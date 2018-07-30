@@ -69,8 +69,8 @@
     author        = {Mgr. Dušan Klinec},
     gender        = m,
     advisor       = {prof. RNDr. Václav Matyáš, M.Sc., Ph.D.},
-    title         = {Secure multi-party computation with resource constained devices},
-    TeXtitle      = {Secure multi-party computation with resource constained devices},
+    title         = {Secure multi-party computation with resource-constrained devices},
+    TeXtitle      = {Secure multi-party computation with resource-constrained devices},
     keywords      = {multi-party computation, secure hardware, cryptocurrencies},
     TeXkeywords   = {multi-party computation, multi signatures, smart cards, resource constrained devices, cryptocurrencies, monero, \ldots},
     abstract      = {This is the abstract of my thesis, which can
@@ -110,10 +110,12 @@
 
 \begin{itemize}
 	\item Bug resilience, Kleptography, Single point of failure of resource constrained devices. GACR proposal motivation. eID system failure due to {\bf{ROCA}}~\cite{2017-ccs-nemec}. Smart-ID~\cite{smart_id_ee}. 
+    
+    - TODO: ROCA 2 paper.
         
     \item {\bf{Fingerprinting}} public keys from cryptographic libraries and devices possible. Enables to target attack on particular vulnerable library. {\bf{ROCA}} also fingerprintable, like shown in our previous research {\it{Measuring Popularity of Cryptographic Libraries in Internet-Wide Scans}}~\cite{2017-acsac-nemec}.
     
-    \item Many scenarios (e.g., DRM, licensing, cloud assisted computation) require computation with sensitive data on attacker computer. Universal approach is FHE but not practical. Another solution is a secure multi-party computation (SMPC), utilizing secure crypto processors (SCPs) or smart cards to provide better security guarantees. {\bf{Whitebox}} attack resistant cryptography \cite{whitebox_klinec_santacrypt2013,Klinec2013thesis} attempts to transform algorithms so their evaluation on attackers computer is secure, e.g. AES algorithm with embedded decryption key without possibility of key extraction. However, whitebox schemes often fail (cite) which indicates SMPC / sc schemes are more practical.
+    \item Many scenarios (e.g., DRM, licensing, cloud assisted computation) require computation with sensitive data on attacker computer. Universal approach is FHE but not practical. Another solution is a secure multi-party computation (SMPC), utilizing secure crypto processors (SCPs) or smart cards to provide better security guarantees. {\bf{Whitebox}} attack resistant cryptography \cite{whitebox_klinec_santacrypt2013,Klinec2013thesis} attempts to transform algorithms so their evaluation on attackers computer is secure, e.g. AES algorithm with embedded decryption key without possibility of key extraction. However, whitebox schemes often fail (cite) which indicates SMPC / SCP schemes are more practical.
     
     \item In previous research we devised powerful randomness test {\bf{\emph{Booltest}}} \cite{booltest_secrypt2017} which provides comparable and better results compared to standard randomness testing batteries. Testing randomness of PRNGs or cryptographic primitives is essential for the assessment of the quality of cryptographic schemes. It is usually the first step of a security audit. We also tested output of PRNG of smart cards and hardware wallet Trezor. Having device failing to pass randomness test indicates a further problem with potentially high impact. Implementing the SMPC may help to avoid similar vulnerabilities and potential backdoors. 
     
@@ -256,22 +258,24 @@ We aim to investigate new possibilities of the secure view-key sharing in the SC
 \section{Monero paper}
 Submitted (ideally). Main author, 70\%.
 
-\section{Touch of evil}
+\section{A Touch of Evil: High-Assurance Cryptographic Hardware from Untrusted Components}
 Primarily targeting topic, 5\% \cite{2017-ccs-mavroudis}
 
-\section{ROCA}
-Motivation for SMPC, 5-10\% \cite{2017-ccs-nemec}
+\section{The Return of Coppersmith's Attack: Practical Factorization of Widely Used RSA Moduli}
+ROCA. Motivation for SMPC, 5-10\% \cite{2017-ccs-nemec}.
+Add ROCA extension.
 
-\section{Booltest}
-The Efficient Randomness Testing using Boolean Functions \cite{booltest_secrypt2017}
+\section{The Efficient Randomness Testing using Boolean Functions}
+Booltest. \cite{booltest_secrypt2017}.
+Add Booltest extended paper in journal.
 
-\section{Measurements of popularity}
-?? \cite{2017-acsac-nemec}
+\section{Measuring Popularity of Cryptographic Libraries in Internet-Wide Scans}
+Fingerprinting. Significant contribution 20-30 \% \cite{2017-acsac-nemec}
 
-\section{WSNProtectLayer}
-?? \cite{wsnprotectlayer}
+\section{WSNProtectLayer – security middleware for wireless sensor networks}
+Minor contribution. Resource-restricted devices. \cite{wsnprotectlayer}
 
-\section{Whitebox}
+\section{Whitebox attack resistant cryptography}
 \cite{whitebox_klinec_santacrypt2013, Klinec2013thesis} 
 
 - Citations count 9: \url{https://scholar.google.com/scholar?cites=3284880228025768764&as_sdt=2005&sciodt=0,5&hl=sk}
@@ -281,6 +285,8 @@ Submitted, V. Sedlacek, small contribution, running experiments, results aggrega
 
 \section{Papers in progress}
 \begin{itemize}
+	\item ROCA - extended attack. Returning information to the system.
+    
 	\item Automated Smart card APDU AFL assisted fuzzer with systematic power trace analysis feedback.
     
     \item Zero knowledge proof of secrets generation correctness for smart cards. Producing a proof that given public key was generated according to the prescribed standard and thus cannot contain a bug / kleptography backdoor. 
