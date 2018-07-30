@@ -62,17 +62,17 @@
 
 
 \thesissetup{
-    date          = \the\year/\the\month/\the\day,
+    date          = \the\year/09/05,
     university    = mu,
     faculty       = fi,
     type          = prop,
-    author        = Dušan Klinec,
+    author        = {Mgr. Dušan Klinec},
     gender        = m,
-    advisor       = Václav Matyáš,
-    title         = {Secure multi party computation with resource constained devices},
-    TeXtitle      = {Secure multi party computation with resource constained devices},
+    advisor       = {prof. RNDr. Václav Matyáš, M.Sc., Ph.D.},
+    title         = {Secure multi-party computation with resource constained devices},
+    TeXtitle      = {Secure multi-party computation with resource constained devices},
     keywords      = {multi-party computation, secure hardware, cryptocurrencies},
-    TeXkeywords   = {multi party computation, multi signatures, smart cards, resource constrained devices, cryptocurrencies, monero, \ldots},
+    TeXkeywords   = {multi-party computation, multi signatures, smart cards, resource constrained devices, cryptocurrencies, monero, \ldots},
     abstract      = {This is the abstract of my thesis, which can
 
                      span multiple paragraphs.},
@@ -109,23 +109,23 @@
 \section{Motivation - contributed papers, itemized}
 
 \begin{itemize}
-	\item Bug resilience, Kleptography, Single point of failure of resource constrained devices. GACR proposal motivation. eID system failure due to {\bf{ROCA}} \cite{2017-ccs-nemec}. Smart-ID \cite{smart_id_ee}. 
+	\item Bug resilience, Kleptography, Single point of failure of resource constrained devices. GACR proposal motivation. eID system failure due to {\bf{ROCA}}~\cite{2017-ccs-nemec}. Smart-ID~\cite{smart_id_ee}. 
         
-    \item {\bf{Fingerprinting}} public keys from cryptographic libraries and devices possible. Enables to target attack on particular vulnerable library. {\bf{ROCA}} also fingerprintable, like shown in our previous research Measuring Popularity of Cryptographic Libraries in Internet-Wide Scans \cite{2017-acsac-nemec}.
+    \item {\bf{Fingerprinting}} public keys from cryptographic libraries and devices possible. Enables to target attack on particular vulnerable library. {\bf{ROCA}} also fingerprintable, like shown in our previous research {\it{Measuring Popularity of Cryptographic Libraries in Internet-Wide Scans}}~\cite{2017-acsac-nemec}.
     
-    \item Many scenarios (e.g., DRM, licensing, cloud assisted computation) require computation with sensitive data on attacker computer. Universal FHE but not feasible for universal problems. Another solution is SMPC, utilizing smart cards to provide better security guarantees. {\bf{Whitebox}} attempts to transform algorithms so it is secure to evaluate it on attackers computer, e.g. AES algorithm with embedded decryption key without possibility of key extraction. However whitebox schemes often fail (cite) which indicates SMPC / sc schemes are more practical.
+    \item Many scenarios (e.g., DRM, licensing, cloud assisted computation) require computation with sensitive data on attacker computer. Universal approach is FHE but not practical. Another solution is a secure multi-party computation (SMPC), utilizing secure crypto processors (SCPs) or smart cards to provide better security guarantees. {\bf{Whitebox}} attack resistant cryptography \cite{whitebox_klinec_santacrypt2013,Klinec2013thesis} attempts to transform algorithms so their evaluation on attackers computer is secure, e.g. AES algorithm with embedded decryption key without possibility of key extraction. However, whitebox schemes often fail (cite) which indicates SMPC / sc schemes are more practical.
     
-    \item In previous research we devised powerful randomness test {\bf{\emph{Booltest}}} \cite{booltest_secrypt2017} which provides comparable and better results compared to standard testing batteries. Testing randomness of PRNGs or cryptographic primitives is essential for assessment of the quality of cryptographic schemes. Randomness testing is usually the first step of security audit. We also tested output of PRNG of smart cards and hardware wallet Trezor. Having device failing to pass randomness test indicates further problem with potentially high impact. Implementing the SMPC may help to avoid similar vulnerabilities and potential backdoors. 
+    \item In previous research we devised powerful randomness test {\bf{\emph{Booltest}}} \cite{booltest_secrypt2017} which provides comparable and better results compared to standard randomness testing batteries. Testing randomness of PRNGs or cryptographic primitives is essential for the assessment of the quality of cryptographic schemes. It is usually the first step of a security audit. We also tested output of PRNG of smart cards and hardware wallet Trezor. Having device failing to pass randomness test indicates a further problem with potentially high impact. Implementing the SMPC may help to avoid similar vulnerabilities and potential backdoors. 
     
     - {\it{add booltest extended paper in journal}}
     
     - {\it{test trezor PRNG, publish on blog, cite blog}}
     
-    \item In previous research we proposed and analyzed Intrusion detection system running on resource constrained devices creating wireless sensor networks \cite{wsnprotectlayer}. Effective multi party computation algorithms could improve security properties of {\bf{WSN}} protocols.
+    \item In previous research, we proposed and analyzed an Intrusion detection system running on resource-constrained devices creating wireless sensor networks \cite{wsnprotectlayer}. Effective multi-party computation algorithms could improve security properties of {\bf{WSN}} protocols.
     
-    \item SMPC with Smartcards as our previous research A {\bf{Touch of Evil}}: High-Assurance Cryptographic Hardware from Untrusted Components \cite{2017-ccs-mavroudis}. Multi-Encryption and multi-signatures N-of-N. At least one honest participant is enough to protect secret.
+    \item SMPC with Smartcards as our previous research A {\it {\bf{Touch of Evil}}: High-Assurance Cryptographic Hardware from Untrusted Components} \cite{2017-ccs-mavroudis}. Multi-Encryption and multi-signatures N-of-N. At least one honest participant is enough to protect secret.
     
-    \item Paper with V. Sedlacek analyzing particular {\bf{number factorization}} method based on elliptic curves. Submitted by the end of theses submition deadline.
+    \item Paper with V. Sedlacek analyzing particular {\bf{number factorization}} method based on elliptic curves. Submitted by the end of theses submission deadline.
    
     
 \end{itemize}
@@ -134,21 +134,21 @@
 
 {\bf{Mix of GACR and Monero paper. Broader.}}
 
-The focus of the research aimed by theses is to analyze a secure distributed function computation in restricted environments. The computation model consists of mutiple heterogenous nodes. Node is either a powerful generic device such as cloud computation servers or very resource restricted device, e.g., with low computational power, memory, energy. The typical instantiation of the restricted device is Secure cryptographic processors (SCP) or smart card with additional properties such as tamper protection. 
-We aim to study ECC based protocols enabling a secure computation on powerful but potentialy malicious devices with help of trusted SCPs and to improve the system robustness if the SCP is compromised.
+The focus of the research aimed by theses is to analyze a secure distributed function computation in restricted environments. The computation model consists of multiple heterogeneous nodes. Node is either a powerful generic device such as cloud computation servers or very resource-restricted device, e.g., with low computational power, memory, energy. The typical instantiation of the resource-restricted device is Secure cryptographic processors (SCP) or smart card with additional properties such as tamper protection. 
+We aim to study ECC based protocols enabling a secure computation on powerful but potentially malicious devices with the help of trusted SCPs and to improve the system robustness if the SCP is compromised.
 
-\paragraph{SCPs} play a key role in many critical systems across various fields, e.g., banking, military, and government.
+\paragraph{SCPs} play a crucial role in many critical systems across various fields, e.g., banking, military, and government.
 SCPs provide an important additional layer of protection against attacks. A potential security vulnerability or a bug in the SCP can have broad consequences and compromise overall system security. For example, our recent discovery of a security vulnerability in RSA key generation in the Infineon SCP shows the fragility of eID systems having the affected chip a single point of failure \cite{2017-ccs-nemec}. 
 
 Therefore it is highly important to test for potential
-bugs and backdoors in the SCPs as critical system components. A manufacturing path from blueprints to a final product has multiple steps and manufacturer is not able to oversee all parts of the process. Backdoors can be induced at any stage and even product certification cannot give reasonable assurances for critical systems \cite{2017-ccs-nemec}. Moreover the Kleptography-based \cite{Young:1997:KUC:1754542.1754551} backdoor can be present in the standard itself so only the attacker can detect and use it while for others it is computationally indistinguishable, e.g., RSA key generation. 
+bugs and backdoors in the SCPs as critical system components. A manufacturing path from blueprints to a final product has multiple steps, and the manufacturer is not able to oversee all parts of the process. Backdoors can be induced at any stage, and even product certification cannot give reasonable assurances for critical systems \cite{2017-ccs-nemec}. Moreover the Kleptography-based \cite{Young:1997:KUC:1754542.1754551} backdoor can be present in the standard itself so only the attacker can detect and use it while for others it is computationally indistinguishable, e.g., RSA key generation. 
 
 The solution we propose to this family of threats is removing the single point of failure by employing a secure multi-party computation (SMPC). 
-With the SMPC multiple independent participants in the protocol can jointly compute an agreed-upon function so that individual function inputs of the participants remain private while output is computed all participants. The participants can be malicious, deviate from the protocol, and collude to get the private function inputs of others. SMPC is also known as secure function evaluation (SFE) or privacy-preserving computation. Several SMPC protocol exist with different guarantees with respect to the attacker model, number of colludin participants and so on.
+With the SMPC multiple independent participants in the protocol can jointly compute an agreed-upon function so that individual function inputs of the participants remain private while the output is computed by all participants. The participants can be malicious, deviate from the protocol, and collude to get the private function inputs of others. SMPC is also known as secure function evaluation (SFE) or privacy-preserving computation. Several SMPC protocol exists with different guarantees with respect to the attacker model, a number of colluding participants and so on.
 
 
 
-\paragraph{Smart-ID} A practical example of SMPC deployed in Estonia is the Smart-ID \cite{smart_id_ee}, used for authentication and legal digital signatures. Smart-ID extends the RSA digital signature scheme, so it is computed jointly by two independent parties, user's smartphone, and the server-side HSM. 
+\paragraph{Smart-ID} A practical example of SMPC deployed in Estonia is the Smart-ID \cite{smart_id_ee}, used for authentication and legal digital signatures. Smart-ID extends the RSA digital signature scheme, so it is computed jointly by two independent parties, user's smart-phone, and the server-side HSM. 
 Each party creates a signature share $s_i$ using a private key share $p_i$. The final composite signature $s$ is a simple combination of the signature shares $s_i$. 
 The $s$ is RFC3447 \cite{rfc3447} RSASSA-PKCS1-v1.5 compliant signature under the composite private key $p$. Even after compromising one of the $p_i$ the attacker is not able to forge signatures.
 
@@ -158,22 +158,22 @@ The $s$ is RFC3447 \cite{rfc3447} RSASSA-PKCS1-v1.5 compliant signature under th
 	\item {\bf{Fully homomorphic encryption}}, alternative solution, not practical for universal problems. Could substitute need for secure processors.
     \item {\bf{SMPC}}, multi party computation in general. Secure function evaluation, privacy preserving computation, specific algorithms, e.g., privacy preserving set intersection, database lookup, data mining. 
     \item {\bf{Secure processor assisted cryptography}}, using FPGAs, smart-cards, 
-    \item {\bf{Multisignatures}} multiparty signature schemes. 1-N, N-N, k-N. Popular in cryptocurrencies.
-    \item {\bf{Privacy centric crypto currencies}}. Initial goal is to support transaction signing on resource constrained devices. Key for spending funds is highly valuable target for attackers, sometimes worth millions of dollars. Storing key in a secure processor lowers the attack surface compared to general PC wallet. SCP can provide further security guarantees, security proofs / high EAL certification. 
+    \item {\bf{Multi-signatures}} multiparty signature schemes. 1-N, N-N, k-N. Popular in cryptocurrencies.
+    \item {\bf{Privacy centric cryptocurrencies}}. The initial goal is to support transaction signing on resource-constrained devices. Key for spending funds is a highly valuable target for attackers, sometimes worth millions of dollars. Storing key in a secure processor lowers the attack surface compared to general PC wallet. SCP can provide further security guarantees, security proofs / high EAL certification. 
     
-    Privacy preserving cryptocurrencies use complex crypto schemes which makes support for SCP difficult due to restricted computational environment. HW wallet for Monero, ZCoin, Zcash or derivation of those. 
+    Privacy-centric cryptocurrencies use complex crypto schemes which makes support for SCP difficult due to the restricted computational environment. HW wallet for Monero, ZCoin, Zcash or derivation of those. 
     
-    Another goals is multisig support so one signing key is distributed among more hardware wallets from different vendors. Secure blockchain scanning is another topic. 
+    Another goal is multi-signature support, so one signing key is distributed among more hardware wallets from different vendors. Secure blockchain scanning is another topic. 
 \end{itemize}
 
 \section{Related work - text}
 
 Secure function evaluation has been broadly studied \cite{
 yao82, conf/sp/SonghoriHS0K15, Malkhi:2004:FST:1251375.1251395, 10.1007/978-3-642-40041-4_5}, namely with respect to private database search \cite{Bertino2005, Naor:1999:PPA:336992.337028}, private data mining \cite{Aldeen2015} and voting. However, it typically suffers from large performance or communication overhead.
-The previous research uses FPGA as a trusted element, trading trust for computational effectiveness. However, FPGA itself cannot withstand attacks by side channel power analysis or fault induction attacks.
+The previous research uses FPGA as a trusted element, trading trust for computational efficiency. However, FPGA itself cannot withstand attacks by side channel power analysis or fault induction attacks.
 SCPs, on the other hand, are tamper-proof but do not offer the flexibility of FPGAs and, namely, they suffer from low computational power and very limited memory \cite{10.1007/978-3-642-19074-2_1, Boureanu:2015:LCC:2714576.2714591, cryptoeprint:2016:615}.
-In \cite{2017-ccs-mavroudis}, we designed, theoretically analyzed, and evaluated \emph{Myst}, a suite of ECC-based cryptographic protocols for distributed key generation, encryption, decryption and signature generation using SMPC on smartcards.
-Also, the K-out-of-N ECC-based multi-signature protocol research has recently undergone a rapid development, especially due to rising crypto-currencies popularity as they rely on multi-signatures for signing outgoing transactions in accounts held by multiple owners ~\cite{Bellare:2007:UAS:2394539.2394589, Bnz2017BulletproofsSP, cryptoeprint:2018:068}. 
+In \cite{2017-ccs-mavroudis}, we designed, theoretically analyzed, and evaluated \emph{Myst}, a suite of ECC-based cryptographic protocols for a distributed key generation, encryption, decryption and signature generation using SMPC on smartcards.
+Also, the K-out-of-N ECC-based multi-signature protocol research has recently undergone rapid development, especially due to rising crypto-currencies popularity as they rely on multi-signatures for signing outgoing transactions in accounts held by multiple owners ~\cite{Bellare:2007:UAS:2394539.2394589, Bnz2017BulletproofsSP, cryptoeprint:2018:068}. 
 
 
 
@@ -183,7 +183,7 @@ Idea: submit to Oakland (rolling deadline) or some other A, A+ conference before
 
 Covering basic Monero transaction, transaction signing protocol for hardware wallets, with security proof (ideally. reduction. original signing algorithm is secure then transformed protocol is secure as well).
 
-Covering also blockchain scanning so view key is not leaked to the host. Schemes designed with their properties. Group payment identification psedunonymity, fast scanning. Encrypted Bloom filters. Imposibility on some attractive scheme properties. 
+Covering also blockchain scanning, so view key is not leaked to the host. Schemes designed with their properties. Group payment identification pseudonymity, fast scanning. Encrypted Bloom filters. Impossibility on some attractive scheme properties (publicly derivable public key chain for forward secrecy, corresponding private key derivation only with hardware wallet. Formalize). 
 
 
 \chapter{Study plan}
@@ -195,13 +195,13 @@ Covering also blockchain scanning so view key is not leaked to the host. Schemes
     \item Analysis of existing protocols using SMPC. 
 \end{itemize}
 
-I will study and design multi-party protocols with different levels of trust and computational power of interacting parties, enabling a secure computation on powerful yet potentially malicious devices with help of trusted SCPs.
+I will study and design multi-party protocols with different levels of trust and computational power of interacting parties, enabling a secure computation on powerful yet potentially malicious devices with the help of trusted SCPs.
 
-SMPC-based techniques for systematic protection from the vulnerabilities and backdoors in ECC-based systems will be devised. These are aimed to remain secure even after compromise of several cooperating parties. The primary focus is on SMPC ECC signature schemes in resource-constrained environments.
+SMPC-based techniques for systematic protection from the vulnerabilities and backdoors in ECC-based systems will be devised. These are aimed to remain secure even after the compromise of several cooperating parties. The primary focus is on SMPC ECC signature schemes in resource-constrained environments.
 
 I believe that an exploration of a currently under-researched combination of highly secure yet very resource-limited devices and multi-party computation will bring significant benefits. The main benefit is the removal of a single point of failure from critical large-scale security systems, such as eID. The research will benefit from our expertise in this field and our previous results (incl. the Infineon cryptographic vulnerability analysis) \cite{2017-ccs-mavroudis, 2017-ccs-nemec}, multi-party protocol framework \emph{Myst}.
 
-\paragraph{K-of-N MPC generalization.} In \cite{2017-ccs-mavroudis} we designed, theoretically analyzed, and evaluated the \emph{Myst}, suite of cryptographic protocols for a distributed key generation, encryption, decryption and signature generation using multi-party computation on smart cards. The protocols type is N-of-N so an attacker has to compromise all involved components to gain any advantage. N-of-N increases resilience against the single point of failures and potential backdoors in the cards hardware (if selected from diverse manufacturers and supply chains). We would like to investigate options for generalization of these protocols to k-of-N threshold scheme yet still execute in resource-constrained environment of the smart cards. This is unsolved problem with broad potential applications, e.g., in the transaction signing in public blockchains as it helps to increase the availability and flexibility.  
+\paragraph{K-of-N MPC generalization.} In \cite{2017-ccs-mavroudis} we designed, theoretically analyzed, and evaluated the \emph{Myst}, suite of cryptographic protocols for a distributed key generation, encryption, decryption and signature generation using multi-party computation on smart cards. The protocols type is N-of-N, so an attacker has to compromise all involved components to gain any advantage. N-of-N increases resilience against the single point of failures and potential backdoors in the cards hardware (if selected from diverse manufacturers and supply chains). We would like to investigate options for generalization of these protocols to k-of-N threshold scheme yet still execute in a resource-constrained environment of the smart cards. This is an unsolved problem with broad potential applications, e.g., in the transaction signing in public blockchains as it helps to increase the availability and flexibility.  
 
 
 \paragraph{Multi-signatures.} K-of-N ECC-based multi-signature protocol research has recently undergone a rapid development especially due to rising crypto-currencies popularity as they rely on multi-signatures for signing outgoing transactions in accounts held by multiple owners ~\cite{Bellare:2006:MPP:1180405.1180453, Bellare:2007:UAS:2394539.2394589, 10.1007/3-540-36288-6_3, cryptoeprint:2015:996, Bnz2017BulletproofsSP, cryptoeprint:2018:068}.
@@ -210,44 +210,47 @@ a)~2-step protocol\footnote{Protocols with similar properties usually have three
 The key aggregation means the resulting signature is verifiable as the original Schnorr signature using a single aggregated public key which saves space. As the signature is saved in the blockchain the space savings are of high importance - the bigger the transaction, the more fees user need to pay for the transaction processing. This new perspective stresses the space effectiveness in the signature protocols design. We plan to investigate the possible space requirements reductions in the signature design as was performed in the case of Borromean signatures \cite{borromean} which reduced signature size almost in half. Moreover, we plan to study mechanisms of adapting signature schemes to the SCPs model. The motivation is a rising popularity of secure hardware, e.g., used to protect crypto-currency assets while signature protocols are not optimized for SCPs which brings challenges using SCPs in this ecosystem. The transformation is not straightforward and without protocol modifications.
 
 
-The protocols will be analyzed and transformed to the form usable in the restricted environments such as SCPs. Results will be evaluated on the  high-throughput smart card grid already used in \cite{2017-ccs-mavroudis}. 
+The protocols will be analyzed and transformed into the form usable in the restricted environments such as SCPs. Results will be evaluated on the high-throughput smart card grid already used in \cite{2017-ccs-mavroudis}. 
 
 
 Phase 2 focuses on a delegated transaction scanning and a secure protocol offloading from SCPs to hosts.
  
-There are several general purpose, universal SMPC protocols which often suffer high computation and message complexity as a price for the universality. On the other hand there are few very specific optimized SMPC solving particular problems wich can be order of magnitudes faster than universal protocols. Two-party secure computation is another specification of the universal model allowing better performance with fixed number of participants \cite{Wang:2017:AGE:3133956.3134053}. We aim to study specialized ECC-based SMPC to address open problems in cryptocurrency model and to enable computation offloading to powerful hosts with use of SCPs.
+There are several general purposes, universal SMPC protocols which often suffer high computation and message complexity as a price for the universality. On the other hand, there are few very specific optimized SMPC solving particular problems which can be an order of magnitudes faster than universal protocols. Two-party secure computation is another specification of the universal model allowing better performance with a fixed number of participants \cite{Wang:2017:AGE:3133956.3134053}. We aim to study specialized ECC-based SMPC to address open problems in cryptocurrency model and to enable computation offloading to powerful hosts with use of SCPs.
 %\todo{More citations on general and specific MPCs}
 %\todo{Rethink if still actual: We need to add more generic basic research motivation with text below as practical demonstration of one potential use case}
 
 \paragraph{SMPC in cryptocurrencies.} 
 Specialized SMPC protocols can address novel challenges in the cryptocurrency model systems. There are several cryptocurrency-related open problems where users need to compute a joint function without disclosing their inputs.
 
-Privacy-centric cryptographic currencies (e.g., Monero, Zcash, Dash, PivX\cite{monero_1098}) provide transaction unlinkability and privacy, usually implemented by defining two individual keys instead of just one: view-key and spend-key. A user scans the whole blockchain and performs a simple operation with his view-key on per-transaction basis to determine whether the transaction being inspected is destined to him and to reveal the amount being sent. The spend-key is then used to spend the received money.
+Privacy-centric cryptographic currencies (e.g., Monero, Zcash, Dash, PivX\cite{monero_1098}) provide transaction unlinkability and privacy, usually implemented by defining two individual keys instead of just one: view-key and spend-key. A user scans the whole blockchain and performs a simple operation with his view-key on a per-transaction basis to determine whether the transaction being inspected is destined to him and to reveal the amount being sent. The spend-key is then used to spend the received money.
 The view-key can be passed to another third party auditor as a read-only key to verify incoming transactions when needed (e.g., regulatory demands). An obvious downside of passing the raw view-key is the third party can leak it or use it to scan the blockchain even after the required auditory period. 
  
-We plan to investigate multi-party protocols for a secure and controlled view-key sharing with another party. We plan to adapt existing SMPC protocols to keep the view-key private and fulfill regulatory demands of the authorities by actively participating in the verification process on a per-transaction basis. The benefit is that after the requirement invalidation the authority cannot use the view-key share to gain any advantage to further scan for a transaction without the owners knowledge. The participation of the owning entity is required.
+We plan to investigate multi-party protocols for a secure and controlled view-key sharing with another party. We plan to adapt existing SMPC protocols to keep the view-key private and fulfill regulatory demands of the authorities by actively participating in the verification process on a per-transaction basis. The benefit is that after the requirement invalidation the authority cannot use the view-key share to gain any advantage to further scan for a transaction without the owner's knowledge. The participation of the owning entity is required.
 
-The increasing demand and usage of SCP as hardware wallets motivates the design and analysis of protocols using and/or supporting SCPs. Ideally, the view-key and spend-keys are stored in the SCP and never leave it. As the SCP is low-performance device, it is challenging to scan the blockchain on the device directly. The same holds for participation in the SMPs.
+The increasing demand and usage of SCP as hardware wallets motivates the design and analysis of protocols using and/or supporting SCPs. Ideally, the view-key and spend-keys are stored in the SCP and never leave it. As the SCP is a low-performance device, it is challenging to scan the blockchain on the device directly. The same holds for participation in the SMPs.
 
 \paragraph{Secure computation offloading.}
-Secure computation offloading to the cloud with potentialy malicious computation nodes is still an attractive open problem. There are several general solutions such as Fully Homomorphic encryption and Garbled circuits which are either universal and very innefective or very specific. These mechanisms also often suffer high communication complexity.\todo{FHE, Garbled citations} 
-We focus on asymmetric SMPC with resource restricted devices (SCPs) in a sense the majority of the computation is performed on the powerful yet malicious host without compromising the security of the private function inputs. SCPs typically provide sensitive inputs to the function being computed, e.g., private keys. 
+Secure computation offloading to the cloud with potentially malicious computation nodes is still an attractive open problem. There are several general solutions such as Fully Homomorphic encryption and Garbled circuits which are either universal and very ineffective or very specific. These mechanisms also often suffer high communication complexity.\todo{FHE, Garbled citations} 
+We focus on asymmetric SMPC with resource-restricted devices (SCPs) in a sense the majority of the computation is performed on the powerful yet malicious host without compromising the security of the private function inputs. SCPs typically provide sensitive inputs to the function being computed, e.g., private keys. 
 
 In the crypto-currency setup the zero-knowledge proofs, commitments, multi-signatures, and blockchain scanning would significantly benefit from effective computation offloading and multi-party protocol versions.
 
-We aim to investigate new possibilities of the secure view-key sharing in the SCP via SMPC by offloading costly operations to the high-performance hosts, minimizing a number of rounds, operations and memory in SCP.
+We aim to investigate new possibilities of the secure view-key sharing in the SCP via SMPC by offloading costly operations to the high-performance hosts, minimizing the number of rounds, operations and memory in SCP.
 
 
+%% Bibliography
+  \printbibliography[heading=bibintoc] 
 
-  \printbibliography[heading=bibintoc] %% Print the bibliography.
+
+%% Index
+%   \makeatletter\thesis@blocks@clear\makeatother
+%   \phantomsection %% Print the index and insert it into the
+%   \addcontentsline{toc}{chapter}{\indexname} %% table of contents.
+%   \printindex
 
 
-  \makeatletter\thesis@blocks@clear\makeatother
-  \phantomsection %% Print the index and insert it into the
-  \addcontentsline{toc}{chapter}{\indexname} %% table of contents.
-  \printindex
-
-\appendix %% Start the appendices.
+%% Appendix
+\appendix 
 \chapter{Attached papers}
 
 \section{Monero paper}
@@ -269,7 +272,12 @@ The Efficient Randomness Testing using Boolean Functions \cite{booltest_secrypt2
 ?? \cite{wsnprotectlayer}
 
 \section{Whitebox}
-?? Citations count 9: \url{https://scholar.google.com/scholar?cites=3284880228025768764&as_sdt=2005&sciodt=0,5&hl=sk}
+\cite{whitebox_klinec_santacrypt2013, Klinec2013thesis} 
+
+- Citations count 9: \url{https://scholar.google.com/scholar?cites=3284880228025768764&as_sdt=2005&sciodt=0,5&hl=sk}
+
+\section{ECC Factorization paper}
+Submitted, V. Sedlacek, small contribution, running experiments, results aggregation. 
 
 \section{Papers in progress}
 \begin{itemize}
@@ -284,7 +292,9 @@ The Efficient Randomness Testing using Boolean Functions \cite{booltest_secrypt2
 
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Trash
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
