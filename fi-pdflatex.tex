@@ -115,13 +115,9 @@
         
     \item {\bf{Fingerprinting}} public keys from cryptographic libraries and devices possible. Enables to target attack on particular vulnerable library. {\bf{ROCA}} also fingerprintable, like shown in our previous research {\it{Measuring Popularity of Cryptographic Libraries in Internet-Wide Scans}}~\cite{2017-acsac-nemec}.
     
+        \item In previous research we devised powerful randomness test {\bf{\emph{Booltest}}} \cite{booltest_secrypt2017} which provides comparable and better results compared to standard randomness testing batteries. Testing randomness of PRNGs or cryptographic primitives is essential for the assessment of the quality of cryptographic schemes. It is usually the first step of a security audit. In the extended version of the paper submitted to the Springer Book of Secrypt We also tested output of TRNGs of smart cards and hardware wallets Trezor and Ledger. Having device failing to pass randomness test indicates a further problem with potentially high impact. Implementing the SMPC may help to avoid similar vulnerabilities and potential backdoors. 
+    
     \item Many scenarios (e.g., DRM, licensing, cloud assisted computation) require computation with sensitive data on attacker computer. Universal approach is FHE but not practical. Another solution is a secure multi-party computation (SMPC), utilizing secure crypto processors (SCPs) or smart cards to provide better security guarantees. {\bf{Whitebox}} attack resistant cryptography \cite{whitebox_klinec_santacrypt2013,Klinec2013thesis} attempts to transform algorithms so their evaluation on attackers computer is secure, e.g. AES algorithm with embedded decryption key without possibility of key extraction. However, whitebox schemes often fail (cite) which indicates SMPC / SCP schemes are more practical.
-    
-    \item In previous research we devised powerful randomness test {\bf{\emph{Booltest}}} \cite{booltest_secrypt2017} which provides comparable and better results compared to standard randomness testing batteries. Testing randomness of PRNGs or cryptographic primitives is essential for the assessment of the quality of cryptographic schemes. It is usually the first step of a security audit. We also tested output of PRNG of smart cards and hardware wallet Trezor. Having device failing to pass randomness test indicates a further problem with potentially high impact. Implementing the SMPC may help to avoid similar vulnerabilities and potential backdoors. 
-    
-    - {\it{add booltest extended paper in journal}}
-    
-    - {\it{test trezor PRNG, publish on blog, cite blog}}
     
     \item In previous research, we proposed and analyzed an Intrusion detection system running on resource-constrained devices creating wireless sensor networks \cite{wsnprotectlayer}. Effective multi-party computation algorithms could improve security properties of {\bf{WSN}} protocols.
     
