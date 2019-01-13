@@ -269,10 +269,17 @@ Circuit \emph{creator} creates the circuit $C$ and \emph{garbles} it in a sense 
 Obviously the scheme works only with semi-honest attackers as the malicious creator could create different circuit $C^\prime$ leaking the evaluator's inputs. The more formal description can be found in \cite{BHR12}. 
 
 \paragraph{Multi-party extension.} %
-Yao's work has been extended by \cite{GMW87} to a multi-party case and with malicious adaptive nodes using only one-way functions. They make use of Verifiable Secret Sharing (VSS) and agreement protocols. The work is based on boolean circuit but compared to \cite{Yao86} each party evaluates the circuit independently with shares of other players inputs. This work is a completeness theorem for distributed protocols with honest majority. Two protocols were proposed, the first for semi-honest setting which is secure with $m-1$ corrupted nodes, the other in the malicious settings secure with honest majority (correctness and privacy). Later \cite{CLOS02} shown how to construct a multi-party protocols in universally composable framework in computational assumptions with dishonest majority up to $m-1$ of adaptive malicious parties. 
+Yao's work has been extended by \cite{GMW87} to a multi-party case and with malicious adaptive nodes using only one-way functions. They make use of Verifiable Secret Sharing (VSS) and agreement protocols. The work is based on boolean circuit but compared to \cite{Yao86} each party evaluates the circuit independently with shares of other players inputs. This work is a completeness theorem for distributed protocols with honest majority. Two protocols were proposed, the first for semi-honest setting which is secure with $m-1$ corrupted nodes, the other in the malicious settings secure with honest majority (correctness and privacy). Bounds are tight in this model assuming absolute security. 
+
+Consequently the works of \cite{RB89, B91} improved the bound for honest majority in malicious settings with negligible change of error and broadcast.
+The \cite{RB89} claimed adaptive security which was disproved and fixed in \cite{CDDHR99}.
+Round complexity is $\bigO(\text{depth}(C))$ for adaptive security \cite{GMW87, CDDHR99}, $\bigO(1)$ for static \cite{BMR90} while the original \cite{GMW87} round complexity is $\bigO(\text{depth}(C))$.
+
+Later \cite{CLOS02} shown how to construct a multi-party protocols in universally composable framework with computational assumptions, dishonest majority up to $m-1$ of adaptive malicious parties in CRS model and broadcast. 
+Non-adaptive cases require trapdoor functions, adaptive requires augmented non-committing encryption protocols \cite{CFGN96}.
 
 \paragraph{Computationally unbounded.}
-The information-theoretic equivalent of this work was done by \cite{BGW88} and \cite{CCD88}. The work is based on Shamir's secret sharing and arithmetic circuits in finite fields. The malicious case make use of error correcting Reed Solomon codes. They proved a honest majority is required for semi-honest setting in this model and $2/3$-honest majority for malicious settings. Moreover, these bounds are tight. These protocols have $\bigO(\text{depth}(C))$ communication rounds.
+The information-theoretic equivalent of this work was done by \cite{BGW88} and \cite{CCD88}. The work is based on Shamir's secret sharing and arithmetic circuits in finite fields. The malicious case make use of error correcting Reed Solomon codes. They proved a honest majority is required for semi-honest setting in this model and $2/3$-honest majority for malicious settings. Moreover, these bounds are tight. These protocols have $\bigO(\text{depth}(C))$ communication rounds as each party is evaluating a circuit and a communication round is required to evaluate multiplication gates.
 
 \paragraph{Extensions.} A large body of research has been based on \cite{Yao86, GMW87, BGW88, CCD88} and many extensions and improvements were published. 
 For the garbled circuits it entails: Point-and-permute \cite{BMR90}, Free XOR \cite{KS08}, garbled row reduction \cite{NPS99, PSSW09}, FleXOR \cite{KMR14}, half gates \cite{ZRE14}, garbled gadgets \cite{BMR16} and CompGC \cite{cryptoeprint:2016:458}.
@@ -281,11 +288,18 @@ Cut-and-choose extension \cite{LP07,LP11,Lin16} enables use of the garbled circu
 
 Secret-sharing based approach extensions working with malicious parties: SPDZ \cite{DPSZ12, cryptoeprint:2012:642}, MiniMac \cite{DZ13}, TinyOT \cite{NNOB12}, MASCOT \cite{KOS16}, TinyTable \cite{cryptoeprint:2016:695}, and further improvements \cite{FKOS15, DZ16, LPJ17, BCGIM17, cryptoeprint:2017:1230}. The \cite{WRK17} generalizes TinyOT to multiparty setting, dishonest majority of malicious attackers in standalone security model while \cite{DPSZ12} is statistically UC-secure.
 
-\paragraph{Constant-round protocols.} The \cite{BB89} was the first Constant-round information-theoretic protocol. Later \cite{IK00, IK02} used so called randomized polynomials and randomized encodings \cite{AIK04} of a function to construct constant round protocols in information-theoretic setting with active adversary. Later \cite{ABT18} proved a tight bound 2-rounds for perfectly secure semi-honest MPC with honest majority using a new tool multi-party randomized encodings. The \cite{cryptoeprint:2018:1078} shown 2-round information-theoretic statistically secure MPC with malicious adversaries and honest majority with selective abort which was shown by \cite{GIKR04} to be the strongest notion of security for 2-round protocols.
+\paragraph{Constant-round protocols.} The \cite{BB89} was the first Constant-round information-theoretic protocol. Later \cite{IK00, IK02} used so called randomized polynomials and randomized encodings \cite{AIK04} of a function to construct constant round protocols in information-theoretic setting with active adversary. Later \cite{ABT18} proved a tight bound 2-rounds for perfectly secure semi-honest MPC with honest majority using a new tool multi-party randomized encodings. The \cite{cryptoeprint:2018:1078} shown 2-round information-theoretic statistically secure MPC with malicious adversaries and honest majority with selective abort which was shown by \cite{GIKR04} to be the strongest achievable notion of security for 2-round protocols.
+
+On the field of computational security the \cite{cryptoeprint:2017:1056} show there exists a 4-round, round optimal, MPC that securely realizes arbitrary functionalitites in presence of malicious adversaries corrupting any number of parties, assuming one-way functions with no setup. The 4 rounds are proven lower bound in this setting by \cite{cryptoeprint:2016:252}.
+
+Similarly, the \cite{cryptoeprint:2018:572} shown round optimal 2-round MPC protocol for general circuits that achieves security with abort against any dishonest minority of corruptions using one-way functions.
+
+% cool presentation: http://conferences.au.dk/fileadmin/user_upload/TPMPC18/Antigoni_Polychroniadou.pdf
+
 
 \paragraph{Universally composable framework.}%
 Nananana nana nan anana
-
+plan model, ZK simulation inspired, \url{http://web.cs.ucla.edu/~rafail/PUBLIC/57.pdf}
 
 \newpage
 \begin{itemize}
