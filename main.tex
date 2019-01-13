@@ -60,6 +60,19 @@
 \newcommandx{\improvement}[2][1=]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,#1]{#2}}
 \newcommandx{\thiswillnotshow}[2][1=]{\todo[disable,#1]{#2}}
 
+\usepackage{graphicx}
+\usepackage{amsmath, amssymb, mathtools}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{url}
+\usepackage{siunitx}
+\usepackage{ifthen}
+
+\newcounter{camera_ready}  % camera ready switch, using heavy graphs, in PDF
+\setcounter{camera_ready}{0}  % set to 1 to print in vectors
+\newcommand{\ifcamready}[2]{\ifthenelse{\value{camera_ready}>0}{#1}{#2}}
+\newcommand{\itembf}[1]{\item {\bf{#1}}}
+\newcommand{\bigO}[0]{\mathcal{O}}
 
 \thesissetup{
     date          = \the\year/09/05,
@@ -72,7 +85,7 @@
     title         = {Secure multi-party computation with resource-constrained devices},
     TeXtitle      = {Secure multi-party computation with resource-constrained devices},
     keywords      = {multi-party computation, secure hardware, cryptocurrencies},
-    TeXkeywords   = {multi-party computation, multi signatures, smart cards, resource constrained devices, cryptocurrencies, monero, \ldots},
+    TeXkeywords   = {multi-party computation, tamper-proof tokens, multi signatures, smart cards, resource constrained devices, cryptocurrencies, monero, \ldots},
     abstract      = {This is the abstract of my thesis, which can
 
                      span multiple paragraphs.},
@@ -88,6 +101,8 @@
 \usepackage{amsmath}  %% Mathematics
 \usepackage{amsthm}
 \usepackage{amsfonts}
+\usepackage{framed}
+\usepackage{color}
 \usepackage{url}      %% Hyperlinks
 \usepackage{markdown} %% Lightweight markup
 \usepackage{listings} %% Source code highlighting
@@ -101,13 +116,28 @@
   commentstyle    = \itshape\color{magenta}}
 \usepackage{floatrow} %% Putting captions above tables
 \floatsetup[table]{capposition=top}
+\definecolor{shadecolor}{rgb}{1,0.8,0.3}
 \begin{document}
 
-\chapter*{Introduction}
-\addcontentsline{toc}{chapter}{Introduction}
+%\chapter*{Introduction}
+%\addcontentsline{toc}{chapter}{Introduction}
 
-\section{Motivation - contributed papers, itemized}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Introduction}
+\begin{shaded}
+\begin{itemize}
+    \item Introduction, motivation
+    \item Current state
+    \item Problems, solved parts
+    \item Open problems, hints what to do
+    \item Aim of the work, high level.
+    \item Chapters, contents.
+    \item 2-3 pages
+\end{itemize}
+\end{shaded}
+
+Itemized:
 \begin{itemize}
 	\item Bug resilience, Kleptography, Single point of failure of resource constrained devices. GACR proposal motivation. eID system failure due to {\bf{ROCA}}~\cite{2017-ccs-nemec}. Smart-ID~\cite{smart_id_ee}. 
     
@@ -124,39 +154,56 @@
     \item SMPC with Smartcards as our previous research A {\it {\bf{Touch of Evil}}: High-Assurance Cryptographic Hardware from Untrusted Components} \cite{2017-ccs-mavroudis}. Multi-Encryption and multi-signatures N-of-N. At least one honest participant is enough to protect secret.
     
     \item Paper with V. Sedlacek analyzing particular {\bf{number factorization}} method based on elliptic curves. Submitted by the end of theses submission deadline.
-   
-    
+
 \end{itemize}
 
-\section{Motivation - text}
+\subsection{Motivation - text}
 
-{\bf{Mix of GACR and Monero paper. Broader.}}
+    {\bf{Mix of GACR and Monero paper. Broader.}}
+    
+    The focus of the research aimed by theses is to analyze a secure distributed function computation in restricted environments. The computation model consists of multiple heterogeneous nodes. Node is either a powerful generic device such as cloud computation servers or very resource-restricted device, e.g., with low computational power, memory, energy. The typical instantiation of the resource-restricted device is Secure cryptographic processors (SCP) or smart card with additional properties such as tamper protection. 
+    We aim to study ECC based protocols enabling a secure computation on powerful but potentially malicious devices with the help of trusted SCPs and to improve the system robustness if the SCP is compromised.
+    
+    \paragraph{SCPs} play a crucial role in many critical systems across various fields, e.g., banking, military, and government.
+    SCPs provide an important additional layer of protection against attacks. A potential security vulnerability or a bug in the SCP can have broad consequences and compromise overall system security. For example, our recent discovery of a security vulnerability in RSA key generation in the Infineon SCP shows the fragility of eID systems having the affected chip a single point of failure \cite{2017-ccs-nemec}. 
+    
+    Therefore it is highly important to test for potential
+    bugs and backdoors in the SCPs as critical system components. A manufacturing path from blueprints to a final product has multiple steps, and the manufacturer is not able to oversee all parts of the process. Backdoors can be induced at any stage, and even product certification cannot give reasonable assurances for critical systems \cite{2017-ccs-nemec}. Moreover the Kleptography-based \cite{Young:1997:KUC:1754542.1754551} backdoor can be present in the standard itself so only the attacker can detect and use it while for others it is computationally indistinguishable, e.g., RSA key generation. 
+    
+    The solution we propose to this family of threats is removing the single point of failure by employing a secure multi-party computation (SMPC). 
+    With the SMPC multiple independent participants in the protocol can jointly compute an agreed-upon function so that individual function inputs of the participants remain private while the output is computed by all participants. The participants can be malicious, deviate from the protocol, and collude to get the private function inputs of others. SMPC is also known as secure function evaluation (SFE) or privacy-preserving computation. Several SMPC protocol exists with different guarantees with respect to the attacker model, a number of colluding participants and so on.
+    
+    \paragraph{Smart-ID} A practical example of SMPC deployed in Estonia is the Smart-ID \cite{smart_id_ee}, used for authentication and legal digital signatures. Smart-ID extends the RSA digital signature scheme, so it is computed jointly by two independent parties, user's smart-phone, and the server-side HSM. 
+    Each party creates a signature share $s_i$ using a private key share $p_i$. The final composite signature $s$ is a simple combination of the signature shares $s_i$. 
+    The $s$ is RFC3447 \cite{rfc3447} RSASSA-PKCS1-v1.5 compliant signature under the composite private key $p$. Even after compromising one of the $p_i$ the attacker is not able to forge signatures.
 
-The focus of the research aimed by theses is to analyze a secure distributed function computation in restricted environments. The computation model consists of multiple heterogeneous nodes. Node is either a powerful generic device such as cloud computation servers or very resource-restricted device, e.g., with low computational power, memory, energy. The typical instantiation of the resource-restricted device is Secure cryptographic processors (SCP) or smart card with additional properties such as tamper protection. 
-We aim to study ECC based protocols enabling a secure computation on powerful but potentially malicious devices with the help of trusted SCPs and to improve the system robustness if the SCP is compromised.
 
-\paragraph{SCPs} play a crucial role in many critical systems across various fields, e.g., banking, military, and government.
-SCPs provide an important additional layer of protection against attacks. A potential security vulnerability or a bug in the SCP can have broad consequences and compromise overall system security. For example, our recent discovery of a security vulnerability in RSA key generation in the Infineon SCP shows the fragility of eID systems having the affected chip a single point of failure \cite{2017-ccs-nemec}. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Therefore it is highly important to test for potential
-bugs and backdoors in the SCPs as critical system components. A manufacturing path from blueprints to a final product has multiple steps, and the manufacturer is not able to oversee all parts of the process. Backdoors can be induced at any stage, and even product certification cannot give reasonable assurances for critical systems \cite{2017-ccs-nemec}. Moreover the Kleptography-based \cite{Young:1997:KUC:1754542.1754551} backdoor can be present in the standard itself so only the attacker can detect and use it while for others it is computationally indistinguishable, e.g., RSA key generation. 
+\section{State of the Art}
+\begin{shaded}
+\begin{itemize}
+    \item More concrete introduction
+    \item Current state of the art
+    \item Classical and up to date results, comparison, overview / survey
+    \item Up to date topics to address, who is solving those
+    \item How to contribute
+    \item Range: 8-12 pages
+\end{itemize}
+\end{shaded}
 
-The solution we propose to this family of threats is removing the single point of failure by employing a secure multi-party computation (SMPC). 
-With the SMPC multiple independent participants in the protocol can jointly compute an agreed-upon function so that individual function inputs of the participants remain private while the output is computed by all participants. The participants can be malicious, deviate from the protocol, and collude to get the private function inputs of others. SMPC is also known as secure function evaluation (SFE) or privacy-preserving computation. Several SMPC protocol exists with different guarantees with respect to the attacker model, a number of colluding participants and so on.
-
-
-
-\paragraph{Smart-ID} A practical example of SMPC deployed in Estonia is the Smart-ID \cite{smart_id_ee}, used for authentication and legal digital signatures. Smart-ID extends the RSA digital signature scheme, so it is computed jointly by two independent parties, user's smart-phone, and the server-side HSM. 
-Each party creates a signature share $s_i$ using a private key share $p_i$. The final composite signature $s$ is a simple combination of the signature shares $s_i$. 
-The $s$ is RFC3447 \cite{rfc3447} RSASSA-PKCS1-v1.5 compliant signature under the composite private key $p$. Even after compromising one of the $p_i$ the attacker is not able to forge signatures.
 
 \section{Related work - itemized}
-
 \begin{itemize}
-	\item {\bf{Fully homomorphic encryption}}, alternative solution, not practical for universal problems. Could substitute need for secure processors.
     \item {\bf{SMPC}}, multi party computation in general. Secure function evaluation, privacy preserving computation, specific algorithms, e.g., privacy preserving set intersection, database lookup, data mining. 
+    
+    \item {\bf{Fully homomorphic encryption}}, alternative solution, not practical for universal problems. Could substitute need for secure processors. Move to bottom, like SoK paper, just mention.
+    
     \item {\bf{Secure processor assisted cryptography}}, using FPGAs, smart-cards, 
+    
     \item {\bf{Multi-signatures}} multiparty signature schemes. 1-N, N-N, k-N. Popular in cryptocurrencies.
+    
     \item {\bf{Privacy centric cryptocurrencies}}. The initial goal is to support transaction signing on resource-constrained devices. Key for spending funds is a highly valuable target for attackers, sometimes worth millions of dollars. Storing key in a secure processor lowers the attack surface compared to general PC wallet. SCP can provide further security guarantees, security proofs / high EAL certification. 
     
     Privacy-centric cryptocurrencies use complex crypto schemes which makes support for SCP difficult due to the restricted computational environment. HW wallet for Monero, ZCoin, Zcash or derivation of those. 
@@ -164,24 +211,96 @@ The $s$ is RFC3447 \cite{rfc3447} RSASSA-PKCS1-v1.5 compliant signature under th
     Another goal is multi-signature support, so one signing key is distributed among more hardware wallets from different vendors. Secure blockchain scanning is another topic. 
 \end{itemize}
 
-\section{Related work - new}
+\section{Related work - DRAFT}
+    \subsection{SMPC}
+    - garbled circuits, ORAMs, circuit compilers.
+    
+    \subsection{Fully homomorphic encryption}
+    - gentry, ideal solution to trusted computing on cloud or with secret inputs. not practical for general problems.
+    
+    \subsection{Multi signatures}
+    - schnorr, mention UCL paper, okamoto, public key aggregation,  
+    
+    \subsection{Secure processor assisted cryptography}
+    - roca, add DH proposal, FPGAs, 
+    
+    \subsection{Privacy centric cryptocurrencies}
+    - multisigs, monero, zcoin, zcash
+    
+\newpage    
+\section{Related work}
 
-\subsection{Fully homomorphic encryption}
-- gentry, ideal solution to trusted computing on cloud or with secret inputs. not practical for general problems.
+Secure multi-party computation (MPC) is very generic and well studied cryptographic task.
+It allows mutual distrustful parties $P_i, i \in \{1,\dots,m\}$ to jointly perform a distributed computation of a function $f(x_i,\dots,x_m) = (y_i,\dots,y_m)$ on their inputs $x_i$ in a way each party learns only $y_i$ from the execution (\emph{privacy}). In particular, other users' inputs $x_{j, j \neq i}$ and outputs $y_{j, j \neq i}$ remain secret for user $P_i$. Depending on the security properties of the particular MPC protocols they should remain secure even with presence of a coalition of colluding corrupted nodes. MPC basically attempts to emulate a trusted third party (TTP) computing the function $f$ on user's behalf preserving the \emph{correctness} and \emph{privacy} as described.
 
-\subsection{SMPC}
-- garbled circuits, ORAMs, circuit compilers.
+MPC protocols are characterized with respect to various criteria:
+\begin{itemize}
+    \itembf{Number of parties.} Two-party computation is an important special case $m=2$ which has dedicated body of research as it achieves own specific feasibility results due to nature of the problem, i.e., there is no honest majority and often motivated by popular client-server paradigm.
 
-\subsection{Multi signatures}
-- schnorr, mention UCL paper, okamoto, public key aggregation,  
+    \itembf{Attacker types.} The \emph{semi-honest} attackers may form a colluding coalitions with the aim to learn more information from the protocol runs than the privacy property of the MPC describes. They may communicate and share information from runs. However, they exactly follow the protocol definition. This attacker model is also called \emph{passive} or \emph{honest-but-curious}. 
+    On the other hand, \emph{malicious} or \emph{active} attackers may on top of that perform arbitrary actions during the protocol execution. They can diverge from the protocol, forge, replay messages, stop responding etc.
 
-\subsection{Secure processor assisted cryptography}
-- roca, add DH proposal, FPGAs, 
+    \emph{Static} attackers corrupt the nodes on the beginning of the protocol. Corrupted set is unknown to the honest parties. \emph{Adaptive} attackers may selectively choose which node to corrupt during the protocol execution based on the collected information from the run. Intuitively, adaptive attacker model is stronger.
+    
+    \itembf{Size of the attacker coalition.} Basic security property of MPC protocol is a size of the coalition $t$ the MPC protocol stays secure. Depending on the attacker model it can be \emph{dishonest majority} up to $m-1$, \emph{honest majority} $2t+1 < m$, which makes sense only with $m>2$. There are also special cases requiring $2/3$ majority.
 
-\subsection{Privacy centric cryptocurrencies}
-- multisigs, monero, zcoin, zcash
+    \itembf{Computational power.} The adversary is typically assumed to be \emph{computationally bounded}, i.e., it's running time is probabilistic polynomial in the inputs $x_i$ and number of parties $m$.
+    MC protocols with this attacker typically rely on typical cryptographic tools and hardness assumptions like Decisional Diffie-Hellman assumption, factoring hardness assumption and so on. From this reason the model is also called \emph{cryptographic}.
+    
+    Contrary to that \emph{information-theoretic} model poses no restrictions on attackers computational power. It's also known as \emph{computationally unbounded model} or \emph{perfectly private}. MPC in this model provides higher security guarantees but the security breaks completely if the attacker coalition size $t$ grows above the required limit. MPC in this model are typically using perfectly-secure one-time-pad and secret sharing, e.g., Shamir's secret sharing. They are usually computationally more effective as there is no cryptography related but the communication cost may render them ineffective. 
+    
+    \itembf{Set-up assumptions.} MPC security is stated with respect to various set-up assumptions. If not stated the MPC is assumed to work in so called \emph{plain model}. It may also use stronger security models such as \emph{Common Reference String (CRS)} model assuming all nodes have access to a CRS from certain distribution generated by a TTP. It may be e.g., cryptographic keys or randomness used later in the protocol. Other commonly used models are \emph{Correlated Randomness Model} and \emph{Public key infrastructure (PKI)}. 
+    
+    Orthogonal to that are theoretical assumptions such as \emph{One way functions}, \emph{Random oracle model}, \emph{collision resistant hash functions}.
+    
+    \itembf{Communication properties.} MPC typically assume \emph{private channels}, i.e., private and reliable point-to-point communication channels. Some properties may additionally require a \emph{broadcast}. Channels can be either \emph{synchronized} or \emph{asynchronous}. 
+    
+    Protocols are usually characterized with the respect to communication \emph{rounds}. In one round each participant $P_i$ may send message to others $\overline{P_i} = \{P_j; i \neq i\}$. Some literature define round as one message round-trip, i.e., message exchange. Literature agrees that if a message is a reaction on previous message it is considered as a new round. 
+    
+    With respect to number of rounds are protocols characterized as \emph{polynomialy input or function bound}, \emph{constant-round}.
+\end{itemize}
 
-\section{Related work - text}
+\paragraph{Two-party computation.} %
+One of the founding work on MPC is a seminal paper of Yao \cite{Yao86} which proved \emph{completeness} of the two-party computation, i.e. all computable function $f$ can be computed in secure two-party computation model in semi-honest setting with computationally bounded attackers. 
+
+Yao's approach is based on a converting function $f$ to a boolean circuit $C$. The $C$ consists of gates, i.e., nodes performing addition and multiplication (AND and XOR) on its inputs and producing an output. Number of input wires on gate is fan-in, typically 2 and number of outputs is called fan-out which is typically 1. Gates are connected with wires into a circuit. Input wires are connecting user inputs to gate's input, output wires are connected to gates outputs and unconnected on the other end.
+
+Circuit \emph{creator} creates the circuit $C$ and \emph{garbles} it in a sense he encrypts and permutes the gates truth tables to protect his values and intermediate state. This operation gave the scheme name \emph{garbled circuits}. Creator sends the garbled circuit with his encrypted inputs, i.e., wire \emph{labels}, to the \emph{evaluator}. In order to evaluate the circuit she needs to know wire labels corresponding to her inputs and only the creator knows the encryption key. The $\binom{2}{1}$ Oblivious Transfer is used to query corresponding values from the creator without revealing evaluator's inputs. Evaluator evaluates the $C$ in topological order gate-by-gate and obtains output labels which are decrypted by the creator to obtain final result of the computation. The protocol is constant round, independent on the circuit depth. 
+Obviously the scheme works only with semi-honest attackers as the malicious creator could create different circuit $C^\prime$ leaking the evaluator's inputs. The more formal description can be found in \cite{BHR12}. 
+
+\paragraph{Multi-party extension.} %
+Yao's work has been extended by \cite{GMW87} to a multi-party case and with malicious adaptive nodes using only one-way functions. They make use of Verifiable Secret Sharing (VSS) and agreement protocols. The work is based on boolean circuit but compared to \cite{Yao86} each party evaluates the circuit independently with shares of other players inputs. This work is a completeness theorem for distributed protocols with honest majority. Two protocols were proposed, the first for semi-honest setting which is secure with $m-1$ corrupted nodes, the other in the malicious settings secure with honest majority (correctness and privacy). Later \cite{CLOS02} shown how to construct a multi-party protocols in universally composable framework in computational assumptions with dishonest majority up to $m-1$ of adaptive malicious parties. 
+
+\paragraph{Computationally unbounded.}
+The information-theoretic equivalent of this work was done by \cite{BGW88} and \cite{CCD88}. The work is based on Shamir's secret sharing and arithmetic circuits in finite fields. The malicious case make use of error correcting Reed Solomon codes. They proved a honest majority is required for semi-honest setting in this model and $2/3$-honest majority for malicious settings. Moreover, these bounds are tight. These protocols have $\bigO(\text{depth}(C))$ communication rounds.
+
+\paragraph{Extensions.} A large body of research has been based on \cite{Yao86, GMW87, BGW88, CCD88} and many extensions and improvements were published. 
+For the garbled circuits it entails: Point-and-permute \cite{BMR90}, Free XOR \cite{KS08}, garbled row reduction \cite{NPS99, PSSW09}, FleXOR \cite{KMR14}, half gates \cite{ZRE14}, garbled gadgets \cite{BMR16} and CompGC \cite{cryptoeprint:2016:458}.
+
+Cut-and-choose extension \cite{LP07,LP11,Lin16} enables use of the garbled circuit with malicious parties. The approach has been extensively studied and significantly improved, e.g., LEGO \cite{NO09} and it's numerous improvements \cite{cryptoeprint:2013:155, FJNT15, cryptoeprint:2016:1069, cryptoeprint:2017:226, KNBTR17, cryptoeprint:2018:578}.
+
+Secret-sharing based approach extensions working with malicious parties: SPDZ \cite{DPSZ12, cryptoeprint:2012:642}, MiniMac \cite{DZ13}, TinyOT \cite{NNOB12}, MASCOT \cite{KOS16}, TinyTable \cite{cryptoeprint:2016:695}, and further improvements \cite{FKOS15, DZ16, LPJ17, BCGIM17, cryptoeprint:2017:1230}. The \cite{WRK17} generalizes TinyOT to multiparty setting, dishonest majority of malicious attackers in standalone security model while \cite{DPSZ12} is statistically UC-secure.
+
+\paragraph{Constant-round protocols.} The \cite{BB89} was the first Constant-round information-theoretic protocol. Later \cite{IK00, IK02} used so called randomized polynomials and randomized encodings \cite{AIK04} of a function to construct constant round protocols in information-theoretic setting with active adversary. Later \cite{ABT18} proved a tight bound 2-rounds for perfectly secure semi-honest MPC with honest majority using a new tool multi-party randomized encodings. The \cite{cryptoeprint:2018:1078} shown 2-round information-theoretic statistically secure MPC with malicious adversaries and honest majority with selective abort which was shown by \cite{GIKR04} to be the strongest notion of security for 2-round protocols.
+
+\paragraph{Universally composable framework.}%
+Nananana nana nan anana
+
+
+\newpage
+\begin{itemize}
+    \item UC secure, setup assumptions, tokenzzzz
+\end{itemize}
+
+UC-related: "Consequently, many known protocols (e.g., the general protocol of
+[gmw87], to name one) are not UC secure. Thus, the feasibility of realizing cryptographic tasks
+requires re-investigation within the UC framework. Let us briefly summarize the known results.
+In the case of a majority of honest parties, there exist UC secure protocols for computing any
+functionality ([c01], building on [bgw88, rb89, cfgn96]). Also, in the honest-but-curious case
+(i.e., when even corrupted parties follow the protocol specification), UC secure protocols exist for
+essentially any functionality [clos02]."
+
+
 
 Secure function evaluation has been broadly studied \cite{
 yao82, conf/sp/SonghoriHS0K15, Malkhi:2004:FST:1251375.1251395, 10.1007/978-3-642-40041-4_5}, namely with respect to private database search \cite{Bertino2005, Naor:1999:PPA:336992.337028}, private data mining \cite{Aldeen2015} and voting. However, it typically suffers from large performance or communication overhead.
@@ -191,17 +310,23 @@ In \cite{2017-ccs-mavroudis}, we designed, theoretically analyzed, and evaluated
 Also, the K-out-of-N ECC-based multi-signature protocol research has recently undergone rapid development, especially due to rising crypto-currencies popularity as they rely on multi-signatures for signing outgoing transactions in accounts held by multiple owners ~\cite{Bellare:2007:UAS:2394539.2394589, Bnz2017BulletproofsSP, cryptoeprint:2018:068}. 
 
 
-
-\section{Monero paper}
-
-Idea: submit to Oakland (rolling deadline) or some other A, A+ conference before theses submission. 
-
-Covering basic Monero transaction, transaction signing protocol for hardware wallets, with security proof (ideally. reduction. original signing algorithm is secure then transformed protocol is secure as well).
-
-Covering also blockchain scanning, so view key is not leaked to the host. Schemes designed with their properties. Group payment identification pseudonymity, fast scanning. Encrypted Bloom filters. Impossibility on some attractive scheme properties (publicly derivable public key chain for forward secrecy, corresponding private key derivation only with hardware wallet. Formalize). 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\chapter{Study plan}
+\section{Thesis aim}
+\begin{shaded}
+\begin{itemize}
+    \item What new can be expected
+    \item What will be created
+    \item Hypotheses to research
+    \item Methods used
+    \item Plans, time harmonogram
+    \item Conferences
+    \item Range: 2 pages
+\end{itemize}
+\end{shaded}
+
+chapter{Study plan}
 
 \begin{itemize}
 	\item Transaction signing for privacy centric cryptocurrencies on secure crypto processors.  
@@ -252,6 +377,35 @@ In the crypto-currency setup the zero-knowledge proofs, commitments, multi-signa
 
 We aim to investigate new possibilities of the secure view-key sharing in the SCP via SMPC by offloading costly operations to the high-performance hosts, minimizing the number of rounds, operations and memory in SCP.
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Achieved results}
+\begin{shaded}
+\begin{itemize}
+    \item What we have, created
+    \item Conferences presented
+    \item Range: 3-5 pages
+\end{itemize}
+\end{shaded}
+
+\subsection{Monero paper}
+
+Idea: submit to Oakland (rolling deadline) or some other A, A+ conference before theses submission. 
+
+Covering basic Monero transaction, transaction signing protocol for hardware wallets, with security proof (ideally. reduction. original signing algorithm is secure then transformed protocol is secure as well).
+
+Covering also blockchain scanning, so view key is not leaked to the host. Schemes designed with their properties. Group payment identification pseudonymity, fast scanning. Encrypted Bloom filters. Impossibility on some attractive scheme properties (publicly derivable public key chain for forward secrecy, corresponding private key derivation only with hardware wallet. Formalize). 
+
+
+\section{Author's Publications}
+\begin{shaded}
+\begin{itemize}
+    \item Contribution to the paper, percentual contribution
+\end{itemize}
+\end{shaded}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Bibliography
   \printbibliography[heading=bibintoc] 
