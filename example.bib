@@ -1613,6 +1613,21 @@ isbn="978-0-387-34805-6"
  keywords = {cryptographic protocols, security analysis of protocols, concurrent composition},
 } 
 
+@inproceedings{CF01,%Canetti:2001:UCC:646766.704151,
+ author = {Canetti, Ran and Fischlin, Marc},
+ title = {Universally Composable Commitments},
+ booktitle = {Proceedings of the 21st Annual International Cryptology Conference on Advances in Cryptology},
+ series = {CRYPTO '01},
+ year = {2001},
+ isbn = {3-540-42456-3},
+ pages = {19--40},
+ numpages = {22},
+ url = {http://dl.acm.org/citation.cfm?id=646766.704151},
+ acmid = {704151},
+ publisher = {Springer-Verlag},
+ address = {London, UK, UK},
+} 
+
 @inproceedings{CD01,%Cramer:2001:SDL:646766.704286,
  author = {Cramer, Ronald and Damg{\aa}rd, Ivan},
  title = {Secure Distributed Linear Algebra in a Constant Number of Rounds},
@@ -1660,6 +1675,36 @@ isbn="978-0-387-34805-6"
  address = {New York, NY, USA}, %comp, dishonest majority
 } 
 
+@InProceedings{DN02,%10.1007/3-540-45708-9_37,
+author="Damg{\aa}rd, Ivan
+and Nielsen, Jesper Buus",
+editor="Yung, Moti",
+title="Perfect Hiding and Perfect Binding Universally Composable Commitment Schemes with Constant Expansion Factor",
+booktitle="Advances in Cryptology --- CRYPTO 2002",
+year="2002",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="581--596",%
+%abstract="Canetti and Fischlin have recently proposed the security notion universal composability for commitment schemes and provided two examples. This new notion is very strong. It guarantees that security is maintained even when an unbounded number of copies of the scheme are running concurrently, also it guarantees non-malleability and security against adaptive adversaries. Both proposed schemes use $\Theta$(k) bits to commit to one bit and can be based on the existence of trapdoor commitments and non-malleable encryption.",
+isbn="978-3-540-45708-4"
+}
+
+@InProceedings{FGMR02,%10.1007/3-540-46035-7_32,
+author="Fitzi, Matthias
+and Gisin, Nicolas
+and Maurer, Ueli
+and von Rotz, Oliver",
+editor="Knudsen, Lars R.",
+title="Unconditional Byzantine Agreement and Multi-party Computation Secure against Dishonest Minorities from Scratch",
+booktitle="Advances in Cryptology --- EUROCRYPT 2002",
+year="2002",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="482--501",%
+%abstract="It is well-known that n players, connected only by pairwise secure channels, can achieve unconditional broadcast if and only if the number t of cheaters satisfies t < n/3. In this paper, we show that this bound can be improved - at the sole price that the adversary can prevent successful completion of the protocol, but in which case all players will have agreement about this fact. Moreover, a first time slot during which the adversary forgets to cheat can be reliably detected and exploited in order to allow for future broadcasts with t < n/2. This even allows for secure multi-party computation with t < n/2 after the first detection of such a time slot.",
+isbn="978-3-540-46035-0"
+}
+
 @InProceedings{GIKR04,%10.1007/3-540-45708-9_12,
 author="Gennaro, Rosario
 and Ishai, Yuval
@@ -1704,6 +1749,64 @@ isbn="978-3-540-45708-4"
  %keywords = {\$\NC^0\$, constant depth circuits, cryptographic primitives, cryptography, one-way function, pseudo-random generator, randomizing polynomials},%randomized encodings IK00, IK02 extension
 } 
 
+@inproceedings{BCNP04,
+author = {Barak, B and Canetti, R and Nielsen, Jesper and Pass, R},
+year = {2004},
+month = {11},
+pages = {186- 195},
+title = {Universally composable protocols with relaxed set-up assumptions},
+isbn = {0-7695-2228-9},
+doi = {10.1109/FOCS.2004.71},
+keywords = {PKI, setup-assumption}
+}
+
+@InProceedings{HM04,%10.1007/978-3-540-24638-1_4,
+author="Hofheinz, Dennis
+and M{\"u}ller-Quade, J{\"o}rn",
+editor="Naor, Moni",
+title="Universally Composable Commitments Using Random Oracles",
+booktitle="Theory of Cryptography",
+year="2004",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="58--76",
+%abstract="In the setting of universal composability [Can01], commitments cannot be implemented without additional assumptions such as that of a publicly available common reference string[CF01]. Here, as an alternative to the commitments in the common reference string model, the use of random oracles to achieve universal composability of commitment protocols is motivated. Special emphasis is put on the security in the situation when the additional ``helper functionality'' is replaced by a realizable primitive. This contribution gives two constructions which allow to turn a given non-interactive commitment scheme into a non-interactive universally composable commitment scheme in the random oracle model. For both constructions the binding and the hiding property remain valid when collision-free hash functions are used instead of random oracles. Moreover the second construction in this case even preserves the property of perfect binding.",
+isbn="978-3-540-24638-1"
+}
+
+@InProceedings{FWW04,%10.1007/978-3-540-28628-8_34,
+author="Fitzi, Matthias
+and Wolf, Stefan
+and Wullschleger, J{\"u}rg",
+editor="Franklin, Matt",
+title="Pseudo-signatures, Broadcast, and Multi-party Computation from Correlated Randomness",
+booktitle="Advances in Cryptology -- CRYPTO 2004",
+year="2004",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="562--578",%
+%abstract="Unconditionally secure multi-party computations in general, and broadcast in particular, are impossible if any third of the players can be actively corrupted and if no additional information-theoretic primitive is given. In this paper, we relativize this pessimistic result by showing that such a primitive can be as simple as noisy communication channels between the players or weakly correlated pieces of information. We consider the scenario where three players have access to random variables X, Y, and Z, respectively, and give the exact condition on the joint distribution PXYZunder which unconditional broadcast is possible. More precisely, we show that this condition characterizes the possibility of realizing so-called pseudo-signatures between the players. As a consequence of our results, we can give conditions for the possibility of achieving unconditional broadcast between n players and any minority of cheaters and, hence, general multi-party computation under the same condition.",
+isbn="978-3-540-28628-8"
+}
+
+@book{G04,%Goldreich:2004:FCV:975541,
+ author = {Goldreich, Oded},
+ title = {Foundations of Cryptography: Volume 2, Basic Applications},
+ year = {2004},
+ isbn = {0521830842},
+ publisher = {Cambridge University Press},
+ address = {New York, NY, USA},
+} 
+
+@book{G06,%Goldreich:2006:FCV:1202577,
+ author = {Goldreich, Oded},
+ title = {Foundations of Cryptography: Volume 1},
+ year = {2006},
+ isbn = {0521035368},
+ publisher = {Cambridge University Press},
+ address = {New York, NY, USA},
+} 
+
 @inproceedings{LP07,%Lindell:2007:EPS:1419582.1419586, cut-and-choose
  author = {Lindell, Yehuda and Pinkas, Benny},
  title = {An Efficient Protocol for Secure Two-Party Computation in the Presence of Malicious Adversaries},
@@ -1721,21 +1824,23 @@ isbn="978-3-540-45708-4"
  address = {Berlin, Heidelberg},
 } 
 
-@InProceedings{KMR14,%10.1007/978-3-662-44381-1_25,
-author="Kolesnikov, Vladimir
-and Mohassel, Payman
-and Rosulek, Mike",
-editor="Garay, Juan A.
-and Gennaro, Rosario",
-title="FleXOR: Flexible Garbling for XOR Gates That Beats Free-XOR",
-booktitle="Advances in Cryptology -- CRYPTO 2014",
-year="2014",
-publisher="Springer Berlin Heidelberg",
-address="Berlin, Heidelberg",
-pages="440--457",
-isbn="978-3-662-44381-1"
+@article{HUU07,
+author = {Hofheinz, Dennis and Uller-Quade, Orn and Unruh, Dominique},
+year = {2007},
+month = {01},
+%pages = {},
+title = {Universally Composable Zero-Knowledge Arguments and Commitments from Signature Cards},
+journal = {Journal of Computer and System Sciences - JCSS},
+keywords = {set-up assumptions, signature cards}
 }
 
+@book{KL07,%Katz:2007:IMC:1206501,
+ author = {Katz, Jonathan and Lindell, Yehuda},
+ title = {Introduction to Modern Cryptography (Chapman \& Hall/Crc Cryptography and Network Security Series)},
+ year = {2007},
+ isbn = {1584885513},
+ publisher = {Chapman \& Hall/CRC},
+} 
 
 @inproceedings{KS08,%Kolesnikov:2008:IGC:1427987.1428038,
  author = {Kolesnikov, Vladimir and Schneider, Thomas},
@@ -1753,6 +1858,21 @@ isbn="978-3-662-44381-1"
  publisher = {Springer-Verlag},
  address = {Berlin, Heidelberg},%https://dl.acm.org/citation.cfm?id=1428038
 } 
+
+@InProceedings{GMS08,%10.1007/978-3-540-78967-3_17,
+author="Goyal, Vipul
+and Mohassel, Payman
+and Smith, Adam",
+editor="Smart, Nigel",
+title="Efficient Two Party and Multi Party Computation Against Covert Adversaries",
+booktitle="Advances in Cryptology -- EUROCRYPT 2008",
+year="2008",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="289--306",%
+%abstract="Recently, Aumann and Lindell introduced a new realistic security model for secure computation, namely, security against covert adversaries. The main motivation was to obtain secure computation protocols which are efficient enough to be usable in practice. Aumann and Lindell presented an efficient two party computation protocol secure against covert adversaries. They were able to utilize cut and choose techniques rather than relying on expensive zero knowledge proofs.",
+isbn="978-3-540-78967-3"
+}
 
 @inproceedings{NO09,%Nielsen:2009:LTS:1530441.1530463,
  author = {Nielsen, Jesper Buus and Orlandi, Claudio},
@@ -1887,6 +2007,37 @@ isbn="978-3-642-32009-5"
  address = {Berlin, Heidelberg},
 } 
 
+@InProceedings{IKMOP13,%10.1007/978-3-642-36594-2_34,
+author="Ishai, Yuval
+and Kushilevitz, Eyal
+and Meldgaard, Sigurd
+and Orlandi, Claudio
+and Paskin-Cherniavsky, Anat",
+editor="Sahai, Amit",
+title="On the Power of Correlated Randomness in Secure Computation",
+booktitle="Theory of Cryptography",
+year="2013",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="600--620",%
+%abstract="We investigate the extent to which correlated secret randomness can help in secure computation with no honest majority. It is known that correlated randomness can be used to evaluate any circuit of size s with perfect security against semi-honest parties or statistical security against malicious parties, where the communication complexity grows linearly with s. This leaves open two natural questions: (1) Can the communication complexity be made independent of the circuit size? (2) Is it possible to obtain perfect security against malicious parties?",
+isbn="978-3-642-36594-2"
+}
+
+@InProceedings{KMR14,%10.1007/978-3-662-44381-1_25,
+author="Kolesnikov, Vladimir
+and Mohassel, Payman
+and Rosulek, Mike",
+editor="Garay, Juan A.
+and Gennaro, Rosario",
+title="FleXOR: Flexible Garbling for XOR Gates That Beats Free-XOR",
+booktitle="Advances in Cryptology -- CRYPTO 2014",
+year="2014",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="440--457",
+isbn="978-3-662-44381-1"
+}
 
 @misc{FJNT15,%cryptoeprint:2015:309,
     author = {Tore Kasper Frederiksen and Thomas P. Jakobsen and Jesper Buus Nielsen and Roberto Trifiletti},
