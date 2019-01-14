@@ -333,7 +333,7 @@ On the field of computational security the \cite{cryptoeprint:2017:1056} show th
 Similarly, the \cite{cryptoeprint:2018:572} shown round optimal 2-round MPC protocol for general circuits that achieves security with abort against any dishonest minority of corruptions using one-way functions.
 % cool presentation: http://conferences.au.dk/fileadmin/user_upload/TPMPC18/Antigoni_Polychroniadou.pdf
 
-\section{Universally composable framework}%
+\section{Universally composable framework}\todo{Maybe move right after MPC intro?}%
 \label{sec:uc}
 Traditionally, the protocols were analyzed in the \emph{stand-alone} security model. The model assumed only the actual participants in the single run of the protocol in isolation which allowed for relatively simple designs and proofs. The model is intuitively the simplest for such analysis but does not realistically capture threats we would like to assume for practical protocol usage. In the real world, many different protocols may be run concurrently in unbounded number of instances in an arbitrary interleaving schedule. These protocols may be executed with same or other parties, their inputs may be correlated, protocol outputs can be used by other protocols and message communication could be controlled by an adversary. The \cite{Can06, Can13} discuss protocols secure in the stand-alone model failing in the concurrent composition.\todo{Simplify?}
 
@@ -366,6 +366,7 @@ The idea of using special tamper-proof hardware tokens for cryptographic purpose
 Consequently, the \cite{AV04} used tamper-proof chips on the computing nodes to emulate a distributed trusted third party denoted Guardian Angel to securely implement fair-exchange, simple multi-party protocol for exchanging secrets between parties in asynchronous environment with malicious adversaries. The tamper-proof hardware basically implemented synchronization algorithm reducing fair-exhange to a distributed consensus problem. 
 
 The idea of using tamper-proof tokens was later extended by \cite{FFPBK06} as a TrustedPals framework which supports general deterministic MPC in the computationally bounded model with malicious parties and honest majority. Each party owns a stateful tamper-proof token programmed and distributed in the setup-phase. Tokens were instantiated by Java SmartCards~\cite{DW99} implementing the whole functionality and thus avoiding transformation to arithmetic circuits which makes the solution practically usable. However, the proof is only in stand-alone model. Authors claimed it was the first practical MPC implementation for two and more parties as the Fairplay~\cite{MNPS04} supported only two-party computation.
+The \cite{JKSS10} was the first approach to outsource Yao's garbled circuit protocol to a hardware token.
 
 \paragraph{UC-security.} Later, Katz in~\cite{K07} formalized the notion of a hardware token model in the UC framework, circumventing impossibility results with physical assumptions of the tokens. Katz shown that the token model is equivalent to CRS for any number of dishonest static malicious parties under DDH assumption (computationaly bounded). %
 The token creator programs the token and sends it to the receiver which can interact with it in the black-box manner, i.e., no other information can be deduced about the program state besides its input/output behavior. %
@@ -400,8 +401,10 @@ They assume collision-resistant hash functions (CRHFs) and the existence of uniq
 \cite{DKMN15b} shown first UC-secure two-party protocol with single stateless token using only one-way functions.
 
 \cite{CCOV17} relaxes trust model in computing with corrupted tokens as some token manufacturers may create malicious tokens. They present UC-secure protocol with $N$ stateless tokens that computes original functionality securely even with $N-1$ malicious tokens with one-way functions. In \cite{2017-ccs-mavroudis} we implemented similar solution but with stronger cryptographic assumptions.
-
 % Unlimited number of OTs -> unlimited number of MPCs
+
+\cite{DSZ14} implemented practical 2PC on smart phones based on \cite{GMW87} using smart card to accelerate computation with pre-computation thanks to the additional trust it provides.
+
 
 \unsurein{Warn: This section is unfinished.}
 \todoin{ToDo: This section is a bit rusty, may need some improvements.}
@@ -416,18 +419,19 @@ However, this research branch is out of the scope of this thesis proposal as gen
 \unsurein{Warn: This section is unfinished}
 \infoin{Text need to be glued together so our thesis goals are visible from the composition}
 
-\begin{itemize}
-    \item Practical MPC computations: \cite{BJSV15} MPC secure statistical analysis of income tax for Estonian government. \cite{BKKRST16} statistically analyzed database with 600k students and 10M tax records. \cite{KW15} suggested to use MPC to implement satellite collision prevention system securely evaluating collision detection algorithm using sensitive location and trajectory using secret sharing and floating point operations.
+%\begin{itemize}
+\paragraph{Practical MPC computations:} \cite{BJSV15} MPC secure statistical analysis of income tax for Estonian government. \cite{BKKRST16} statistically analyzed database with 600k students and 10M tax records. \cite{KW15} suggested to use MPC to implement satellite collision prevention system securely evaluating collision detection algorithm using sensitive location and trajectory using secret sharing and floating point operations.
     
-    \item True2F~\cite{DCMBR18} is a simple application of two-party computation to protect from untrusted U2F tokens. Motivated by ROCA \cite{2017-ccs-nemec} in which autors shown the well-known token generated easily-factorable RSA moduli which deteriorated system security. 
-    In True2F they designed lightweight 2PC protocols for collaborative signature key generation to ensure it has proper entropy contributed by both browser and token. They propose firewalled ECDSA signatures, jointly produced by browser and token in such a way that a) secrets remain private on token and b) token is blocked from exfiltrating secret signing key in the signature randomness.
-    The proposed modifications can run on the same hardware, server-side requires no modifications.
-    % Verifiable identities.
+\paragraph{True2F~\cite{DCMBR18}} is a simple application of two-party computation to protect from untrusted U2F tokens. Motivated by ROCA \cite{2017-ccs-nemec} in which autors shown the well-known token generated easily-factorable RSA moduli which deteriorated system security. 
+In True2F they designed lightweight 2PC protocols for collaborative signature key generation to ensure it has proper entropy contributed by both browser and token. They propose firewalled ECDSA signatures, jointly produced by browser and token in such a way that a) secrets remain private on token and b) token is blocked from exfiltrating secret signing key in the signature randomness.
+The proposed modifications can run on the same hardware, server-side requires no modifications.
+% Verifiable identities.
     
-    \item In OPAQUE~\cite{JKX18} shown how to compile asymmetric password-authenticated key exchange protocols (aPAKE) to OPAQUE protocols, protecting from offline pre-computation attacks as aPAKE protocols usually send hashing \emph{salt} to the host, the login key is derived as $k=H(pass, salt)$. The attacker can collect the salt in a targeted attack, pre-compute $H()$ tables using large word lists and then after server breach immediately recover user password using the tables. OPAQUE uses UC-secure MPC protocol in a way client does not learn the salt and server does not learn the password. The protocol is very effective and provides perfect forward secrecy, supports client-side hardened derivations, e.g., with scrypt and thresholding scheme so attacker has to attack on $t$ servers simultaneously to mount the attack.
+\paragraph{In OPAQUE~\cite{JKX18}} shown how to compile asymmetric password-authenticated key exchange protocols (aPAKE) to OPAQUE protocols, protecting from offline pre-computation attacks as aPAKE protocols usually send hashing \emph{salt} to the host, the login key is derived as $k=H(pass, salt)$. The attacker can collect the salt in a targeted attack, pre-compute $H()$ tables using large word lists and then after server breach immediately recover user password using the tables. OPAQUE uses UC-secure MPC protocol in a way client does not learn the salt and server does not learn the password. The protocol is very effective and provides perfect forward secrecy, supports client-side hardened derivations, e.g., with scrypt and thresholding scheme so attacker has to attack on $t$ servers simultaneously to mount the attack.
     
-    \item \cite{awesome-mpc, sok19} give extensible up-to-date review of the numerous practically usable MPC systems. Such as: SCALE-MAMBA, TinyGarble, EMP-toolkit, Obliv-C, Sharemind and ABY.
-\end{itemize}
+\paragraph{Compilers:} \cite{awesome-mpc, sok19} give extensible up-to-date review of the numerous practically usable MPC systems. Such as: SCALE-MAMBA, TinyGarble, EMP-toolkit, Obliv-C, Sharemind and ABY.
+Fairplay, compilers, etc.
+%\end{itemize}
 
 \infoin{Idea: we want fit somewhere here:%
 \begin{itemize}

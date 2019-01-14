@@ -179,6 +179,18 @@
   \ifx\thesis@bibliography@sorting\undefined
     \def\thesis@bibliography@sorting{#1}%
   \fi}
+\define@key{thesis@bibliography}{maxnames}{%
+  \ifx\thesis@bibliography@maxnames\undefined
+    \def\thesis@bibliography@maxnames{#1}%
+  \fi}
+\define@key{thesis@bibliography}{minnames}{%
+  \ifx\thesis@bibliography@minnames\undefined
+    \def\thesis@bibliography@minnames{#1}%
+  \fi}
+\define@key{thesis@bibliography}{maxalphanames}{%
+  \ifx\thesis@bibliography@maxalphanames\undefined
+    \def\thesis@bibliography@maxalphanames{#1}%
+  \fi}
 \newif\ifthesis@bibliography@loaded@
   \thesis@bibliography@loaded@false
 \newif\ifthesis@bibliography@included@
@@ -191,11 +203,18 @@
       \thesis@require{csquotes}
       \thesis@bibliography@setup{
         style = iso-numeric,
-        sorting = none}
+        sorting = none,
+        minnames = 1,
+        maxnames = 4,
+        maxalphanames = 3,%
+      }
       \thesis@require[
         backend=biber,
         style=\thesis@bibliography@style,
         sorting=\thesis@bibliography@sorting,
+        maxnames=\thesis@bibliography@maxnames,
+        maxalphanames=\thesis@bibliography@maxalphanames,
+        minnames=\thesis@bibliography@minnames,
         autolang=other,
         sortlocale=auto]{biblatex}
       % Load the bibliography databases.
