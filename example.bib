@@ -1,5 +1,6 @@
 % The example bibliographical entries below were borrowed from the
 % <https://www.ctan.org/pkg/biblatex-iso690> package documentation.
+
 @misc{CurveSwap,
     author = {L Valenta et al.},
     title = {In search of CurveSwap: Measuring elliptic curve implementations in the wild},
@@ -67,31 +68,6 @@
 	isbn = {978-1-931971-32-4},
 }
 
-@book{Washington:2008:ECN:1388394,
-	author = {LC Washington},
-	title = {Elliptic Curves: Number Theory and Cryptography, Second Edition},
-	year = {2008},
-	isbn = {9781420071467},
-	edition = {2},
-	publisher = {Chapman \& Hall/CRC},
-} 
-
-@InProceedings{DBLP:conf/c2si/NitajR15a,
-	author    = {A Nitaj and
-	T Rachidi},
-	title     = {Factoring {RSA} Moduli with Weak Prime Factors},
-	booktitle = {Codes, Cryptology, and Information Security - First International
-	Conference, {C2SI} 2015, Rabat, Morocco, May 26-28, 2015, Proceedings
-	- In Honor of Thierry Berger},
-	pages     = {361--374},
-	year      = {2015},
-	crossref  = {DBLP:conf/c2si/2015},
-	url       = {http://dx.doi.org/10.1007/978-3-319-18681-8_29},
-	doi       = {10.1007/978-3-319-18681-8_29},
-	timestamp = {Tue, 12 May 2015 15:24:51 +0200},
-	biburl    = {http://dblp.uni-trier.de/rec/bib/conf/c2si/NitajR15a},
-	bibsource = {dblp computer science bibliography, http://dblp.org}
-}
 
 @InProceedings{conf/c2si/NitajR15a,
 	added-at = {2015-05-12T00:00:00.000+0200},
@@ -825,24 +801,6 @@
 	note = {\url{http://eprint.iacr.org/2015/1098}},
 }
 
-@misc{cryptoeprint:2009:258,
-	author = {R Cosset},
-	title = {FACTORIZATION WITH GENUS 2 CURVES},
-	howpublished = {Cryptology ePrint Archive, Report 2009/258},
-	year = {2009},
-	note = {\url{https://eprint.iacr.org/2009/258}},
-}
-
-@InProceedings{10.1007/3-540-44647-8_11,
-	author="RP Gallant et al.",
-	title="Faster Point Multiplication on Elliptic Curves with Efficient Endomorphisms",
-	booktitle="CRYPTO 2001",
-	publisher="Springer",
-	pages="190--200",
-	abstract="The fundamental operation in elliptic curve cryptographic schemes is the multiplication of an elliptic curve point by an integer. This paper describes a new method for accelerating this operation on classes of elliptic curves that have efficiently-computable endomorphisms. One advantage of the new method is that it is applicable to a larger class of curves than previous such methods. For this special class of curves, a speedup of up to 50{\%} can be expected over the best general methods for point multiplication.",
-	isbn="978-3-540-44647-7"
-}
-
 % Garbled circuits
 @INPROCEEDINGS{yao82,
 	author = {AC Yao},
@@ -968,12 +926,19 @@
 
 % FHE
 @InProceedings{10.1007/978-3-642-40041-4_5,
-	author="C Gentry et al.",
-	title="Homomorphic Encryption from Learning with Errors: Conceptually-Simpler, Asymptotically-Faster, Attribute-Based",
-	booktitle="CRYPTO 2013",
-	publisher="Springer",
-	pages="75--92",
-	isbn="978-3-642-40041-4"
+author="Gentry, Craig
+and Sahai, Amit
+and Waters, Brent",
+editor="Canetti, Ran
+and Garay, Juan A.",
+title="Homomorphic Encryption from Learning with Errors: Conceptually-Simpler, Asymptotically-Faster, Attribute-Based",
+booktitle="Advances in Cryptology -- CRYPTO 2013",
+year="2013",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="75--92",
+abstract="We describe a comparatively simple fully homomorphic encryption (FHE) scheme based on the learning with errors (LWE) problem. In previous LWE-based FHE schemes, multiplication is a complicated and expensive step involving ``relinearization''. In this work, we propose a new technique for building FHE schemes that we call the approximate eigenvector method. In our scheme, for the most part, homomorphic addition and multiplication are just matrix addition and multiplication. This makes our scheme both asymptotically faster and (we believe) easier to understand.",
+isbn="978-3-642-40041-4"
 }
 
 @misc{cryptoeprint:2014:148,
@@ -1003,15 +968,94 @@
 } 
 
 @InProceedings{10.1007/978-3-642-13190-5_2,
-	author="M van Dijk, Marten et al.",
-	editor="Gilbert, Henri",
-	title="Fully Homomorphic Encryption over the Integers",
-	booktitle="EUROCRYPT 2010",
-	year="2010",
-	publisher="Springer Berlin Heidelberg",
-	address="Berlin, Heidelberg",
-	pages="24--43",
-	isbn="978-3-642-13190-5"
+author="van Dijk, Marten
+and Gentry, Craig
+and Halevi, Shai
+and Vaikuntanathan, Vinod",
+editor="Gilbert, Henri",
+title="Fully Homomorphic Encryption over the Integers",
+booktitle="Advances in Cryptology -- EUROCRYPT 2010",
+year="2010",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="24--43",
+abstract="We construct a simple fully homomorphic encryption scheme, using only elementary modular arithmetic. We use Gentry's technique to construct a fully homomorphic scheme from a ``bootstrappable'' somewhat homomorphic scheme. However, instead of using ideal lattices over a polynomial ring, our bootstrappable encryption scheme merely uses addition and multiplication over the integers. The main appeal of our scheme is the conceptual simplicity.",
+isbn="978-3-642-13190-5"
+}
+
+@InProceedings{10.1007/978-3-642-55220-5_30,
+author="Boneh, Dan
+and Gentry, Craig
+and Gorbunov, Sergey
+and Halevi, Shai
+and Nikolaenko, Valeria
+and Segev, Gil
+and Vaikuntanathan, Vinod
+and Vinayagamurthy, Dhinakaran",
+editor="Nguyen, Phong Q.
+and Oswald, Elisabeth",
+title="Fully Key-Homomorphic Encryption, Arithmetic Circuit ABE and Compact Garbled Circuits",
+booktitle="Advances in Cryptology -- EUROCRYPT 2014",
+year="2014",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="533--556",
+%abstract="We construct the first (key-policy) attribute-based encryption (ABE) system with short secret keys: the size of keys in our system depends only on the depth of the policy circuit, not its size. Our constructions extend naturally to arithmetic circuits with arbitrary fan-in gates thereby further reducing the circuit depth. Building on this ABE system we obtain the first reusable circuit garbling scheme that produces garbled circuits whose size is the same as the original circuit plus an additive poly($\lambda$,d) bits, where $\lambda$ is the security parameter and d is the circuit depth. All previous constructions incurred a multiplicativepoly($\lambda$) blowup.",
+isbn="978-3-642-55220-5"
+}
+
+@InProceedings{10.1007/978-3-642-36362-7_1,
+author="Brakerski, Zvika
+and Gentry, Craig
+and Halevi, Shai",
+editor="Kurosawa, Kaoru
+and Hanaoka, Goichiro",
+title="Packed Ciphertexts in LWE-Based Homomorphic Encryption",
+booktitle="Public-Key Cryptography -- PKC 2013",
+year="2013",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="1--13",
+%abstract="In this short note we observe that the Peikert-Vaikuntanathan-Waters (PVW) method of packing many plaintext elements in a single Regev-type ciphertext, can be used for performing SIMD homomorphic operations on packed ciphertext. This provides an alternative to the Smart-Vercauteren (SV) ciphertext-packing technique that relies on polynomial-CRT. While the SV technique is only applicable to schemes that rely on ring-LWE (or other hardness assumptions in ideal lattices), the PVW method can be used also for cryptosystems whose security is based on standard LWE (or more broadly on the hardness of ``General-LWE'').",
+isbn="978-3-642-36362-7"
+}
+
+@misc{cryptoeprint:2011:133,
+    author = {N.P. Smart and F. Vercauteren},
+    title = {Fully Homomorphic SIMD Operations},
+    howpublished = {Cryptology ePrint Archive, Report 2011/133},
+    year = {2011},
+    note = {\url{https://eprint.iacr.org/2011/133}},
+}
+
+@misc{cryptoeprint:2012:099,
+    author = {Craig Gentry and Shai Halevi and Nigel P. Smart},
+    title = {Homomorphic Evaluation of the AES Circuit},
+    howpublished = {Cryptology ePrint Archive, Report 2012/099},
+    year = {2012},
+    note = {\url{https://eprint.iacr.org/2012/099}},
+}
+
+@MISC{helib,
+  author = {Shai Halevi and Victor Shoup},
+  title = {{Helib: Implementing homomorphic encryption}},
+  howpublished = {\url{http://shaih.github.io/HElib/index.html}},
+  year = {2015}
+}
+
+@MISC{palisade,
+  author = {Kurt Rohloff and Gerard Ryan},
+  title = {{The PALISADE lattice cryptography library}},
+  howpublished = {\url{https://git.njit.edu/palisade/PALISADE}},
+  year = {2016}
+}
+
+@MISC{seal,
+  author = {Microsoft Research},
+  title = {{Simple encrypted arithmetic library (SEAL)}},
+  howpublished = {\url{https://www.microsoft.com/en-us/research/project/
+simple-encrypted-arithmetic-library/}},
+  year = {2016}
 }
 
 % Privacy
@@ -1181,6 +1225,9 @@
 	isbn="978-3-662-53641-4"
 }
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% EC
+
 @article{semaev1996computing,
   title={On computing logarithms on elliptic curves},
   author={IA Semaev},
@@ -1244,6 +1291,34 @@
   publisher={Springer}
 }
 
+@misc{cryptoeprint:2009:258,
+	author = {R Cosset},
+	title = {FACTORIZATION WITH GENUS 2 CURVES},
+	howpublished = {Cryptology ePrint Archive, Report 2009/258},
+	year = {2009},
+	note = {\url{https://eprint.iacr.org/2009/258}},
+}
+
+@InProceedings{10.1007/3-540-44647-8_11,
+	author="RP Gallant et al.",
+	title="Faster Point Multiplication on Elliptic Curves with Efficient Endomorphisms",
+	booktitle="CRYPTO 2001",
+	publisher="Springer",
+	pages="190--200",
+	%abstract="The fundamental operation in elliptic curve cryptographic schemes is the multiplication of an elliptic curve point by an integer. This paper describes a new method for accelerating this operation on classes of elliptic curves that have efficiently-computable endomorphisms. One advantage of the new method is that it is applicable to a larger class of curves than previous such methods. For this special class of curves, a speedup of up to 50{\%} can be expected over the best general methods for point multiplication.",
+	isbn="978-3-540-44647-7"
+}
+
+
+@book{Washington:2008:ECN:1388394,
+	author = {LC Washington},
+	title = {Elliptic Curves: Number Theory and Cryptography, Second Edition},
+	year = {2008},
+	isbn = {9781420071467},
+	edition = {2},
+	publisher = {Chapman \& Hall/CRC},
+} 
+
 @inproceedings{fouque2008fault,
   title={Fault attack on elliptic curve Montgomery ladder implementation},
   author={P-A Fouque et al.},
@@ -1267,7 +1342,6 @@
   pages={131--146},
   organization={Springer}
 }
-
 
 @inproceedings{DBLP:conf/ccs/TsaiWY17,
   author    = {M-H Tsai et al.},
@@ -1296,6 +1370,26 @@
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Factoring
+
+@InProceedings{DBLP:conf/c2si/NitajR15a,
+	author    = {A Nitaj and
+	T Rachidi},
+	title     = {Factoring {RSA} Moduli with Weak Prime Factors},
+	booktitle = {Codes, Cryptology, and Information Security - First International
+	Conference, {C2SI} 2015, Rabat, Morocco, May 26-28, 2015, Proceedings
+	- In Honor of Thierry Berger},
+	pages     = {361--374},
+	year      = {2015},
+	crossref  = {DBLP:conf/c2si/2015},
+	url       = {http://dx.doi.org/10.1007/978-3-319-18681-8_29},
+	doi       = {10.1007/978-3-319-18681-8_29},
+	timestamp = {Tue, 12 May 2015 15:24:51 +0200},
+	biburl    = {http://dblp.uni-trier.de/rec/bib/conf/c2si/NitajR15a},
+	bibsource = {dblp computer science bibliography, http://dblp.org}
+}
+
 @inproceedings{DBLP:conf/asiacrypt/BernsteinCCCHLS13,
   author    = {DJ Bernstein et al.},
   title     = {Factoring {RSA} Keys from Certified Smart Cards: Coppersmith in the
@@ -1308,6 +1402,20 @@
   timestamp = {Mon, 25 Sep 2017 10:36:35 +0200},
   biburl    = {https://dblp.org/rec/bib/conf/asiacrypt/BernsteinCCCHLS13},
   bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+% interesting: passing rabin-miler
+@InProceedings{10.1007/978-3-540-30580-4_2,
+author="Bleichenbacher, Daniel",
+editor="Vaudenay, Serge",
+title="Breaking a Cryptographic Protocol with Pseudoprimes",
+booktitle="Public Key Cryptography - PKC 2005",
+year="2005",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="9--15",
+abstract="The Miller-Rabin pseudo primality test is widely used in cryptographic libraries, because of its apparent simplicity. But the test is not always correctly implemented. For example the pseudo primality test in GNU Crypto 1.1.0 uses a fixed set of bases. This paper shows how this flaw can be exploited to break the SRP implementation in GNU Crypto. The attack is demonstrated by explicitly constructing pseudoprimes that satisfy the parameter checks in SRP and that allow a dictionary attack. This dictionary attack would not be possible if the pseudo primality test were correctly implemented.",
+isbn="978-3-540-30580-4"
 }
 
 @inproceedings{2017-acsac-nemec,
@@ -1338,20 +1446,6 @@
    title = {WSNProtectLayer – security middleware for wireless sensor networks},
    url = {https://www.crcpress.com/Securing-Cyber-Physical-Systems/Pathan/9781498700986},
    year = {2015}
-}
-
-
-@InProceedings{10.1007/978-3-540-30580-4_2,
-author="Bleichenbacher, Daniel",
-editor="Vaudenay, Serge",
-title="Breaking a Cryptographic Protocol with Pseudoprimes",
-booktitle="Public Key Cryptography - PKC 2005",
-year="2005",
-publisher="Springer Berlin Heidelberg",
-address="Berlin, Heidelberg",
-pages="9--15",
-abstract="The Miller-Rabin pseudo primality test is widely used in cryptographic libraries, because of its apparent simplicity. But the test is not always correctly implemented. For example the pseudo primality test in GNU Crypto 1.1.0 uses a fixed set of bases. This paper shows how this flaw can be exploited to break the SRP implementation in GNU Crypto. The attack is demonstrated by explicitly constructing pseudoprimes that satisfy the parameter checks in SRP and that allow a dictionary attack. This dictionary attack would not be possible if the pseudo primality test were correctly implemented.",
-isbn="978-3-540-30580-4"
 }
 
 @inproceedings{whitebox_klinec_santacrypt2013,
@@ -1567,6 +1661,21 @@ isbn="978-0-387-34805-6"
  publisher = {Springer-Verlag New York, Inc.},
  address = {Secaucus, NJ, USA},
  keywords = {Distributed computing, Fault tolerance, Proof systems, Secret sharing, Zero knowledge},
+} 
+
+@inproceedings{B91a,%Beaver:1991:EMP:646756.705383,
+ author = {Beaver, Donald},
+ title = {Efficient Multiparty Protocols Using Circuit Randomization},
+ booktitle = {Proceedings of the 11th Annual International Cryptology Conference on Advances in Cryptology},
+ series = {CRYPTO '91},
+ year = {1992},
+ isbn = {3-540-55188-3},
+ pages = {420--432},
+ numpages = {13},
+ url = {http://dl.acm.org/citation.cfm?id=646756.705383},
+ acmid = {705383},
+ publisher = {Springer-Verlag},
+ address = {London, UK, UK},
 } 
 
 @phdthesis{Can95,
@@ -2519,6 +2628,43 @@ pages="23--42",
 isbn="978-3-319-26059-4"
 }
 
+@InProceedings{BJSV15,%10.1007/978-3-662-47854-7_14,
+author="Bogdanov, Dan
+and J{\~o}emets, Marko
+and Siim, Sander
+and Vaht, Meril",
+editor="B{\"o}hme, Rainer
+and Okamoto, Tatsuaki",
+title="How the Estonian Tax and Customs Board Evaluated a Tax Fraud Detection System Based on Secure Multi-party Computation",
+booktitle="Financial Cryptography and Data Security",
+year="2015",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="227--234",
+%abstract="The Estonian Tax and Customs Board (MTA) has identified that Estonia is losing over 220 million euros a year due to avoidance of value-added tax (VAT). The parliament proposed legislation that makes companies declare their purchase and sales invoices for automated risk analysis and fraud detection. The law was vetoed by the Estonian President on the grounds of confidentiality breach and unnecessary burden to companies. In this paper, we report on our collaboration with MTA to build a tax fraud detection system prototype that uses secure multi-party computation (SMC) to remove the companies' concerns over confidentiality. We estimate that the prototype could process a month of Estonian VAT data in ten days running on 20 000 euros worth of hardware.",
+isbn="978-3-662-47854-7"
+}
+
+@article{KW15,%Kamm:2015:SFP:2843612.2843676,
+ author = {Kamm, Liina and Willemson, Jan},
+ title = {Secure Floating Point Arithmetic and Private Satellite Collision Analysis},
+ journal = {Int. J. Inf. Secur.},
+ issue_date = {November  2015},
+ volume = {14},
+ number = {6},
+ month = nov,
+ year = {2015},
+ issn = {1615-5262},
+ pages = {531--548},
+ numpages = {18},
+ url = {http://dx.doi.org/10.1007/s10207-014-0271-8},
+ doi = {10.1007/s10207-014-0271-8},
+ acmid = {2843676},
+ publisher = {Springer-Verlag},
+ address = {Berlin, Heidelberg},
+ keywords = {Benchmark results, Satellite collision analysis, Secure floating point arithmetic, Secure multi-party computation},
+} 
+
 @article{Lin16, %Lindell:2016:FCP:2898115.2898169,
  author = {Lindell, Yehuda},
  title = {Fast Cut-and-Choose-Based Protocols for Malicious and Covert Adversaries},
@@ -2642,6 +2788,15 @@ doi = {10.1007/978-3-319-31517-1_13}
       number = "4",
       pages={23-76},
       url = "https://content.sciendo.com/view/journals/popets/2017/4/article-p23.xml"
+}
+
+@article{BKKRST16,%Bogdanov2016StudentsAT,
+  title={Students and Taxes: a Privacy-Preserving Study Using Secure Computation},
+  author={Dan Bogdanov and Liina Kamm and Baldur Kubo and Reimo Rebane and Ville Sokk and Riivo Talviste},
+  journal={PoPETs},
+  year={2016},
+  volume={2016},
+  pages={117-135}
 }
 
 @inproceedings{BCGIM17,%Boyle:2017:HSS:3133956.3134107,
@@ -2802,3 +2957,42 @@ url="https://doi.org/10.1007/978-3-319-57048-8_6"
     note = {\url{https://eprint.iacr.org/2018/572}},
 }
 
+
+@article{DCMBR18,%DBLP:journals/corr/abs-1810-04660,
+  author    = {Emma Dauterman and
+               Henry Corrigan{-}Gibbs and
+               David Mazi{\`{e}}res and
+               Dan Boneh and
+               Dominic Rizzo},
+  title     = {True2F: Backdoor-resistant authentication tokens},
+  journal   = {CoRR},
+  volume    = {abs/1810.04660},
+  year      = {2018}
+}
+
+@misc{JKX18,%cryptoeprint:2018:163,
+    author = {Stanislaw Jarecki and Hugo Krawczyk and Jiayu Xu},
+    title = {OPAQUE: An Asymmetric PAKE Protocol Secure Against Pre-Computation Attacks},
+    howpublished = {Cryptology ePrint Archive, Report 2018/163},
+    year = {2018},
+    note = {\url{https://eprint.iacr.org/2018/163}},
+    %https://blog.cryptographyengineering.com/2018/10/19/lets-talk-about-pake/
+}
+
+@misc{awesome-mpc,
+    author={Dragos Rotaru and others},
+    title={Awesome MPC},
+    howpublished = {\url{https://github.com/rdragos/awesome-mpc}},
+    year={2019},
+    note = {Accessed: 2019-01-13}
+}
+
+@misc{sok19,
+    author={Marcella Hastings and Brett Hemenway and Daniel Noble and Steve Zdancewic},
+    title={{SoK: General Purpose Compilers for Secure Multi-Party Computation}},
+    howpublished = {\url{https://marsella.github.io/static/mpcsok.pdf}},
+    year={2019},
+    note = {Accessed: 2019-01-13, accepted to IEEE S\&P 2019}
+}
+    
+    
