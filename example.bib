@@ -933,6 +933,7 @@
   booktitle={The 13th USENIX Security Symposium 2004},
   volume={4},
   pages={9},
+  year={2004},
 }
 
 @InProceedings{10.1007/978-3-540-70583-3_40,
@@ -1502,6 +1503,22 @@ URL = "Available from WWW <https://is.muni.cz/th/r0cfw/>",
  address = {New York, NY, USA},
 } 
 
+@inproceedings{IL89,%Impagliazzo:1989:OFE:1398514.1398696,
+ author = {Impagliazzo, R. and Luby, M.},
+ title = {One-way Functions Are Essential for Complexity Based Cryptography},
+ booktitle = {Proceedings of the 30th Annual Symposium on Foundations of Computer Science},
+ series = {SFCS '89},
+ year = {1989},
+ isbn = {0-8186-1982-1},
+ pages = {230--235},
+ numpages = {6},
+ url = {https://doi.org/10.1109/SFCS.1989.63483},
+ doi = {10.1109/SFCS.1989.63483},
+ acmid = {1398696},
+ publisher = {IEEE Computer Society},
+ address = {Washington, DC, USA},
+ keywords = {coin flipping, one-way functions, complexity based cryptography, protocol, identification, authentication, bit commitment},
+} 
 
 @inproceedings{BMR90,%Beaver:1990:RCS:100216.100287,
  author = {Beaver, D. and Micali, S. and Rogaway, P.},
@@ -1552,6 +1569,14 @@ isbn="978-0-387-34805-6"
  keywords = {Distributed computing, Fault tolerance, Proof systems, Secret sharing, Zero knowledge},
 } 
 
+@phdthesis{Can95,
+  author       = {Canetti, Ran}, 
+  title        = {Studies in Secure Multi-Party Computation and Applications},
+  school       = {Department of Computer Science and Applied Math, Weizmann Institute of Science},
+  year         = 1995,
+  address      = {Rehovot, Israel},
+  month        = 6,
+}
 
 @inproceedings{CFGN96,%Canetti:1996:ASM:237814.238015,
  author = {Canetti, Ran and Feige, Uri and Goldreich, Oded and Naor, Moni},
@@ -1570,6 +1595,27 @@ isbn="978-0-387-34805-6"
  address = {New York, NY, USA},
 } 
 
+@article{GO96,%Goldreich:1996:SPS:233551.233553,
+ author = {Goldreich, Oded and Ostrovsky, Rafail},
+ title = {Software Protection and Simulation on Oblivious RAMs},
+ journal = {J. ACM},
+ issue_date = {May 1996},
+ volume = {43},
+ number = {3},
+ month = may,
+ year = {1996},
+ issn = {0004-5411},
+ pages = {431--473},
+ numpages = {43},
+ url = {http://doi.acm.org/10.1145/233551.233553},
+ doi = {10.1145/233551.233553},
+ acmid = {233553},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {pseudorandom functions, simulation of random access machines, software protection},
+ %http://web.cs.ucla.edu/~rafail/PUBLIC/09.pdf
+} 
+
 @inproceedings{CDDHR99,%Cramer:1999:EMC:1756123.1756154,
  author = {Cramer, Ronald and Damg{\aa}rd, Ivan and Dziembowski, Stefan and Hirt, Martin and Rabin, Tal},
  title = {Efficient Multiparty Computations Secure Against an Adaptive Adversary},
@@ -1584,6 +1630,7 @@ isbn="978-0-387-34805-6"
  acmid = {1756154},
  publisher = {Springer-Verlag},
  address = {Berlin, Heidelberg},
+ %ftp://ftp.inf.ethz.ch/pub/crypto/publications/CDDHR99.pdf
 } 
 
 
@@ -1603,6 +1650,18 @@ isbn="978-0-387-34805-6"
  publisher = {ACM},
  address = {New York, NY, USA},
 } 
+
+@INPROCEEDINGS{DW99, 
+author={A. DeHon and J. Wawrzynek}, 
+booktitle={Proceedings 1999 Design Automation Conference (Cat. No. 99CH36361)}, 
+title={Reconfigurable computing: what, why, and implications for design automation}, 
+year={1999}, 
+pages={610-615}, 
+keywords={reconfigurable architectures;electronic design automation;reconfigurable computing architectures;design automation;post-fabrication programmability;spatial computational style;CAD technology;reprogrammability;binding-time;specialization optimizations;regularity extraction;temporal partitioning;scheduling;Design automation;Hardware;Field programmable gate arrays;Engines;Silicon;Permission;Software systems;Computer science;Buildings;Scheduling;smart-cards}, 
+doi={10.1109/DAC.1999.782016}, 
+month={June},
+%smart-cards
+}
 
 @inproceedings{IK00,%Ishai:2000:RPN:795666.796556,
  author = {Ishai, Y. and Kushilevitz, E.},
@@ -1632,7 +1691,8 @@ isbn="978-0-387-34805-6"
  acmid = {875553},
  publisher = {IEEE Computer Society},
  address = {Washington, DC, USA},
- keywords = {cryptographic protocols, security analysis of protocols, concurrent composition},
+ keywords = {cryptographic protocols, security analysis of protocols, concurrent composition},%
+ %https://eprint.iacr.org/2000/067.pdf
 } 
 
 @inproceedings{CF01,%Canetti:2001:UCC:646766.704151,
@@ -1695,6 +1755,7 @@ isbn="978-0-387-34805-6"
  acmid = {509980},
  publisher = {ACM},
  address = {New York, NY, USA}, %comp, dishonest majority
+ %http://web.cs.ucla.edu/~rafail/PUBLIC/57.pdf
 } 
 
 @InProceedings{DN02,%10.1007/3-540-45708-9_37,
@@ -1726,6 +1787,21 @@ pages="482--501",%
 %abstract="It is well-known that n players, connected only by pairwise secure channels, can achieve unconditional broadcast if and only if the number t of cheaters satisfies t < n/3. In this paper, we show that this bound can be improved - at the sole price that the adversary can prevent successful completion of the protocol, but in which case all players will have agreement about this fact. Moreover, a first time slot during which the adversary forgets to cheat can be reliably detected and exploited in order to allow for future broadcasts with t < n/2. This even allows for secure multi-party computation with t < n/2 after the first detection of such a time slot.",
 isbn="978-3-540-46035-0"
 }
+
+@inproceedings{Lin03,%Lindell:2003:GCU:946243.946294,
+ author = {Lindell, Yehuda},
+ title = {General Composition and Universal Composability in Secure Multi-Party Computation},
+ booktitle = {Proceedings of the 44th Annual IEEE Symposium on Foundations of Computer Science},
+ series = {FOCS '03},
+ year = {2003},
+ isbn = {0-7695-2040-5},
+ pages = {394--},
+ url = {http://dl.acm.org/citation.cfm?id=946243.946294},
+ acmid = {946294},
+ publisher = {IEEE Computer Society},
+ address = {Washington, DC, USA},%
+ %https://eprint.iacr.org/2003/141.pdf
+} 
 
 @InProceedings{GIKR04,%10.1007/3-540-45708-9_12,
 author="Gennaro, Rosario
@@ -1811,6 +1887,36 @@ pages="562--578",%
 isbn="978-3-540-28628-8"
 }
 
+@InProceedings{AV04,%10.1007/978-3-540-24591-9_15,
+author="Avoine, Gildas
+and Vaudenay, Serge",
+editor="Chae, Ki-Joon
+and Yung, Moti",
+title="Fair Exchange with Guardian Angels",
+booktitle="Information Security Applications",
+year="2004",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="188--202",
+%abstract="In this paper we propose a new probabilistic Fair Exchange Protocol which requires no central Trusted Third Party. Instead, it relies on a virtually distributed and decentralized Trusted Third Party which is formalized as a Guardian Angel: a kind of Observer e.g. a tamper proof security device. We thus introduce a network model with Pirates and Guardian Angels which is well suited for Ad Hoc networks.",
+isbn="978-3-540-24591-9"
+}
+
+@inproceedings{MNPS04,%Malkhi:2004:FST:1251375.1251395,
+ author = {Malkhi, Dahlia and Nisan, Noam and Pinkas, Benny and Sella, Yaron},
+ title = {Fairplay---a Secure Two-party Computation System},
+ booktitle = {Proceedings of the 13th Conference on USENIX Security Symposium - Volume 13},
+ series = {SSYM'04},
+ year = {2004},
+ location = {San Diego, CA},
+ pages = {20--20},
+ numpages = {1},
+ url = {http://dl.acm.org/citation.cfm?id=1251375.1251395},
+ acmid = {1251395},
+ publisher = {USENIX Association},
+ address = {Berkeley, CA, USA},
+} 
+
 @book{G04,%Goldreich:2004:FCV:975541,
  author = {Goldreich, Oded},
  title = {Foundations of Cryptography: Volume 2, Basic Applications},
@@ -1827,6 +1933,72 @@ isbn="978-3-540-28628-8"
  isbn = {0521035368},
  publisher = {Cambridge University Press},
  address = {New York, NY, USA},
+} 
+
+@article{CKL06,%Canetti:2006:LUC:1117197.1117200,
+ author = {Canetti, Ran and Kushilevitz, Eyal and Lindell, Yehuda},
+ title = {On the Limitations of Universally Composable Two-Party Computation Without Set-Up Assumptions},
+ journal = {J. Cryptol.},
+ issue_date = {April 2006},
+ volume = {19},
+ number = {2},
+ month = apr,
+ year = {2006},
+ issn = {0933-2790},
+ pages = {135--167},
+ numpages = {33},
+ url = {http://dx.doi.org/10.1007/s00145-005-0419-9},
+ doi = {10.1007/s00145-005-0419-9},
+ acmid = {1117200},
+ publisher = {Springer-Verlag New York, Inc.},
+ address = {Secaucus, NJ, USA},
+ keywords = {Impossibility results, Secure two-party computation, Universal composability},
+ %https://eprint.iacr.org/2004/116.pdf
+} 
+
+@misc{Can06,%cryptoeprint:2006:465,
+    author = {Ran Canetti},
+    title = {Security and Composition of Cryptographic Protocols: A Tutorial},
+    howpublished = {Cryptology ePrint Archive, Report 2006/465},
+    year = {2006},
+    note = {\url{https://eprint.iacr.org/2006/465}},
+}
+
+@InProceedings{FFPBK06,%10.1007/11863908_3,
+author="Fort, Milan
+and Freiling, Felix
+and Penso, Lucia Draque
+and Benenson, Zinaida
+and Kesdogan, Dogan",
+editor="Gollmann, Dieter
+and Meier, Jan
+and Sabelfeld, Andrei",
+title="TrustedPals: Secure Multiparty Computation Implemented with Smart Cards",
+booktitle="Computer Security -- ESORICS 2006",
+year="2006",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="34--48",
+%abstract="We study the problem of Secure Multi-party Computation (SMC) in a model where individual processes contain a tamper-proof security module, and introduce the TrustedPals framework, an efficient smart card based implementation of SMC for any number of participating entities in such a model. Security modules can be trusted by other processes and can establish secure channels between each other. However, their availability is restricted by their host, that is, a corrupted party can stop the computation of its own security module as well as drop any message sent by or to its security module. We show that in this model SMC can be implemented by reducing it to a fault-tolerance problem at the level of security modules. Since the critical part of the computation can be executed locally on the smart card, we can compute any function securely with a protocol complexity which is polynomial only in the number of processes (that is, the complexity does not depend on the function which is computed), in contrast to previous approaches.",
+isbn="978-3-540-44605-7"
+}
+
+@inproceedings{K07,%Katz:2007:UCM:1419582.1419589,
+ author = {Katz, Jonathan},
+ title = {Universally Composable Multi-party Computation Using Tamper-Proof Hardware},
+ booktitle = {Proceedings of the 26th Annual International Conference on Advances in Cryptology},
+ series = {EUROCRYPT '07},
+ year = {2007},
+ isbn = {978-3-540-72539-8},
+ location = {Barcelona, Spain},
+ pages = {115--128},
+ numpages = {14},
+ url = {http://dx.doi.org/10.1007/978-3-540-72540-4_7},
+ doi = {10.1007/978-3-540-72540-4_7},
+ acmid = {1419589},
+ publisher = {Springer-Verlag},
+ address = {Berlin, Heidelberg},
+ %https://www.cs.umd.edu/~jkatz/papers/ec07b.pdf
 } 
 
 @inproceedings{LP07,%Lindell:2007:EPS:1419582.1419586, cut-and-choose
@@ -1862,7 +2034,24 @@ keywords = {set-up assumptions, signature cards}
  year = {2007},
  isbn = {1584885513},
  publisher = {Chapman \& Hall/CRC},
-} 
+}
+
+@inproceedings{CPS07,%Canetti:2007:CSU:1333875.1334199,
+ author = {Canetti, Ran and Pass, Rafael and Shelat, Abhi},
+ title = {Cryptography from Sunspots: How to Use an Imperfect Reference String},
+ booktitle = {Proceedings of the 48th Annual IEEE Symposium on Foundations of Computer Science},
+ series = {FOCS '07},
+ year = {2007},
+ isbn = {0-7695-3010-9},
+ pages = {249--259},
+ numpages = {11},
+ url = {http://dx.doi.org/10.1109/FOCS.2007.22},
+ doi = {10.1109/FOCS.2007.22},
+ acmid = {1334199},
+ publisher = {IEEE Computer Society},
+ address = {Washington, DC, USA},
+ keywords = {UC Security, Setup Models, Common Reference String, Non black-box constructions, Entropy},
+}
 
 @inproceedings{KS08,%Kolesnikov:2008:IGC:1427987.1428038,
  author = {Kolesnikov, Vladimir and Schneider, Thomas},
@@ -1894,6 +2083,33 @@ address="Berlin, Heidelberg",
 pages="289--306",%
 %abstract="Recently, Aumann and Lindell introduced a new realistic security model for secure computation, namely, security against covert adversaries. The main motivation was to obtain secure computation protocols which are efficient enough to be usable in practice. Aumann and Lindell presented an efficient two party computation protocol secure against covert adversaries. They were able to utilize cut and choose techniques rather than relying on expensive zero knowledge proofs.",
 isbn="978-3-540-78967-3"
+}
+
+@inproceedings{CGS08,%Chandran:2008:NCU:1788414.1788445,
+ author = {Chandran, Nishanth and Goyal, Vipul and Sahai, Amit},
+ title = {New Constructions for UC Secure Computation Using Tamper-proof Hardware},
+ booktitle = {Proceedings of the Theory and Applications of Cryptographic Techniques 27th Annual International Conference on Advances in Cryptology},
+ series = {EUROCRYPT'08},
+ year = {2008},
+ isbn = {3-540-78966-9, 978-3-540-78966-6},
+ location = {Istanbul, Turkey},
+ pages = {545--562},
+ numpages = {18},
+ url = {http://dl.acm.org/citation.cfm?id=1788414.1788445},
+ acmid = {1788445},
+ publisher = {Springer-Verlag},
+ address = {Berlin, Heidelberg},
+ %https://eprint.iacr.org/2007/334.pdf
+} 
+
+@book{G09,
+    title	= {Foundations of Cryptography: Volume 2, Basic Applications},
+    author	= {Goldreich, Oded},
+    volume	= {2},
+    year	= {2009},
+    publisher	= {Cambridge university press},
+    address = {New York, NY, USA},
+    isbn    = {052111991X},
 }
 
 @inproceedings{NO09,%Nielsen:2009:LTS:1530441.1530463,
@@ -1930,6 +2146,57 @@ isbn="978-3-540-78967-3"
  address = {Berlin, Heidelberg},
 } 
 
+@inproceedings{DNW09,%Damgard:2009:UCM:1530441.1530460,
+ author = {Damg{\aa}rd, Ivan and Nielsen, Jesper Buus and Wichs, Daniel},
+ title = {Universally Composable Multiparty Computation with Partially Isolated Parties},
+ booktitle = {Proceedings of the 6th Theory of Cryptography Conference on Theory of Cryptography},
+ series = {TCC '09},
+ year = {2009},
+ isbn = {978-3-642-00456-8},
+ location = {San Francisco, CA},
+ pages = {315--331},
+ numpages = {17},
+ url = {http://dx.doi.org/10.1007/978-3-642-00457-5_19},
+ doi = {10.1007/978-3-642-00457-5_19},
+ acmid = {1530460},
+ publisher = {Springer-Verlag},
+ address = {Berlin, Heidelberg},
+ keywords = {multiparty computation, public-key infrastructure, universally composable security},
+}
+
+@inproceedings{GISVW10,%Goyal:2010:FCT:2128056.2128083,
+ author = {Goyal, Vipul and Ishai, Yuval and Sahai, Amit and Venkatesan, Ramarathnam and Wadia, Akshay},
+ title = {Founding Cryptography on Tamper-proof Hardware Tokens},
+ booktitle = {Proceedings of the 7th International Conference on Theory of Cryptography},
+ series = {TCC'10},
+ year = {2010},
+ isbn = {3-642-11798-8, 978-3-642-11798-5},
+ location = {Zurich, Switzerland},
+ pages = {308--326},
+ numpages = {19},
+ url = {http://dx.doi.org/10.1007/978-3-642-11799-2_19},
+ doi = {10.1007/978-3-642-11799-2_19},
+ acmid = {2128083},
+ publisher = {Springer-Verlag},
+ address = {Berlin, Heidelberg},
+} 
+
+@inproceedings{GIMS10,%Goyal:2010:ILZ:1881412.1881426,
+ author = {Goyal, Vipul and Ishai, Yuval and Mahmoody, Mohammad and Sahai, Amit},
+ title = {Interactive Locking, Zero-knowledge PCPs, and Unconditional Cryptography},
+ booktitle = {Proceedings of the 30th Annual Conference on Advances in Cryptology},
+ series = {CRYPTO'10},
+ year = {2010},
+ isbn = {3-642-14622-8, 978-3-642-14622-0},
+ location = {Santa Barbara, CA, USA},
+ pages = {173--190},
+ numpages = {18},
+ url = {http://dl.acm.org/citation.cfm?id=1881412.1881426},
+ acmid = {1881426},
+ publisher = {Springer-Verlag},
+ address = {Berlin, Heidelberg},
+} 
+
 @inproceedings{LP11,%Lindell:2011:STC:1987260.1987287,
  author = {Lindell, Yehuda and Pinkas, Benny},
  title = {Secure Two-party Computation via Cut-and-choose Oblivious Transfer},
@@ -1945,6 +2212,38 @@ isbn="978-3-540-78967-3"
  publisher = {Springer-Verlag},
  address = {Berlin, Heidelberg},
 } 
+
+@InProceedings{DKM11,%10.1007/978-3-642-19571-6_11,
+author="D{\"o}ttling, Nico
+and Kraschewski, Daniel
+and M{\"u}ller-Quade, J{\"o}rn",
+editor="Ishai, Yuval",
+title="Unconditional and Composable Security Using a Single Stateful Tamper-Proof Hardware Token",
+booktitle="Theory of Cryptography",
+year="2011",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="164--181",
+%abstract="Cryptographic assumptions regarding tamper proof hardware tokens have gained increasing attention. Even if the tamper-proof hardware is issued by one of the parties, and hence not necessarily trusted by the other, many tasks become possible: Tamper proof hardware is sufficient for universally composable protocols, for information-theoretically secure protocols, and even allow to create software which can only be used once (One-Time-Programs). However, all known protocols employing tamper-proof hardware are either indirect, i.e., additional computational assumptions must be used to obtain general two party computations or a large number of devices must be used. In this work we present the first protocol realizing universally composable two-party computations (and even trusted One-Time-Programs) with information-theoretic security using only one single tamper-proof device issued by one of the mutually distrusting parties.",
+isbn="978-3-642-19571-6"
+}
+
+@InProceedings{IKOPS11,%10.1007/978-3-642-20465-4_23,
+author="Ishai, Yuval
+and Kushilevitz, Eyal
+and Ostrovsky, Rafail
+and Prabhakaran, Manoj
+and Sahai, Amit",
+editor="Paterson, Kenneth G.",
+title="Efficient Non-interactive Secure Computation",
+booktitle="Advances in Cryptology -- EUROCRYPT 2011",
+year="2011",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="406--425",
+%abstract="Suppose that a receiver R wishes to publish an encryption of her secret input x so that every sender S, holding an input y, can reveal f(x,y) to R by sending her a single message. This should be done while simultaneously protecting the secrecy of y against a corrupted R and preventing a corrupted S from having an unfair influence on the output of R beyond what is allowed by f.",
+isbn="978-3-642-20465-4"
+}
 
 @inproceedings{BHR12, %Bellare:2012:FGC:2382196.2382279
  author = {Bellare, Mihir and Hoang, Viet Tung and Rogaway, Phillip},
@@ -2046,6 +2345,37 @@ pages="600--620",%
 isbn="978-3-642-36594-2"
 }
 
+@book{PS13,%Prabhakaran:2013:SMC:2470021,
+ author = {Prabhakaran, M.M. and Sahai, A.},
+ title = {Secure Multi-Party Computation},
+ year = {2013},
+ isbn = {1614991685, 9781614991687},
+ publisher = {IOS Press},
+ address = {Amsterdam, The Netherlands, The Netherlands},
+} 
+
+@Inbook{Can13,
+author="Canetti, Ran",
+editor="Prabhakaran, M. and Sahai, Amit",
+title="Security and Composition of Cryptographic Protocols: A Tutorial",
+bookTitle="Secure Multi-Party Computation",
+year="2013",
+publisher = {IOS Press},
+address = {Amsterdam, The Netherlands, The Netherlands},
+pages="61--119",
+isbn = {1614991685, 9781614991687},
+doi="10.3233/978-1-61499-169-4-61",
+url="https://doi.org/10.3233/978-1-61499-169-4-61"
+}
+
+@misc{AAGPR13,%cryptoeprint:2013:827,
+    author = {Shashank Agrawal and Prabhanjan Ananth and Vipul Goyal and Manoj Prabhakaran and Alon Rosen},
+    title = {Lower Bounds in the Hardware Token Model},
+    howpublished = {Cryptology ePrint Archive, Report 2013/827},
+    year = {2013},
+    note = {\url{https://eprint.iacr.org/2013/827}},
+}
+
 @InProceedings{KMR14,%10.1007/978-3-662-44381-1_25,
 author="Kolesnikov, Vladimir
 and Mohassel, Payman
@@ -2078,6 +2408,23 @@ pages="513--530",
 isbn="978-3-662-44381-1"
 }
 
+@InProceedings{CKSYZ14,%10.1007/978-3-642-54242-8_27,
+author="Choi, Seung Geol
+and Katz, Jonathan
+and Schr{\"o}der, Dominique
+and Yerukhimovich, Arkady
+and Zhou, Hong-Sheng",
+editor="Lindell, Yehuda",
+title="(Efficient) Universally Composable Oblivious Transfer Using a Minimal Number of Stateless Tokens",
+booktitle="Theory of Cryptography",
+year="2014",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="638--662",
+%abstract="We continue the line of work initiated by Katz (Eurocrypt 2007) on using tamper-proof hardware for universally composable secure computation. As our main result, we show an efficient oblivious-transfer (OT) protocol in which two parties each create and exchange a single, stateless token and can then run an unbounded number of OTs. Our result yields what we believe is the most practical and efficient known approach for oblivious transfer based on tamper-proof tokens, and implies that the parties can perform (repeated) secure computation of arbitrary functions without exchanging additional tokens.",
+isbn="978-3-642-54242-8"
+}
+
 @misc{FJNT15,%cryptoeprint:2015:309,
     author = {Tore Kasper Frederiksen and Thomas P. Jakobsen and Jesper Buus Nielsen and Roberto Trifiletti},
     title = {TinyLEGO: An Interactive Garbling Scheme for Maliciously Secure Two-Party Computation},
@@ -2104,25 +2451,22 @@ isbn="978-3-662-44381-1"
  keywords = {distributed password verification, garbled circuits, secure computation, three-party computation},
 } 
 
-@article{Lin16, %Lindell:2016:FCP:2898115.2898169,
- author = {Lindell, Yehuda},
- title = {Fast Cut-and-Choose-Based Protocols for Malicious and Covert Adversaries},
- journal = {J. Cryptol.},
- issue_date = {April     2016},
- volume = {29},
- number = {2},
- month = apr,
- year = {2016},
- issn = {0933-2790},
- pages = {456--490},
- numpages = {35},
- url = {http://dx.doi.org/10.1007/s00145-015-9198-0},
- doi = {10.1007/s00145-015-9198-0},
- acmid = {2898169},
- publisher = {Springer-Verlag New York, Inc.},
- address = {Secaucus, NJ, USA},
- keywords = {Concrete efficiency, Cut-and-choose, Two-party computation, Yao's protocol}, %https://eprint.iacr.org/2017/344.pdf
-} 
+@InProceedings{DKMN15,%10.1007/978-3-662-46494-6_14,
+author="D{\"o}ttling, Nico
+and Kraschewski, Daniel
+and M{\"u}ller-Quade, J{\"o}rn
+and Nilges, Tobias",
+editor="Dodis, Yevgeniy
+and Nielsen, Jesper Buus",
+title="General Statistically Secure Computation with Bounded-Resettable Hardware Tokens",
+booktitle="Theory of Cryptography",
+year="2015",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="319--344",
+%abstract="Universally composable secure computation was assumed to require trusted setups, until it was realized that parties exchanging (untrusted) tamper-proof hardware tokens allow an alternative approach (Katz; EUROCRYPT 2007). This discovery initialized a line of research dealing with two different types of tokens. Using only a single stateful token, one can implement general statistically secure two-party computation (D{\"o}ttling, Kraschewski, M{\"u}ller-Quade; TCC 2011); though all security is lost if an adversarial token receiver manages to physically reset and rerun the token. Stateless tokens, which are secure by definition against any such resetting-attacks, however, do provably not suffice for statistically secure computation in general (Goyal, Ishai, Mahmoody, Sahai; CRYPTO 2010).",
+isbn="978-3-662-46494-6"
+}
 
 @inproceedings{ZRE14,%Zahur2014TwoHM,
   title={Two Halves Make a Whole: Reducing Data Transfer in Garbled Circuits using Half Gates},
@@ -2147,6 +2491,53 @@ pages="711--735",
 abstract="SPDZ, TinyOT and MiniMAC are a family of MPC protocols based on secret sharing with MACs",
 isbn="978-3-662-48797-6"
 }
+
+@book{CDN15, 
+    author={Cramer, Ronald and Damgård, Ivan Bjerre and Nielsen, Jesper Buus}, 
+    title={Secure Multiparty Computation and Secret Sharing},
+    place={Cambridge}, 
+    DOI={10.1017/CBO9781107337756}, 
+    publisher={Cambridge University Press}, 
+    year={2015},
+    isbn={9781107337756},
+}
+
+@InProceedings{DKMN15b,%10.1007/978-3-319-26059-4_2,
+author="D{\"o}ttling, Nico
+and Kraschewski, Daniel
+and M{\"u}ller-Quade, J{\"o}rn
+and Nilges, Tobias",
+editor="Au, Man-Ho
+and Miyaji, Atsuko",
+title="From Stateful Hardware to Resettable Hardware Using Symmetric Assumptions",
+booktitle="Provable Security",
+year="2015",
+publisher="Springer International Publishing",
+address="Cham",
+pages="23--42",
+%abstract="Universally composable multi-party computation is impossible without setup assumptions. Motivated by the ubiquitous use of secure hardware in many real world security applications, Katz (EUROCRYPT 2007) proposed a model of tamper-proof hardware as a UC-setup assumption. An important aspect of this model is whether the hardware token is allowed to hold a state or not. Real world examples of tamper-proof hardware that can hold a state are expensive hardware security modules commonly used in mainframes. Stateless, or resettable hardware tokens model cheaper devices such as smartcards, where an adversarial user can cut off the power supply, thus resetting the card's internal state.",
+isbn="978-3-319-26059-4"
+}
+
+@article{Lin16, %Lindell:2016:FCP:2898115.2898169,
+ author = {Lindell, Yehuda},
+ title = {Fast Cut-and-Choose-Based Protocols for Malicious and Covert Adversaries},
+ journal = {J. Cryptol.},
+ issue_date = {April     2016},
+ volume = {29},
+ number = {2},
+ month = apr,
+ year = {2016},
+ issn = {0933-2790},
+ pages = {456--490},
+ numpages = {35},
+ url = {http://dx.doi.org/10.1007/s00145-015-9198-0},
+ doi = {10.1007/s00145-015-9198-0},
+ acmid = {2898169},
+ publisher = {Springer-Verlag New York, Inc.},
+ address = {Secaucus, NJ, USA},
+ keywords = {Concrete efficiency, Cut-and-choose, Two-party computation, Yao's protocol}, %https://eprint.iacr.org/2017/344.pdf
+} 
 
 @inproceedings{BMR16,%Ball:2016:GGB:2976749.2978410,
  author = {Ball, Marshall and Malkin, Tal and Rosulek, Mike},
@@ -2224,6 +2615,22 @@ doi = {10.1007/978-3-319-31517-1_13}
  publisher = {ACM},
  address = {New York, NY, USA},
  keywords = {multi-party computation, oblivious transfer},
+} 
+
+@inproceedings{HPV16,%Hazay:2016:CST:3081268.3081287,
+ author = {Hazay, Carmit and Polychroniadou, Antigoni and Venkitasubramaniam, Muthuramakrishnan},
+ title = {Composable Security in the Tamper-Proof Hardware Model Under Minimal Complexity},
+ booktitle = {Proceedings, Part I, of the 14th International Conference on Theory of Cryptography - Volume 9985},
+ year = {2016},
+ isbn = {978-3-662-53640-7},
+ pages = {367--399},
+ numpages = {33},
+ url = {https://doi.org/10.1007/978-3-662-53641-4_15},
+ doi = {10.1007/978-3-662-53641-4_15},
+ acmid = {3081287},
+ publisher = {Springer-Verlag New York, Inc.},
+ address = {New York, NY, USA},
+ keywords = {Minimal assumptions, Round complexity, Secure computation, Tamper-proof hardware},
 } 
 
 @article {LPJ17,
@@ -2316,6 +2723,43 @@ doi = {10.1007/978-3-319-31517-1_13}
  keywords = {garbled circuit, multi-party computation, secure computation},
 } 
 
+@Inbook{Lin17,
+author="Lindell, Yehuda",
+editor="Lindell, Yehuda",
+title="How to Simulate It -- A Tutorial on the Simulation Proof Technique",
+bookTitle="Tutorials on the Foundations of Cryptography: Dedicated to Oded Goldreich",
+year="2017",
+publisher="Springer International Publishing",
+address="Cham",
+pages="277--346",
+%abstract="One of the most fundamental notions of cryptography is that of simulation. It stands behind the concepts of semantic security, zero knowledge, and security for multiparty computation. However, writing a simulator and proving security via the use of simulation is a nontrivial task, and one that many newcomers to the field often find difficult. In this tutorial, we provide a guide to how to write simulators and prove security via the simulation paradigm. Although we have tried to make this tutorial as stand-alone as possible, we assume some familiarity with the notions of secure encryption, zero-knowledge, and secure computation.",
+isbn="978-3-319-57048-8",
+doi="10.1007/978-3-319-57048-8_6",
+url="https://doi.org/10.1007/978-3-319-57048-8_6"
+}
+
+@misc{CCOV17,%cryptoeprint:2017:1092,
+    author = {Nishanth Chandran and Wutichai Chongchitmate and Rafail Ostrovsky and Ivan Visconti},
+    title = {Universally Composable Secure Computation with Corrupted Tokens},
+    howpublished = {Cryptology ePrint Archive, Report 2017/1092},
+    year = {2017},
+    note = {\url{https://eprint.iacr.org/2017/1092}},
+    % cites touch of evil
+}
+
+@inproceedings{NFRCLSG17,%DBLP:conf/ndss/NayakF0CLSG17,
+  author    = {Kartik Nayak and
+               Christopher W. Fletcher and
+               Ling Ren and
+               Nishanth Chandran and
+               Satya V. Lokam and
+               Elaine Shi and
+               Vipul Goyal},
+  title     = {{HOP:} Hardware makes Obfuscation Practical},
+  booktitle = {{NDSS}},
+  publisher = {The Internet Society},
+  year      = {2017}
+}
 
 @misc{cryptoeprint:2018:578,
     author = {Jonathan Katz and Samuel Ranellucci and Mike Rosulek and Xiao Wang},
@@ -2332,6 +2776,14 @@ doi = {10.1007/978-3-319-31517-1_13}
     howpublished = {Cryptology ePrint Archive, Report 2018/894},
     year = {2018},
     note = {\url{https://eprint.iacr.org/2018/894}},
+}
+
+@misc{BJOV18,%cryptoeprint:2018:1020,
+    author = {Saikrishna Badrinarayanan and Abhishek Jain and Rafail Ostrovsky and Ivan Visconti},
+    title = {Non-Interactive Secure Computation from One-Way Functions},
+    howpublished = {Cryptology ePrint Archive, Report 2018/1020},
+    year = {2018},
+    note = {\url{https://eprint.iacr.org/2018/1020}},
 }
 
 @misc{cryptoeprint:2018:1078,
