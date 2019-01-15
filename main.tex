@@ -428,11 +428,14 @@ In this part we review related practical results achieved in the MPC.
 %\begin{itemize}
 \subsection{New challenges} There are plenty of practical problems that need to be solved without exposing input data or without requiring additional trust. These problems would significantly benefit by a clever application of MPC.
 
-For example, in \cite{BJSV15} authors used MPC to securely conduct statistical analysis of income tax for Estonian government. Consequently, \cite{BKKRST16} statistically analyzed database with 600k students and 10M tax records. \cite{KW15} suggested to use MPC to implement satellite collision prevention system securely evaluating collision detection algorithm using sensitive location and trajectory using secret sharing and floating point operations.
+For example, in \cite{BJSV15} authors used MPC to securely conduct statistical analysis of income tax for Estonian government. Consequently, \cite{BKKRST16} statistically analyzed database with 600k students and 10M tax records. \cite{KW15} suggested to use MPC to implement satellite collision prevention system securely evaluating collision detection algorithm using sensitive location and trajectory using secret sharing and floating point operations. The scope of possible applications is broad, e.g,  private database search \cite{Bertino2005, Naor:1999:PPA:336992.337028}, private data mining \cite{Aldeen2015}, secure auctions, e-voting and many more.
 
 \subsection{Improving existing systems}
 MPC can be applied to already existing systems in order to increase level of security, reduce required trust or eliminate a single point of failure.
 In our work ROCA~\cite{2017-ccs-nemec} we shown that the well-known token brand was generating easily-factorable RSA moduli which deteriorated system security. This serves as an example that motivates research for finding more robust solutions. Those can be based on MPC.
+    
+\paragraph{Myst.} In \cite{2017-ccs-mavroudis}, we designed, theoretically analyzed, and evaluated \emph{Myst}, a suite of ECC-based cryptographic protocols for a distributed key generation, encryption, decryption and signature generation using MPC on smart cards.
+The ECC Signature task was distributed over $N$ smart cards, protocol can withstand a dishonest majority under computational assumptions. This result helps removing single-point of failure and protecting from supply chain attacks.
     
 \paragraph{True2F.} The \cite{DCMBR18} is a clever application of 2PC to protect from malicious U2F tokens, which are used in the login systems either as a second-factor or in the passwordless schemes. 
 Authors designed lightweight 2PC protocols for a collaborative signature key generation to ensure the secret key has proper entropy which is contributed to by both browser and token. They also propose firewalled ECDSA signatures, jointly produced by browser and token in such a way that a) secrets remain private on token and b) token is blocked from exfiltrating secret information hidden in the signature randomness.
@@ -469,17 +472,8 @@ CBMC-GC \cite{HFKV12}    &  & -        & 2+ & $\Circle$     & -           & -   
 \caption{List of available MPC tools from \cite{sok19}. GC, MC, Hy corresponds to Garbled Circuit, Multiplication Circuit, Hybrid approach respectively. Mixed mode tools can combine both secure and insecure computations in one program. Last two entries are only compilers to the circuit format hence lacking security related fields.}
 \label{tbl:compilers}
 \end{table}
-
 %\end{itemize}
 
-\infoin{Idea: we want fit somewhere here:%
-\begin{itemize}
-    \item MPC on tokens, real applications, resource constrained, trading setup and trust assumptions for resources and thus practicality of the solution
-    \item Construct drop-in replacements like SmartID~\cite{smart_id_ee}, True2F~\cite{DCMBR18}, OPAQUE~\cite{JKX18}
-    \item Removing single point of failures in token systems by smart application of 2PC
-    \item Apply MPC to hardware wallets and cryptocurrencies. Privacy-centric are harder, Monero, ZCash with state-of-the art cryptography, stapling...
-\end{itemize}
-}
 
 \begin{ecmmnt}
 %UC-related: "Consequently, many known protocols (e.g., the general protocol of [gmw87], to name one) are not UC secure. 
@@ -507,8 +501,20 @@ Also, the K-out-of-N ECC-based multi-signature protocol research has recently un
 \end{itemize}
 \end{shaded}
 
+\infoin{Idea: we want fit somewhere here:%
+	\begin{itemize}
+		\item MPC on tokens, real applications, resource constrained, trading setup and trust assumptions for resources and thus practicality of the solution
+		\item Construct drop-in replacements like SmartID~\cite{smart_id_ee}, True2F~\cite{DCMBR18}, OPAQUE~\cite{JKX18}
+		\item Removing single point of failures in token systems by smart application of 2PC
+		\item Apply MPC to hardware wallets and cryptocurrencies. Privacy-centric are harder, Monero, ZCash with state-of-the art cryptography, stapling...
+	\end{itemize}
+}
+
+\newpage
+
 - side channel protection, MPC in tokens. 
-- 
+- single point of failure
+- supply chain attacks
 
 Hidden for the sake of sanity ...
 \begin{ecmmnt}  % comment out the whole sections
