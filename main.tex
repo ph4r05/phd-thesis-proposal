@@ -412,11 +412,6 @@ They assume collision-resistant hash functions (CRHFs) and the existence of uniq
 \todoin{ToDo: This section is a bit rusty, may need some improvements.}
 %\todoin[disable]{ToDo: More smartcard-based works, FPGAs.}
 
-\section{Fully homomorphic encryption} % STUB SECTION
-The MPC can be also realized with a general fully homomorphic encryption (FHE) \cite{Gentry:2009:FHE:1536414.1536440, 10.1007/978-3-642-13190-5_2, cryptoeprint:2011:133, cryptoeprint:2012:099, 10.1007/978-3-642-40041-4_5, 10.1007/978-3-642-36362-7_1, 10.1007/978-3-642-55220-5_30}. One example is secure evaluation of the arithmetic circuit describing the functionality. Several implementation exists, such as HELib~\cite{helib}, PALISADE~\cite{palisade} and SEAL~\cite{seal}.
-
-However, this research branch is out of the scope of this thesis proposal as general FHE are very expensive in terms of CPU time and memory and thus not practically applicable in the context of resource constrained devices.
-
 \section{MPC applications}
 \unsurein{Warn: This section is unfinished}
 \infoin{Text need to be glued together so our thesis goals are visible from the composition}
@@ -475,6 +470,13 @@ CBMC-GC \cite{HFKV12}    &  & -        & 2+ & $\Circle$     & -           & -   
 %\end{itemize}
 
 
+\section{Fully homomorphic encryption} % STUB SECTION
+The fully homomorphic encryption (FHE) is a very powerful tool that enables to compute a function over encrypted data so the function evaluator does not learn data he is computing with. This has great applications in cloud computing as it protects client's data when the computation is offloaded to a malicious servers \cite{Gentry:2009:FHE:1536414.1536440, 10.1007/978-3-642-13190-5_2, cryptoeprint:2011:133, cryptoeprint:2012:099, 10.1007/978-3-642-40041-4_5, 10.1007/978-3-642-36362-7_1, 10.1007/978-3-642-55220-5_30}. 
+%FHE would be quite helpful in a secure evaluation of the arithmetic circuit corresponding to the functionality. 
+Several FHE implementation exists, such as HELib~\cite{helib}, PALISADE~\cite{palisade} and SEAL~\cite{seal}.
+
+However, this research branch is out of the scope of this thesis proposal as general FHE are very expensive in terms of CPU time and memory and thus not practically applicable in the context of resource constrained devices.
+
 \begin{ecmmnt}
 %UC-related: "Consequently, many known protocols (e.g., the general protocol of [gmw87], to name one) are not UC secure. 
 Secure function evaluation has been broadly studied \cite{
@@ -482,6 +484,7 @@ yao82, conf/sp/SonghoriHS0K15, Malkhi:2004:FST:1251375.1251395, 10.1007/978-3-64
 The previous research uses FPGA as a trusted element, trading trust for computational efficiency. However, FPGA itself cannot withstand attacks by side channel power analysis or fault induction attacks.
 SCPs, on the other hand, are tamper-proof but do not offer the flexibility of FPGAs and, namely, they suffer from low computational power and very limited memory \cite{10.1007/978-3-642-19074-2_1, Boureanu:2015:LCC:2714576.2714591, cryptoeprint:2016:615}.
 In \cite{2017-ccs-mavroudis}, we designed, theoretically analyzed, and evaluated \emph{Myst}, a suite of ECC-based cryptographic protocols for a distributed key generation, encryption, decryption and signature generation using SMPC on smartcards.
+
 Also, the K-out-of-N ECC-based multi-signature protocol research has recently undergone rapid development, especially due to rising crypto-currencies popularity as they rely on multi-signatures for signing outgoing transactions in accounts held by multiple owners ~\cite{Bellare:2007:UAS:2394539.2394589, Bnz2017BulletproofsSP, cryptoeprint:2018:068}. 
 \end{ecmmnt}
 
@@ -507,16 +510,68 @@ Also, the K-out-of-N ECC-based multi-signature protocol research has recently un
 		\item Construct drop-in replacements like SmartID~\cite{smart_id_ee}, True2F~\cite{DCMBR18}, OPAQUE~\cite{JKX18}
 		\item Removing single point of failures in token systems by smart application of 2PC
 		\item Apply MPC to hardware wallets and cryptocurrencies. Privacy-centric are harder, Monero, ZCash with state-of-the art cryptography, stapling...
+		\item side channel protection, MPC in tokens. 
+		\item single point of failure supply chain attacks
+		\item Distrib SC grid, Myst, compute MPC, performance gains
 	\end{itemize}
 }
-
 \newpage
 
-- side channel protection, MPC in tokens. 
-- single point of failure
-- supply chain attacks
+This section summarizes overall goals and my research aims.
+The central question connecting my further research is: \emph{How can a connection of hardware tamper-proof hardware and a secure multi-party computation solve practical problems and increase level of security in existing systems?}
 
-Hidden for the sake of sanity ...
+\subsection{Problem statement}
+The problems we aim to address by the future work:
+
+\begin{enumerate}
+	\item Single point of failure 
+	\item String trust assumptions
+	\item Insufficient protection of private data and secret keys 
+\end{enumerate}
+ 
+For instance, the severity of problem 1. is illustrated by our recent work \cite{2017-ccs-nemec} where we shown that the single point of failure is a huge risk for security-critical systems, such as eGovernment. Hence new approaches have to be found to alleviate the risk by removing the single point of failure, making the systems more robust. MPC is a systematic answer to this problem as it addresses the problem itself.
+
+\subsection{Research aim}
+The starting point for the next work can be our previous research \cite{2017-ccs-mavroudis} where we were able to successfully design a practically functional system based on MPC which brings significant security benefits to end-users. Such systems increase a security level as potential attacker need to compromise more targets simultaneously to breach the system. 
+
+Another inspiration could be the SmartID~\cite{smart_id_ee}. It generates RSA keys collaboratively both on the smart phone and the desktop so attacker need to obtain both key parts to break the system. It is a nice example of a robust system that would mitigate vulnerabilities like those presented in Infineon and eGovernment. 
+
+Moreover, we would like to focus on building practical and effective solutions that could serve as a drop-in replacement for existing, not that secure ones. If environment does not need to be changed the adoption is more seamless. This approach is now far more common, as we seen in \cite{smart_id_ee, DCMBR18}. % JKX18 OPAQUE somehow??
+
+Previous research also suggest that combination of MPC and hardware tokens is very beneficial as it helps to overcome problems of a trusted setup which is often not desirable. E.g., it is impossible to prove that all parties destroyed the trapdoor information during the trusted setup of the system, which is essential to it's security. Typical example is a trusted setup in the ZCash\footnote{\url{https://z.cash/}}, popular anonymous cryptocurrency. If the trusted setup was somehow subverted and attacker knows the trapdoor, he completely break the system by generating new coins without anybody noticing.
+
+As argumented by \cite{K07} the token model increases robustness as each user is free to choose from various manufacturers which smart card to use. In connection with \cite{2017-ccs-nemec} this gives strong security guarantees also against supply chain attacks.
+
+We believe that an exploration of a currently under-researched combination of highly secure yet very resource-limited devices and multi-party computation will bring significant benefits.
+
+\subsection{Research focus.}
+Here we present ideas that we want to work on.
+
+\paragraph{Practically usable MPC on smart cards.}
+We will continue in analysis of existing MPC protocols in context of a deployment on resource-constrained devices, which is a challenging task.
+As token model offers some unique properties we can make trade-offs in the trust model and assumptions of original protocols to make them more effective and practically usable. 
+%Requirements on the token, minimal, maximal, tradeofs.
+%Existing protocols could be modified to be practically usable with the tokens. 
+
+We will try to make our previous result \cite{2017-ccs-mavroudis} more universal so it can evaluate bigger class of functions. Similarly we want to study how to protect from malicious tokens, e.g., by requiring card to create a zero-knowledge proof that the operation was performed correctly. This could eliminate threat of backdoors in the model and reduces required trust.
+
+\paragraph{Side-channel and backdoor protection}.
+Theoretical work \cite{DNW09} shown that party which can exchange only limited amount of information with the environment it is possible to perform UC-secure MPC with malicious attackers. We would like to investigate how this relates to side-channels of the smart cards and assurances we can obtain in this model.
+
+On the other hand, we will analyze whether pre-programmed smart-cards acting like a black box are properly implementing security related functionalities. E.g., if Rabin Miler basis is fixed a pseudoprime could be generated which passes the test without actually being a prime. Such an attack breaks the system as we can bypass hardness assumptions of traditional ECC. Consequently, we will try to design protocols for collaborative parameter generation and attestations based on Zero Knowledge proofs to avoid mentioned problems.
+
+\paragraph{Hardware wallets.}
+Similarly we would like to focus on cryptocurrencies and hardware wallets as our work could have significant impact in this field protecting end-users from loosing funds. 
+Hardware wallet is a dedicated device that stores user's secrets and signs user's outgoing transactions to protect from money theft. There are open questions how to realize such algorithms in privacy centric cryptocurrencies (PCCC).
+We will study how to transform complex algorithms used in PCCC so they are usable on the hardware wallet and how to use MPC to distribute the risk to multiple devices, such as smart phone, browser and the hardware wallet. 
+
+\subsection{Tentatime work plan}
+\todoin{Workplan here}
+
+\subsection{Publication venues}
+\todoin{Conferences here}
+
+%Hidden for the sake of sanity ...
 \begin{ecmmnt}  % comment out the whole sections
 \chapter{Study plan}
 \begin{itemize}
@@ -567,11 +622,11 @@ We focus on asymmetric SMPC with resource-restricted devices (SCPs) in a sense t
 In the crypto-currency setup the zero-knowledge proofs, commitments, multi-signatures, and blockchain scanning would significantly benefit from effective computation offloading and multi-party protocol versions.
 
 We aim to investigate new possibilities of the secure view-key sharing in the SCP via SMPC by offloading costly operations to the high-performance hosts, minimizing the number of rounds, operations and memory in SCP.
-
+\end{ecmmnt}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Achieved results}
+\chapter{Achieved results}
 \begin{shaded}
 \begin{itemize}
     \item What we have, created
@@ -580,6 +635,7 @@ We aim to investigate new possibilities of the secure view-key sharing in the SC
 \end{itemize}
 \end{shaded}
 
+\newpage
 \subsection{Monero paper}
 
 Idea: submit to Oakland (rolling deadline) or some other A, A+ conference before theses submission. 
@@ -589,12 +645,15 @@ Covering basic Monero transaction, transaction signing protocol for hardware wal
 Covering also blockchain scanning, so view key is not leaked to the host. Schemes designed with their properties. Group payment identification pseudonymity, fast scanning. Encrypted Bloom filters. Impossibility on some attractive scheme properties (publicly derivable public key chain for forward secrecy, corresponding private key derivation only with hardware wallet. Formalize). 
 
 
-\section{Author's Publications}
+\chapter{Author's Publications}
 \begin{shaded}
 \begin{itemize}
     \item Contribution to the paper, percentual contribution
 \end{itemize}
 \end{shaded}
+
+\todoin{Publications here}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -638,6 +697,11 @@ Minor contribution. Resource-restricted devices. \cite{wsnprotectlayer}
 
 - Citations count 9: \url{https://scholar.google.com/scholar?cites=3284880228025768764&as_sdt=2005&sciodt=0,5&hl=sk}
 
+\section{Nat traversal}
+\cite{Klinec:2014:TSN:2659651.2659698},
+\emph{Traversing Symmetric NAT with Predictable Port Allocation} in the context of establishing P2P connections so parties can communicate directly, e.g., for MPC.
+
+
 \section{ECC Factorization paper}
 Submitted, V. Sedlacek, small contribution, running experiments, results aggregation. 
 
@@ -652,7 +716,7 @@ Submitted, V. Sedlacek, small contribution, running experiments, results aggrega
     \item Static Rabin-Miller basis on embedded cards, testing, detection, exploitation. Based on Bleichenbacher \cite{10.1007/978-3-540-30580-4_2}.
     
 \end{itemize}
-\end{ecmmnt}
+
 
 \end{document}
 
