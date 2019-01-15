@@ -1,5 +1,7 @@
 % The example bibliographical entries below were borrowed from the
 % <https://www.ctan.org/pkg/biblatex-iso690> package documentation.
+% http://mirrors.ibiblio.org/CTAN/macros/latex/exptl/biblatex/doc/biblatex.pdf
+% http://tug.ctan.org/info/biblatex-cheatsheet/biblatex-cheatsheet.pdf
 
 @misc{CurveSwap,
     author = {L Valenta et al.},
@@ -2370,6 +2372,23 @@ pages="406--425",
 isbn="978-3-642-20465-4"
 }
 
+@InProceedings{BDOZ11,%10.1007/978-3-642-20465-4_11,
+author="Bendlin, Rikke
+and Damg{\aa}rd, Ivan
+and Orlandi, Claudio
+and Zakarias, Sarah",
+editor="Paterson, Kenneth G.",
+title="Semi-homomorphic Encryption and Multiparty Computation",
+booktitle="Advances in Cryptology -- EUROCRYPT 2011",
+year="2011",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="169--188",
+%abstract="An additively-homomorphic encryption scheme enables us to compute linear functions of an encrypted input by manipulating only the ciphertexts. We define the relaxed notion of a semi-homomorphic encryption scheme, where the plaintext can be recovered as long as the computed function does not increase the size of the input ``too much''. We show that a number of existing cryptosystems are captured by our relaxed notion. In particular, we give examples of semi-homomorphic encryption schemes based on lattices, subset sum and factoring. We then demonstrate how semi-homomorphic encryption schemes allow us to construct an efficient multiparty computation protocol for arithmetic circuits, UC-secure against a dishonest majority. The protocol consists of a preprocessing phase and an online phase. Neither the inputs nor the function to be computed have to be known during preprocessing. Moreover, the online phase is extremely efficient as it requires no cryptographic operations: the parties only need to exchange additive shares and verify information theoretic MACs. Our contribution is therefore twofold: from a theoretical point of view, we can base multiparty computation on a variety of different assumptions, while on the practical side we offer a protocol with better efficiency than any previous solution.",
+isbn="978-3-642-20465-4",
+% https://eprint.iacr.org/2010/514.pdf 
+}
+
 @inproceedings{BHR12, %Bellare:2012:FGC:2382196.2382279
  author = {Bellare, Mihir and Hoang, Viet Tung and Rogaway, Phillip},
  title = {Foundations of Garbled Circuits},
@@ -3028,4 +3047,185 @@ url="https://doi.org/10.1007/978-3-319-57048-8_6"
     note = {Accessed: 2019-01-13, accepted to IEEE S\&P 2019}
 }
     
-    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MPC SoK articles
+
+@misc{emp-toolkit,
+    author = {Xiao Wang and Alex J. Malozemoff and Jonathan Katz},
+    title = {{EMPtoolkit: Efficient MultiParty computation toolkit}},
+    year = {2016},
+    howpublished = {\url{https://github.com/emp-toolkit}},
+    note = {Accessed: 2019-01-13},
+}
+
+@misc{ZE15,%cryptoeprint:2015:1153,
+    author = {Samee Zahur and David Evans},
+    title = {Obliv-C: A Language for Extensible Data-Oblivious Computation},
+    howpublished = {Cryptology ePrint Archive, Report 2015/1153},
+    year = {2015},
+    note = {\url{https://eprint.iacr.org/2015/1153}},
+}
+
+@misc{scale-mamba,
+    author = {Abdelrahaman Aly and Marcel Keller and Dragos Rotaru and Peter Scholl and Nigel P. Smart and Tim Wood},
+    title = {{SCALE-MAMBA Software}},
+    howpublished = {\url{https://homes.esat.kuleuven.be/~nsmart/SCALE}},
+    year = {2018},
+    note = {Accessed: 2019-01-13},
+}
+
+@inproceedings{oblivm,
+ author = {Liu, Chang and Wang, Xiao Shaun and Nayak, Kartik and Huang, Yan and Shi, Elaine},
+ title = {ObliVM: A Programming Framework for Secure Computation},
+ booktitle = {Proceedings of the 2015 IEEE Symposium on Security and Privacy},
+ series = {SP '15},
+ year = {2015},
+ isbn = {978-1-4673-6949-7},
+ pages = {359--376},
+ numpages = {18},
+ url = {https://doi.org/10.1109/SP.2015.29},
+ doi = {10.1109/SP.2015.29},
+ acmid = {2867660},
+ publisher = {IEEE Computer Society},
+ address = {Washington, DC, USA},
+ keywords = {Secure Computation, Oblivious Algorithms, Oblivious RAM, Programming Language, Type System, Compiler},
+}
+
+@inproceedings{SHSSK15,%Songhori:2015:THC:2867539.2867663,
+ author = {Songhori, Ebrahim M. and Hussain, Siam U. and Sadeghi, Ahmad-Reza and Schneider, Thomas and Koushanfar, Farinaz},
+ title = {TinyGarble: Highly Compressed and Scalable Sequential Garbled Circuits},
+ booktitle = {Proceedings of the 2015 IEEE Symposium on Security and Privacy},
+ series = {SP '15},
+ year = {2015},
+ isbn = {978-1-4673-6949-7},
+ pages = {411--428},
+ numpages = {18},
+ url = {https://doi.org/10.1109/SP.2015.32},
+ doi = {10.1109/SP.2015.32},
+ acmid = {2867663},
+ publisher = {IEEE Computer Society},
+ address = {Washington, DC, USA},
+ keywords = {Secure Function Evaluation, Garbled Circuit, Logic Design, Hardware Synthesis},
+}
+
+@inproceedings{RHH14,%Rastogi:2014:WPL:2650286.2650775,
+ author = {Rastogi, Aseem and Hammer, Matthew A. and Hicks, Michael},
+ title = {Wysteria: A Programming Language for Generic, Mixed-Mode Multiparty Computations},
+ booktitle = {Proceedings of the 2014 IEEE Symposium on Security and Privacy},
+ series = {SP '14},
+ year = {2014},
+ isbn = {978-1-4799-4686-0},
+ pages = {655--670},
+ numpages = {16},
+ url = {https://doi.org/10.1109/SP.2014.48},
+ doi = {10.1109/SP.2014.48},
+ acmid = {2650775},
+ publisher = {IEEE Computer Society},
+ address = {Washington, DC, USA},
+ keywords = {Secure multi-party computation, Functional language, Dependent type system},
+}
+
+@inproceedings{Demmler2015ABYA,
+  title={ABY - A Framework for Efficient Mixed-Protocol Secure Two-Party Computation},
+  author={Daniel Demmler and Thomas Schneider and Michael Zohner},
+  booktitle={NDSS},
+  year={2015}
+}
+
+@inproceedings{Mohassel:2018:AMP:3243734.3243760,
+ author = {Mohassel, Payman and Rindal, Peter},
+ title = {ABY3: A Mixed Protocol Framework for Machine Learning},
+ booktitle = {Proceedings of the 2018 ACM SIGSAC Conference on Computer and Communications Security},
+ series = {CCS '18},
+ year = {2018},
+ isbn = {978-1-4503-5693-0},
+ location = {Toronto, Canada},
+ pages = {35--52},
+ numpages = {18},
+ url = {http://doi.acm.org/10.1145/3243734.3243760},
+ doi = {10.1145/3243734.3243760},
+ acmid = {3243760},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {gradient descent, inference, logistic regression, machine learning, neural networks, regression, secure multi-party computation, secure protocol, training},
+}
+
+@InProceedings{BLWJP08,%10.1007/978-3-540-88313-5_13,
+author="Bogdanov, Dan
+and Laur, Sven
+and Willemson, Jan",
+editor="Jajodia, Sushil
+and Lopez, Javier",
+title="Sharemind: A Framework for Fast Privacy-Preserving Computations",
+booktitle="Computer Security - ESORICS 2008",
+year="2008",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="192--206",
+abstract="Gathering and processing sensitive data is a difficult task. In fact, there is no common recipe for building the necessary information systems. In this paper, we present a provably secure and efficient general-purpose computation system to address this problem. Our solution---Sharemind---is a virtual machine for privacy-preserving data processing that relies on share computing techniques. This is a standard way for securely evaluating functions in a multi-party computation environment. The novelty of our solution is in the choice of the secret sharing scheme and the design of the protocol suite. We have made many practical decisions to make large-scale share computing feasible in practice. The protocols of Sharemind are information-theoretically secure in the honest-but-curious model with three computing participants. Although the honest-but-curious model does not tolerate malicious participants, it still provides significantly increased privacy preservation when compared to standard centralised databases.",
+isbn="978-3-540-88313-5"
+}
+
+@inproceedings{Bogdanov:2008:SFF:1462455.1462473,
+ author = {Bogdanov, Dan and Laur, Sven and Willemson, Jan},
+ title = {Sharemind: A Framework for Fast Privacy-Preserving Computations},
+ booktitle = {Proceedings of the 13th European Symposium on Research in Computer Security: Computer Security},
+ series = {ESORICS '08},
+ year = {2008},
+ isbn = {978-3-540-88312-8},
+ location = {Malaga, Spain},
+ pages = {192--206},
+ numpages = {15},
+ url = {http://dx.doi.org/10.1007/978-3-540-88313-5_13},
+ doi = {10.1007/978-3-540-88313-5_13},
+ acmid = {1462473},
+ publisher = {Springer-Verlag},
+ address = {Berlin, Heidelberg},
+}
+
+@inproceedings{ZSB13,%Zhang:2013:PGC:2508859.2516752,
+ author = {Zhang, Yihua and Steele, Aaron and Blanton, Marina},
+ title = {PICCO: A General-purpose Compiler for Private Distributed Computation},
+ booktitle = {Proceedings of the 2013 ACM SIGSAC Conference on Computer \&\#38; Communications Security},
+ series = {CCS '13},
+ year = {2013},
+ isbn = {978-1-4503-2477-9},
+ location = {Berlin, Germany},
+ pages = {813--826},
+ numpages = {14},
+ url = {http://doi.acm.org/10.1145/2508859.2516752},
+ doi = {10.1145/2508859.2516752},
+ acmid = {2516752},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {compiler, general-purpose computation, linear secret sharing, parallel execution, secure computation outsourcing, secure multi-party computation, source-to-source translator},
+} 
+
+@INPROCEEDINGS{MGCBT16,
+  author={B. Mood and D. Gupta and H. Carter and K. Butler and P. Traynor},
+  booktitle={2016 IEEE European Symposium on Security and Privacy (EuroS P)}, 
+  title={Frigate: A Validated, Extensible, and Efficient Compiler and Interpreter for Secure Computation}, 
+  year={2016},
+  pages={112-127},
+  keywords={data structures;program compilers;security of data;secure computation research;compiler systems;Frigate;principled compiler;circuit interpreter;compiler design;standard data structures;internal compiler state;circuit compilers;Wires;Testing;Protocols;Logic gates;Generators;Program processors;Standards;Secure Computation;Compilers},
+  doi={10.1109/EuroSP.2016.20},
+  month={March},}
+
+@inproceedings{HFKV12,%Holzer:2012:STC:2382196.2382278,
+ author = {Holzer, Andreas and Franz, Martin and Katzenbeisser, Stefan and Veith, Helmut},
+ title = {Secure Two-party Computations in ANSI C},
+ booktitle = {Proceedings of the 2012 ACM Conference on Computer and Communications Security},
+ series = {CCS '12},
+ year = {2012},
+ isbn = {978-1-4503-1651-4},
+ location = {Raleigh, North Carolina, USA},
+ pages = {772--783},
+ numpages = {12},
+ url = {http://doi.acm.org/10.1145/2382196.2382278},
+ doi = {10.1145/2382196.2382278},
+ acmid = {2382278},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {compilers, model checking, privacy, secure computations},
+}
+

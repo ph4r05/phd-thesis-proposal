@@ -71,6 +71,9 @@
 \usepackage{xargs}  % Use more than one optional parameter in a new commands  
 \usepackage[pdftex,dvipsnames]{xcolor}  % Colored text etc.  
 \usepackage{floatrow} %% Putting captions above tables
+\usepackage{wasysym}
+\usepackage{multirow}
+\usepackage{booktabs}
 
 \newcounter{camera_ready}  % camera ready switch, using heavy graphs, in PDF
 \setcounter{camera_ready}{0}  % set to 1 to print in vectors
@@ -78,6 +81,7 @@
 \newcommand{\itembf}[1]{\item {\bf{#1}}}
 \newcommand{\bigO}[0]{\mathcal{O}}
 \newcommand{\cmmnt}[1]{\ignorespaces}
+\newcommand{\mcrot}[4]{\multicolumn{#1}{#2}{\rlap{\rotatebox{#3}{#4}~}}} 
 %\newenvironment{ecmmnt}[1]{}{}  % #1
 
 \thesissetup{
@@ -427,10 +431,30 @@ In True2F they designed lightweight 2PC protocols for collaborative signature ke
 The proposed modifications can run on the same hardware, server-side requires no modifications.
 % Verifiable identities.
     
-\paragraph{In OPAQUE~\cite{JKX18}} shown how to compile asymmetric password-authenticated key exchange protocols (aPAKE) to OPAQUE protocols, protecting from offline pre-computation attacks as aPAKE protocols usually send hashing \emph{salt} to the host, the login key is derived as $k=H(pass, salt)$. The attacker can collect the salt in a targeted attack, pre-compute $H()$ tables using large word lists and then after server breach immediately recover user password using the tables. OPAQUE uses UC-secure MPC protocol in a way client does not learn the salt and server does not learn the password. The protocol is very effective and provides perfect forward secrecy, supports client-side hardened derivations, e.g., with scrypt and thresholding scheme so attacker has to attack on $t$ servers simultaneously to mount the attack.
+\paragraph{OPAQUE~\cite{JKX18}} shown how to compile asymmetric password-authenticated key exchange protocols (aPAKE) to OPAQUE protocols, protecting from offline pre-computation attacks as aPAKE protocols usually send hashing \emph{salt} to the host, the login key is derived as $k=H(pass, salt)$. The attacker can collect the salt in a targeted attack, pre-compute $H()$ tables using large word lists and then after server breach immediately recover user password using the tables. OPAQUE uses UC-secure MPC protocol in a way client does not learn the salt and server does not learn the password. The protocol is very effective and provides perfect forward secrecy, supports client-side hardened derivations, e.g., with scrypt and thresholding scheme so attacker has to attack on $t$ servers simultaneously to mount the attack.
     
-\paragraph{Compilers:} \cite{awesome-mpc, sok19} give extensible up-to-date review of the numerous practically usable MPC systems. Such as: SCALE-MAMBA, TinyGarble, EMP-toolkit, Obliv-C, Sharemind and ABY.
-Fairplay, compilers, etc.
+%awesome-mpc
+\paragraph{Compilers:} Fairplay~\cite{MNPS04} was the first published compiler for 2PC based on garbled circuits. Compilers and general MPC systems undergo massive active development since then. The \cite{sok19} gives an extensible up-to-date review of the numerous practically usable MPC systems. Tools list is depicted in table \ref{tbl:compilers}. 
+
+\begin{table}[h]
+\begin{tabular}{llllllll}
+Tool        &  & \rlap{\rotatebox{90}{Protocol}~} & \rlap{\rotatebox{90}{Parties}~} & \rlap{\rotatebox{90}{Mixed-mode}~} & \rlap{\rotatebox{90}{Semi-honest}~} & \rlap{\rotatebox{90}{Malicious}~} & \rlap{\rotatebox{90}{Updated}~} \\\hline
+EMP-toolkit \cite{emp-toolkit} &  & GC       & 2  & $\CIRCLE$     & $\CIRCLE$           & $\CIRCLE$         & 09/2018           \\
+Obliv-C \cite{ZE15}    &  & GC       & 2  & $\CIRCLE$     & $\CIRCLE$           & $\Circle$         & 06/2018           \\
+OblivVM \cite{oblivm}    &  & GC       & 2  & $\CIRCLE$     & $\CIRCLE$           & $\Circle$         & 02/2016           \\
+TinyGarble \cite{SHSSK15}  &  & GC       & 2  & $\Circle$     & $\CIRCLE$           & $\Circle$         & 10/2018           \\
+Wysteria \cite{RHH14}    &  & MC       & 2+ & $\CIRCLE$     & $\CIRCLE$           & $\Circle$         & 10/2014           \\
+ABY \cite{Demmler2015ABYA}        &  & GC, MC   & 2  & $\CIRCLE$     & $\CIRCLE$           & $\Circle$         & 10/2018           \\
+SCALE-MAMBA \cite{scale-mamba} &  & Hy       & 2+ & $\CIRCLE$     & $\CIRCLE$           & $\CIRCLE$         & 10/2018           \\
+Sharemind \cite{BLWJP08}   &  & Hy       & 3  & $\CIRCLE$     & $\CIRCLE$           & $\Circle$         & 09/2018           \\
+PICCO \cite{ZSB13}      &  & Hy       & 3+ & $\CIRCLE$     & $\CIRCLE$           & $\Circle$         & 10/2017           \\
+Frigate \cite{MGCBT16}    &  & -        & 2+ & $\Circle$     & -           & -         & 05/2016           \\
+CBMC-GC \cite{HFKV12}    &  & -        & 2+ & $\Circle$     & -           & -         & 05/2017           \\
+\end{tabular}
+\caption{List of available MPC tools from \cite{sok19}. GC, MC, Hy corresponds to Garbled Circuit, Multiplication Circuit, Hybrid approach respectively. Mixed mode tools can combine both secure and insecure computations in one program. Last two entries are only compilers to the circuit format hence lacking security related fields.}
+\label{tbl:compilers}
+\end{table}
+
 %\end{itemize}
 
 \infoin{Idea: we want fit somewhere here:%
