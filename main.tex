@@ -43,8 +43,8 @@
 %%
 %% For non-Latin scripts, it may be necessary to load additional
 %% fonts:
-%\usepackage{paratype}
-%\def\textrussian#1{{\usefont{T2A}{PTSerif-TLF}{m}{rm}#1}}
+\usepackage{paratype}
+\def\textrussian#1{{\usefont{T2A}{PTSerif-TLF}{m}{rm}#1}}
 %%
 %% The following section sets up the metadata of the thesis.
 
@@ -407,12 +407,10 @@ They assume collision-resistant hash functions (CRHFs) and the existence of uniq
 \cite{CCOV17} relaxes trust model in computing with corrupted tokens as some token manufacturers may create malicious tokens. They present UC-secure protocol with $N$ stateless tokens that computes original functionality securely even with $N-1$ malicious tokens with one-way functions. In \cite{2017-ccs-mavroudis} we implemented similar solution but with stronger cryptographic assumptions.
 % Unlimited number of OTs -> unlimited number of MPCs
 
-\cite{DSZ14} implemented practical 2PC on smart phones based on \cite{GMW87} using smart card to accelerate computation with pre-computation thanks to the additional trust it provides.
 
-
-\unsurein{Warn: This section is unfinished.}
+%\unsurein[disable]{Warn: This section is unfinished.}
 \todoin{ToDo: This section is a bit rusty, may need some improvements.}
-\todoin{ToDo: More smartcard-based works, FPGAs.}
+%\todoin[disable]{ToDo: More smartcard-based works, FPGAs.}
 
 \section{Fully homomorphic encryption} % STUB SECTION
 The MPC can be also realized with a general fully homomorphic encryption (FHE) \cite{Gentry:2009:FHE:1536414.1536440, 10.1007/978-3-642-13190-5_2, cryptoeprint:2011:133, cryptoeprint:2012:099, 10.1007/978-3-642-40041-4_5, 10.1007/978-3-642-36362-7_1, 10.1007/978-3-642-55220-5_30}. One example is secure evaluation of the arithmetic circuit describing the functionality. Several implementation exists, such as HELib~\cite{helib}, PALISADE~\cite{palisade} and SEAL~\cite{seal}.
@@ -422,19 +420,36 @@ However, this research branch is out of the scope of this thesis proposal as gen
 \section{MPC applications}
 \unsurein{Warn: This section is unfinished}
 \infoin{Text need to be glued together so our thesis goals are visible from the composition}
+\todo{Asymetric MPC, cloud offload?}
+In this part we review related practical results achieved in the MPC.
+%In \cite{JKSS10} authors desing asymmetric MPC
+\cite{DSZ14} implemented practical 2PC on smart phones based on \cite{GMW87} using smart card to accelerate computation with pre-computation thanks to the additional trust it provides.
 
 %\begin{itemize}
-\paragraph{Practical MPC computations:} \cite{BJSV15} MPC secure statistical analysis of income tax for Estonian government. \cite{BKKRST16} statistically analyzed database with 600k students and 10M tax records. \cite{KW15} suggested to use MPC to implement satellite collision prevention system securely evaluating collision detection algorithm using sensitive location and trajectory using secret sharing and floating point operations.
+\subsection{New challenges} There are plenty of practical problems that need to be solved without exposing input data or without requiring additional trust. These problems would significantly benefit by a clever application of MPC.
+
+For example, in \cite{BJSV15} authors used MPC to securely conduct statistical analysis of income tax for Estonian government. Consequently, \cite{BKKRST16} statistically analyzed database with 600k students and 10M tax records. \cite{KW15} suggested to use MPC to implement satellite collision prevention system securely evaluating collision detection algorithm using sensitive location and trajectory using secret sharing and floating point operations.
+
+\subsection{Improving existing systems}
+MPC can be applied to already existing systems in order to increase level of security, reduce required trust or eliminate a single point of failure.
+In our work ROCA~\cite{2017-ccs-nemec} we shown that the well-known token brand was generating easily-factorable RSA moduli which deteriorated system security. This serves as an example that motivates research for finding more robust solutions. Those can be based on MPC.
     
-\paragraph{True2F~\cite{DCMBR18}} is a simple application of two-party computation to protect from untrusted U2F tokens. Motivated by ROCA \cite{2017-ccs-nemec} in which autors shown the well-known token generated easily-factorable RSA moduli which deteriorated system security. 
-In True2F they designed lightweight 2PC protocols for collaborative signature key generation to ensure it has proper entropy contributed by both browser and token. They propose firewalled ECDSA signatures, jointly produced by browser and token in such a way that a) secrets remain private on token and b) token is blocked from exfiltrating secret signing key in the signature randomness.
-The proposed modifications can run on the same hardware, server-side requires no modifications.
+\paragraph{True2F.} The \cite{DCMBR18} is a clever application of 2PC to protect from malicious U2F tokens, which are used in the login systems either as a second-factor or in the passwordless schemes. 
+Authors designed lightweight 2PC protocols for a collaborative signature key generation to ensure the secret key has proper entropy which is contributed to by both browser and token. They also propose firewalled ECDSA signatures, jointly produced by browser and token in such a way that a) secrets remain private on token and b) token is blocked from exfiltrating secret information hidden in the signature randomness.
+The proposed modifications can run on the same hardware, server-side requires no modifications which makes adoption significantly easier. Hence True2F is a drop-in replacement increasing the security level.
 % Verifiable identities.
     
-\paragraph{OPAQUE~\cite{JKX18}} shown how to compile asymmetric password-authenticated key exchange protocols (aPAKE) to OPAQUE protocols, protecting from offline pre-computation attacks as aPAKE protocols usually send hashing \emph{salt} to the host, the login key is derived as $k=H(pass, salt)$. The attacker can collect the salt in a targeted attack, pre-compute $H()$ tables using large word lists and then after server breach immediately recover user password using the tables. OPAQUE uses UC-secure MPC protocol in a way client does not learn the salt and server does not learn the password. The protocol is very effective and provides perfect forward secrecy, supports client-side hardened derivations, e.g., with scrypt and thresholding scheme so attacker has to attack on $t$ servers simultaneously to mount the attack.
-    
+\paragraph{OPAQUE.} In \cite{JKX18} authors designed a new asymmetric password-authenticated key exchange protocol (aPAKE) called OPAQUE which uses MPC to overcome issues of existing aPAKE protocols.
+OPAQUE protocols protect from offline pre-computation attacks as aPAKE protocols usually send hashing \emph{salt} to the host. 
+The login key is derived as $k=H(pass, salt)$. The attacker can collect the salt in a targeted attack, pre-compute $H()$ tables using large word lists. Consequently, when the server is breached attacker can immediately recover user password using the pre-computed tables. OPAQUE uses UC-secure MPC protocol to derive login keys in a way that client does not learn the salt and server does not learn the password. The protocol is very effective and provides perfect forward secrecy, supports client-side hardened derivations, e.g., with scrypt, and a thresholding scheme so attacker has to attack on $t$ servers simultaneously to mount the attack.
+
+\subsection{Universal MPC tools}
 %awesome-mpc
-\paragraph{Compilers:} Fairplay~\cite{MNPS04} was the first published compiler for 2PC based on garbled circuits. Compilers and general MPC systems undergo massive active development since then. The \cite{sok19} gives an extensible up-to-date review of the numerous practically usable MPC systems. Tools list is depicted in table \ref{tbl:compilers}. 
+MPC compiler is a software which translates a desired functionality $\mathcal{F}$ specification, e.g., secure set intersection, to a program that uses MPC to securely evaluate the functionality $\mathcal{F}$.
+
+Fairplay~\cite{MNPS04} was the first published MPC compiler for two-party computations based on Yao's garbled circuits. It featured a high-level definition procedural language: Secure Function Definition Language (SFDL) used to express the desired functionality $\mathcal{F}$. Fairplay translates SFDL to a circuit representation which can be securely evaluated by two parties. This general tool enabled experimentation with MPC to a broader audience. 
+
+MPC compilers and general MPC systems undergo massive active development since then. The \cite{sok19} gives an extensible up-to-date review of the numerous practically usable MPC systems. Tools list is depicted in table \ref{tbl:compilers}. \todo{Mention tech compilers are based on?}
 
 \begin{table}[h]
 \begin{tabular}{llllllll}
@@ -467,21 +482,7 @@ CBMC-GC \cite{HFKV12}    &  & -        & 2+ & $\Circle$     & -           & -   
 }
 
 \begin{ecmmnt}
-
-
-\newpage
-\begin{itemize}
-    \item Real-world multiparty examples, SoK, compilers. OPAQUE
-
-    \item UC secure framework, what can and cannot be done, setup assumptions, tokenzzzz
-    
-    \item TOKEN WORLD, assumptions, results... stateless, statefull, bounds, token complexities. use Katz and others
-    
-    \item Real-world MPC with tokens, True2F, 
-\end{itemize}
-
 %UC-related: "Consequently, many known protocols (e.g., the general protocol of [gmw87], to name one) are not UC secure. 
-
 Secure function evaluation has been broadly studied \cite{
 yao82, conf/sp/SonghoriHS0K15, Malkhi:2004:FST:1251375.1251395, 10.1007/978-3-642-40041-4_5}, namely with respect to private database search \cite{Bertino2005, Naor:1999:PPA:336992.337028}, private data mining \cite{Aldeen2015} and voting. However, it typically suffers from large performance or communication overhead.
 The previous research uses FPGA as a trusted element, trading trust for computational efficiency. However, FPGA itself cannot withstand attacks by side channel power analysis or fault induction attacks.
@@ -505,6 +506,9 @@ Also, the K-out-of-N ECC-based multi-signature protocol research has recently un
     \item Range: 2 pages
 \end{itemize}
 \end{shaded}
+
+- side channel protection, MPC in tokens. 
+- 
 
 Hidden for the sake of sanity ...
 \begin{ecmmnt}  % comment out the whole sections
