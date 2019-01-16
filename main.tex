@@ -219,17 +219,7 @@ Itemized:
 
 
 \chapter{State of the Art}
-\begin{shaded}
-Guide:
-\begin{itemize}
-    \item More concrete introduction
-    \item Current state of the art
-    \item Classical and up to date results, comparison, overview / survey
-    \item Up to date topics to address, who is solving those
-    \item How to contribute
-    \item Range: 8-12 pages
-\end{itemize}
-\end{shaded}
+
 
 \begin{ecmmnt}  % comment out the whole sections
 \section{Related work - itemized}
@@ -266,7 +256,7 @@ Guide:
     - multisigs, monero, zcoin, zcash
 \end{ecmmnt}
 
-\newpage
+%\newpage
 %\section{Related work}
 
 Secure multi-party computation (MPC) is very generic and well studied cryptographic task.
@@ -298,6 +288,26 @@ MPC protocols are characterized with respect to various criteria:
     
 \end{itemize}
 
+\section{Universally composable framework}%
+\label{sec:uc}
+Traditionally, protocols were analyzed in the \emph{stand-alone} security model. The model assumed only a presence of actual participants in a single run of the protocol in isolation which allowed for relatively simple designs and proofs. The model is intuitively the simplest for such analysis but does not realistically capture threats we would like to assume for practical protocol usage. In the real world, many different protocols may be run concurrently in an unbounded number of instances in an arbitrary interleaving schedule. These protocols may be executed with the same or other parties, parties inputs may be correlated, protocol outputs can be used by other protocols and message communication could be controlled by an adversary. The \cite{Can06, Can13} discuss protocols secure in the stand-alone model failing in the concurrent composition.
+
+In order to take these concerns into account one would have to address each of them in the model and still, there would be new, previously neglected problems. These concerns motivated research of the security frameworks effectively addressing these issues.
+
+One of the most common models is the Universally Composable (UC) framework by Canneti~\cite{Can01}. The notions of security expressed within the framework preserve security under universal composition. Thus the protocols remain secure in an arbitrary unknown multi-party multi-execution environment. The important benefit is the framework also covers not explicitly considered environments. This allows for modular design and analysis of complex protocols by breaking down the protocol and proving security for smaller building blocks.
+
+The security in the UC framework is proven by a so-called \emph{simulation} technique.
+The framework essentially defines two separate worlds. The \emph{ideal~world}, where the security is intuitively guaranteed and the \emph{real~world}.
+UC also defines the \emph{environment}~$\mathcal{Z}$, the algorithmic entity which represents everything external to the protocol execution. It wraps and controls the execution, hands arbitrary inputs to the parties, collects outputs from the parties, communicates with the adversary~$\mathcal{A}$.
+
+In the ideal world, the \emph{ideal~functionality}~$\mathcal{F}$\footnote{Ideal functionality was originally used in~\cite{GMW87}} is a natural algorithmic description of the function $f$. It securely evaluates function $f$ acting as an incorruptible trusted third party (TTP). It securely evaluates $f$ and returns the result to the participants $P_i$. The \emph{adversary}~$\mathcal{A}$ can interact with $\mathcal{F}$ only via the external interface. Besides that, $\mathcal{A}$ interacts with other parties and environment~$\mathcal{Z}$ in an arbitrary manner, defined by the security properties being proved, e.g. semi-honest vs. malicious adversary.
+This notion intuitively captures the desired security properties we want the protocol $\pi$ realizing function $f$ to have, i.e., it should securely emulate the TTP in the real world setting.
+
+We say that $\pi$ securely evaluates a function $f$ if for any adversary $\mathcal{A}$ there exists an ideal adversary $\mathcal{S}$, simulator, such that no environment $\mathcal{Z}$ can tell with non-negligible advantage distinguish the real-world ($\pi, \mathcal{A}$) and the ideal world ($\mathcal{F}, \mathcal{S}$).
+
+Intuitively, the Environment $\mathcal{Z}$ cannot distinguish which execution is it plugged in. If it is so, the adversary can only cause a "damage" or learn only the information it could learn in the idealized world with the TTP where the security is implicit. For more detailed treatment please refer to \cite{Can01, CLOS02, Lin03, G09, CDN15, Lin17}.
+
+
 \section{Two-party computation} %
 One of the founding work on MPC is a seminal paper of Yao \cite{Yao86} which proved \emph{completeness} of the two-party computation, i.e. all computable function $f$ can be computed in secure two-party computation model in semi-honest setting with computationally bounded attackers. 
 
@@ -316,7 +326,7 @@ Round complexity is $\bigO(\text{depth}(C))$ for adaptive security \cite{GMW87, 
 Later \cite{CLOS02} shown how to construct a multi-party protocols in universally composable framework with computational assumptions, dishonest majority up to $m-1$ of adaptive malicious parties in CRS model and broadcast. 
 Non-adaptive cases require trapdoor functions, adaptive requires augmented non-committing encryption protocols \cite{CFGN96}.
 
-\section{Computationally unbounded}%
+\section{Information-theoretic protocols}%
 The information-theoretic protocols are typically simpler, faster and have better communication and computation costs compared to computational equivalents. Foundations in this field were laid by works \cite{BGW88} and \cite{CCD88}. They are based on Shamir's secret sharing and arithmetic circuits in finite fields. The malicious case make use of error correcting Reed Solomon codes. They proved a honest majority is required for semi-honest setting in this model and $2/3$-honest majority for malicious settings. Moreover, these bounds were proven tight. These protocols have $\bigO(\text{depth}(C))$ communication rounds as each party is evaluating a circuit and a communication round is required to securely evaluate multiplication gates.
 
 \section{Extensions}%
@@ -325,7 +335,8 @@ For the garbled circuits it entails: Point-and-permute \cite{BMR90}, Free XOR \c
 
 Cut-and-choose extension \cite{LP07,LP11,Lin16} enables use of the garbled circuit with malicious parties by simply generating more circuits, committing to them and revealing subset of them on request. The approach has been extensively studied and significantly improved, e.g., LEGO \cite{NO09} and it's numerous improvements \cite{cryptoeprint:2013:155, FJNT15, cryptoeprint:2016:1069, cryptoeprint:2017:226, KNBTR17, cryptoeprint:2018:578}.
 
-Secret-sharing based approach extensions working with malicious parties: SPDZ \cite{DPSZ12, cryptoeprint:2012:642}, MiniMac \cite{DZ13}, TinyOT \cite{NNOB12}, MASCOT \cite{KOS16}, TinyTable \cite{cryptoeprint:2016:695}, and further improvements \cite{FKOS15, DZ16, LPJ17, BCGIM17, cryptoeprint:2017:1230}. \todo{Elaborate more on: beaver triplets \cite{B91a}, correlated randomness, OT-extension ROT, offline pre-computing phase?}
+Secret-sharing based approach extensions working with malicious parties: SPDZ \cite{DPSZ12, cryptoeprint:2012:642}, MiniMac \cite{DZ13}, TinyOT \cite{NNOB12}, MASCOT \cite{KOS16}, TinyTable \cite{cryptoeprint:2016:695}, and further improvements \cite{FKOS15, DZ16, LPJ17, BCGIM17, cryptoeprint:2017:1230}. %
+\todo{Elaborate more on: beaver triplets \cite{B91a}, correlated randomness, OT-extension ROT, offline pre-computing phase?}
 
 The \cite{WRK17} generalizes TinyOT to multiparty setting, dishonest majority of malicious attackers. The protocol is the first constant-round implemented and practically usable. It works in standalone security model while \cite{DPSZ12} is statistically UC-secure. 
 
@@ -337,26 +348,8 @@ On the field of computational security the \cite{cryptoeprint:2017:1056} show th
 Similarly, the \cite{cryptoeprint:2018:572} shown round optimal 2-round MPC protocol for general circuits that achieves security with abort against any dishonest minority of corruptions using one-way functions.
 % cool presentation: http://conferences.au.dk/fileadmin/user_upload/TPMPC18/Antigoni_Polychroniadou.pdf
 
-\section{Universally composable framework}\todo{Maybe move right after MPC intro?}%
-\label{sec:uc}
-Traditionally, the protocols were analyzed in the \emph{stand-alone} security model. The model assumed only the actual participants in the single run of the protocol in isolation which allowed for relatively simple designs and proofs. The model is intuitively the simplest for such analysis but does not realistically capture threats we would like to assume for practical protocol usage. In the real world, many different protocols may be run concurrently in unbounded number of instances in an arbitrary interleaving schedule. These protocols may be executed with same or other parties, their inputs may be correlated, protocol outputs can be used by other protocols and message communication could be controlled by an adversary. The \cite{Can06, Can13} discuss protocols secure in the stand-alone model failing in the concurrent composition.\todo{Simplify?}
 
-In order to take these concerns into account one would have to address each of them in the model and still there would be new previously neglected problems. These concerns motivated research of the security frameworks effectively addressing these issues.
-
-One of the most commonly models is the Universally Composable (UC) framework by Canneti~\cite{Can01}. The notions of security expressed within the framework preserve security under universal composition, thus they remain secure in an arbitrary unknown multi-party multi-execution environment. The important benefit is the framework covers also not explicitly considered environments. This allows for modular design and analysis of complex protocols by breaking down the protocol and proving security for smaller building blocks.
-
-The security in the UC framework is proven by a so-called \emph{simulation} technique.
-The framework essentially defines two separate worlds. The \emph{ideal~world}, where the security is intuitively guaranteed and the \emph{real~world}.
-Model also defines the \emph{environment}~$\mathcal{Z}$, the algorithmic entity which represents everything external to the protocol execution. It wraps and controls the execution, hands arbitrary inputs to the parties, collects outputs from the parties, communicates with the adversary~$\mathcal{A}$.
-
-In the ideal world, the \emph{ideal~functionality}~$\mathcal{F}$\footnote{Ideal functionality was originally used in~\cite{GMW87}} is a natural algorithmic description of the function $f$. It securely evaluates function $f$ acting as an incorruptible trusted third party (TTP). It securely evaluates $f$ and returns the result to the participants $P_i$. The \emph{adversary}~$\mathcal{A}$ can interact with $\mathcal{F}$ only via external interface. Besides that, $\mathcal{A}$ interacts with other parties and environment~$\mathcal{Z}$ in an arbitrary manner, defined by the security properties being proved, e.g. semi-honest vs. malicious adversary.
-This notion intuitively captures the desired security properties we want the protocol $\pi$ realizing function $f$ to have, i.e., it should securely emulate the TTP in the real world setting.\todo{Maybe we don't need that level of detail?}
-
-We say that $\pi$ securely evaluates a function $f$ if for any adversary $\mathcal{A}$ there exists an ideal adversary $\mathcal{S}$, simulator, such that no environment $\mathcal{Z}$ can tell with non-negligible advantage distinguish the real-world ($\pi, \mathcal{A}$) and the ideal world ($\mathcal{F}, \mathcal{S}$).
-
-Intuitively, the Environment $\mathcal{Z}$ cannot distinguish which execution is it plugged in. If it is so, the adversary can only cause a "damage" or learn only the information it could learn in the idealized world with the TTP where the security is implicit. For more detailed treatment please refer to \cite{Can01, CLOS02, Lin03, G09, CDN15, Lin17}.
-
-\paragraph{Feasability.}
+\section{UC Feasability}
 The \cite{Can01} shown that any polynomial-time computable functionality $\mathcal{F}$ can be UC-securely realized with honest majority in the plain model. Unfortunately, it was later shown by \cite{CF01} the result does not hold with no honest majority. In particular, this is important result for two-party protocols where number of basic functionalities, e.g., commitments, zero-knowledge proofs and coin tossing, cannot be UC-realized in the plain model. The \cite{Lin03, CKL04, CKL06} rule out essentially all non-trivial two-party functions.
 
 To overcome this impossibility results several different trust models were studied. 
@@ -477,6 +470,20 @@ Several FHE implementation exists, such as HELib~\cite{helib}, PALISADE~\cite{pa
 
 However, this research branch is out of the scope of this thesis proposal as general FHE are very expensive in terms of CPU time and memory and thus not practically applicable in the context of resource constrained devices.
 
+
+\newpage
+\begin{shaded}
+	Guide:
+	\begin{itemize}
+		\item More concrete introduction
+		\item Current state of the art
+		\item Classical and up to date results, comparison, overview / survey
+		\item Up to date topics to address, who is solving those
+		\item How to contribute
+		\item Range: 8-12 pages
+	\end{itemize}
+\end{shaded}
+
 \begin{ecmmnt}
 %UC-related: "Consequently, many known protocols (e.g., the general protocol of [gmw87], to name one) are not UC secure. 
 Secure function evaluation has been broadly studied \cite{
@@ -492,31 +499,6 @@ Also, the K-out-of-N ECC-based multi-signature protocol research has recently un
 
 
 \chapter{Thesis aim}
-\begin{shaded}
-\begin{itemize}
-    \item What new can be expected
-    \item What will be created
-    \item Hypotheses to research
-    \item Methods used
-    \item Plans, time harmonogram
-    \item Conferences
-    \item Range: 2 pages
-\end{itemize}
-\end{shaded}
-
-\infoin{Idea: we want fit somewhere here:%
-	\begin{itemize}
-		\item MPC on tokens, real applications, resource constrained, trading setup and trust assumptions for resources and thus practicality of the solution
-		\item Construct drop-in replacements like SmartID~\cite{smart_id_ee}, True2F~\cite{DCMBR18}, OPAQUE~\cite{JKX18}
-		\item Removing single point of failures in token systems by smart application of 2PC
-		\item Apply MPC to hardware wallets and cryptocurrencies. Privacy-centric are harder, Monero, ZCash with state-of-the art cryptography, stapling...
-		\item side channel protection, MPC in tokens. 
-		\item single point of failure supply chain attacks
-		\item Distrib SC grid, Myst, compute MPC, performance gains
-	\end{itemize}
-}
-\newpage
-
 This section summarizes overall goals and my research aims.
 The central question connecting my further research is: \emph{How can a connection of hardware tamper-proof hardware and a secure multi-party computation solve practical problems and increase level of security in existing systems?}
 
@@ -554,6 +536,7 @@ As token model offers some unique properties we can make trade-offs in the trust
 %Existing protocols could be modified to be practically usable with the tokens. 
 
 We will try to make our previous result \cite{2017-ccs-mavroudis} more universal so it can evaluate bigger class of functions. Similarly we want to study how to protect from malicious tokens, e.g., by requiring card to create a zero-knowledge proof that the operation was performed correctly. This could eliminate threat of backdoors in the model and reduces required trust.
+Our ambition is to extend existing MPC compilers to support hardware token models.
 
 \paragraph{Side-channel and backdoor protection}.
 Theoretical work \cite{DNW09} shown that party which can exchange only limited amount of information with the environment it is possible to perform UC-secure MPC with malicious attackers. We would like to investigate how this relates to side-channels of the smart cards and assurances we can obtain in this model.
@@ -570,6 +553,31 @@ We will study how to transform complex algorithms used in PCCC so they are usabl
 
 \subsection{Publication venues}
 \todoin{Conferences here}
+
+\newpage
+\begin{shaded}
+	\begin{itemize}
+		\item What new can be expected
+		\item What will be created
+		\item Hypotheses to research
+		\item Methods used
+		\item Plans, time harmonogram
+		\item Conferences
+		\item Range: 2 pages
+	\end{itemize}
+\end{shaded}
+
+\infoin{Idea: we want fit somewhere here:%
+	\begin{itemize}
+		\item MPC on tokens, real applications, resource constrained, trading setup and trust assumptions for resources and thus practicality of the solution
+		\item Construct drop-in replacements like SmartID~\cite{smart_id_ee}, True2F~\cite{DCMBR18}, OPAQUE~\cite{JKX18}
+		\item Removing single point of failures in token systems by smart application of 2PC
+		\item Apply MPC to hardware wallets and cryptocurrencies. Privacy-centric are harder, Monero, ZCash with state-of-the art cryptography, stapling...
+		\item side channel protection, MPC in tokens. 
+		\item single point of failure supply chain attacks
+		\item Distrib SC grid, Myst, compute MPC, performance gains
+	\end{itemize}
+}
 
 %Hidden for the sake of sanity ...
 \begin{ecmmnt}  % comment out the whole sections
@@ -718,13 +726,16 @@ Submitted, V. Sedlacek, small contribution, running experiments, results aggrega
 \end{itemize}
 
 
+\chapter{UC framework security}
+Describe stuff here
+
+
 \end{document}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Trash
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %Theses are rumoured to be the capstones of education, so I decided
