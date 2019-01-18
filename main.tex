@@ -147,6 +147,17 @@
 \newcommandx{\imrovementin}[2][1=]{\todo[inline,noprepend,caption={},linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,size=normalsize,#1]{
 \begin{minipage}{\textwidth-4pt}#2\end{minipage}}}
 
+%% We will define several mathematical sectioning commands.
+\newtheorem{theorem}{Theorem}[section] %% The numbering of theorems
+%% will be reset after each section.
+\newtheorem{lemma}[theorem]{Lemma}         %% The numbering of lemmas
+\newtheorem{corollary}[theorem]{Corollary} %% and corollaries will
+%% share the counter with theorems.
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
 \begin{document}
 \setlength{\marginparwidth}{2.5cm}  % fixes TODO
 
@@ -290,23 +301,15 @@ MPC protocols are characterized with respect to various criteria:
 
 \section{Universally composable framework}%
 \label{sec:uc}
-Traditionally, protocols were analyzed in the \emph{stand-alone} security model. The model assumed only a presence of actual participants in a single run of the protocol in isolation which allowed for relatively simple designs and proofs. The model is intuitively the simplest for such analysis but does not realistically capture threats we would like to assume for practical protocol usage. In the real world, many different protocols may be run concurrently in an unbounded number of instances in an arbitrary interleaving schedule. These protocols may be executed with the same or other parties, parties inputs may be correlated, protocol outputs can be used by other protocols and message communication could be controlled by an adversary. The \cite{Can06, Can13} discuss protocols secure in the stand-alone model failing in the concurrent composition.
+Traditionally, protocols were analyzed in the \emph{stand-alone} security model. The model assumed only a presence of actual participants in a single run of the protocol in isolation which allowed for relatively simple designs and proofs. The model is intuitively the simplest but does not realistically capture threats in a practical protocol usage. 
 
-In order to take these concerns into account one would have to address each of them in the model and still, there would be new, previously neglected problems. These concerns motivated research of the security frameworks effectively addressing these issues.
+In the real world, many different protocols may be run concurrently in an unbounded number of instances in an arbitrary interleaving schedule. The \cite{Can06, Can13} discuss protocols secure in the stand-alone model failing in the concurrent composition.
 
 One of the most common models is the Universally Composable (UC) framework by Canneti~\cite{Can01}. The notions of security expressed within the framework preserve security under universal composition. Thus the protocols remain secure in an arbitrary unknown multi-party multi-execution environment. The important benefit is the framework also covers not explicitly considered environments. This allows for modular design and analysis of complex protocols by breaking down the protocol and proving security for smaller building blocks.
 
-The security in the UC framework is proven by a so-called \emph{simulation} technique.
-The framework essentially defines two separate worlds. The \emph{ideal~world}, where the security is intuitively guaranteed and the \emph{real~world}.
-UC also defines the \emph{environment}~$\mathcal{Z}$, the algorithmic entity which represents everything external to the protocol execution. It wraps and controls the execution, hands arbitrary inputs to the parties, collects outputs from the parties, communicates with the adversary~$\mathcal{A}$.
+Intuitively, the model defines an \emph{ideal~functionality}~$\mathcal{F}$, which naturally describes the task as if we would have TTP. The security is achieved by a \emph{simulation}. An Interactive Touring Machine (ITM) \emph{Environment} $\mathcal{Z}$ attempt to distinguish whether it is interacting with the \emph{ideal~world} with $\mathcal{F}$ or with the \emph{real world} with $\pi$, the MPC protocol without TTP. 
 
-In the ideal world, the \emph{ideal~functionality}~$\mathcal{F}$\footnote{Ideal functionality was originally used in~\cite{GMW87}} is a natural algorithmic description of the function $f$. It securely evaluates function $f$ acting as an incorruptible trusted third party (TTP). It securely evaluates $f$ and returns the result to the participants $P_i$. The \emph{adversary}~$\mathcal{A}$ can interact with $\mathcal{F}$ only via the external interface. Besides that, $\mathcal{A}$ interacts with other parties and environment~$\mathcal{Z}$ in an arbitrary manner, defined by the security properties being proved, e.g. semi-honest vs. malicious adversary.
-This notion intuitively captures the desired security properties we want the protocol $\pi$ realizing function $f$ to have, i.e., it should securely emulate the TTP in the real world setting.
-
-We say that $\pi$ securely evaluates a function $f$ if for any adversary $\mathcal{A}$ there exists an ideal adversary $\mathcal{S}$, simulator, such that no environment $\mathcal{Z}$ can tell with non-negligible advantage distinguish the real-world ($\pi, \mathcal{A}$) and the ideal world ($\mathcal{F}, \mathcal{S}$).
-
-Intuitively, the Environment $\mathcal{Z}$ cannot distinguish which execution is it plugged in. If it is so, the adversary can only cause a "damage" or learn only the information it could learn in the idealized world with the TTP where the security is implicit. For more detailed treatment please refer to \cite{Can01, CLOS02, Lin03, G09, CDN15, Lin17}.
-
+If $\mathcal{Z}$ cannot distinguish which execution is it plugged in the adversary can cause only a "damage" or learn only the information it could learn in the ideal world with the TTP where the security is implicit. For more detailed treatment please refer to \cite{Can01, CLOS02, Lin03, G09, CDN15, Lin17} or the appendix \ref{apx:uc}.
 
 \section{Two-party computation} %
 One of the founding work on MPC is a seminal paper of Yao \cite{Yao86} which proved \emph{completeness} of the two-party computation, i.e. all computable function $f$ can be computed in secure two-party computation model in semi-honest setting with computationally bounded attackers. 
@@ -569,13 +572,14 @@ We will study how to transform complex algorithms used in PCCC so they are usabl
 
 \infoin{Idea: we want fit somewhere here:%
 	\begin{itemize}
-		\item MPC on tokens, real applications, resource constrained, trading setup and trust assumptions for resources and thus practicality of the solution
+		\item MPC on tokens, real applications, resource constrained, trading setup and trust assumptions for resources and thus practicality of the solution, more effective, simplify, use trust of the token.
 		\item Construct drop-in replacements like SmartID~\cite{smart_id_ee}, True2F~\cite{DCMBR18}, OPAQUE~\cite{JKX18}
 		\item Removing single point of failures in token systems by smart application of 2PC
-		\item Apply MPC to hardware wallets and cryptocurrencies. Privacy-centric are harder, Monero, ZCash with state-of-the art cryptography, stapling...
+		\item Apply MPC to hardware wallets and cryptocurrencies. Privacy-centric are harder, Monero, ZCash with state-of-the art cryptography, stapling, musig
 		\item side channel protection, MPC in tokens. 
 		\item single point of failure supply chain attacks
 		\item Distrib SC grid, Myst, compute MPC, performance gains
+		\item Anti cheating cards, generating proper randomness.
 	\end{itemize}
 }
 
@@ -726,9 +730,42 @@ Submitted, V. Sedlacek, small contribution, running experiments, results aggrega
 \end{itemize}
 
 
-\chapter{UC framework security}
-Describe stuff here
+\chapter{Security models}
+\label{apx:uc}
+Here we shortly compare plain and security UC model.
 
+\paragraph{Plain model}
+Both models, plain and UC, define two separate worlds.
+The \emph{ideal world}, where the security is intuitively guaranteed and the \emph{real world}.
+
+In the ideal world, the \emph{ideal~functionality}\footnote{Ideal functionality was originally used in~\cite{GMW87}} $\mathcal{F}$ is a natural algorithmic description of the function $f$. It securely evaluates the function $f$ acting as an incorruptible trusted third party (TTP). It securely evaluates $f$ and returns the result to the participants $P_i$. The \emph{adversary}~$\mathcal{A}$ can interact with $\mathcal{F}$ only via the external interface. Besides that, $\mathcal{A}$ interacts with other parties in an arbitrary manner, defined by the security properties being proved, e.g. semi-honest vs. malicious adversary.
+This notion intuitively captures the desired security properties we want the protocol $\pi$ realizing function $f$ to have, i.e., it should securely emulate the TTP in the real world setting.
+
+We say that $\pi$ securely evaluates a function $f$ in the real world if for any adversary $\mathcal{A}$ there exists an ideal adversary $\mathcal{S}$, a simulator, such that statistical distributions generated by views of parties in the real world and ideal world are indistinguishable. 
+
+\begin{definition}
+	We call a function $\mu$ : $\mathbb{N} \leftarrow [0,1]$ \emph{negligible} in $x$ if for all $c \in \mathbb{N}$ there exists $x_c \in \mathbb{N}$ such that $\mu(x) \leq x^{-c}$ for all $x > x_c$.
+\end{definition}
+
+If all non-uniform polynomial time distinguisher can distinguish the distributions only with negligible probability the security is \emph{computational}. If the statistical distance of distributions is negligible then the protocol is \emph{statistically secure}, without computational restrictions on the distinguishers.
+If the distributions are perfectly equal we say the security is \emph{perfect}. 
+
+%The \emph{view} of a party is defined contains the input, internal randomness and all received messages during the protocol.
+
+\paragraph{UC framework}
+The UC framework captures a complex set of interactions in comparison to the plain-model. MPC protocols may be executed with the same or other parties, parties inputs may be correlated, protocol outputs can be used by other protocols and message communication could be controlled by an adversary in any way. 
+
+It is not feasible to address all these concerns in the plain model as one would have to model each individually. Still, there would be new, previously neglected problems. These concerns motivated quick shift to UC framework which provides very high security guarantees.
+
+The power stems from addition of an \emph{environment}~$\mathcal{Z}$, the algorithmic entity which represents everything external to the protocol execution, representing potential outside interactions and concurrent protocol executions. It wraps and controls the execution, hands arbitrary inputs to the parties, collects outputs from the parties, communicates with the adversary~$\mathcal{A}$ during the whole course of the protocol. The communication with~$\mathcal{A}$ is essential to the security.
+
+%This notion intuitively captures the desired security properties we want the protocol $\pi$ realizing function $f$ to have, i.e., it should securely emulate the TTP in the real world setting.
+
+We say that $\pi$ securely evaluates a function $f$ if for any adversary $\mathcal{A}$ there exists an ideal adversary $\mathcal{S}$, a simulator, such that no environment $\mathcal{Z}$ can tell with non-negligible advantage distinguish the real-world ($\pi, \mathcal{A}$) and the ideal world ($\mathcal{F}, \mathcal{S}$). The environment $\mathcal{Z}$ is running in the time \emph{similar} to the adversary, i.e., polynomially to $\mathcal{A}$.
+
+If not said otherwise, the adversary is considered to be running in probabilistic polynomial-time (computational security). In the model with private communication channels it makes sense to assume also computationally unbounded adversaries. Then like in the plain model we talk about \emph{statistical} and \emph{perfect} security.
+
+For more detailed treatment please refer to \cite{Can01, CLOS02, Lin03, G09, CDN15, Lin17}.
 
 \end{document}
 
@@ -807,15 +844,15 @@ Describe stuff here
 % proofs.
 
 %% We will define several mathematical sectioning commands.
-\newtheorem{theorem}{Theorem}[section] %% The numbering of theorems
-                               %% will be reset after each section.
-\newtheorem{lemma}[theorem]{Lemma}         %% The numbering of lemmas
-\newtheorem{corollary}[theorem]{Corollary} %% and corollaries will
-                               %% share the counter with theorems.
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}
-\theoremstyle{remark}
-\newtheorem*{remark}{Remark}
+%\newtheorem{theorem}{Theorem}[section] %% The numbering of theorems
+%                               %% will be reset after each section.
+%\newtheorem{lemma}[theorem]{Lemma}         %% The numbering of lemmas
+%\newtheorem{corollary}[theorem]{Corollary} %% and corollaries will
+%                               %% share the counter with theorems.
+%\theoremstyle{definition}
+%\newtheorem{definition}{Definition}
+%\theoremstyle{remark}
+%\newtheorem*{remark}{Remark}
 
 % \begin{theorem}
 %   This is a theorem that offers a profound insight into the
