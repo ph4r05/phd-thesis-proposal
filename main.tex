@@ -228,10 +228,7 @@ Itemized:
 
 \end{ecmmnt}
 
-
-\chapter{State of the Art}
-
-
+\chapter{State of the Art}%
 \begin{ecmmnt}  % comment out the whole sections
 \section{Related work - itemized}
 \begin{itemize}
@@ -266,10 +263,13 @@ Itemized:
     \subsection{Privacy centric cryptocurrencies}
     - multisigs, monero, zcoin, zcash
 \end{ecmmnt}
-
+%
 %\newpage
 %\section{Related work}
 
+This chapter gives a short introduction to the multi-party computation, its properties, attacker types, security models and set-up assumptions. Then follows the review of basic two-party, multi-party and information-theoretic protocols in sections \ref{sec:soa:2pc}, \ref{sec:soa:mpc}, \ref{sec:soa:infproto} with a new extensions in section \ref{sec:soa:extensions}. Furthermore, the section \ref{sec:soa:const_rounds} reviews constant-round protocols, followed by feasibility results in various security models in the section \ref{sec:soa:uc_feasibility}. The section \ref{sec:soa:tokens} describes how use of hardware tokens, tamper-proof resource constrained devices helps to overcome certain impossibility results. The chapter is concluded by a review of practical MPC applications and tools that are base and inspiration for the following work in the section \ref{sec:soa:applications}.
+
+\paragraph{MPC.}%
 Secure multi-party computation (MPC) is a very generic and well studied cryptographic task.
 It allows mutual distrustful parties $P_i, i \in \{1,\dots,m\}$ to jointly perform a distributed computation of a function $f(x_i,\dots,x_m) = (y_i,\dots,y_m)$ on their inputs $x_i$ in a way each party learns only $y_i$ from the execution (\emph{privacy}). In particular, other users' inputs $x_{j, j \neq i}$ and outputs $y_{j, j \neq i}$ remain secret for user $P_i$. Depending on the security properties of the particular MPC protocols, they should remain secure even with presence of a coalition of colluding corrupted nodes. MPC basically attempts to emulate a trusted third party (TTP) computing the function $f$ on user's behalf, preserving the \emph{correctness} and \emph{privacy} as described. For more formal treatment please refer to \cite{G09}.
 
@@ -299,8 +299,7 @@ MPC protocols are characterized with respect to various criteria:
     
 \end{itemize}
 
-\section{Security models}%
-\label{sec:uc}
+\section{Security models}\label{sec:uc}%
 Traditionally, protocols were analyzed in the \emph{stand-alone} security model. The model assumed only a presence of actual participants in a single run of the protocol in isolation which allowed for relatively simple designs and proofs. The model is intuitively the simplest but does not realistically capture threats in a practical protocol usage. 
 
 In the real world, many different protocols may be run concurrently in an unbounded number of instances in an arbitrary interleaving schedule. The \cite{Can06, Can13} discuss protocols secure in the stand-alone model failing in the concurrent composition.
@@ -311,7 +310,7 @@ Intuitively, the model defines an \emph{ideal~functionality}~$\mathcal{F}$, whic
 
 If $\mathcal{Z}$ cannot distinguish which execution is it plugged in the adversary can cause only a "damage" or learn only the information it could learn in the ideal world with the TTP where the security is implicit. For more detailed treatment please refer to \cite{Can01, CLOS02, Lin03, G09, CDN15, Lin17} or the appendix \ref{apx:uc}.
 
-\section{Two-party computation} %
+\section{Two-party computation}\label{sec:soa:2pc} %
 One of the founding work on MPC is a seminal paper of Yao \cite{Yao86}, which proved \emph{completeness} of the two-party computation, i.e., all computable functions $f$ can be computed in a secure two-party computation model in the semi-honest setting with computationally bounded attackers. 
 
 Yao's approach is based on a converting function $f$ to a Boolean circuit $C$. $C$ consists of gates, i.e., nodes performing addition and multiplication (AND and XOR) on its inputs and producing an output. A number of input wires on a gate is called fan-in, typically is 2 and a number of outputs is called fan-out, which is typically 1. Gates are connected with wires into a circuit. Input wires are connecting user inputs to gate's input, output wires are connected to gates outputs and unconnected on the other end.
@@ -319,7 +318,7 @@ Yao's approach is based on a converting function $f$ to a Boolean circuit $C$. $
 The circuit \emph{creator} creates the circuit $C$ and \emph{garbles} it in a sense that he encrypts and permutes the gate truth tables to protect his values and the intermediate state. This operation gave the scheme the name \emph{garbled circuits}. The creator sends the garbled circuit with his encrypted inputs, i.e., wire \emph{labels}, to the \emph{evaluator}. In order to evaluate the circuit, the evaluator needs to know wire labels corresponding to her inputs and only the creator knows the encryption key. The $\binom{2}{1}$ oblivious transfer (OT) is used to query corresponding values from the creator, without revealing evaluator's inputs. The evaluator evaluates $C$ in a topological order gate-by-gate and obtains output labels, which are decrypted by the creator to obtain the final result of the computation. The protocol has a constant number of rounds and is independent of the circuit depth. 
 Obviously, the scheme works only with semi-honest attackers as a malicious creator could create a different circuit $C^\prime$ leaking the evaluator's inputs. The more formal description can be found in \cite{BHR12}. 
 
-\section{Multi-party extension}% 
+\section{Multi-party extension}\label{sec:soa:mpc}% 
 Yao's work has been extended by \cite{GMW87} to a multi-party case and with malicious adaptive nodes using only one-way functions. They make use of Verifiable Secret Sharing (VSS) and agreement protocols. The work is based on a Boolean or arithmetical circuit, but compared to \cite{Yao86}, each party evaluates the circuit independently with shares of other players' inputs. Multiplication gates are evaluated using the OT which dominates evaluation cost. The \cite{GMW87} proves a completeness theorem for distributed protocols with honest majority. Two protocols were proposed, the first one for a semi-honest setting, which is secure with $m-1$ corrupted nodes, the other one in the malicious setting, secure with an honest majority (correctness and privacy). Bounds are tight in this model assuming absolute security. 
 
 Consequently, the work \cite{RB89, B91} improved the bound for an honest majority in malicious setting, with a negligible change of error (statistical security) and broadcast.
@@ -329,10 +328,10 @@ Round complexity is $\bigO(\text{depth}(C))$ for adaptive adversaries \cite{GMW8
 Later, \cite{CLOS02} showed how to construct MPCs in the Universally Composable framework with computational assumptions, dishonest majority up to $m-1$ of adaptive malicious parties in the CRS model and broadcast. 
 Non-adaptive cases require trapdoor functions, adaptive requires augmented non-committing encryption protocols \cite{CFGN96}.
 
-\section{Information-theoretic protocols}%
+\section{Information-theoretic protocols}\label{sec:soa:infproto}%
 The information-theoretic protocols are typically simpler, faster and have better communication and computation costs compared to computational equivalents. Foundations in this field were laid by \cite{BGW88} and \cite{CCD88}. They are based on Shamir's secret sharing and arithmetic circuits in finite fields. The malicious case makes use of the error-correcting Reed Solomon codes. They proved an honest majority is required for the semi-honest setting in this model and $2/3$-honest majority for malicious settings. Moreover, these bounds were proven tight. These protocols have $\bigO(\text{depth}(C))$ communication rounds as each party is evaluating a circuit and a communication round is required to securely evaluate multiplication gates.
 
-\section{Extensions}%
+\section{Extensions}\label{sec:soa:extensions}%
 A large body of research has been based on \cite{Yao86, GMW87, BGW88, CCD88} and many extensions and improvements were published. 
 For the garbled circuits it entails: Point-and-permute \cite{BMR90}, Free XOR \cite{KS08}, garbled row reduction \cite{NPS99, PSSW09}, FleXOR \cite{KMR14}, half gates \cite{ZRE14}, garbled gadgets \cite{BMR16} and CompGC \cite{cryptoeprint:2016:458}.
 
@@ -343,7 +342,7 @@ Secret-sharing based approach extensions working with malicious parties: SPDZ \c
 
 The \cite{WRK17} generalizes TinyOT to multi-party setting, dishonest majority of malicious attackers. The protocol is the first constant-round implemented and practically usable. It works in the standalone security model while \cite{DPSZ12} is statistically UC-secure. 
 
-\section{Constant-round protocols}% 
+\section{Constant-round protocols}\label{sec:soa:const_rounds}% 
 A large body of research was devoted to research on protocol round optimality in various settings. The \cite{BB89} was the first constant-round information-theoretic protocol. Later \cite{IK00, IK02} used so-called randomized polynomials and randomized encodings \cite{AIK04} of a function to construct constant round protocols in information-theoretic setting with an active adversary. Later, \cite{ABT18} proved a tight bound 2-rounds for perfectly secure semi-honest MPC with an honest majority using a new tool multi-party randomized encodings. The \cite{cryptoeprint:2018:1078} shown 2-round information-theoretic statistically secure MPC with malicious adversaries and an honest majority with selective abort which was shown by \cite{GIKR04} to be the strongest achievable notion of security for 2-round protocols.
 
 On the field of computational security the \cite{cryptoeprint:2017:1056} show there exists a 4-round, round optimal, MPC that securely realizes arbitrary functionalitites in presence of malicious adversaries corrupting any number of parties, assuming one-way functions with no setup. The 4 rounds are proven lower bound in this setting by \cite{cryptoeprint:2016:252}.
@@ -352,7 +351,7 @@ Similarly, the \cite{cryptoeprint:2018:572} shown round optimal 2-round MPC prot
 % cool presentation: http://conferences.au.dk/fileadmin/user_upload/TPMPC18/Antigoni_Polychroniadou.pdf
 
 
-\section{UC Feasability}
+\section{UC Feasability}\label{sec:soa:uc_feasibility}
 The \cite{Can01} shown that any polynomial-time computable functionality $\mathcal{F}$ can be UC-securely realized with an honest majority in the plain model. Unfortunately, it was later shown by \cite{CF01} the result does not hold with no honest majority. In particular, this is an important result for two-party protocols where a number of basic functionalities, e.g., commitments, zero-knowledge proofs, and coin tossing, cannot be UC-realized in the plain model. The \cite{Lin03, CKL04, CKL06} rule out essentially all non-trivial two-party functions.
 
 To overcome this impossibility results several different trust models were studied. 
@@ -360,7 +359,7 @@ The \cite{CF01} firstly proposed to use a Common Reference String (CRS) trusted 
 
 Several other set-up assumptions were analyzed with potential trade-offs, effectiveness, and practicality. The \cite{BCNP04} studied the use of a Public Key Infrastructures (PKI) in UC-secure framework where trusted certificate authorities (CAs) verify that the participants registered public keys are well formed and that participants know the corresponding secret key. PKIs are well studied and deployed in practice making it more practical to use in UC-secure protocols. Similarly, \cite{HUU07} proposes to use government-issued signature cards, devices capable of securely storing honestly generated signing keys and signing requests on demand. Such an assumption is also quite practical as few countries already deployed the system as part of the eGovernment. However, the manufacturer of the card needs to be completely trusted.
 
-\section{Tamper-proof tokens}
+\section{Tamper-proof tokens}\label{sec:soa:tokens}
 The idea of using special tamper-proof hardware tokens for cryptographic purposes was for the first time used in the \cite{GO96} in the software protection context for random-access machines (RAMs) obliviousness, i.e., hiding memory access patterns against information-theoretic active adversaries. They used the minimal hardware tokens as a physical assurance of a trusted computing with small shielded memory and CPU unit resisting tampering attacks.
 
 Consequently, the \cite{AV04} used tamper-proof chips on the computing nodes to emulate a distributed trusted third party denoted Guardian Angel to securely implement fair-exchange, a simple multi-party protocol for exchanging secrets between parties in an asynchronous environment with malicious adversaries. The tamper-proof hardware basically implemented synchronization algorithm reducing fair-exchange to a distributed consensus problem. 
@@ -409,7 +408,7 @@ They assume collision-resistant hash functions (CRHFs) and the existence of uniq
 \todoin{ToDo: This section is a bit rusty, may need some improvements.}
 %\todoin[disable]{ToDo: More smartcard-based works, FPGAs.}
 
-\section{Selected MPC applications}
+\section{Selected MPC applications}\label{sec:soa:applications}
 \unsurein{Warn: This section is unfinished}
 %\infoin{Text need to be glued together so our thesis goals are visible from the composition}
 \todo{Asymetric MPC, cloud offload?}
@@ -469,7 +468,7 @@ CBMC-GC \cite{HFKV12}    &  & -        & 2+ & $\Circle$     & -           & -   
 %\end{itemize}
 
 
-\section{Fully homomorphic encryption} % STUB SECTION
+\section{Fully homomorphic encryption}\label{sec:soa:fhe}
 The fully homomorphic encryption (FHE) is a very powerful tool that enables to compute a function over encrypted data so the function evaluator does not learn data he is computing with. This has great applications in cloud computing as it protects client's data when the computation is offloaded to a malicious servers \cite{Gentry:2009:FHE:1536414.1536440, 10.1007/978-3-642-13190-5_2, cryptoeprint:2011:133, cryptoeprint:2012:099, 10.1007/978-3-642-40041-4_5, 10.1007/978-3-642-36362-7_1, 10.1007/978-3-642-55220-5_30}. 
 %FHE would be quite helpful in a secure evaluation of the arithmetic circuit corresponding to the functionality. 
 Several FHE implementation exists, such as HELib~\cite{helib}, PALISADE~\cite{palisade} and SEAL~\cite{seal}.
@@ -504,7 +503,7 @@ Also, the K-out-of-N ECC-based multi-signature protocol research has recently un
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\chapter{Thesis aim}
+\chapter{Thesis aim}\label{sec:aim}
 This section summarizes the overall goals and my research aims.
 The central question connecting my further research is: \emph{How can a connection of hardware tamper-proof hardware and a secure multi-party computation solve practical problems and increase the level of security in existing systems?}
 
