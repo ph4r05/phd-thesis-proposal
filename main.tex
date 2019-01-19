@@ -271,7 +271,10 @@ This chapter gives a short introduction to the multi-party computation, its prop
 
 \paragraph{MPC.}%
 Secure multi-party computation (MPC) is a very generic and well studied cryptographic task.
-It allows mutual distrustful parties $P_i, i \in \{1,\dots,m\}$ to jointly perform a distributed computation of a function $f(x_i,\dots,x_m) = (y_i,\dots,y_m)$ on their inputs $x_i$ in a way each party learns only $y_i$ from the execution (\emph{privacy}). In particular, other users' inputs $x_{j, j \neq i}$ and outputs $y_{j, j \neq i}$ remain secret for user $P_i$. Depending on the security properties of the particular MPC protocols, they should remain secure even with presence of a coalition of colluding corrupted nodes. MPC basically attempts to emulate a trusted third party (TTP) computing the function $f$ on user's behalf, preserving the \emph{correctness} and \emph{privacy} as described. For more formal treatment please refer to \cite{G09}.
+It allows mutual distrustful parties $P_i, i \in \{1,\dots,m\}$ to jointly perform a distributed computation of a function $f(x_i,\dots,x_m) = (y_i,\dots,y_m)$ on their inputs $x_i$ consistently with the $f$ (\emph{correctness}) in a way each party learns only $y_i$ from the execution (\emph{privacy}). In particular, other users' inputs $x_{j, j \neq i}$ and outputs $y_{j, j \neq i}$ remain secret for user $P_i$.
+MPC intuitively attempts to emulate a trusted third party (TTP) computing the function $f$ on user's behalf, preserving the \emph{correctness} and \emph{privacy}.
+MPC protocols should remain secure even with presence of a coalition of colluding corrupted nodes, depending on the particular security properties.
+For more formal treatment please refer to \cite{G09}.
 
 MPC protocols are characterized with respect to various criteria:
 \begin{itemize}
