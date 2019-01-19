@@ -758,15 +758,15 @@ If the distributions are perfectly equal we say the security is \emph{perfect}.
 \paragraph{UC framework}
 The UC framework captures a complex set of interactions in comparison to the plain-model. MPC protocols may be executed with the same or other parties, parties inputs may be correlated, protocol outputs can be used by other protocols and message communication could be controlled by an adversary in any way. 
 
-It is not feasible to address all these concerns in the plain model as one would have to model each individually. Still, there would be new, previously neglected problems. These concerns motivated quick shift to UC framework which provides very high security guarantees.
+It is not feasible to address all these concerns in the plain model as one would have to model each individually. Still, there would be new, previously neglected problems. These concerns motivated quick shift to UC framework which provides very high-security guarantees.
 
-The power stems from addition of an \emph{environment}~$\mathcal{Z}$, the algorithmic entity which represents everything external to the protocol execution, representing potential outside interactions and concurrent protocol executions. It wraps and controls the execution, hands arbitrary inputs to the parties, collects outputs from the parties, communicates with the adversary~$\mathcal{A}$ during the whole course of the protocol. The communication with~$\mathcal{A}$ is essential to the security.
+The power stems from the addition of an \emph{environment}~$\mathcal{Z}$, the algorithmic entity which represents everything external to the protocol execution, representing potential outside interactions and concurrent protocol executions. It wraps and controls the execution, hands arbitrary inputs to the parties, collects outputs from the parties, communicates with the adversary~$\mathcal{A}$ during the whole course of the protocol. The communication with~$\mathcal{A}$ is essential to the security.
 
 %This notion intuitively captures the desired security properties we want the protocol $\pi$ realizing function $f$ to have, i.e., it should securely emulate the TTP in the real world setting.
 
 We say that $\pi$ securely evaluates a function $f$ if for any adversary $\mathcal{A}$ there exists an ideal adversary $\mathcal{S}$, a simulator, such that no environment $\mathcal{Z}$ can tell with non-negligible advantage distinguish the real-world ($\pi, \mathcal{A}$) and the ideal world ($\mathcal{F}, \mathcal{S}$). The environment $\mathcal{Z}$ is running in the time \emph{similar} to the adversary, i.e., polynomially to $\mathcal{A}$.
 
-If not said otherwise, the adversary is considered to be running in probabilistic polynomial-time (computational security). In the model with private communication channels it makes sense to assume also computationally unbounded adversaries. Then like in the plain model we talk about \emph{statistical} and \emph{perfect} security.
+If not said otherwise, the adversary is considered to be running in probabilistic polynomial-time (computational security). In the model with private communication channels, it makes sense to assume also computationally unbounded adversaries. Then like in the plain model we talk about \emph{statistical} and \emph{perfect} security.
 
 For more detailed treatment please refer to \cite{Can01, CLOS02, Lin03, G09, CDN15, Lin17}.
 
