@@ -335,6 +335,14 @@ Non-adaptive cases require trapdoor functions, adaptive requires augmented non-c
 \section{Information-theoretic protocols}\label{sec:soa:infproto}%
 The information-theoretic protocols are typically simpler, faster and have better communication and computation costs compared to computational equivalents. Foundations in this field were laid by \cite{BGW88} and \cite{CCD88}. The protocols are based on Shamir's secret sharing and arithmetic circuits in finite fields. The malicious adversary resistant protocols makes use of the error-correcting Reed Solomon codes. In \cite{BGW88} proved an honest majority is required for the semi-honest setting in this model and $2/3$-honest majority for malicious setting. Moreover, these bounds were proven tight. These protocols have $\bigO(\text{depth}(C))$ communication rounds as each party is evaluating a circuit and a communication round is required to securely evaluate multiplication gates.
 
+\section{Constant-round protocols}\label{sec:soa:const_rounds}% 
+A large body of research was devoted to research on protocol round optimality in various settings. The \cite{BB89} was the first constant-round information-theoretic protocol. Later \cite{IK00, IK02} used so-called randomized polynomials and randomized encodings \cite{AIK04} of a function to construct constant round protocols in information-theoretic setting with an active adversary. Later, \cite{ABT18} proved a tight bound 2-rounds for perfectly secure semi-honest MPC with an honest majority using a new tool multi-party randomized encodings. The \cite{cryptoeprint:2018:1078} shown 2-round information-theoretic statistically secure MPC with malicious adversaries and an honest majority with selective abort which was shown by \cite{GIKR04} to be the strongest achievable notion of security for 2-round protocols.
+
+On the field of computational security the \cite{cryptoeprint:2017:1056} show there exists a 4-round, round optimal, MPC that securely realizes arbitrary functionalitites in presence of malicious adversaries corrupting any number of parties, assuming one-way functions with no setup. The 4 rounds are proven lower bound in this setting by \cite{cryptoeprint:2016:252}.
+
+Similarly, the \cite{cryptoeprint:2018:572} shown round optimal 2-round MPC protocol for general circuits that achieves security with abort against any dishonest minority of corruptions using one-way functions.
+% cool presentation: http://conferences.au.dk/fileadmin/user_upload/TPMPC18/Antigoni_Polychroniadou.pdf
+
 \section{Extensions}\label{sec:soa:extensions}%
 A large body of research has been based on \cite{Yao86, GMW87, BGW88, CCD88} and many extensions and improvements were published. 
 For the garbled circuits it entails: Point-and-permute \cite{BMR90}, Free XOR \cite{KS08}, garbled row reduction \cite{NPS99, PSSW09}, FleXOR \cite{KMR14}, half gates \cite{ZRE14}, garbled gadgets \cite{BMR16} and CompGC \cite{cryptoeprint:2016:458}.
@@ -344,7 +352,7 @@ Cut-and-choose extension \cite{LP07,LP11,Lin16} enables the use of the garbled c
 
 Secret-sharing based extensions which resistant to malicious parties are for instance DPSZ \cite{DPSZ12, cryptoeprint:2012:642}, MiniMac \cite{DZ13}, TinyOT \cite{NNOB12}, BDOZ \cite{BDOZ11}, MASCOT \cite{KOS16}. Schemes in this family make use of an additional pre-processing phase which is input independent. Initially, the Beaver triplets \cite{B91a} $(a,b,a.b)$ were used in the pre-computation phase for masking online phase, in particular evaluation of multiplication gates.
 
-The \cite{WRK17} generalizes TinyOT to multi-party setting, dishonest majority of malicious attackers. The protocol is the first constant-round implemented and practically usable. It works in the standalone security model while \cite{DPSZ12} is statistically UC-secure. The following new works are in the same line of research: \cite{FKOS15, DZ16, LPJ17, BCGIM17, cryptoeprint:2017:1230}.
+The \cite{WRK17} generalizes TinyOT to multi-party setting with dishonest majority of malicious attackers. The protocol is the first constant-round implemented and practically usable. It works in the standalone security model while \cite{DPSZ12} is statistically UC-secure. The following new works are in the same line of research: \cite{FKOS15, DZ16, LPJ17, BCGIM17, cryptoeprint:2017:1230}.
 %
 %TinyTable \cite{cryptoeprint:2016:695} = 2PC, boolean, precomp, scambling.
 %\cite{FKOS15} = MPC shared triplets.
@@ -352,13 +360,6 @@ The \cite{WRK17} generalizes TinyOT to multi-party setting, dishonest majority o
 %\cite{LPJ17} preproc
 %\cite{BCGIM17} homom prepro
 
-\section{Constant-round protocols}\label{sec:soa:const_rounds}% 
-A large body of research was devoted to research on protocol round optimality in various settings. The \cite{BB89} was the first constant-round information-theoretic protocol. Later \cite{IK00, IK02} used so-called randomized polynomials and randomized encodings \cite{AIK04} of a function to construct constant round protocols in information-theoretic setting with an active adversary. Later, \cite{ABT18} proved a tight bound 2-rounds for perfectly secure semi-honest MPC with an honest majority using a new tool multi-party randomized encodings. The \cite{cryptoeprint:2018:1078} shown 2-round information-theoretic statistically secure MPC with malicious adversaries and an honest majority with selective abort which was shown by \cite{GIKR04} to be the strongest achievable notion of security for 2-round protocols.
-
-On the field of computational security the \cite{cryptoeprint:2017:1056} show there exists a 4-round, round optimal, MPC that securely realizes arbitrary functionalitites in presence of malicious adversaries corrupting any number of parties, assuming one-way functions with no setup. The 4 rounds are proven lower bound in this setting by \cite{cryptoeprint:2016:252}.
-
-Similarly, the \cite{cryptoeprint:2018:572} shown round optimal 2-round MPC protocol for general circuits that achieves security with abort against any dishonest minority of corruptions using one-way functions.
-% cool presentation: http://conferences.au.dk/fileadmin/user_upload/TPMPC18/Antigoni_Polychroniadou.pdf
 
 
 \section{UC Feasability}\label{sec:soa:uc_feasibility}
@@ -367,7 +368,7 @@ The \cite{Can01} shown that any polynomial-time computable functionality $\mathc
 To overcome this impossibility results several different trust models were studied. 
 The \cite{CF01} firstly proposed to use a Common Reference String (CRS) trusted set-up, publicly known string randomly sampled from the given distribution by a TTP. The \cite{CLOS02} shown the CRS is sufficient to UC-secure realize MPC with any number of malicious parties and it became the most studied assumption. However, if the CRS is generated maliciously the security of the protocols break completely. Because of this drawback, several different flavours were studied, e.g., threshold CRS variants able to sustain small portion of attackers or simplified random CRS which is practically easier to generate securely using naturally occurring high-entropy source \cite{CPS07}.
 
-Several other set-up assumptions were analyzed with potential trade-offs, effectiveness, and practicality. The \cite{BCNP04} studied the use of a Public Key Infrastructures (PKI) in UC-secure framework where trusted certificate authorities (CAs) verify that the participants registered public keys are well formed and that participants know the corresponding secret key. PKIs are well studied and deployed in practice making it more practical to use in UC-secure protocols. Similarly, \cite{HUU07} proposes to use government-issued signature cards, devices capable of securely storing honestly generated signing keys and signing requests on demand. Such an assumption is also quite practical as few countries already deployed the system as part of the eGovernment. However, the manufacturer of the card needs to be completely trusted.
+Several other set-up assumptions were analyzed with potential trade-offs, effectiveness, and practicality. The \cite{BCNP04} studied the use of a Public Key Infrastructures (PKI) in UC-secure framework where trusted certificate authorities (CAs) verify that the participants registered public keys are well formed and that participants know the corresponding secret key. PKIs are well studied and deployed in practice making it more practical to use in UC-secure protocols. Similarly, \cite{HUU07} proposes to use government-issued signature cards, devices capable of securely storing honestly generated signing keys and signing requests on demand. Such an assumption is also quite practical as few countries already deployed the system with signing cards as part of the eGovernment. However, the manufacturer of the card needs to be completely trusted.
 
 \section{Tamper-proof tokens}\label{sec:soa:tokens}
 The idea of using special tamper-proof hardware tokens for cryptographic purposes was for the first time used in the \cite{GO96} in the software protection context for random-access machines (RAMs) obliviousness, i.e., hiding memory access patterns against information-theoretic active adversaries. They used the minimal hardware tokens as a physical assurance of a trusted computing with small shielded memory and CPU unit resisting tampering attacks.
@@ -404,22 +405,19 @@ They assume collision-resistant hash functions (CRHFs) and the existence of uniq
 
 \cite{AAGPR13} gave lower bounds in the hardware token model. Namely, lower bound for simple bit-OT tokens is polynomial in the sender's or receiver's input in the information-theoretic setting for 2PC. Bit-OT tokens are very simple, thus easy to manufacture and their functionality does not depend on the computed function so they can be pre-manufactured in the offline phase and used for any functionality.
 
-\cite{DKMN15} relaxed model of resettable tokens so an attacker can reset them an only bounded number of times which corresponds to real-world assumptions triggering tamper mode protections in the security tokens. They showed positive results close to the results obtained for stateful tokens. 
+\cite{DKMN15} relaxed model of resettable tokens so an attacker can reset them an only bounded number of times which corresponds to real-world assumptions triggering tamper mode protections in the security tokens. They showed positive results close to the results obtained for stateful tokens. \cite{DKMN15b} shown first UC-secure two-party protocol with a single stateless token using only one-way functions.
 
 \cite{HPV16} constructed two-party protocol with optimal round complexity with stateless tokens and one-way functions in client-server setting (only server creates tokens) in extended Global Universal Composable framework which relaxes transferability of tokens. The protocol is UC-secure with malicious senders and receivers.
-
-\cite{DKMN15b} shown first UC-secure two-party protocol with a single stateless token using only one-way functions.
 
 \cite{CCOV17} relaxes the trust model in computing with corrupted tokens as some token manufacturers may create malicious tokens. They present UC-secure protocol with $N$ stateless tokens that compute original functionality securely even with $N-1$ malicious tokens with one-way functions. In \cite{2017-ccs-mavroudis} we implemented similar solution but with stronger cryptographic assumptions.
 % Unlimited number of OTs -> unlimited number of MPCs
 
-
-%\unsurein[disable]{Warn: This section is unfinished.}
 \todoin{ToDo: This section is a bit rusty, may need some improvements.}
+%\unsurein[disable]{Warn: This section is unfinished.}
 %\todoin[disable]{ToDo: More smartcard-based works, FPGAs.}
 
 \section{Selected MPC applications}\label{sec:soa:applications}
-\unsurein{Warn: This section is unfinished}
+%\unsurein{Warn: This section is unfinished}
 %\infoin{Text need to be glued together so our thesis goals are visible from the composition}
 \todo{Asymetric MPC, cloud offload?}
 In this part, we review related practical results achieved in the MPC.
@@ -544,7 +542,7 @@ We believe that an exploration of a currently under-researched combination of hi
 \subsection{Research focus.}
 Here we present ideas that we want to work on.
 
-\paragraph{Practically usable MPC on smart cards.}
+\paragraph{Practically usable MPC on smart cards.}%
 We will continue in the analysis of existing MPC protocols in the context of a deployment on resource-constrained devices, which is a challenging task.
 As token model offers some unique properties, we can make trade-offs in the trust model and assumptions of original protocols to make them more effective and practically usable. 
 %Requirements on the token, minimal, maximal, tradeofs.
@@ -553,12 +551,12 @@ As token model offers some unique properties, we can make trade-offs in the trus
 We will try to make our previous result \cite{2017-ccs-mavroudis} more universal so it can evaluate the bigger class of functions. Similarly, we want to study how to protect from malicious tokens, e.g., by requiring a card to create a zero-knowledge proof that the operation was performed correctly. This could eliminate the threat of backdoors in the model and reduces required trust.
 Our ambition is to extend existing MPC compilers to support hardware token models.
 
-\paragraph{Side-channel and backdoor protection}.
+\paragraph{Side-channel and backdoor protection.}%
 Theoretical work \cite{DNW09} shown that party which can exchange an only limited amount of information with the environment it is possible to perform UC-secure MPC with malicious attackers. We would like to investigate how this relates to side-channels of the smart cards and assurances we can obtain in this model.
 
 On the other hand, we will analyze whether pre-programmed smart cards acting like a black box are properly implementing security-related functionalities. E.g., if Rabin Miler basis is fixed a pseudoprime could be generated which passes the test without actually being a prime. Such an attack breaks the system as we can bypass hardness assumptions of traditional ECC. Consequently, we will try to design protocols for collaborative parameter generation and attestations based on zero knowledge (ZK) proofs to avoid mentioned problems.
 
-\paragraph{Hardware wallets.}
+\paragraph{Hardware wallets.}%
 Similarly, we would like to focus on cryptocurrencies and hardware wallets as our work could have a significant impact in this field protecting end-users from losing funds. 
 Hardware wallet is a dedicated device that stores user's secrets and signs user's outgoing transactions to protect from money theft. There are open questions on how to realize such algorithms in privacy-centric cryptocurrencies (PCCC).
 We will study how to transform complex algorithms used in PCCC so they are usable on the hardware wallet and how to use MPC to distribute the risk to multiple devices, such as smartphone, browser and the hardware wallet. 
