@@ -340,11 +340,17 @@ A large body of research has been based on \cite{Yao86, GMW87, BGW88, CCD88} and
 For the garbled circuits it entails: Point-and-permute \cite{BMR90}, Free XOR \cite{KS08}, garbled row reduction \cite{NPS99, PSSW09}, FleXOR \cite{KMR14}, half gates \cite{ZRE14}, garbled gadgets \cite{BMR16} and CompGC \cite{cryptoeprint:2016:458}.
 
 Cut-and-choose extension \cite{LP07,LP11,Lin16} enables the use of the garbled circuit with malicious parties by simply generating more circuits, committing to them and revealing a subset of them on request. The approach has been extensively studied and significantly improved, e.g., LEGO \cite{NO09} and its numerous improvements \cite{cryptoeprint:2013:155, FJNT15, cryptoeprint:2016:1069, cryptoeprint:2017:226, KNBTR17, cryptoeprint:2018:578}.
+\cite{SHSSK15} uses a sequential gate logic (gates with memory and clock) to significantly reduce the circuit size. %TinyTable \cite{cryptoeprint:2016:695}
 
-Secret-sharing based approach extensions working with malicious parties: SPDZ \cite{DPSZ12, cryptoeprint:2012:642}, MiniMac \cite{DZ13}, TinyOT \cite{NNOB12}, MASCOT \cite{KOS16}, TinyTable \cite{cryptoeprint:2016:695}, and further improvements \cite{FKOS15, DZ16, LPJ17, BCGIM17, cryptoeprint:2017:1230}. %
-\todo[disable]{Elaborate more on: beaver triplets \cite{B91a}, correlated randomness, OT-extension ROT, offline pre-computing phase?}
+Secret-sharing based extensions which resistant to malicious parties are for instance DPSZ \cite{DPSZ12, cryptoeprint:2012:642}, MiniMac \cite{DZ13}, TinyOT \cite{NNOB12}, BDOZ \cite{BDOZ11}, MASCOT \cite{KOS16}. Schemes in this family make use of an additional pre-processing phase which is input independent. Initially, the Beaver triplets \cite{B91a} $(a,b,a.b)$ were used in the pre-computation phase for masking online phase, in particular evaluation of multiplication gates.
 
-The \cite{WRK17} generalizes TinyOT to multi-party setting, dishonest majority of malicious attackers. The protocol is the first constant-round implemented and practically usable. It works in the standalone security model while \cite{DPSZ12} is statistically UC-secure. 
+The \cite{WRK17} generalizes TinyOT to multi-party setting, dishonest majority of malicious attackers. The protocol is the first constant-round implemented and practically usable. It works in the standalone security model while \cite{DPSZ12} is statistically UC-secure. The following new works are in the same line of research: \cite{FKOS15, DZ16, LPJ17, BCGIM17, cryptoeprint:2017:1230}.
+%
+%TinyTable \cite{cryptoeprint:2016:695} = 2PC, boolean, precomp, scambling.
+%\cite{FKOS15} = MPC shared triplets.
+%\cite{DZ16} = minimac AES
+%\cite{LPJ17} preproc
+%\cite{BCGIM17} homom prepro
 
 \section{Constant-round protocols}\label{sec:soa:const_rounds}% 
 A large body of research was devoted to research on protocol round optimality in various settings. The \cite{BB89} was the first constant-round information-theoretic protocol. Later \cite{IK00, IK02} used so-called randomized polynomials and randomized encodings \cite{AIK04} of a function to construct constant round protocols in information-theoretic setting with an active adversary. Later, \cite{ABT18} proved a tight bound 2-rounds for perfectly secure semi-honest MPC with an honest majority using a new tool multi-party randomized encodings. The \cite{cryptoeprint:2018:1078} shown 2-round information-theoretic statistically secure MPC with malicious adversaries and an honest majority with selective abort which was shown by \cite{GIKR04} to be the strongest achievable notion of security for 2-round protocols.
