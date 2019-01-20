@@ -271,24 +271,24 @@ This chapter gives a short introduction to the multi-party computation, its prop
 
 \paragraph{MPC.}%
 Secure multi-party computation (MPC) is a very generic and well studied cryptographic task.
-It allows mutual distrustful parties $P_i, i \in \{1,\dots,m\}$ to jointly perform a distributed computation of a function $f(x_i,\dots,x_m) = (y_i,\dots,y_m)$ on their inputs $x_i$ consistently with the $f$ (\emph{correctness}) in a way each party learns only $y_i$ from the execution (\emph{privacy}). In particular, other users' inputs $x_{j, j \neq i}$ and outputs $y_{j, j \neq i}$ remain secret for user $P_i$.
+It allows mutually distrustful parties $P_i, i \in \{1,\dots,m\}$ to jointly perform a distributed computation of a function $f(x_i,\dots,x_m) = (y_i,\dots,y_m)$ on their inputs $x_i$ consistently with the $f$ (\emph{correctness}) in a way each party learns only $y_i$ from the execution (\emph{privacy}). In particular, other users' inputs $x_{j, j \neq i}$ and outputs $y_{j, j \neq i}$ remain secret for user $P_i$.
 MPC intuitively attempts to emulate a trusted third party (TTP) computing the function $f$ on user's behalf, preserving the \emph{correctness} and \emph{privacy}.
 MPC protocols should remain secure even with presence of a coalition of colluding corrupted nodes, depending on the particular security properties.
 For more formal treatment please refer to \cite{G09}.
 
 MPC protocols are characterized with respect to various criteria:
 \begin{itemize}
-    \itembf{Number of parties.} Two-party computation (\emph{2PC}) is an important special case, $m=2$, which has a large dedicated body of research as it achieves own specific feasibility results due to nature of the problem, i.e., there is no honest majority and often motivated by popular client-server paradigm. Separate group constitutes also 3-party computation (\emph{3PC}) \cite{CKMZ14, MRZ15}.
+    \itembf{Number of parties.} Two-party computation (\emph{2PC}) is an important special case, $m=2$, which has a large dedicated body of research as it achieves own specific feasibility results due to nature of the problem, i.e., there is no honest majority and is often motivated by popular client-server paradigm. 3-party computation also constitutes a separate group (\emph{3PC}) \cite{CKMZ14, MRZ15}.
 
     \itembf{Attacker types.} The \emph{semi-honest} attackers may form a colluding coalition with the aim to learn more information from the protocol runs than the privacy property of the MPC describes. They may communicate and share information from runs. However, they exactly follow the protocol definition. This attacker model is also called \emph{passive} or \emph{honest-but-curious}. 
     On the other hand, \emph{malicious} or \emph{active} attackers may on top of that perform arbitrary actions during the protocol execution. They can diverge from the protocol, forge, replay messages, stop responding, etc.
 
     \emph{Static} attackers corrupt the nodes at the beginning of a protocol. A set of corrupted nodes is unknown to the honest parties. \emph{Adaptive} attackers may adaptively choose what node to corrupt during the protocol execution, based on the collected information from the run. Intuitively, the adaptive attacker model is stronger.
     
-    \itembf{Size of the attacker coalition.} A basic security property of MPC protocol is a size of the coalition $t$ the MPC protocol stays secure. Depending on the attacker model, it can be \emph{dishonest majority} up to $m-1$, \emph{honest majority} $2t+1 < m$, which makes sense only with $m>2$. There are also special cases requiring $2/3$ majority.
+    \itembf{Size of the attacker coalition.} A basic security property of MPC protocol is a size of the coalition $t$ with which the MPC protocol stays secure. Depending on the attacker model, it can be \emph{dishonest majority} up to $m-1$, \emph{honest majority} $2t+1 < m$, which makes sense only with $m>2$. There are also special cases requiring $2/3$ majority.
 
     \itembf{Computational power.} The adversary is typically assumed to be \emph{computationally bounded}, i.e., its running complexity is probabilistic polynomial in the inputs $x_i$ and number of parties $m$.
-    MC protocols with this attacker typically rely on typical cryptographic tools and hardness assumptions like the Decisional Diffie-Hellman assumption \cite{KL07}, factoring hardness assumption and so on. From this reason, the model is also called \emph{cryptographic}.
+    MC protocols with bounded attacker typically rely on standard cryptographic primitives and hardness assumptions like the Decisional Diffie-Hellman assumption \cite{KL07}, factoring hardness assumption and so on. For this reason, the model is also called \emph{cryptographic}.
     
     Contrary to that, the \emph{information-theoretic} also called \emph{computationally unbounded} model poses no restrictions on the attackers' computational power. MPC in this model provides higher security guarantees, but its security breaks completely if the attacker coalition size $t$ grows above the required limit. 
     In this model, protocols are typically using perfectly-secure one-time-pad and secret sharing, e.g., Shamir's secret sharing \cite{Shamir79}. The protocols are usually computationally more effective as there is no public-key cryptography involved, but the communication cost may render them ineffective. 
@@ -297,7 +297,7 @@ MPC protocols are characterized with respect to various criteria:
     
     \itembf{Communication properties.} MPC typically assumes \emph{private channels}, i.e., private and reliable point-to-point (P2P) communication channels. Some properties may additionally require a \emph{broadcast}. Channels can be either \emph{synchronized} or \emph{asynchronous}. The weakest model is assuming only plain links with no guarantees. The slightly stronger model adds an authenticated P2P links.
     
-    Protocols are usually characterized with the respect to communication \emph{rounds}. In one round, each participant $P_i$ may send message to any other party $\overline{P_i} = \{P_j; i \neq i\}$, but the messages can only depend on information received in previous rounds. Round complexity depends on the underlying mechanism, typically it is: $\bigO(\text{depth}(C))$, polynomial in the depth of the circuit, $\bigO(\text{deg}(g))$, polynomial in degree of encoding polynomials or $\bigO(1)$, \emph{constant round}.
+    Protocols are usually characterized with the respect to communication \emph{rounds}. In one round, each participant $P_i$ may send message to any other party $\overline{P_i} = \{P_j; i \neq j\}$, but the messages can only depend on information received in previous rounds. Round complexity depends on the underlying mechanism, typically it is: $\bigO(\text{depth}(C))$, polynomial in the depth of the circuit, $\bigO(\text{deg}(g))$, polynomial in degree of encoding polynomials or $\bigO(1)$, \emph{constant round}.
     
     \itembf{Security model.} Originally, protocols were proved in the \emph{stand-alone} security model, isolated from the outer world. Consequently, a stronger security framework assuming concurrent protocol composition was developed by \cite{Can01}, \emph{Universally composable (UC) framework}, which enables for more systematic analysis and stronger security properties. However, some \emph{stand-alone} secure protocols fail to remain secure in the \emph{UC} model.
     
@@ -317,7 +317,7 @@ If $\mathcal{Z}$ cannot distinguish which execution is it plugged in the adversa
 \section{Two-party computation}\label{sec:soa:2pc} %
 One of the founding work on MPC is a seminal paper of Yao \cite{Yao86}, which proved \emph{completeness} of the two-party computation, i.e., all computable functions $f$ can be computed in a secure two-party computation model in the semi-honest setting with computationally bounded attackers. 
 
-Yao's approach is based on a converting function $f$ to a Boolean circuit $C$. $C$ consists of gates, i.e., nodes performing addition and multiplication (AND and XOR) on its inputs and producing an output. A number of input wires on a gate is called fan-in, typically is 2 and a number of outputs is called fan-out, which is typically 1. Gates are connected with wires into a circuit. Input wires are connecting user inputs to gate's input, output wires are connected to gates outputs and unconnected on the other end.
+Yao's approach is based on converting a function $f$ to a Boolean circuit $C$. $C$ consists of gates, i.e., nodes performing addition and multiplication (AND and XOR) on its inputs and producing an output. A number of input wires on a gate is called fan-in, typically is 2 and a number of outputs is called fan-out, which is typically 1. Gates are connected with wires into a circuit. Input wires are connecting user inputs to gate's input, output wires are connected to gates outputs and unconnected on the other end.
 
 The circuit \emph{creator} creates the circuit $C$ and \emph{garbles} it in a sense that he encrypts and permutes the gate truth tables to protect his values and the intermediate state. This operation gave the scheme the name \emph{garbled circuits}. The creator sends the garbled circuit with his encrypted inputs, i.e., wire \emph{labels}, to the \emph{evaluator}. In order to evaluate the circuit, the evaluator needs to know wire labels corresponding to her inputs and only the creator knows the encryption key. The $\binom{2}{1}$ oblivious transfer (OT) is used to query corresponding values from the creator, without revealing evaluator's inputs. The evaluator evaluates $C$ in a topological order gate-by-gate and obtains output labels, which are decrypted by the creator to obtain the final result of the computation. The protocol has a constant number of rounds and is independent of the circuit depth. 
 Obviously, the scheme works only with semi-honest attackers as a malicious creator could create a different circuit $C^\prime$ leaking the evaluator's inputs. The more formal description can be found in \cite{BHR12}. 
@@ -329,18 +329,18 @@ Consequently, the work \cite{RB89, B91} improved the bound for an honest majorit
 \cite{RB89} claimed adaptive security, which was disproved and fixed in \cite{CDDHR99}.
 Round complexity is $\bigO(\text{depth}(C))$ for adaptive adversaries \cite{GMW87, CDDHR99}, $\bigO(1)$ for static adversaries \cite{BMR90} while the original \cite{GMW87} round complexity is $\bigO(\text{depth}(C))$.
 
-Later, \cite{CLOS02} showed how to construct MPCs in the Universally Composable framework with computational assumptions, dishonest majority up to $m-1$ of adaptive malicious parties in the CRS model and broadcast. 
+Later, \cite{CLOS02} showed how to construct MPC protocols in the Universally Composable framework with computational assumptions, dishonest majority up to $m-1$ of adaptive malicious parties in the CRS model and broadcast. 
 Non-adaptive cases require trapdoor functions, adaptive requires augmented non-committing encryption protocols \cite{CFGN96}.
 
 \section{Information-theoretic protocols}\label{sec:soa:infproto}%
-The information-theoretic protocols are typically simpler, faster and have better communication and computation costs compared to computational equivalents. Foundations in this field were laid by \cite{BGW88} and \cite{CCD88}. The protocols are based on Shamir's secret sharing and arithmetic circuits in finite fields. The malicious adversary resistant protocols makes use of the error-correcting Reed Solomon codes. In \cite{BGW88} proved an honest majority is required for the semi-honest setting in this model and $2/3$-honest majority for malicious setting. Moreover, these bounds were proven tight. These protocols have $\bigO(\text{depth}(C))$ communication rounds as each party is evaluating a circuit and a communication round is required to securely evaluate multiplication gates.
+The information-theoretic protocols are typically simpler, faster and have better communication and computation costs compared to computational equivalents. Foundations in this field were laid by \cite{BGW88} and \cite{CCD88}. The protocols are based on Shamir's secret sharing and arithmetic circuits in finite fields. The malicious adversary resistant protocols make use of the error-correcting Reed Solomon codes. In \cite{BGW88} proved an honest majority is required for the semi-honest setting in this model and $2/3$-honest majority for malicious setting. Moreover, these bounds were proven tight. These protocols have $\bigO(\text{depth}(C))$ communication rounds as each party is evaluating a circuit and a communication round is required to securely evaluate multiplication gates.
 
 \section{Constant-round protocols}\label{sec:soa:const_rounds}% 
-A large body of research was devoted to research on protocol round optimality in various settings. The \cite{BB89} was the first constant-round information-theoretic protocol. Later \cite{IK00, IK02} used so-called randomized polynomials and randomized encodings \cite{AIK04} of a function to construct constant round protocols in information-theoretic setting with an active adversary. Later, \cite{ABT18} proved a tight bound 2-rounds for perfectly secure semi-honest MPC with an honest majority using a new tool multi-party randomized encodings. The \cite{cryptoeprint:2018:1078} shown 2-round information-theoretic statistically secure MPC with malicious adversaries and an honest majority with selective abort which was shown by \cite{GIKR04} to be the strongest achievable notion of security for 2-round protocols.
+A large body of research was devoted to research on protocol round optimality in various settings. The \cite{BB89} was the first constant-round information-theoretic protocol. Later \cite{IK00, IK02} used so-called randomized polynomials and randomized encodings \cite{AIK04} of a function to construct constant round protocols in information-theoretic setting with an active adversary. Later, \cite{ABT18} proved a tight bound 2-rounds for perfectly secure semi-honest MPC with an honest majority using a new tool multi-party randomized encodings. The \cite{cryptoeprint:2018:1078} showed 2-round information-theoretic statistically secure MPC with malicious adversaries and an honest majority with selective abort which was shown by \cite{GIKR04} to be the strongest achievable notion of security for 2-round protocols.
 
 On the field of computational security the \cite{cryptoeprint:2017:1056} show there exists a 4-round, round optimal, MPC that securely realizes arbitrary functionalitites in presence of malicious adversaries corrupting any number of parties, assuming one-way functions with no setup. The 4 rounds are proven lower bound in this setting by \cite{cryptoeprint:2016:252}.
 
-Similarly, the \cite{cryptoeprint:2018:572} shown round optimal 2-round MPC protocol for general circuits that achieves security with abort against any dishonest minority of corruptions using one-way functions.
+Similarly, the \cite{cryptoeprint:2018:572} showed round optimal 2-round MPC protocol for general circuits that achieves security with abort against any dishonest minority of corruptions using one-way functions.
 % cool presentation: http://conferences.au.dk/fileadmin/user_upload/TPMPC18/Antigoni_Polychroniadou.pdf
 
 \section{Extensions}\label{sec:soa:extensions}%
@@ -362,13 +362,13 @@ The \cite{WRK17} generalizes TinyOT to multi-party setting with a dishonest majo
 
 
 
-\section{UC Feasability}\label{sec:soa:uc_feasibility}
-The \cite{Can01} shown that any polynomial-time computable functionality $\mathcal{F}$ can be UC-securely realized with an honest majority in the plain model. Unfortunately, it was later shown by \cite{CF01} the result does not hold with no honest majority. In particular, this is an important result for two-party protocols where a number of basic functionalities, e.g., commitments, zero-knowledge proofs, and coin tossing, cannot be UC-realized in the plain model. The \cite{Lin03, CKL04, CKL06} rule out essentially all non-trivial two-party functions.
+\section{UC Feasibility}\label{sec:soa:uc_feasibility}
+The \cite{Can01} showed that any polynomial-time computable functionality $\mathcal{F}$ can be UC-securely realized with an honest majority in the plain model. Unfortunately, it was later showed by \cite{CF01} the result does not hold with no honest majority. In particular, this is an important result for two-party protocols where a number of basic functionalities, e.g., commitments, zero-knowledge proofs, and coin tossing, cannot be UC-realized in the plain model. The \cite{Lin03, CKL04, CKL06} rule out essentially all non-trivial two-party functions.
 
 To overcome this impossibility results several different trust models were studied. 
-The \cite{CF01} firstly proposed to use a Common Reference String (CRS) trusted set-up, publicly known string randomly sampled from the given distribution by a TTP. The \cite{CLOS02} shown the CRS is sufficient to UC-secure realize MPC with any number of malicious parties and it became the most studied assumption. However, if the CRS is generated maliciously the security of the protocols break completely. Because of this drawback, several different flavours were studied, e.g., threshold CRS variants able to sustain small portion of attackers or simplified random CRS which is practically easier to generate securely using naturally occurring high-entropy source \cite{CPS07}.
+The \cite{CF01} first proposed to use a Common Reference String (CRS) trusted set-up, publicly known string randomly sampled from the given distribution by a TTP. The \cite{CLOS02} showed the CRS is sufficient to UC-secure realize MPC with any number of malicious parties and it became the most studied assumption. However, if the CRS is generated maliciously the security of the protocols break completely. Because of this drawback, several different flavours were studied, e.g., threshold CRS variants able to sustain small portion of attackers or simplified random CRS which is practically easier to generate securely using naturally occurring high-entropy source \cite{CPS07}.
 
-Several other set-up assumptions were analyzed with potential trade-offs, effectiveness, and practicality. The \cite{BCNP04} studied the use of a Public Key Infrastructures (PKI) in UC-secure framework where trusted certificate authorities (CAs) verify that the participants registered public keys are well formed and that participants know the corresponding secret key. PKIs are well studied and deployed in practice making it more practical to use in UC-secure protocols. Similarly, \cite{HUU07} proposes to use government-issued signature cards, devices capable of securely storing honestly generated signing keys and signing requests on demand. Such an assumption is also quite practical as few countries already deployed the system with signing cards as part of the eGovernment. However, the manufacturer of the card needs to be completely trusted.
+Several other set-up assumptions were analyzed with potential trade-offs, effectiveness, and practicality. The \cite{BCNP04} studied the use of a Public Key Infrastructures (PKI) in UC-secure framework where trusted certificate authorities (CAs) verify that the participants-registered public keys are well formed and that participants know the corresponding secret key. PKIs are well studied and deployed in practice making it more practical to use in UC-secure protocols. Similarly, \cite{HUU07} proposes to use government-issued signature cards, devices capable of securely storing honestly generated signing keys and signing requests on demand. Such an assumption is also quite practical as a few countries already deployed the system with signing cards as part of the eGovernment. However, the manufacturer of the card needs to be completely trusted.
 
 \section{Tamper-proof tokens}\label{sec:soa:tokens}
 The idea of using special tamper-proof hardware tokens for cryptographic purposes was for the first time used in the \cite{GO96} in the software protection context for random-access machines (RAMs) obliviousness, i.e., hiding memory access patterns against information-theoretic active adversaries. They used the minimal hardware tokens as a physical assurance of trusted computing with small shielded memory and CPU unit resisting tampering attacks.
@@ -396,7 +396,7 @@ The \cite{CGS08} improved Katz by using only resettable or stateless tokens and 
 \cite{DNW09} discusses that hardware token has two key properties: 1. it is isolated from the environment, 2. it is a new separate entity and Sender never sees an interaction of token and receiver. The \cite{K07} uses only the first property. The \cite{DNW09} then relaxes token assumption to a temporal isolation of one party so he can communicate up to $b$ bits with the environment. This under standard cryptographic assumptions allows to UC-secure realize any multi-party computation with active and adaptive adversaries with a dishonest majority. This result can be used with side-channels attacks on the smart cards.
 % IT also proposes more CA which may be trusted by several sets of parties ~ company CAs, trust yours, distrust others.
 
-\cite{GISVW10} Proves information-theoretic non-interactive security for malicious parties and stateful tokens. They also prove stateless tokens are sufficient for general UC-secure computations using only one-way functions in a computational setting. Note that unconditional security is not possible as an attacker can learn the whole token functionality \cite{GIMS10}. Additionally, they provided a non-interactive computationally secure protocol for stateless tokens which enables reactive functionalities such as obfuscation, where a user can query the token bounded number of times. This is the first feasibility obfuscation result with stateless tokens against malicious senders. They use very simple bit-One-Time-Memory tokens. A number of tokens is proportional to the size of the circuit.
+\cite{GISVW10} proves information-theoretic non-interactive security for malicious parties and stateful tokens. They also prove stateless tokens are sufficient for general UC-secure computations using only one-way functions in a computational setting. Note that unconditional security is not possible as an attacker can learn the whole token functionality \cite{GIMS10}. Additionally, they provided a non-interactive computationally secure protocol for stateless tokens which enables reactive functionalities such as obfuscation, where a user can query the token bounded number of times. This is the first feasibility obfuscation result with stateless tokens against malicious senders. They use very simple bit-One-Time-Memory tokens. A number of tokens is proportional to the size of the circuit.
 
 \cite{DKM11} provides the first protocol for UC-secure two-party computation with information-theoretic security using only single stateful untrusted token.
 
@@ -405,7 +405,7 @@ They assume collision-resistant hash functions (CRHFs) and the existence of uniq
 
 \cite{AAGPR13} gave lower bounds in the hardware token model. Namely, lower bound for simple bit-OT tokens is polynomial in the sender's or receiver's input in the information-theoretic setting for 2PC. Bit-OT tokens are very simple, thus easy to manufacture and their functionality does not depend on the computed function so they can be pre-manufactured in the offline phase and used for any functionality.
 
-\cite{DKMN15} relaxed model of resettable tokens so an attacker can reset them an only bounded number of times which corresponds to real-world assumptions triggering tamper mode protections in the security tokens. They showed positive results close to the results obtained for stateful tokens. \cite{DKMN15b} shown first UC-secure two-party protocol with a single stateless token using only one-way functions.
+\cite{DKMN15} relaxed model of resettable tokens so an attacker can reset them an only bounded number of times which corresponds to real-world assumptions triggering tamper mode protections in the security tokens. They showed positive results close to the results obtained for stateful tokens. \cite{DKMN15b} showed first UC-secure two-party protocol with a single stateless token using only one-way functions.
 
 \cite{HPV16} constructed two-party protocol with optimal round complexity with stateless tokens and one-way functions in client-server setting (only server creates tokens) in extended Global Universal Composable framework which relaxes transferability of tokens. The protocol is UC-secure with malicious senders and receivers.
 
@@ -517,7 +517,7 @@ This section summarizes the overall goals and my research aims.
 The central question connecting my further research is: \emph{How can a connection of tamper-proof hardware and a secure multi-party computation solve practical problems and increase the level of security in existing systems?}
 
 \section{Problem statement}
-The challenges we aim to address by the future work:
+The challenges we aim to address by the future work can be summarized as follows:
 
 \begin{enumerate}
 	\item Single point of failure 
@@ -525,22 +525,22 @@ The challenges we aim to address by the future work:
 	\item Insufficient protection of private data and secret keys 
 \end{enumerate}
  
-For instance, the severity of problem 1. is illustrated by our recent work \cite{2017-ccs-nemec} where we showed that the single point of failure is a huge risk for security-critical systems, such as eGovernment. Hence new approaches have to be found to alleviate the risk by removing the single point of failure, making the systems more robust. MPC is a systematic answer to this problem as it addresses the problem itself.
+For instance, the severity of problem 1. is illustrated by our recent work \cite{2017-ccs-nemec} where we showed that the single point of failure is a huge risk for security-critical systems, such as eGovernment. Hence new approaches have to be found to alleviate the risk by removing the single point of failure, making the systems more robust. MPC is a systematic answer to this problem as it addresses the single point of failure directly.
 
 \section{Research aim}
-The starting point for the next work can be our previous research \cite{2017-ccs-mavroudis} where we were able to successfully design a practically functional system based on MPC which brings significant security benefits to end-users. Such systems increase a security level as a potential attacker need to compromise more targets simultaneously to breach the system. 
+The starting point for the next work can be our previous research \cite{2017-ccs-mavroudis} where we were able to successfully design a practically functional system based on MPC which brings significant security benefits to end-users. Such systems increase a security level as a potential attacker needs to compromise more targets simultaneously to breach the system. 
 
 Another inspiration could be the SmartID~\cite{smart_id_ee}. It generates RSA keys collaboratively both on the smartphone and the desktop, so attacker needs to obtain both key parts to break the system. It is a nice example of a robust system that would mitigate vulnerabilities like those found in Infineon and eGovernment. 
 
-Moreover, we would like to focus on building practical and effective solutions that could serve as a drop-in replacement for existing, not that secure ones. If the environment does not need to be changed the adoption is more seamless. This approach is now far more common, as we seen in \cite{smart_id_ee, DCMBR18}. % JKX18 OPAQUE somehow??
+Moreover, we would like to focus on building practical and effective solutions that could serve as a drop-in replacement for existing, less secure. If the environment does not need to be changed the adoption is more seamless. This approach is now far more common, as we saw in \cite{smart_id_ee, DCMBR18}. % JKX18 OPAQUE somehow??
 
-Previous research also suggests that a combination of MPC and hardware tokens is very beneficial as it helps to overcome problems of a trusted setup which is often not desirable. E.g., it is impossible to prove that all parties destroyed the trapdoor information during the trusted setup of the system, which is essential to its security. Typical example is a trusted setup in the ZCash\footnote{\url{https://z.cash/}}, popular anonymous cryptocurrency. If the trusted setup was somehow subverted and an attacker knows the trapdoor, he completely breaks the system by generating new coins without anybody noticing.
+Previous research also suggests that a combination of MPC and hardware tokens is very beneficial as it helps to overcome problems of a trusted setup which is often not desirable. For instance, it is impossible to prove that all parties destroyed the trapdoor information during the trusted setup of the system, which is essential to its security. Typical example is a trusted setup in the ZCash\footnote{\url{https://z.cash/}}, popular anonymous cryptocurrency. If the trusted setup was somehow subverted and an attacker knows the trapdoor, he completely breaks the system by generating new coins without anybody noticing.
 
 As discussed by \cite{K07}, the token model increases robustness as each user is free to choose from various manufacturers which smart card to use. In connection with \cite{2017-ccs-nemec} this gives strong security guarantees also against supply chain attacks.
 
 We believe that an exploration of a currently under-researched combination of highly secure yet very resource-limited devices and multi-party computation will bring significant benefits.
 
-\section{Research focus.}
+\section{Research focus}
 Here we present ideas that we want to work on.
 
 \paragraph{Practically usable MPC on smart cards.}%
@@ -549,13 +549,13 @@ As token model offers some unique properties, we can make trade-offs in the trus
 %Requirements on the token, minimal, maximal, tradeoffs.
 %Existing protocols could be modified to be practically usable with the tokens. 
 
-We will try to make our previous result \cite{2017-ccs-mavroudis} more universal so it can evaluate the bigger class of functions. Similarly, we want to study how to protect from malicious tokens, e.g., by requiring a card to create a zero-knowledge proof that the operation was performed correctly.  This protection could eliminate the threat of backdoors in the model and reduces the required trust.
+We will try to make our previous result \cite{2017-ccs-mavroudis} more universal so it can evaluate a bigger class of functions. Similarly, we want to study how to protect from malicious tokens, e.g., by requiring a card to create a zero-knowledge proof that the operation was performed correctly.  This protection could eliminate the threat of backdoors in the model and reduces the required trust.
 Our ambition is to extend existing MPC compilers to support hardware token models.
 
 \paragraph{Side-channel and backdoor protection.}%
-Theoretical work \cite{DNW09} showed that if a party can exchange an only limited amount of information with the environment then it is possible to perform UC-secure MPC with malicious attackers. We would like to investigate how this relates to side-channels of the smart cards and assurances we can obtain in this model.
+Theoretical work \cite{DNW09} showed that if a party can exchange only a limited amount of information with the environment then it is possible to perform UC-secure MPC with malicious attackers. We would like to investigate how this relates to side-channels of the smart cards and assurances we can obtain in this model.
 
-On the other hand, we will analyze whether pre-programmed smart cards acting as a black box are properly implementing security-related functionalities. E.g., if Rabin Miller basis is fixed a pseudoprime could be generated which passes the test without actually being a prime. Such an attack breaks the system as we can bypass hardness assumptions of traditional ECC. Consequently, we will try to design protocols for collaborative parameter generation and attestations based on zero-knowledge (ZK) proofs to avoid mentioned problems.
+On the other hand, we will analyze whether pre-programmed smart cards acting as a black box are properly implementing security-related functionalities. For example, if Rabin Miller basis is fixed a pseudoprime could be generated which passes the test without actually being a prime. Such an attack breaks the system as we can bypass hardness assumptions of traditional ECC. Consequently, we will try to design protocols for collaborative parameter generation and attestations based on zero-knowledge (ZK) proofs to avoid mentioned problems.
 
 \paragraph{Hardware wallets.}%
 Similarly, we would like to focus on cryptocurrencies and hardware wallets as our work could have a significant impact in this field protecting end-users from losing funds. 
@@ -564,7 +564,7 @@ We will study how to transform complex algorithms used in PCCC, so they are usab
 
 
 \section{Publication venues}
-Research in the line of interest of this proposal is commonly published on the top security international conferences. The primary goal is to publish at the top conferences although it is a bit ambitious goal.
+Research in the line of interest of this proposal is commonly published at the top security international conferences. The primary goal is to publish at the top conferences although it may seem a bit ambitious.
 
 \begin{itemize}
 	\item \emph{USENIX Security Symposium}, $A^*$ CORE rank
@@ -691,13 +691,13 @@ This chapter summarizes achieved results so far.
 This section is based on results achieved in the: \emph{A Touch of Evil: High-Assurance Cryptographic Hardware from Untrusted Components}~\cite{2017-ccs-mavroudis}. 
 The following paragraphs are adapted from this work.%\cite{2017-ccs-mavroudis}.
 
-In \cite{2017-ccs-nemec}, \emph{The Return of Coppersmith's Attack: Practical Factorization of Widely Used RSA Moduli (ROCA)}, we touched a problem of black-box cryptographic implementations in the secure hardware. The popular secure hardware vendor incorporated an proprietary algorithm for faster generation of RSA primes. The original reasons were probably to increase a performance of RSA key-pair generation as it has significant running time. Unfortunately, the secure hardware generated weak private keys as it significantly decreased an entropy and preserved certain mathematical structure which crucially reduces factorization time of the resulting RSA moduli. The primes were generated as: $p = kM + (65537^a \text{mod} M)$, where $M$ is a constant. 
-As a result, many different domains become affected by this vulnerability. Namely eGovernment, code signing and TPM related tasks such as disc encryption with Bitlocker.
+In \cite{2017-ccs-nemec}, \emph{The Return of Coppersmith's Attack: Practical Factorization of Widely Used RSA Moduli (ROCA)}, we touched a problem of black-box cryptographic implementations in the secure hardware. The popular secure hardware vendor incorporated a proprietary algorithm for faster generation of RSA primes. The original reasons were probably to increase a performance of RSA key-pair generation as it has significant running time. Unfortunately, the secure hardware generated weak private keys as it significantly decreased the entropy and preserved certain mathematical structure which crucially reduces factorization time of the resulting RSA moduli. The primes were generated as: $p = kM + (65537^a \text{mod} M)$, where $M$ is a constant. 
+As a result, many different domains become affected by this vulnerability. Namely eGovernment, code signing and TPM related tasks such as disk encryption with Bitlocker.
 
-\cite{Young:1996:DSB:646761.706030} introduced a \emph{Kleptography}, study of subverting cryptographic algorithms and standards, i.e., cryptographic backdoors. In the kleptography design the crypto-primitive is constructed in such a way that the resulting system is seemingly correct, without vulnerabilities, but an attacker is able to break the system easily. ROCA could be one example of a construction of a kleptographic design as it was undetected several years while the attackers could factor the RSA moduli easily.
+\cite{Young:1996:DSB:646761.706030} introduced \emph{Kleptography}, a study of subverting cryptographic algorithms and standards, i.e., cryptographic backdoors. In the kleptography design the crypto-primitive is constructed in such a way that the resulting system is seemingly correct, without vulnerabilities, but an attacker is able to break the system easily. ROCA could be one example of a construction of a kleptographic design as it was undetected several years while the attackers could factor the RSA moduli easily.
 
 Similarly, an unintentional vulnerability like faulty pseudo-random number generator (PRNG) may drastically weaken all the cryptographic features in the upper design layers. Moreover, such fault is difficult to detect. 
-Hardware token manufacturer also cannot forsee the whole manufacturing process which opens possibilities for insider attackers implanting malicious circuitry to the token. 
+Hardware token manufacturer also cannot oversee the whole manufacturing process which opens possibilities for insider attackers implanting malicious circuitry to the token. 
 
 \paragraph{Myst.}%
 In \cite{2017-ccs-mavroudis} we address these concerns by distributing the trust among $N$ smart cards which jointly compute the cryptographic functions in the MPC manner. 
@@ -723,7 +723,7 @@ The distributed key generation operation enables multiple cards to
 collectively generate a shared public and private key pair with
 shares distributed between all participating cards. The individual card does not have an access to the generated key and the protocol protects from maliciously crafted shares. ElGamal \cite{Brandt:2005:ECP:2182226.2182233} is used for distributed encryption and decryption using the previously generated key shares. For the distributed signing, we introduced a new multi-signature protocol based on Schnorr signatures \cite{Schnorr:1991:ESG:2724954.2725006}.
 
-Myst is a practical solution protecting from single-point-of-failure problems on smart cards. The testing prototype contains 120 individual smart cards with high encryption, decryption and signing throughput as shown in figure \ref{fig:myst_throughput}. Myst is a scalable replacement for Hardware Security Modules (HSM) as the used cards are FIPS 140-2 Level 4 tamper-resistance certified and thanks to our distributed protocols it overcomes potential problems with cryptographic HSM black-box implementation.
+Myst is a practical solution protecting from single-point-of-failure problems on smart cards. The testing prototype contains 120 individual smart cards with high encryption, decryption and signing throughput as showed in figure \ref{fig:myst_throughput}. Myst is a scalable replacement for Hardware Security Modules (HSM) as the used cards are FIPS 140-2 Level 4 tamper-resistance certified and thanks to our distributed protocols it overcomes potential problems with cryptographic HSM black-box implementation.
 
 \begin{figure}[h]
 	\centering
@@ -741,13 +741,13 @@ The \cite{2017-ccs-mavroudis} was presented on ACM Conference on Computer and Co
 \label{sec:aim:monero_hw_wallet}
 In this yet unpublished work I designed and implemented transaction signing protocol for Monero~\cite{zero_to_monero}, privacy-centric cryptocurrency, on the hardware wallet, resource constrained device. 
 
-Monero differs from traditional cryptocurrencies in a way it stores the transaction on the blockchain. Transaction sender and recipient are concealed so potential financial flow tracking between parcitipants is severely limited. It uses unique, pseudo-random sender addresses, derived from Diffie-Hellman exchange of the sender and recipient. On top of that, Monero uses ring-signatures to make transaction graph analysis difficult. Ring-signatures are digital signatures which have a \emph{ring} of $N$ public keys associated with it. The signature is verifiable with the whole ring but it is not known which private key corresponding to one public key from the ring actually signed the transaction. This scheme thus provides 1-in-$N$ anonymity.
+Monero differs from traditional cryptocurrencies in a way it stores the transaction on the blockchain. Transaction sender and recipient are concealed so potential financial flow tracking between participants is severely limited. It uses unique, pseudo-random sender addresses, derived from Diffie-Hellman exchange of the sender and recipient. On top of that, Monero uses ring-signatures to make transaction graph analysis difficult. Ring-signatures are digital signatures which have a \emph{ring} of $N$ public keys associated with it. The signature is verifiable with the whole ring but it is not known which private key corresponding to one public key from the ring actually signed the transaction. This scheme thus provides 1-in-$N$ anonymity.
 
-Monero uses Pedersen Commitments to conceal the value of transactions being sent. On top of that, non-interactive zero-knowledge proofs, so-called Bulletproofs \cite{Bnz2017BulletproofsSP} are used to ensure the transaction uses proper values.
+Monero uses Pedersen commitments to conceal the value of transactions being sent. On top of that, non-interactive zero-knowledge proofs, so-called Bulletproofs \cite{Bnz2017BulletproofsSP} are used to ensure the transaction uses proper values.
 
-In the considered scenario a user owns a hardware wallet, dedicated device storing the private keys used for signing the transactions. It has usually a display and hardware buttons so user can confirm the transaction details on the device. Hardware wallets protects user from theft as the key is never leaked to the connected host, which might be infected due to large attack surface and due to its multi-purpose nature. Hardware wallets are on the other hand very limited devices so the attack surface is as low as possible. 
+In the considered scenario a user owns a hardware wallet, dedicated device storing the private keys used for signing the transactions. It has usually a display and hardware buttons so user can confirm the transaction details on the device. Hardware wallet protects user from theft as the key is never leaked to the connected host, which might be infected due to large attack surface and due to its multi-purpose nature. Hardware wallet is on the other hand very limited device so the attack surface is as low as possible. 
 
-I've designed and implemented a Monero transaction signing protocol on a hardware wallet in a way the secret key never leaves the hardware device and the malicious host cannot tamper the signing data, i.e., user always have to confirm the transaction details first. On top of that, host verifies if the hardware wallet is not cheating either. The protocol is intuitive and simple to analyze that it preserves desired security properties. It is thus specialized secure two-party computation protocol. 
+I have designed and implemented a Monero transaction signing protocol on a hardware wallet in a way the secret key never leaves the hardware device and the malicious host cannot tamper with the signing data, i.e., user always has to confirm the transaction details first. On top of that, host verifies if the hardware wallet is not cheating either. The protocol is intuitive and simple to analyze that it preserves desired security properties. It is thus specialized secure two-party computation protocol. 
 
 Later, we plan to extend the protocol to support threshold signatures and multiple different hardware wallets, following the approach of True2F~\cite{DCMBR18} and 
 \cite{2017-ccs-mavroudis}. The implementation is already merged to the Monero upstream\footnote{\url{https://github.com/monero-project/monero}} and the Trezor hardware wallet upstream repositories\footnote{\url{https://github.com/trezor/trezor-core/}}.
@@ -790,27 +790,27 @@ Covering also blockchain scanning, so view key is not leaked to the host. Scheme
 \begin{itemize}
 	\item \emph{A Touch of Evil: High-Assurance Cryptographic Hardware from Untrusted Components \cite{2017-ccs-mavroudis}.} I helped with implementation of the back-end related services for controlling the Myst from the host. Contribution: 5\%
 	
-	\item \emph{The Return of Coppersmith's Attack: Practical Factorization of Widely Used RSA Moduli \cite{2017-ccs-nemec}.} I reviewed the math code, implemented the fingerprinting tool\footnote{\url{https://github.com/crocs-muni/roca}}, analyzed large key datasets for presence of the vulnerability, e.g., in TLS datasets, certificate authorities (CA) keys and Estonian eID. Contribution: 10\%. \todo{DUNNO. CHECK}
+	\item \emph{The Return of Coppersmith's Attack: Practical Factorization of Widely Used RSA Moduli \cite{2017-ccs-nemec}.} I reviewed the math code, implemented the fingerprinting tool\footnote{\url{https://github.com/crocs-muni/roca}}, analyzed large key datasets for presence of the vulnerability, e.g., TLS datasets, certificate authority (CA) keys and Estonian eID. Contribution: 10\%. \todo{DUNNO. CHECK}
 	
-	\item \emph{The Efficient Randomness Testing using Boolean Functions \cite{booltest_secrypt2017}}. I've co-authored and implemented the Booltest, a tool\footnote{\url{https://github.com/ph4r05/polynomial-distinguishers}} for effective randomness testing. Contribution: 20\%.\todo{DUNNO. CHECK}
+	\item \emph{The Efficient Randomness Testing using Boolean Functions \cite{booltest_secrypt2017}}. I co-authored and implemented the Booltest, a tool\footnote{\url{https://github.com/ph4r05/polynomial-distinguishers}} for effective randomness testing. Contribution: 20\%.\todo{DUNNO. CHECK}
 	
 	\item \emph{Measuring Popularity of Cryptographic Libraries in Internet-Wide Scans \cite{2017-acsac-nemec}}. I've co-analyzed large key datasets for known fingerprints. Contribution: 20\%.\todo{DUNNO. CHECK}
 	
-	\item \emph{Traversing Symmetric NAT with Predictable Port Allocation \cite{Klinec:2014:TSN:2659651.2659698}}. I've designed, implemented and evaluated a protocol for bypassing Symmetric NAT so two parties can establish a direct connection. Contribution: 80\%.
+	\item \emph{Traversing Symmetric NAT with Predictable Port Allocation \cite{Klinec:2014:TSN:2659651.2659698}}. I have designed, implemented and evaluated a protocol for bypassing Symmetric NAT so two parties can establish a direct connection. Contribution: 80\%.
 	
 	\item \emph{Android APK on-the-fly tampering \cite{apk_tampering}}. I've helped with the design and implementation of the malicious traffic interceptor adding malicious payload to the Android application archives (APKs) being downloaded on-the-fly. Contribution: 40\%.\todo{DUNNO. CHECK}
 	
-	\item \emph{WSNProtectLayer – security middleware for wireless sensor networks \cite{wsnprotectlayer}}. I've co-authored the implementation of the WSNProtectLayer on resource-constrained devices, sensor nodes. Contribution: 5\%.\todo{DUNNO. CHECK}
+	\item \emph{WSNProtectLayer – security middleware for wireless sensor networks \cite{wsnprotectlayer}}. I co-authored the implementation of the WSNProtectLayer on resource-constrained devices (sensor nodes). Contribution: 5\%.\todo{DUNNO. CHECK}
 \end{itemize}
 
-Moreover, there are several papers in the pipeline which haven't been submitted yet:
+Moreover, there are several papers in the pipeline which have not been submitted yet:
 
 \begin{itemize}
-	\item \emph{Monero hardware wallet signing protocol.} As mentioned in the section \ref{sec:aim:monero_hw_wallet}, I've designed and implemented distributed transaction signing protocol. Contribution: 80\%.
+	\item \emph{Monero hardware wallet signing protocol.} As mentioned in the Section \ref{sec:aim:monero_hw_wallet}, I have designed and implemented distributed transaction signing protocol. Contribution: 80\%.
 	
-	\item \emph{The $4p-1$ factorization method and its viability as a basis for an RSA backdoor}. The work describes very effective factorization methods for RSA moduli assuming the private keys are of a special form. I've performed the large-scale algorithm testing and running time analysis. Contribution: 13\%.\todo{DUNNO. CHECK}
+	\item \emph{The $4p-1$ factorization method and its viability as a basis for an RSA backdoor}. The work describes very effective factorization methods for RSA moduli assuming the private keys are of a special form. I have performed the large-scale algorithm testing and running time analysis. Contribution: 13\%.\todo{DUNNO. CHECK}
 	
-	\item \emph{Security margins for known cryptographic algorithms.} The paper analyzes the security margins of known round-reduced block and stream encryption algorithms and hash functions. I've tested the algorithms with the Booltest. Contribution: 10\%.\todo{DUNNO. CHECK}	
+	\item \emph{Security margins for known cryptographic algorithms.} The paper analyzes the security margins of known round-reduced block and stream encryption algorithms and hash functions. I have tested the algorithms with the Booltest. Contribution: 10\%.\todo{DUNNO. CHECK}	
 \end{itemize}
 
 %\section{Papers in progress}
@@ -945,7 +945,7 @@ The power stems from the addition of an \emph{environment}~$\mathcal{Z}$, the al
 
 %This notion intuitively captures the desired security properties we want the protocol $\pi$ realizing function $f$ to have, i.e., it should securely emulate the TTP in the real world setting.
 
-We say that $\pi$ securely evaluates a function $f$ if for any adversary $\mathcal{A}$ there exists an ideal adversary $\mathcal{S}$, a simulator, such that no environment $\mathcal{Z}$ can tell with non-negligible advantage distinguish the real-world ($\pi, \mathcal{A}$) and the ideal world ($\mathcal{F}, \mathcal{S}$). The environment $\mathcal{Z}$ is running in the time \emph{similar} to the adversary, i.e., polynomially to $\mathcal{A}$.
+We say that $\pi$ securely evaluates a function $f$ if for any adversary $\mathcal{A}$ there exists an ideal adversary $\mathcal{S}$, a simulator, such that no environment $\mathcal{Z}$ can with non-negligible advantage distinguish the real-world ($\pi, \mathcal{A}$) and the ideal world ($\mathcal{F}, \mathcal{S}$). The environment $\mathcal{Z}$ is running in the time \emph{similar} to the adversary, i.e., polynomially to $\mathcal{A}$.
 
 If not said otherwise, the adversary is considered to be running in probabilistic polynomial-time (computational security). In the model with private communication channels, it makes sense to assume also computationally unbounded adversaries. Then like in the plain model we talk about \emph{statistical} and \emph{perfect} security.
 
