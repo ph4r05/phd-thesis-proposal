@@ -515,7 +515,7 @@ Also, the K-out-of-N ECC-based multi-signature protocol research has recently un
 This section summarizes the overall goals and my research aims.
 The central question connecting my further research is: \emph{How can a connection of hardware tamper-proof hardware and a secure multi-party computation solve practical problems and increase the level of security in existing systems?}
 
-\subsection{Problem statement}
+\section{Problem statement}
 The problems we aim to address by the future work:
 
 \begin{enumerate}
@@ -526,7 +526,7 @@ The problems we aim to address by the future work:
  
 For instance, the severity of problem 1. is illustrated by our recent work \cite{2017-ccs-nemec} where we showed that the single point of failure is a huge risk for security-critical systems, such as eGovernment. Hence new approaches have to be found to alleviate the risk by removing the single point of failure, making the systems more robust. MPC is a systematic answer to this problem as it addresses the problem itself.
 
-\subsection{Research aim}
+\section{Research aim}
 The starting point for the next work can be our previous research \cite{2017-ccs-mavroudis} where we were able to successfully design a practically functional system based on MPC which brings significant security benefits to end-users. Such systems increase a security level as a potential attacker need to compromise more targets simultaneously to breach the system. 
 
 Another inspiration could be the SmartID~\cite{smart_id_ee}. It generates RSA keys collaboratively both on the smartphone and the desktop, so attacker needs to obtain both key parts to break the system. It is a nice example of a robust system that would mitigate vulnerabilities like those presented in Infineon and eGovernment. 
@@ -539,7 +539,7 @@ As discussed by \cite{K07}, the token model increases robustness as each user is
 
 We believe that an exploration of a currently under-researched combination of highly secure yet very resource-limited devices and multi-party computation will bring significant benefits.
 
-\subsection{Research focus.}
+\section{Research focus.}
 Here we present ideas that we want to work on.
 
 \paragraph{Practically usable MPC on smart cards.}%
@@ -554,18 +554,49 @@ Our ambition is to extend existing MPC compilers to support hardware token model
 \paragraph{Side-channel and backdoor protection.}%
 Theoretical work \cite{DNW09} shown that party which can exchange an only limited amount of information with the environment it is possible to perform UC-secure MPC with malicious attackers. We would like to investigate how this relates to side-channels of the smart cards and assurances we can obtain in this model.
 
-On the other hand, we will analyze whether pre-programmed smart cards acting like a black box are properly implementing security-related functionalities. E.g., if Rabin Miler basis is fixed a pseudoprime could be generated which passes the test without actually being a prime. Such an attack breaks the system as we can bypass hardness assumptions of traditional ECC. Consequently, we will try to design protocols for collaborative parameter generation and attestations based on zero knowledge (ZK) proofs to avoid mentioned problems.
+On the other hand, we will analyze whether pre-programmed smart cards acting like a black box are properly implementing security-related functionalities. E.g., if Rabin Miller basis is fixed a pseudoprime could be generated which passes the test without actually being a prime. Such an attack breaks the system as we can bypass hardness assumptions of traditional ECC. Consequently, we will try to design protocols for collaborative parameter generation and attestations based on zero knowledge (ZK) proofs to avoid mentioned problems.
 
 \paragraph{Hardware wallets.}%
 Similarly, we would like to focus on cryptocurrencies and hardware wallets as our work could have a significant impact in this field protecting end-users from losing funds. 
 Hardware wallet is a dedicated device that stores user's secrets and signs user's outgoing transactions to protect from money theft. There are open questions on how to realize such algorithms in privacy-centric cryptocurrencies (PCCC).
 We will study how to transform complex algorithms used in PCCC so they are usable on the hardware wallet and how to use MPC to distribute the risk to multiple devices, such as smartphone, browser and the hardware wallet. 
 
-\subsection{Tentatime work plan}
-\todoin{Workplan here}
 
-\subsection{Publication venues}
-\todoin{Conferences here}
+\section{Publication venues}
+Research in the line of interest of this proposal is commonly published on the top security international conferences. The primary goal is to publish at the top conferences although it is a bit ambitious goal.
+
+\begin{itemize}
+	\item \emph{USENIX Security Symposium}, $A^*$ CORE rank
+	\item \emph{IEEE Symposium on Security and Privacy, (S\&P, also known as "Oakland")}, $A^*$ CORE rank
+	\item \emph{ACM Conference on Computer and Communications Security (ACM CCS)}, $A^*$ CORE rank
+	\item \emph{The Network and Distributed System Security Symposium (NDSS)}, $A^*$ CORE rank
+\end{itemize}
+
+Alternatively, the applicable conferences for the proposed research are:
+
+\begin{itemize}
+	\item \emph{European Symposium on Research in Computer Security (ESORICS)}, $A$ CORE rank
+	\item \emph{Annual Computer Security Applications Conference (ACSAC)}, $A$ CORE rank
+	\item \emph{International Conference on Hardware Security and Trust (ICHST)}
+	\item \emph{ACM Conference on Data and Application Security and Privacy (ACM CODASPY)}
+	\item \emph{IEEE European Symposium on Security and Privacy (Euro SP)}
+	\item \emph{Theory and Practice of Multi-Party Computation (TPMPC)}
+\end{itemize}
+
+
+\section{Work plan}
+\begin{itemize}
+	\itembf{Spring 2019} Research based on extending \cite{2017-ccs-mavroudis} to support general function classes.
+	
+	\itembf{Fall 2019} Finishing the previous goal, focus more on Rabin Miller basis black-box testing, study possibilities of improving the current state with MPC as in \cite{DCMBR18}.
+	
+	\itembf{Spring 2020} Focusing on hardware wallets research, application of MPC to transaction signing and secret key generation.
+	
+	\itembf{Fall 2020} Extending general purpose MPC compiler to make use of hardware tokens.
+	
+	\itembf{Spring 2021} Finishing dissertation thesis.
+\end{itemize}
+
 
 \newpage
 \begin{shaded}
@@ -649,6 +680,90 @@ We aim to investigate new possibilities of the secure view-key sharing in the SC
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Achieved results}
+This chapter summarizes achieved results so far.
+
+% CCS Touch of evil
+% Monero paper - MPC transaction signing
+% 
+
+\section{CCS 2017}
+This section is based on results achieved in the: \emph{A Touch of Evil: High-Assurance Cryptographic Hardware from Untrusted Components}~\cite{2017-ccs-mavroudis}. 
+The following paragraphs are adapted from this work.%\cite{2017-ccs-mavroudis}.
+
+In \cite{2017-ccs-nemec}, \emph{The Return of Coppersmith's Attack: Practical Factorization of Widely Used RSA Moduli (ROCA)}, we touched a problem of black-box cryptographic implementations in the secure hardware. The popular secure hardware vendor incorporated an proprietary algorithm for faster generation of RSA primes. The original reasons were probably to increase a performance of RSA key-pair generation as it has significant running time. Unfortunately, the secure hardware generated weak private keys as it significantly decreased an entropy and preserved certain mathematical structure which crucially reduces factorization time of the resulting RSA moduli. The primes were generated as: $p = kM + (65537^a \text{mod} M)$, where $M$ is a constant. 
+As a result, many different domains become affected by this vulnerability. Namely eGovernment, code signing and TPM related tasks such as disc encryption with Bitlocker.
+
+\cite{Young:1996:DSB:646761.706030} introduced a \emph{Kleptography}, study of subverting cryptographic algorithms and standards, i.e., cryptographic backdoors. In the kleptography design the crypto-primitive is constructed in such a way that the resulting system is seemingly correct, without vulnerabilities, but an attacker is able to break the system easily. ROCA could be one example of a construction of a kleptographic design as it was undetected several years while the attackers could factor the RSA moduli easily.
+
+Similarly, an unintentional vulnerability like faulty pseudo-random number generator (PRNG) may drastically weaken all the cryptographic features in the upper design layers. Moreover, such fault is difficult to detect. 
+Hardware token manufacturer also cannot forsee the whole manufacturing process which opens possibilities for insider attackers implanting malicious circuitry to the token. 
+
+\paragraph{Myst.}%
+In \cite{2017-ccs-mavroudis} we address these concerns by distributing the trust among $N$ smart cards which jointly compute the cryptographic functions in the MPC manner. 
+The key idea is to combine
+protective-redundancy with modern threshold cryptographic techniques to build a system tolerant to hardware trojans and errors. 
+If smart cards originate from non-crossing supply chains it reduces the likelihood of compromises as a potential attacker would have to compromise all used smart cards. 
+If vendors would like to circumvent our design they would need to coordinate the effort and backdoor used smart cards. There is an interesting aspect of geopolitics, as we assume such coordinated effort is infeasible if vendors are owned by various geopolitical clusters, e.g. from US, EU, Russia and China.
+
+We proposed \emph{Myst}, a practical high-assurance architecture, that uses commercial off-the-shelf (COTS) hardware, and provides strong security guarantees, even in the presence of multiple malicious or faulty components. Figure \ref{fig:myst_arch} shows architecture of the Myst.
+Myst realizes secure variants of random number and key generation, public key decryption and signing.  
+
+\begin{figure}[h]
+	\centering
+	\ifcamready%
+	{\includegraphics[scale=0.30,clip]{img/myst_arch.png}}%
+	{\includegraphics[scale=0.30,clip]{img/myst_arch.png}}
+	\captionsetup{width=0.95\linewidth}
+	\caption{Architecture of the \emph{Myst}, scalable MPC system designed in \cite{2017-ccs-mavroudis}. IC stands for integrated circuits, which are instantiated by smart cards in our work.}
+	\label{fig:myst_arch}
+\end{figure}
+
+The distributed key generation operation enables multiple cards to
+collectively generate a shared public and private key pair with
+shares distributed between all participating cards. The individual card does not have an access to the generated key and the protocol protects from maliciously crafted shares. ElGamal \cite{Brandt:2005:ECP:2182226.2182233} is used for distributed encryption and decryption using the previously generated key shares. For the distributed signing, we introduced a new multi-signature protocol based on Schnorr signatures \cite{Schnorr:1991:ESG:2724954.2725006}.
+
+Myst is a practical solution protecting from single-point-of-failure problems on smart cards. The testing prototype contains 120 individual smart cards with high encryption, decryption and signing throughput as shown in figure \ref{fig:myst_throughput}. Myst is a scalable replacement for Hardware Security Modules (HSM) as the used cards FIPS 140-2 Level 4 tamper-resistance certified and thanks to our distributed protocols it overcomes potential problems with cryptographic HSM black-box implementation.
+
+\begin{figure}[h]
+	\centering
+	\ifcamready%
+	{\includegraphics[scale=0.45,clip]{img/myst_throughput.png}}%
+	{\includegraphics[scale=0.45,clip]{img/myst_throughput.png}}
+	\captionsetup{width=0.95\linewidth}
+	\caption{Myst average throughput for decryption and signing, depending on the quorum size, i.e., number of cards computing the same operation. From \cite{2017-ccs-mavroudis}.}
+	\label{fig:myst_throughput}
+\end{figure}
+
+The \cite{2017-ccs-mavroudis} was presented on ACM Conference on Computer and Communications Security 2017 (ACM CCS), Dallas, Texas, US.
+
+\section{Monero hardware wallet}
+In this yet unpublished work
+
+\cite{Bnz2017BulletproofsSP}  % bulletproofs
+
+
+\begin{ecmmnt}
+\begin{itemize}
+	\item Bug resilience, Kleptography, Single point of failure of resource constrained devices. GACR proposal motivation. eID system failure due to {\bf{ROCA}}~\cite{2017-ccs-nemec}. Smart-ID~\cite{smart_id_ee}. 
+	
+	- TODO: ROCA 2 paper.
+	
+	\item {\bf{Fingerprinting}} public keys from cryptographic libraries and devices possible. Enables to target attack on particular vulnerable library. {\bf{ROCA}} also fingerprintable, like shown in our previous research {\it{Measuring Popularity of Cryptographic Libraries in Internet-Wide Scans}}~\cite{2017-acsac-nemec}.
+	
+	\item In previous research we devised powerful randomness test {\bf{\emph{Booltest}}} \cite{booltest_secrypt2017} which provides comparable and better results compared to standard randomness testing batteries. Testing randomness of PRNGs or cryptographic primitives is essential for the assessment of the quality of cryptographic schemes. It is usually the first step of a security audit. In the extended version of the paper submitted to the Springer Book of Secrypt We also tested output of TRNGs of smart cards and hardware wallets Trezor and Ledger. Having device failing to pass randomness test indicates a further problem with potentially high impact. Implementing the SMPC may help to avoid similar vulnerabilities and potential backdoors. 
+	
+	\item Many scenarios (e.g., DRM, licensing, cloud assisted computation) require computation with sensitive data on attacker computer. Universal approach is FHE but not practical. Another solution is a secure multi-party computation (SMPC), utilizing secure crypto processors (SCPs) or smart cards to provide better security guarantees. {\bf{Whitebox}} attack resistant cryptography \cite{whitebox_klinec_santacrypt2013,Klinec2013thesis} attempts to transform algorithms so their evaluation on attackers computer is secure, e.g. AES algorithm with embedded decryption key without possibility of key extraction. However, whitebox schemes often fail (cite) which indicates SMPC / SCP schemes are more practical.
+	
+	\item In previous research, we proposed and analyzed an Intrusion detection system running on resource-constrained devices creating wireless sensor networks \cite{wsnprotectlayer}. Effective multi-party computation algorithms could improve security properties of {\bf{WSN}} protocols.
+	
+	\item SMPC with Smartcards as our previous research A {\it {\bf{Touch of Evil}}: High-Assurance Cryptographic Hardware from Untrusted Components} \cite{2017-ccs-mavroudis}. Multi-Encryption and multi-signatures N-of-N. At least one honest participant is enough to protect secret.
+	
+	\item Paper with V. Sedlacek analyzing particular {\bf{number factorization}} method based on elliptic curves. Submitted by the end of theses submission deadline.
+	
+\end{itemize}
+\end{ecmmnt}
+
+\newpage
 \begin{shaded}
 \begin{itemize}
     \item What we have, created
@@ -666,6 +781,7 @@ Covering basic Monero transaction, transaction signing protocol for hardware wal
 
 Covering also blockchain scanning, so view key is not leaked to the host. Schemes designed with their properties. Group payment identification pseudonymity, fast scanning. Encrypted Bloom filters. Impossibility on some attractive scheme properties (publicly derivable public key chain for forward secrecy, corresponding private key derivation only with hardware wallet. Formalize). 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Author's Publications}
 \begin{shaded}
