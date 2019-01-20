@@ -737,9 +737,21 @@ Myst is a practical solution protecting from single-point-of-failure problems on
 The \cite{2017-ccs-mavroudis} was presented on ACM Conference on Computer and Communications Security 2017 (ACM CCS), Dallas, Texas, US.
 
 \section{Monero hardware wallet}
-In this yet unpublished work
+In this yet unpublished work I designed and implemented transaction signing protocol for Monero~\cite{zero_to_monero}, privacy-centric cryptocurrency, on the hardware wallet, resource constrained device. 
 
-\cite{Bnz2017BulletproofsSP}  % bulletproofs
+Monero differs from traditional cryptocurrencies in a way it stores the transaction on the blockchain. Transaction sender and recipient are concealed so potential financial flow tracking between parcitipants is severely limited. It uses unique, pseudo-random sender addresses, derived from Diffie-Hellman exchange of the sender and recipient. On top of that, Monero uses ring-signatures to make graph analysis difficult. Ring-signatures are digital signatures which have a \emph{ring} of $N$ public keys associated with it. The signature is verifiable with the whole ring but it is not known which private key corresponding to one public key from the ring actually signed the transaction. This scheme thus provides 1-in-$N$ anonymity.
+
+Monero uses Pedersen Commitments to conceal the value of transactions being sent. On top of that, non-interactive zero-knowledge proofs, so-called Bulletproofs \cite{Bnz2017BulletproofsSP} are used to ensure the transaction uses proper values.
+
+In the considered scenario an user owns a hardware wallet, dedicated device storing the private keys used for signing the transactions. It has usually a display and hardware buttons so user can confirm the transaction details on the device. Hardware wallets protects user from theft as the key is never leaked to the connected host, which might be infected due to large attack surface and due to its multi-purpose nature. Hardware wallets are on the other hand very limited devices so the attack surface is as low as possible. 
+
+I've designed and implemented a Monero transaction signing protocol on a hardware wallet in a way the secret key never leaves the hardware device and the malicious host cannot tamper the signing data, i.e., user always have to confirm the transaction details first. On top of that, host verifies if the hardware wallet is not cheating either. The protocol is intuitive and simple to analyze that it preserves desired security properties. It is thus specialized secure two-party computation protocol. 
+
+Later, we plan to extend the protocol to support threshold signatures and multiple different hardware wallets, following the approach of True2F~\cite{DCMBR18} and 
+\cite{2017-ccs-mavroudis}. The implementation is already merged to the Monero upstream\footnote{\url{https://github.com/monero-project/monero}} and the Trezor hardware wallet upstream repositories\footnote{\url{https://github.com/trezor/trezor-core/}}.
+
+The paper is not yet published, with expected submission in Spring 2019. 
+% bulletproofs
 
 
 \begin{ecmmnt}
