@@ -514,10 +514,10 @@ Also, the K-out-of-N ECC-based multi-signature protocol research has recently un
 
 \chapter{Thesis aim}\label{sec:aim}
 This section summarizes the overall goals and my research aims.
-The central question connecting my further research is: \emph{How can a connection of hardware tamper-proof hardware and a secure multi-party computation solve practical problems and increase the level of security in existing systems?}
+The central question connecting my further research is: \emph{How can a connection of tamper-proof hardware and a secure multi-party computation solve practical problems and increase the level of security in existing systems?}
 
 \section{Problem statement}
-The problems we aim to address by the future work:
+The challenges we aim to address by the future work:
 
 \begin{enumerate}
 	\item Single point of failure 
@@ -530,7 +530,7 @@ For instance, the severity of problem 1. is illustrated by our recent work \cite
 \section{Research aim}
 The starting point for the next work can be our previous research \cite{2017-ccs-mavroudis} where we were able to successfully design a practically functional system based on MPC which brings significant security benefits to end-users. Such systems increase a security level as a potential attacker need to compromise more targets simultaneously to breach the system. 
 
-Another inspiration could be the SmartID~\cite{smart_id_ee}. It generates RSA keys collaboratively both on the smartphone and the desktop, so attacker needs to obtain both key parts to break the system. It is a nice example of a robust system that would mitigate vulnerabilities like those presented in Infineon and eGovernment. 
+Another inspiration could be the SmartID~\cite{smart_id_ee}. It generates RSA keys collaboratively both on the smartphone and the desktop, so attacker needs to obtain both key parts to break the system. It is a nice example of a robust system that would mitigate vulnerabilities like those found in Infineon and eGovernment. 
 
 Moreover, we would like to focus on building practical and effective solutions that could serve as a drop-in replacement for existing, not that secure ones. If the environment does not need to be changed the adoption is more seamless. This approach is now far more common, as we seen in \cite{smart_id_ee, DCMBR18}. % JKX18 OPAQUE somehow??
 
@@ -553,14 +553,14 @@ We will try to make our previous result \cite{2017-ccs-mavroudis} more universal
 Our ambition is to extend existing MPC compilers to support hardware token models.
 
 \paragraph{Side-channel and backdoor protection.}%
-Theoretical work \cite{DNW09} shown that party which can exchange an only limited amount of information with the environment it is possible to perform UC-secure MPC with malicious attackers. We would like to investigate how this relates to side-channels of the smart cards and assurances we can obtain in this model.
+Theoretical work \cite{DNW09} showed that if a party can exchange an only limited amount of information with the environment then it is possible to perform UC-secure MPC with malicious attackers. We would like to investigate how this relates to side-channels of the smart cards and assurances we can obtain in this model.
 
 On the other hand, we will analyze whether pre-programmed smart cards acting as a black box are properly implementing security-related functionalities. E.g., if Rabin Miller basis is fixed a pseudoprime could be generated which passes the test without actually being a prime. Such an attack breaks the system as we can bypass hardness assumptions of traditional ECC. Consequently, we will try to design protocols for collaborative parameter generation and attestations based on zero-knowledge (ZK) proofs to avoid mentioned problems.
 
 \paragraph{Hardware wallets.}%
 Similarly, we would like to focus on cryptocurrencies and hardware wallets as our work could have a significant impact in this field protecting end-users from losing funds. 
 Hardware wallet is a dedicated device that stores user's secrets and signs user's outgoing transactions to protect from money theft. There are open questions on how to realize such algorithms in privacy-centric cryptocurrencies (PCCC).
-We will study how to transform complex algorithms used in PCCC, so they are usable on the hardware wallet and how to use MPC to distribute the risk to multiple devices, such as smartphone, browser and the hardware wallet. 
+We will study how to transform complex algorithms used in PCCC, so they are usable on the hardware wallet and how to use MPC to distribute the trust among multiple devices, such as smartphone, browser and the hardware wallet. 
 
 
 \section{Publication venues}
@@ -723,7 +723,7 @@ The distributed key generation operation enables multiple cards to
 collectively generate a shared public and private key pair with
 shares distributed between all participating cards. The individual card does not have an access to the generated key and the protocol protects from maliciously crafted shares. ElGamal \cite{Brandt:2005:ECP:2182226.2182233} is used for distributed encryption and decryption using the previously generated key shares. For the distributed signing, we introduced a new multi-signature protocol based on Schnorr signatures \cite{Schnorr:1991:ESG:2724954.2725006}.
 
-Myst is a practical solution protecting from single-point-of-failure problems on smart cards. The testing prototype contains 120 individual smart cards with high encryption, decryption and signing throughput as shown in figure \ref{fig:myst_throughput}. Myst is a scalable replacement for Hardware Security Modules (HSM) as the used cards FIPS 140-2 Level 4 tamper-resistance certified and thanks to our distributed protocols it overcomes potential problems with cryptographic HSM black-box implementation.
+Myst is a practical solution protecting from single-point-of-failure problems on smart cards. The testing prototype contains 120 individual smart cards with high encryption, decryption and signing throughput as shown in figure \ref{fig:myst_throughput}. Myst is a scalable replacement for Hardware Security Modules (HSM) as the used cards are FIPS 140-2 Level 4 tamper-resistance certified and thanks to our distributed protocols it overcomes potential problems with cryptographic HSM black-box implementation.
 
 \begin{figure}[h]
 	\centering
@@ -741,7 +741,7 @@ The \cite{2017-ccs-mavroudis} was presented on ACM Conference on Computer and Co
 \label{sec:aim:monero_hw_wallet}
 In this yet unpublished work I designed and implemented transaction signing protocol for Monero~\cite{zero_to_monero}, privacy-centric cryptocurrency, on the hardware wallet, resource constrained device. 
 
-Monero differs from traditional cryptocurrencies in a way it stores the transaction on the blockchain. Transaction sender and recipient are concealed so potential financial flow tracking between parcitipants is severely limited. It uses unique, pseudo-random sender addresses, derived from Diffie-Hellman exchange of the sender and recipient. On top of that, Monero uses ring-signatures to make graph analysis difficult. Ring-signatures are digital signatures which have a \emph{ring} of $N$ public keys associated with it. The signature is verifiable with the whole ring but it is not known which private key corresponding to one public key from the ring actually signed the transaction. This scheme thus provides 1-in-$N$ anonymity.
+Monero differs from traditional cryptocurrencies in a way it stores the transaction on the blockchain. Transaction sender and recipient are concealed so potential financial flow tracking between parcitipants is severely limited. It uses unique, pseudo-random sender addresses, derived from Diffie-Hellman exchange of the sender and recipient. On top of that, Monero uses ring-signatures to make transaction graph analysis difficult. Ring-signatures are digital signatures which have a \emph{ring} of $N$ public keys associated with it. The signature is verifiable with the whole ring but it is not known which private key corresponding to one public key from the ring actually signed the transaction. This scheme thus provides 1-in-$N$ anonymity.
 
 Monero uses Pedersen Commitments to conceal the value of transactions being sent. On top of that, non-interactive zero-knowledge proofs, so-called Bulletproofs \cite{Bnz2017BulletproofsSP} are used to ensure the transaction uses proper values.
 
@@ -794,7 +794,7 @@ Covering also blockchain scanning, so view key is not leaked to the host. Scheme
 	
 	\item \emph{The Efficient Randomness Testing using Boolean Functions \cite{booltest_secrypt2017}}. I've co-authored and implemented the Booltest, a tool\footnote{\url{https://github.com/ph4r05/polynomial-distinguishers}} for effective randomness testing. Contribution: 20\%.\todo{DUNNO. CHECK}
 	
-	\item \emph{Measuring Popularity of Cryptographic Libraries in Internet-Wide Scans \cite{2017-acsac-nemec}}. I've co-analyzed large key datasets for knowns fingerprints. Contribution: 20\%.\todo{DUNNO. CHECK}
+	\item \emph{Measuring Popularity of Cryptographic Libraries in Internet-Wide Scans \cite{2017-acsac-nemec}}. I've co-analyzed large key datasets for known fingerprints. Contribution: 20\%.\todo{DUNNO. CHECK}
 	
 	\item \emph{Traversing Symmetric NAT with Predictable Port Allocation \cite{Klinec:2014:TSN:2659651.2659698}}. I've designed, implemented and evaluated a protocol for bypassing Symmetric NAT so two parties can establish a direct connection. Contribution: 80\%.
 	
