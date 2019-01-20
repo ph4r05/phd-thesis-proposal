@@ -352,7 +352,7 @@ Cut-and-choose extension \cite{LP07,LP11,Lin16} enables the use of the garbled c
 
 Secret-sharing based extensions which resistant to malicious parties are for instance DPSZ \cite{DPSZ12, cryptoeprint:2012:642}, MiniMac \cite{DZ13}, TinyOT \cite{NNOB12}, BDOZ \cite{BDOZ11}, MASCOT \cite{KOS16}. Schemes in this family make use of an additional pre-processing phase which is input independent. Initially, the Beaver triplets \cite{B91a} $(a,b,a.b)$ were used in the pre-computation phase for masking online phase, in particular evaluation of multiplication gates.
 
-The \cite{WRK17} generalizes TinyOT to multi-party setting with dishonest majority of malicious attackers. The protocol is the first constant-round implemented and practically usable. It works in the standalone security model while \cite{DPSZ12} is statistically UC-secure. The following new works are in the same line of research: \cite{FKOS15, DZ16, LPJ17, BCGIM17, cryptoeprint:2017:1230}.
+The \cite{WRK17} generalizes TinyOT to multi-party setting with a dishonest majority of malicious attackers. The protocol is the first constant-round implemented and practically usable. It works in the standalone security model while \cite{DPSZ12} is statistically UC-secure. The following new works are in the same line of research: \cite{FKOS15, DZ16, LPJ17, BCGIM17, cryptoeprint:2017:1230}.
 %
 %TinyTable \cite{cryptoeprint:2016:695} = 2PC, boolean, precomp, scambling.
 %\cite{FKOS15} = MPC shared triplets.
@@ -371,7 +371,7 @@ The \cite{CF01} firstly proposed to use a Common Reference String (CRS) trusted 
 Several other set-up assumptions were analyzed with potential trade-offs, effectiveness, and practicality. The \cite{BCNP04} studied the use of a Public Key Infrastructures (PKI) in UC-secure framework where trusted certificate authorities (CAs) verify that the participants registered public keys are well formed and that participants know the corresponding secret key. PKIs are well studied and deployed in practice making it more practical to use in UC-secure protocols. Similarly, \cite{HUU07} proposes to use government-issued signature cards, devices capable of securely storing honestly generated signing keys and signing requests on demand. Such an assumption is also quite practical as few countries already deployed the system with signing cards as part of the eGovernment. However, the manufacturer of the card needs to be completely trusted.
 
 \section{Tamper-proof tokens}\label{sec:soa:tokens}
-The idea of using special tamper-proof hardware tokens for cryptographic purposes was for the first time used in the \cite{GO96} in the software protection context for random-access machines (RAMs) obliviousness, i.e., hiding memory access patterns against information-theoretic active adversaries. They used the minimal hardware tokens as a physical assurance of a trusted computing with small shielded memory and CPU unit resisting tampering attacks.
+The idea of using special tamper-proof hardware tokens for cryptographic purposes was for the first time used in the \cite{GO96} in the software protection context for random-access machines (RAMs) obliviousness, i.e., hiding memory access patterns against information-theoretic active adversaries. They used the minimal hardware tokens as a physical assurance of trusted computing with small shielded memory and CPU unit resisting tampering attacks.
 
 Consequently, the \cite{AV04} used tamper-proof chips on the computing nodes to emulate a distributed trusted third party denoted Guardian Angel to securely implement fair-exchange, a simple multi-party protocol for exchanging secrets between parties in an asynchronous environment with malicious adversaries. The tamper-proof hardware basically implemented synchronization algorithm reducing fair-exchange to a distributed consensus problem. 
 
@@ -387,20 +387,20 @@ After the creator sends the token, he cannot directly communicate with it but ca
 %katz protocol - 2 rounds
 
 \paragraph{Comparison to CRS.} %
-Katz discusses that token model may reduce required trust compared to CRS as an user can either manufacture token itself or independently choose a blank programmable token from several manufacturers on the market. In the CRS model, each party has to trust the setup.
+Katz discusses that token model may reduce required trust compared to CRS as a user can either manufacture token itself or independently choose a blank programmable token from several manufacturers on the market. In the CRS model, each party has to trust the setup.
 It could also help with accountability. In the CRS model, it may not be feasible to detect malicious generator or to prove that trapdoor information was deleted while tokens can be tested by independent labs attesting their declared functionalities.
 
 \paragraph{Improvements.}%
 The \cite{CGS08} improved Katz by using only resettable or stateless tokens and one round protocol under enhanced trapdoor permutations assumption, which is more general than DDH used by Katz. The \cite{CGS08} also relaxes assumption how malicious parties create tokens\cmmnt{Attacker does not need to know the code}. Resettable tokens are simpler thus cheaper to manufacture. Moreover, an attacker cannot perform rewinding attack which increases security and makes proofs simpler.
 
-\cite{DNW09} discusses that hardware token has two key properties: 1. it is isolated from the environment, 2. it is a new separate entity and Sender never sees an interaction of token and receiver. The \cite{K07} uses only the first property. The \cite{DNW09} then relaxes token assumption to a temporal isolation of one party so he can communicate up to $b$ bits with the environment. This under standard cryptographic assumptions allows to UC-secure realize any multi-party computation with active and adaptive adversaries with an dishonest majority. This result can be used with side-channels attacks on the smart cards.
+\cite{DNW09} discusses that hardware token has two key properties: 1. it is isolated from the environment, 2. it is a new separate entity and Sender never sees an interaction of token and receiver. The \cite{K07} uses only the first property. The \cite{DNW09} then relaxes token assumption to a temporal isolation of one party so he can communicate up to $b$ bits with the environment. This under standard cryptographic assumptions allows to UC-secure realize any multi-party computation with active and adaptive adversaries with a dishonest majority. This result can be used with side-channels attacks on the smart cards.
 % IT also proposes more CA which may be trusted by several sets of parties ~ company CAs, trust yours, distrust others.
 
-\cite{GISVW10} Proves information-theoretic non-interactive security for malicious parties and stateful tokens. They also prove stateless tokens are sufficient for general UC-secure computations using only one-way functions in a computational setting. Note that unconditional security is not possible as an attacker can learn the whole token functionality \cite{GIMS10}. Additionally, they provided a non-interactive computationally secure protocol for stateless tokens which enables reactive functionalities such as obfuscation, where an user can query the token bounded number of times. This is the first feasibility obfuscation result with stateless tokens against malicious senders. They use very simple bit-One-Time-Memory tokens. A number of tokens is proportional to the size of the circuit.
+\cite{GISVW10} Proves information-theoretic non-interactive security for malicious parties and stateful tokens. They also prove stateless tokens are sufficient for general UC-secure computations using only one-way functions in a computational setting. Note that unconditional security is not possible as an attacker can learn the whole token functionality \cite{GIMS10}. Additionally, they provided a non-interactive computationally secure protocol for stateless tokens which enables reactive functionalities such as obfuscation, where a user can query the token bounded number of times. This is the first feasibility obfuscation result with stateless tokens against malicious senders. They use very simple bit-One-Time-Memory tokens. A number of tokens is proportional to the size of the circuit.
 
 \cite{DKM11} provides the first protocol for UC-secure two-party computation with information-theoretic security using only single stateful untrusted token.
 
-\cite{CKSYZ14} demonstrated that only two stateless protocol are enough (and optimal) to perform unbounded independent secure computations for two parties in constant rounds.
+\cite{CKSYZ14} demonstrated that only two stateless tokens are enough (and optimal) to perform unbounded independent secure computations for two parties in constant number of rounds.
 They assume collision-resistant hash functions (CRHFs) and the existence of unique signatures. Protocol variant using only symmetric-key primitives offers a bounded number of secure computations.
 
 \cite{AAGPR13} gave lower bounds in the hardware token model. Namely, lower bound for simple bit-OT tokens is polynomial in the sender's or receiver's input in the information-theoretic setting for 2PC. Bit-OT tokens are very simple, thus easy to manufacture and their functionality does not depend on the computed function so they can be pre-manufactured in the offline phase and used for any functionality.
@@ -419,9 +419,10 @@ They assume collision-resistant hash functions (CRHFs) and the existence of uniq
 \section{Selected MPC applications}\label{sec:soa:applications}
 %\unsurein{Warn: This section is unfinished}
 %\infoin{Text need to be glued together so our thesis goals are visible from the composition}
-\todo{Asymetric MPC, cloud offload?}
+%\todo{Asymetric MPC, cloud offload?}%
+%
 In this part, we review related practical results achieved in the MPC.
-%In \cite{JKSS10} authors desing asymmetric MPC
+%In \cite{JKSS10} authors design asymmetric MPC
 \cite{DSZ14} implemented practical 2PC on smartphones based on \cite{GMW87} using a smart card to accelerate computation with pre-computation phase `thanks to the additional trust it provides.
 
 %\begin{itemize}
@@ -533,7 +534,7 @@ Another inspiration could be the SmartID~\cite{smart_id_ee}. It generates RSA ke
 
 Moreover, we would like to focus on building practical and effective solutions that could serve as a drop-in replacement for existing, not that secure ones. If the environment does not need to be changed the adoption is more seamless. This approach is now far more common, as we seen in \cite{smart_id_ee, DCMBR18}. % JKX18 OPAQUE somehow??
 
-Previous research also suggests that a combination of MPC and hardware tokens is very beneficial as it helps to overcome problems of a trusted setup which is often not desirable. E.g., it is impossible to prove that all parties destroyed the trapdoor information during the trusted setup of the system, which is essential to its security. Typical example is a trusted setup in the ZCash\footnote{\url{https://z.cash/}}, popular anonymous cryptocurrency. If the trusted setup was somehow subverted and an attacker knows the trapdoor, he completely break the system by generating new coins without anybody noticing.
+Previous research also suggests that a combination of MPC and hardware tokens is very beneficial as it helps to overcome problems of a trusted setup which is often not desirable. E.g., it is impossible to prove that all parties destroyed the trapdoor information during the trusted setup of the system, which is essential to its security. Typical example is a trusted setup in the ZCash\footnote{\url{https://z.cash/}}, popular anonymous cryptocurrency. If the trusted setup was somehow subverted and an attacker knows the trapdoor, he completely breaks the system by generating new coins without anybody noticing.
 
 As discussed by \cite{K07}, the token model increases robustness as each user is free to choose from various manufacturers which smart card to use. In connection with \cite{2017-ccs-nemec} this gives strong security guarantees also against supply chain attacks.
 
@@ -545,21 +546,21 @@ Here we present ideas that we want to work on.
 \paragraph{Practically usable MPC on smart cards.}%
 We will continue in the analysis of existing MPC protocols in the context of a deployment on resource-constrained devices, which is a challenging task.
 As token model offers some unique properties, we can make trade-offs in the trust model and assumptions of original protocols to make them more effective and practically usable. 
-%Requirements on the token, minimal, maximal, tradeofs.
+%Requirements on the token, minimal, maximal, tradeoffs.
 %Existing protocols could be modified to be practically usable with the tokens. 
 
-We will try to make our previous result \cite{2017-ccs-mavroudis} more universal so it can evaluate the bigger class of functions. Similarly, we want to study how to protect from malicious tokens, e.g., by requiring a card to create a zero-knowledge proof that the operation was performed correctly. This could eliminate the threat of backdoors in the model and reduces required trust.
+We will try to make our previous result \cite{2017-ccs-mavroudis} more universal so it can evaluate the bigger class of functions. Similarly, we want to study how to protect from malicious tokens, e.g., by requiring a card to create a zero-knowledge proof that the operation was performed correctly.  This protection could eliminate the threat of backdoors in the model and reduces the required trust.
 Our ambition is to extend existing MPC compilers to support hardware token models.
 
 \paragraph{Side-channel and backdoor protection.}%
 Theoretical work \cite{DNW09} shown that party which can exchange an only limited amount of information with the environment it is possible to perform UC-secure MPC with malicious attackers. We would like to investigate how this relates to side-channels of the smart cards and assurances we can obtain in this model.
 
-On the other hand, we will analyze whether pre-programmed smart cards acting like a black box are properly implementing security-related functionalities. E.g., if Rabin Miller basis is fixed a pseudoprime could be generated which passes the test without actually being a prime. Such an attack breaks the system as we can bypass hardness assumptions of traditional ECC. Consequently, we will try to design protocols for collaborative parameter generation and attestations based on zero knowledge (ZK) proofs to avoid mentioned problems.
+On the other hand, we will analyze whether pre-programmed smart cards acting as a black box are properly implementing security-related functionalities. E.g., if Rabin Miller basis is fixed a pseudoprime could be generated which passes the test without actually being a prime. Such an attack breaks the system as we can bypass hardness assumptions of traditional ECC. Consequently, we will try to design protocols for collaborative parameter generation and attestations based on zero-knowledge (ZK) proofs to avoid mentioned problems.
 
 \paragraph{Hardware wallets.}%
 Similarly, we would like to focus on cryptocurrencies and hardware wallets as our work could have a significant impact in this field protecting end-users from losing funds. 
 Hardware wallet is a dedicated device that stores user's secrets and signs user's outgoing transactions to protect from money theft. There are open questions on how to realize such algorithms in privacy-centric cryptocurrencies (PCCC).
-We will study how to transform complex algorithms used in PCCC so they are usable on the hardware wallet and how to use MPC to distribute the risk to multiple devices, such as smartphone, browser and the hardware wallet. 
+We will study how to transform complex algorithms used in PCCC, so they are usable on the hardware wallet and how to use MPC to distribute the risk to multiple devices, such as smartphone, browser and the hardware wallet. 
 
 
 \section{Publication venues}
@@ -737,13 +738,14 @@ Myst is a practical solution protecting from single-point-of-failure problems on
 The \cite{2017-ccs-mavroudis} was presented on ACM Conference on Computer and Communications Security 2017 (ACM CCS), Dallas, Texas, US.
 
 \section{Monero hardware wallet}
+\label{sec:aim:monero_hw_wallet}
 In this yet unpublished work I designed and implemented transaction signing protocol for Monero~\cite{zero_to_monero}, privacy-centric cryptocurrency, on the hardware wallet, resource constrained device. 
 
 Monero differs from traditional cryptocurrencies in a way it stores the transaction on the blockchain. Transaction sender and recipient are concealed so potential financial flow tracking between parcitipants is severely limited. It uses unique, pseudo-random sender addresses, derived from Diffie-Hellman exchange of the sender and recipient. On top of that, Monero uses ring-signatures to make graph analysis difficult. Ring-signatures are digital signatures which have a \emph{ring} of $N$ public keys associated with it. The signature is verifiable with the whole ring but it is not known which private key corresponding to one public key from the ring actually signed the transaction. This scheme thus provides 1-in-$N$ anonymity.
 
 Monero uses Pedersen Commitments to conceal the value of transactions being sent. On top of that, non-interactive zero-knowledge proofs, so-called Bulletproofs \cite{Bnz2017BulletproofsSP} are used to ensure the transaction uses proper values.
 
-In the considered scenario an user owns a hardware wallet, dedicated device storing the private keys used for signing the transactions. It has usually a display and hardware buttons so user can confirm the transaction details on the device. Hardware wallets protects user from theft as the key is never leaked to the connected host, which might be infected due to large attack surface and due to its multi-purpose nature. Hardware wallets are on the other hand very limited devices so the attack surface is as low as possible. 
+In the considered scenario a user owns a hardware wallet, dedicated device storing the private keys used for signing the transactions. It has usually a display and hardware buttons so user can confirm the transaction details on the device. Hardware wallets protects user from theft as the key is never leaked to the connected host, which might be infected due to large attack surface and due to its multi-purpose nature. Hardware wallets are on the other hand very limited devices so the attack surface is as low as possible. 
 
 I've designed and implemented a Monero transaction signing protocol on a hardware wallet in a way the secret key never leaves the hardware device and the malicious host cannot tamper the signing data, i.e., user always have to confirm the transaction details first. On top of that, host verifies if the hardware wallet is not cheating either. The protocol is intuitive and simple to analyze that it preserves desired security properties. It is thus specialized secure two-party computation protocol. 
 
@@ -753,8 +755,16 @@ Later, we plan to extend the protocol to support threshold signatures and multip
 The paper is not yet published, with expected submission in Spring 2019. 
 % bulletproofs
 
+\begin{ecmmnt}\subsection{Monero paper}
 
-\begin{ecmmnt}
+Idea: submit to Oakland (rolling deadline) or some other A, A+ conference before theses submission. 
+
+Covering basic Monero transaction, transaction signing protocol for hardware wallets, with security proof (ideally. reduction. original signing algorithm is secure then transformed protocol is secure as well).
+
+Covering also blockchain scanning, so view key is not leaked to the host. Schemes designed with their properties. Group payment identification pseudonymity, fast scanning. Encrypted Bloom filters. Impossibility on some attractive scheme properties (publicly derivable public key chain for forward secrecy, corresponding private key derivation only with hardware wallet. Formalize). 
+\end{ecmmnt}
+
+\begin{ecmmnt}% summary, my works.
 \begin{itemize}
 	\item Bug resilience, Kleptography, Single point of failure of resource constrained devices. GACR proposal motivation. eID system failure due to {\bf{ROCA}}~\cite{2017-ccs-nemec}. Smart-ID~\cite{smart_id_ee}. 
 	
@@ -775,6 +785,46 @@ The paper is not yet published, with expected submission in Spring 2019.
 \end{itemize}
 \end{ecmmnt}
 
+\section{Publications}
+
+\begin{itemize}
+	\item \emph{A Touch of Evil: High-Assurance Cryptographic Hardware from Untrusted Components \cite{2017-ccs-mavroudis}.} I helped with implementation of the back-end related services for controlling the Myst from the host. Contribution: 5\%
+	
+	\item \emph{The Return of Coppersmith's Attack: Practical Factorization of Widely Used RSA Moduli \cite{2017-ccs-nemec}.} I reviewed the math code, implemented the fingerprinting tool\footnote{\url{https://github.com/crocs-muni/roca}}, analyzed large key datasets for presence of the vulnerability, e.g., in TLS datasets, certificate authorities (CA) keys and Estonian eID. Contribution: 10\%. \todo{DUNNO. CHECK}
+	
+	\item \emph{The Efficient Randomness Testing using Boolean Functions \cite{booltest_secrypt2017}}. I've co-authored and implemented the Booltest, a tool\footnote{\url{https://github.com/ph4r05/polynomial-distinguishers}} for effective randomness testing. Contribution: 20\%.\todo{DUNNO. CHECK}
+	
+	\item \emph{Measuring Popularity of Cryptographic Libraries in Internet-Wide Scans \cite{2017-acsac-nemec}}. I've co-analyzed large key datasets for knowns fingerprints. Contribution: 20\%.\todo{DUNNO. CHECK}
+	
+	\item \emph{Traversing Symmetric NAT with Predictable Port Allocation \cite{Klinec:2014:TSN:2659651.2659698}}. I've designed, implemented and evaluated a protocol for bypassing Symmetric NAT so two parties can establish a direct connection. Contribution: 80\%.
+	
+	\item \emph{Android APK on-the-fly tampering \cite{apk_tampering}}. I've helped with the design and implementation of the malicious traffic interceptor adding malicious payload to the Android application archives (APKs) being downloaded on-the-fly. Contribution: 40\%.\todo{DUNNO. CHECK}
+	
+	\item \emph{WSNProtectLayer – security middleware for wireless sensor networks \cite{wsnprotectlayer}}. I've co-authored the implementation of the WSNProtectLayer on resource-constrained devices, sensor nodes. Contribution: 5\%.\todo{DUNNO. CHECK}
+\end{itemize}
+
+Moreover, there are several papers in the pipeline which haven't been submitted yet:
+
+\begin{itemize}
+	\item \emph{Monero hardware wallet signing protocol.} As mentioned in the section \ref{sec:aim:monero_hw_wallet}, I've designed and implemented distributed transaction signing protocol. Contribution: 80\%.
+	
+	\item \emph{The $4p-1$ factorization method and its viability as a basis for an RSA backdoor}. The work describes very effective factorization methods for RSA moduli assuming the private keys are of a special form. I've performed the large-scale algorithm testing and running time analysis. Contribution: 13\%.\todo{DUNNO. CHECK}
+	
+	\item \emph{Security margins for known cryptographic algorithms.} The paper analyzes the security margins of known round-reduced block and stream encryption algorithms and hash functions. I've tested the algorithms with the Booltest. Contribution: 10\%.\todo{DUNNO. CHECK}	
+\end{itemize}
+
+%\section{Papers in progress}
+%\begin{itemize}
+%	\item ROCA - extended attack. Returning information to the system.
+%	
+%	\item Automated Smart card APDU AFL assisted fuzzer with systematic power trace analysis feedback.
+%	
+%	\item Zero knowledge proof of secrets generation correctness for smart cards. Producing a proof that given public key was generated according to the prescribed standard and thus cannot contain a bug / kleptography backdoor. 
+%	
+%	\item Static Rabin-Miller basis on embedded cards, testing, detection, exploitation. Based on Bleichenbacher \cite{10.1007/978-3-540-30580-4_2}.
+%\end{itemize}
+
+
 \newpage
 \begin{shaded}
 \begin{itemize}
@@ -785,24 +835,17 @@ The paper is not yet published, with expected submission in Spring 2019.
 \end{shaded}
 
 \newpage
-\subsection{Monero paper}
-
-Idea: submit to Oakland (rolling deadline) or some other A, A+ conference before theses submission. 
-
-Covering basic Monero transaction, transaction signing protocol for hardware wallets, with security proof (ideally. reduction. original signing algorithm is secure then transformed protocol is secure as well).
-
-Covering also blockchain scanning, so view key is not leaked to the host. Schemes designed with their properties. Group payment identification pseudonymity, fast scanning. Encrypted Bloom filters. Impossibility on some attractive scheme properties (publicly derivable public key chain for forward secrecy, corresponding private key derivation only with hardware wallet. Formalize). 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Author's Publications}
-\begin{shaded}
-\begin{itemize}
-    \item Contribution to the paper, percentual contribution
-\end{itemize}
-\end{shaded}
-
-\todoin{Publications here}
+%\chapter{Author's Publications}
+%\begin{shaded}
+%\begin{itemize}
+%    \item Contribution to the paper, percentual contribution
+%\end{itemize}
+%\end{shaded}
+%
+%\todoin{Publications here}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -820,8 +863,11 @@ Covering also blockchain scanning, so view key is not leaked to the host. Scheme
 
 %% Appendix
 \appendix 
-\chapter{Attached papers}
 
+\chapter{Attached papers}
+\todoin{Attach papers}
+
+\begin{ecmmnt} % paper list
 \section{Monero paper}
 Submitted (ideally). Main author, 70\%.
 
@@ -866,7 +912,7 @@ Submitted, V. Sedlacek, small contribution, running experiments, results aggrega
     \item Static Rabin-Miller basis on embedded cards, testing, detection, exploitation. Based on Bleichenbacher \cite{10.1007/978-3-540-30580-4_2}.
     
 \end{itemize}
-
+\end{ecmmnt}
 
 \chapter{Security models}
 \label{apx:uc}
