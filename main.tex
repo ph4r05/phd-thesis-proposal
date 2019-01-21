@@ -453,7 +453,7 @@ MPC compiler is a software that translates a desired functionality $\mathcal{F}$
 
 Fairplay~\cite{MNPS04} was the first published MPC compiler for two-party computations based on Yao's garbled circuits. It featured a high-level definition procedural language: Secure Function Definition Language (SFDL) used to express the desired functionality $\mathcal{F}$. Fairplay translates SFDL to a circuit representation which can be securely evaluated by two parties. This general tool enabled experimentation with MPC to a broader audience. 
 
-MPC compilers and general MPC systems undergo massive active development since then. \cite{sok19} gives an extensible up-to-date review of the numerous practically usable MPC systems. Tools list is depicted in Table \ref{tbl:compilers}. %
+MPC compilers and general MPC systems undergo massive active development since then. \cite{sok19} gives an extensible up-to-date review of the numerous practically usable MPC systems. A tools list is depicted in Table \ref{tbl:compilers}. %
 \todo[disable]{Mention tech compilers are based on?}
 
 \begin{table}[h]
@@ -528,84 +528,84 @@ The challenges we aim to address by the future work can be summarized as follows
 For instance, the severity of problem 1. is illustrated by our recent work \cite{2017-ccs-nemec} where we showed that the single point of failure is a huge risk for security-critical systems, such as eGovernment. Hence new approaches have to be found to alleviate the risk by removing the single point of failure, making the systems more robust. MPC is a systematic answer to this problem as it addresses the single point of failure directly.
 
 \section{Research aim}
-The starting point for the next work can be our previous research \cite{2017-ccs-mavroudis} where we were able to successfully design a practically functional system based on MPC which brings significant security benefits to end-users. Such systems increase a security level as a potential attacker needs to compromise more targets simultaneously to breach the system. 
+The starting point for my next work will be our previous research \cite{2017-ccs-mavroudis}, where we were able to successfully design a practically functional system based on MPC which brings significant security benefits to end-users. Such systems increase a security level as a potential attacker needs to compromise more targets simultaneously to breach the system. 
 
-Another inspiration could be the SmartID~\cite{smart_id_ee}. It generates RSA keys collaboratively both on the smartphone and the desktop, so attacker needs to obtain both key parts to break the system. It is a nice example of a robust system that would mitigate vulnerabilities like those found in Infineon and eGovernment. 
+Another inspiration could be the SmartID~\cite{smart_id_ee}. It generates RSA keys collaboratively both on the smartphone and the desktop, so attacker needs to obtain both key parts to break the system. It is a nice example of a robust system that would mitigate vulnerabilities like those we found in Infineon and eGovernment applications \cite{2017-ccs-nemec}. 
 
-Moreover, we would like to focus on building practical and effective solutions that could serve as a drop-in replacement for existing, less secure. If the environment does not need to be changed the adoption is more seamless. This approach is now far more common, as we saw in \cite{smart_id_ee, DCMBR18}. % JKX18 OPAQUE somehow??
+Moreover, we would like to focus on building practical and effective solutions that could serve as a drop-in replacement for existing, less secure. If the environment does not need to be changed, the adoption is more seamless. This approach is now far more common, as we saw in \cite{smart_id_ee, DCMBR18}. % JKX18 OPAQUE somehow??
 
-Previous research also suggests that a combination of MPC and hardware tokens is very beneficial as it helps to overcome problems of a trusted setup which is often not desirable. For instance, it is impossible to prove that all parties destroyed the trapdoor information during the trusted setup of the system, which is essential to its security. Typical example is a trusted setup in the ZCash\footnote{\url{https://z.cash/}}, popular anonymous cryptocurrency. If the trusted setup was somehow subverted and an attacker knows the trapdoor, he completely breaks the system by generating new coins without anybody noticing.
+Previous research also suggests that a combination of MPC and hardware tokens is very beneficial as it helps to overcome problems of a trusted setup which is often not desirable. For instance, it is impossible to prove that all parties destroyed the trapdoor information during the trusted setup of the system, which is essential to its security. Typical example is a trusted setup in ZCash\footnote{\url{https://z.cash/}}, popular anonymous cryptocurrency. If the trusted setup was somehow subverted and an attacker knows the trapdoor, he completely breaks the system by generating new coins without anybody noticing.
 
-As discussed by \cite{K07}, the token model increases robustness as each user is free to choose from various manufacturers which smartcard to use. In connection with \cite{2017-ccs-nemec} this gives strong security guarantees also against supply chain attacks.
+As discussed by \cite{K07}, the token model increases robustness as each user is free to choose from various manufacturers which smartcard to use. In connection with \cite{2017-ccs-nemec}, this gives strong security guarantees also against supply chain attacks.
 
 We believe that an exploration of a currently under-researched combination of highly secure yet very resource-limited devices and multi-party computation will bring significant benefits.
 
 \section{Research focus}
-Here we present ideas that we want to work on.
+Here we present areas that we want to work on.
 
 \paragraph{Practically usable MPC on smartcards.}%
 We will continue in the analysis of existing MPC protocols in the context of a deployment on resource-constrained devices, which is a challenging task.
-As token model offers some unique properties, we can make trade-offs in the trust model and assumptions of original protocols to make them more effective and practically usable. 
+As the token model offers some unique properties, we can make trade-offs in the trust model and assumptions of original protocols to make them more effective and practically usable. 
 %Requirements on the token, minimal, maximal, tradeoffs.
 %Existing protocols could be modified to be practically usable with the tokens. 
 
-We will try to make our previous result \cite{2017-ccs-mavroudis} more universal so it can evaluate a bigger class of functions. Similarly, we want to study how to protect from malicious tokens, e.g., by requiring a card to create a zero-knowledge proof that the operation was performed correctly.  This protection could eliminate the threat of backdoors in the model and reduces the required trust.
+We will try to make our previous result \cite{2017-ccs-mavroudis} more universal, so it can evaluate a bigger class of functions. Similarly, we want to study how to protect from malicious tokens, e.g., by requiring a card to create a zero-knowledge proof that the operation was performed correctly.  This protection could eliminate the threat of backdoors in the model and reduces the required trust.
 Our ambition is to extend existing MPC compilers to support hardware token models.
 
 \paragraph{Side-channel and backdoor protection.}%
 Theoretical work \cite{DNW09} showed that if a party can exchange only a limited amount of information with the environment then it is possible to perform UC-secure MPC with malicious attackers. We would like to investigate how this relates to side-channels of the smartcards and assurances we can obtain in this model.
 
-On the other hand, we will analyze whether pre-programmed smartcards acting as a black box are properly implementing security-related functionalities. For example, if Rabin Miller basis is fixed a pseudoprime could be generated which passes the test without actually being a prime. Such an attack breaks the system as we can bypass hardness assumptions of traditional ECC. Consequently, we will try to design protocols for collaborative parameter generation and attestations based on zero-knowledge (ZK) proofs to avoid mentioned problems.
+On the other hand, we will analyze whether pre-programmed smartcards acting as a black box are properly implementing security-related functionalities. For example, if Rabin Miller basis is fixed, a pseudoprime could be generated which passes the test without actually being a prime. Such an attack breaks the system as we can bypass hardness assumptions of traditional ECC. Consequently, we will try to design protocols for collaborative parameter generation and attestations based on zero-knowledge (ZK) proofs to avoid mentioned problems.
 
 \paragraph{Hardware wallets.}%
-Similarly, we would like to focus on cryptocurrencies and hardware wallets as our work could have a significant impact in this field protecting end-users from losing funds. 
+Similarly, we would like to examine some selected MPC-related issues in cryptocurrencies and hardware wallets, as our work could have a significant impact in this field protecting end-users from losing funds. 
 Hardware wallet is a dedicated device that stores user's secrets and signs user's outgoing transactions to protect from money theft. There are open questions on how to realize such algorithms in privacy-centric cryptocurrencies (PCCC).
 We will study how to transform complex algorithms used in PCCC, so they are usable on the hardware wallet and how to use MPC to distribute the trust among multiple devices, such as smartphone, browser and the hardware wallet. 
 
 
 \section{Publication venues}
-Research in the line of interest of this proposal is commonly published at the top security international conferences. The primary goal is to publish at the top conferences although it may seem a bit ambitious.
+Research in the line of interest of this proposal is commonly published at the top security international conferences. The primary goal is to publish at the top conferences, although it may seem a bit ambitious.
 
 \begin{itemize}
-	\item \emph{USENIX Security Symposium}, $A^*$ CORE rank
+	\item \emph{USENIX Security Symposium}, $A^*$ CORE rank.
 	
-	\item \emph{IEEE Symposium on Security and Privacy, (S\&P, also known as "Oakland")}, $A^*$ CORE rank
+	\item \emph{IEEE Symposium on Security and Privacy, (S\&P, also known as "Oakland")}, $A^*$ CORE rank.
 	
-	\item \emph{ACM Conference on Computer and Communications Security (ACM CCS)}, $A^*$ CORE rank
+	\item \emph{ACM Conference on Computer and Communications Security (ACM CCS)}, $A^*$ CORE rank.
 	
-	\item \emph{The Network and Distributed System Security Symposium (NDSS)}, $A^*$ CORE rank
+	\item \emph{The Network and Distributed System Security Symposium (NDSS)}, $A^*$ CORE rank.
 \end{itemize}
 
 Alternatively, the applicable conferences for the proposed research are:
 
 \begin{itemize}
-	\item \emph{European Symposium on Research in Computer Security (ESORICS)}, $A$ CORE rank
+	\item \emph{European Symposium on Research in Computer Security (ESORICS)}, $A$ CORE rank.
 	
-	\item \emph{Annual Computer Security Applications Conference (ACSAC)}, $A$ CORE rank
+	\item \emph{Annual Computer Security Applications Conference (ACSAC)}, $A$ CORE rank.
 	
-	\item \emph{Conference on Cryptographic Hardware and Embedded Systems (CHES)}, $A$ CORE rank
+	\item \emph{Conference on Cryptographic Hardware and Embedded Systems (CHES)}, $A$ CORE rank.
 	
-	\item \emph{International Conference on Hardware Security and Trust (ICHST)}, without CORE record
+	%\item \emph{International Conference on Hardware Security and Trust (ICHST)}, without CORE record.
 	
-	\item \emph{ACM Conference on Data and Application Security and Privacy (ACM CODASPY)}, without CORE record, 19\% acceptrance rate \footnote{\url{https://dl.acm.org/citation.cfm?id=2857705}}
+	%\item \emph{ACM Conference on Data and Application Security and Privacy (ACM CODASPY)}, without CORE record, 19\% acceptrance rate \footnote{\url{https://dl.acm.org/citation.cfm?id=2857705}}.
 	
-	\item \emph{IEEE European Symposium on Security and Privacy (Euro SP)}, without CORE record, expected $A^*$ ranking\footnote{\url{http://portal.core.edu.au/conf-ranks/2185/}}
+	%\item \emph{IEEE European Symposium on Security and Privacy (Euro SP)}, without CORE record, expected $A^*$ ranking\footnote{\url{http://portal.core.edu.au/conf-ranks/2185/}}.
 	
-	\item \emph{Theory and Practice of Multi-Party Computation (TPMPC)}, without CORE record
+	%\item \emph{Theory and Practice of Multi-Party Computation (TPMPC)}, without CORE record.
 \end{itemize}
 
 
 \section{Work plan}
 \begin{itemize}
-	\itembf{Spring 2019} Research based on extending \cite{2017-ccs-mavroudis} to support general function classes.
+	\itembf{Spring 2019.} Research based on extending \cite{2017-ccs-mavroudis} to support general function classes.
 	
-	\itembf{Fall 2019} Finishing the previous goal, focus more on Rabin Miller basis black-box testing, study possibilities of improving the current state with MPC as in \cite{DCMBR18}.
+	\itembf{Fall 2019.} Finishing the previous goal, focus more on Rabin Miller basis black-box testing, study possibilities of improving the current state with MPC as in \cite{DCMBR18}.
 	
-	\itembf{Spring 2020} Focusing on hardware wallets research, application of MPC to transaction signing and secret key generation.
+	\itembf{Spring 2020.} Focusing on hardware wallets research, application of MPC to transaction signing and secret key generation.
 	
-	\itembf{Fall 2020} Extending general purpose MPC compiler to make use of hardware tokens.
+	\itembf{Fall 2020.} Extending general purpose MPC compiler to make use of hardware tokens.
 	
-	\itembf{Spring 2021} Finishing dissertation thesis.
+	\itembf{Spring 2021.} Finishing dissertation thesis.
 \end{itemize}
 
 
@@ -704,19 +704,19 @@ The following paragraphs are adapted from this work.%\cite{2017-ccs-mavroudis}.
 In \cite{2017-ccs-nemec}, \emph{The Return of Coppersmith's Attack: Practical Factorization of Widely Used RSA Moduli (ROCA)}, we touched a problem of black-box cryptographic implementations in the secure hardware. The popular secure hardware vendor incorporated a proprietary algorithm for faster generation of RSA primes. The original reasons were probably to increase a performance of RSA key-pair generation as it has significant running time. Unfortunately, the secure hardware generated weak private keys as it significantly decreased the entropy and preserved certain mathematical structure which crucially reduces factorization time of the resulting RSA moduli. The primes were generated as: $p = kM + (65537^a \text{mod} M)$, where $M$ is a constant. 
 As a result, many different domains become affected by this vulnerability. Namely eGovernment, code signing and TPM related tasks such as disk encryption with Bitlocker.
 
-\cite{Young:1996:DSB:646761.706030} introduced \emph{Kleptography}, a study of subverting cryptographic algorithms and standards, i.e., cryptographic backdoors. In the kleptography design the crypto-primitive is constructed in such a way that the resulting system is seemingly correct, without vulnerabilities, but an attacker is able to break the system easily. ROCA could be one example of a construction of a kleptographic design as it was undetected several years while the attackers could factor the RSA moduli easily.
+\cite{Young:1996:DSB:646761.706030} introduced \emph{kleptography}, a study of subverting cryptographic algorithms and standards, i.e., cryptographic backdoors. In the kleptography design, the crypto-primitive is constructed in such a way that the resulting system is seemingly correct, without vulnerabilities, but an attacker is able to break the system easily. ROCA could be one example of a construction of a kleptographic design as it was undetected several years while the attackers could factor the RSA moduli easily.
 
 Similarly, an unintentional vulnerability like faulty pseudo-random number generator (PRNG) may drastically weaken all the cryptographic features in the upper design layers. Moreover, such fault is difficult to detect. 
 Hardware token manufacturer also cannot oversee the whole manufacturing process which opens possibilities for insider attackers implanting malicious circuitry to the token. 
 
 \paragraph{Myst.}%
-In \cite{2017-ccs-mavroudis} we address these concerns by distributing the trust among $N$ smartcards which jointly compute the cryptographic functions in the MPC manner. 
+In \cite{2017-ccs-mavroudis}, we address these concerns by distributing the trust among $N$ smartcards which jointly compute the cryptographic functions in the MPC manner. 
 The key idea is to combine
 protective-redundancy with modern threshold cryptographic techniques to build a system tolerant to hardware trojans and errors. 
-If smartcards originate from non-crossing supply chains it reduces the likelihood of compromises as a potential attacker would have to compromise all used smartcards. 
-If vendors would like to circumvent our design they would need to coordinate the effort and backdoor used smartcards. There is an interesting aspect of geopolitics, as we assume such coordinated effort is infeasible if vendors are owned by various geopolitical clusters, e.g. from US, EU, Russia and China.
+If smartcards originate from non-crossing supply chains, it reduces the likelihood of compromises as a potential attacker would have to compromise all used smartcards. 
+If vendors would like to circumvent our design, they would need to coordinate the effort and backdoor used smartcards. There is an interesting aspect of geopolitics, as we assume such coordinated effort is infeasible if vendors are owned by various geopolitical clusters, e.g., from US, EU, Russia and China.
 
-We proposed \emph{Myst}, a practical high-assurance architecture, that uses commercial off-the-shelf (COTS) hardware, and provides strong security guarantees, even in the presence of multiple malicious or faulty components. Figure \ref{fig:myst_arch} shows architecture of the Myst.
+We proposed \emph{Myst}, a practical high-assurance architecture that uses commercial off-the-shelf (COTS) hardware, and provides strong security guarantees, even in the presence of multiple malicious or faulty components. Figure \ref{fig:myst_arch} shows architecture of the Myst.
 Myst realizes secure variants of random number and key generation, public key decryption and signing.  
 
 \begin{figure}[h]
@@ -749,13 +749,13 @@ Myst is a practical solution protecting from single-point-of-failure problems on
 
 \section{Monero hardware wallet}
 \label{sec:aim:monero_hw_wallet}
-In this yet unpublished work I designed and implemented transaction signing protocol for Monero~\cite{zero_to_monero}, privacy-centric cryptocurrency, on the hardware wallet, resource constrained device. 
+In this, yet unpublished, work I designed and implemented transaction signing protocol for Monero~\cite{zero_to_monero}, privacy-centric cryptocurrency, on the hardware wallet, resource constrained device. 
 
 Monero differs from traditional cryptocurrencies in a way it stores the transaction on the blockchain. Transaction sender and recipient are concealed so potential financial flow tracking between participants is severely limited. It uses unique, pseudo-random sender addresses, derived from Diffie-Hellman exchange of the sender and recipient. On top of that, Monero uses ring-signatures to make transaction graph analysis difficult. Ring-signatures are digital signatures which have a \emph{ring} of $N$ public keys associated with it. The signature is verifiable with the whole ring but it is not known which private key corresponding to one public key from the ring actually signed the transaction. This scheme thus provides 1-in-$N$ anonymity.
 
 Monero uses Pedersen commitments to conceal the value of transactions being sent. On top of that, non-interactive zero-knowledge proofs, so-called Bulletproofs \cite{Bnz2017BulletproofsSP} are used to ensure the transaction uses proper values.
 
-In the considered scenario a user owns a hardware wallet, dedicated device storing the private keys used for signing the transactions. It has usually a display and hardware buttons so user can confirm the transaction details on the device. Hardware wallet protects user from theft as the key is never leaked to the connected host, which might be infected due to large attack surface and due to its multi-purpose nature. Hardware wallet is on the other hand very limited device so the attack surface is as low as possible. 
+In the considered scenario, a user owns a hardware wallet, dedicated device storing the private keys used for signing the transactions. It has usually a display and hardware buttons so user can confirm the transaction details on the device. Hardware wallet protects a user from theft as the key is never leaked to the connected host, which might be infected due to large attack surface and due to its multi-purpose nature. Hardware wallet is on the other hand very limited device so the attack surface is as low as possible. 
 
 I have designed and implemented a Monero transaction signing protocol on a hardware wallet in a way the secret key never leaves the hardware device and the malicious host cannot tamper with the signing data, i.e., user always has to confirm the transaction details first. On top of that, host verifies if the hardware wallet is not cheating either. The protocol is intuitive and simple to analyze that it preserves desired security properties. It is thus specialized secure two-party computation protocol. 
 
@@ -820,7 +820,7 @@ Moreover, there are several papers in the pipeline which have not been submitted
 	
 	\item \emph{The $4p-1$ factorization method and its viability as a basis for an RSA backdoor}. The work describes very effective factorization methods for RSA moduli assuming the private keys are of a special form. I have performed the large-scale algorithm testing and running time analysis. Contribution: 13\%.\todo{DUNNO. CHECK}
 	
-	\item \emph{Security margins for known cryptographic algorithms.} The paper analyzes the security margins of known round-reduced block and stream encryption algorithms and hash functions. I have tested the algorithms with the Booltest. Contribution: 10\%.\todo{DUNNO. CHECK}	
+	\item \emph{Security margins for known cryptographic algorithms.} The work analyzes the security margins of known round-reduced block and stream encryption algorithms and hash functions. I have tested the algorithms with the Booltest. Contribution: 10\%.\todo{DUNNO. CHECK}	
 \end{itemize}
 
 %\section{Papers in progress}
@@ -928,11 +928,11 @@ Submitted, V. Sedlacek, small contribution, running experiments, results aggrega
 \label{apx:uc}
 Here we shortly compare plain and security UC model.
 
-\paragraph{Plain model}
+\paragraph{Plain model.}
 Both models, plain and UC, define two separate worlds.
 The \emph{ideal world}, where the security is intuitively guaranteed and the \emph{real world}.
 
-In the ideal world, the \emph{ideal~functionality}\footnote{Ideal functionality was originally used in~\cite{GMW87}} $\mathcal{F}$ is a natural algorithmic description of the function $f$. It securely evaluates the function $f$ acting as an incorruptible trusted third party (TTP). It securely evaluates $f$ and returns the result to the participants $P_i$. The \emph{adversary}~$\mathcal{A}$ can interact with $\mathcal{F}$ only via the external interface. Besides that, $\mathcal{A}$ interacts with other parties in an arbitrary manner, defined by the security properties being proved, e.g. semi-honest vs. malicious adversary.
+In the ideal world, the \emph{ideal~functionality}\footnote{Ideal functionality was originally used in~\cite{GMW87}.} $\mathcal{F}$ is a natural algorithmic description of the function $f$. It securely evaluates the function $f$ acting as an incorruptible trusted third party (TTP). It securely evaluates $f$ and returns the result to the participants $P_i$. The \emph{adversary}~$\mathcal{A}$ can interact with $\mathcal{F}$ only via the external interface. Besides that, $\mathcal{A}$ interacts with other parties in an arbitrary manner, defined by the security properties being proved, e.g. semi-honest vs. malicious adversary.
 This notion intuitively captures the desired security properties we want the protocol $\pi$ realizing function $f$ to have, i.e., it should securely emulate the TTP in the real world setting.
 
 We say that $\pi$ securely evaluates a function $f$ in the real world if for any adversary $\mathcal{A}$ there exists an ideal adversary $\mathcal{S}$, a simulator, such that statistical distributions generated by views of parties in the real world and ideal world are indistinguishable. 
@@ -946,12 +946,12 @@ If the distributions are perfectly equal we say the security is \emph{perfect}.
 
 %The \emph{view} of a party is defined contains the input, internal randomness and all received messages during the protocol.
 
-\paragraph{UC framework}
+\paragraph{UC framework.}
 The UC framework captures a complex set of interactions in comparison to the plain-model. MPC protocols may be executed with the same or other parties, parties inputs may be correlated, protocol outputs can be used by other protocols and message communication could be controlled by an adversary in any way. 
 
 It is not feasible to address all these concerns in the plain model as one would have to model each individually. Still, there would be new, previously neglected problems. These concerns motivated quick shift to UC framework which provides very high-security guarantees.
 
-The power stems from the addition of an \emph{environment}~$\mathcal{Z}$, the algorithmic entity which represents everything external to the protocol execution, representing potential outside interactions and concurrent protocol executions. It wraps and controls the execution, hands arbitrary inputs to the parties, collects outputs from the parties, communicates with the adversary~$\mathcal{A}$ during the whole course of the protocol. The communication with~$\mathcal{A}$ is essential to the security.
+The power stems from the addition of an \emph{environment}~$\mathcal{Z}$, the algorithmic entity that represents everything external to the protocol execution, representing potential outside interactions and concurrent protocol executions. It wraps and controls the execution, hands arbitrary inputs to the parties, collects outputs from the parties, communicates with the adversary~$\mathcal{A}$ during the whole course of the protocol. The communication with~$\mathcal{A}$ is essential to the security.
 
 %This notion intuitively captures the desired security properties we want the protocol $\pi$ realizing function $f$ to have, i.e., it should securely emulate the TTP in the real world setting.
 
