@@ -530,13 +530,15 @@ For instance, the severity of problem 1. is illustrated by our recent work \cite
 \section{Research aim}
 The starting point for my next work will be our previous research \cite{2017-ccs-mavroudis}, where we were able to successfully design a practically functional system based on MPC which brings significant security benefits to end-users. Such systems increase a security level as a potential attacker needs to compromise more targets simultaneously to breach the system. 
 
-Another inspiration could be the SmartID~\cite{smart_id_ee}. It generates RSA keys collaboratively both on the smartphone and the desktop, so attacker needs to obtain both key parts to break the system. It is a nice example of a robust system that would mitigate vulnerabilities like those we found in Infineon and eGovernment applications \cite{2017-ccs-nemec}. 
+Another inspiration could be the SmartID~\cite{smart_id_ee} protocol deployed by banks in Baltic countries, producing qualified signature according to eIDAS directive. The RSA key-pairs are generated collaboratively both on the smartphone and the desktop, so attacker needs to obtain both key parts to break the system. It is a nice example of a robust system that would mitigate vulnerabilities like those we found in Infineon chip and its eGovernment application \cite{2017-ccs-nemec}. 
 
-Moreover, we would like to focus on building practical and effective solutions that could serve as a drop-in replacement for existing, less secure. If the environment does not need to be changed, the adoption is more seamless. This approach is now far more common, as we saw in \cite{smart_id_ee, DCMBR18}. % JKX18 OPAQUE somehow??
+Moreover, we would like to focus on building practical and efficient solutions that could serve as a drop-in replacement for existing, less secure ones. 
+The adoption is more seamless if the environment does not need to be changed.
+This approach is now far more common, as we saw in \cite{smart_id_ee, DCMBR18}. % JKX18 OPAQUE somehow??
 
-Previous research also suggests that a combination of MPC and hardware tokens is very beneficial as it helps to overcome problems of a trusted setup which is often not desirable. For instance, it is impossible to prove that all parties destroyed the trapdoor information during the trusted setup of the system, which is essential to its security. Typical example is a trusted setup in ZCash\footnote{\url{https://z.cash/}}, popular anonymous cryptocurrency. If the trusted setup was somehow subverted and an attacker knows the trapdoor, he completely breaks the system by generating new coins without anybody noticing.
+Previous research also suggests that a combination of MPC and hardware tokens is very beneficial as it helps to overcome problems of a trusted setup which  itself is often not desirable. For instance, it is impossible to prove that all parties destroyed the trapdoor information during the trusted setup of the system, which is essential to its security. Typical example is a trusted setup in ZCash\footnote{\url{https://z.cash/}}, popular anonymous cryptocurrency. If the trusted setup was somehow subverted and an attacker knows the trapdoor, he can completely break the system by generating new coins without anybody noticing.
 
-As discussed by \cite{K07}, the token model increases robustness as each user is free to choose from various manufacturers which smartcard to use. In connection with \cite{2017-ccs-nemec}, this gives strong security guarantees also against supply chain attacks.
+As discussed by \cite{K07}, the token model increases robustness as each user is free to choose which smartcard to use from various manufacturers. In connection with \cite{2017-ccs-nemec}, this gives strong security guarantees also against supply chain attacks.
 
 We believe that an exploration of a currently under-researched combination of highly secure yet very resource-limited devices and multi-party computation will bring significant benefits.
 
@@ -699,15 +701,16 @@ This chapter summarizes achieved results so far.
 
 \section{Myst - MPC smartcard grid}
 This section is based on results achieved in the: \emph{A Touch of Evil: High-Assurance Cryptographic Hardware from Untrusted Components}~\cite{2017-ccs-mavroudis}. 
-The following paragraphs are adapted from this work.%\cite{2017-ccs-mavroudis}.
 
-In \cite{2017-ccs-nemec}, \emph{The Return of Coppersmith's Attack: Practical Factorization of Widely Used RSA Moduli (ROCA)}, we touched a problem of black-box cryptographic implementations in the secure hardware. The popular secure hardware vendor incorporated a proprietary algorithm for faster generation of RSA primes. The original reasons were probably to increase a performance of RSA key-pair generation as it has significant running time. Unfortunately, the secure hardware generated weak private keys as it significantly decreased the entropy and preserved certain mathematical structure which crucially reduces factorization time of the resulting RSA moduli. The primes were generated as: $p = kM + (65537^a \text{mod} M)$, where $M$ is a constant. 
-As a result, many different domains become affected by this vulnerability. Namely eGovernment, code signing and TPM related tasks such as disk encryption with Bitlocker.
+In \cite{2017-ccs-nemec}, \emph{The Return of Coppersmith's Attack: Practical Factorization of Widely Used RSA Moduli (ROCA)}, we touched a problem of black-box cryptographic implementations in the secure hardware. The popular secure hardware vendor incorporated a proprietary algorithm for faster generation of RSA primes. The original reasons were probably to increase a performance of RSA key-pair generation as it has significant running time. Unfortunately, the secure hardware generated weak private keys. It significantly decreased the entropy and preserved certain mathematical structure which crucially reduces factorization time of the resulting RSA moduli. The primes were generated as: $p = kM + (65537^a \,\text{mod} M)$, where $M$ is a constant. An RSA modulus formed with primes of this form can be easily factorized with the Coppersmith method.
+As a result, many different domains become affected by this vulnerability. Namely electronic IDs, code signing and secure key storage such as disk encryption with Bitlocker.
 
-\cite{Young:1996:DSB:646761.706030} introduced \emph{kleptography}, a study of subverting cryptographic algorithms and standards, i.e., cryptographic backdoors. In the kleptography design, the crypto-primitive is constructed in such a way that the resulting system is seemingly correct, without vulnerabilities, but an attacker is able to break the system easily. ROCA could be one example of a construction of a kleptographic design as it was undetected several years while the attackers could factor the RSA moduli easily.
+\cite{Young:1996:DSB:646761.706030} introduced \emph{kleptography}, a study of subverting cryptographic algorithms and standards, i.e., cryptographic backdoors. In the kleptography design, the crypto-primitive is constructed in such a way that the resulting system is seemingly correct, without vulnerabilities, but an attacker is able to break the system easily. ROCA vulnerability could be one example of a construction of a kleptographic design as it was undetected several years while the attackers could factor the RSA moduli easily.
 
 Similarly, an unintentional vulnerability like faulty pseudo-random number generator (PRNG) may drastically weaken all the cryptographic features in the upper design layers. Moreover, such fault is difficult to detect. 
 Hardware token manufacturer also cannot oversee the whole manufacturing process which opens possibilities for insider attackers implanting malicious circuitry to the token. 
+%
+The following paragraphs are adapted from this work.%\cite{2017-ccs-mavroudis}.
 
 \paragraph{Myst.}%
 In \cite{2017-ccs-mavroudis}, we address these concerns by distributing the trust among $N$ smartcards which jointly compute the cryptographic functions in the MPC manner. 
@@ -757,9 +760,9 @@ Monero uses Pedersen commitments to conceal the value of transactions being sent
 
 In the considered scenario, a user owns a hardware wallet, dedicated device storing the private keys used for signing the transactions. It has usually a display and hardware buttons so user can confirm the transaction details on the device. Hardware wallet protects a user from theft as the key is never leaked to the connected host, which might be infected due to large attack surface and due to its multi-purpose nature. Hardware wallet is on the other hand very limited device so the attack surface is as low as possible. 
 
-I have designed and implemented a Monero transaction signing protocol on a hardware wallet in a way the secret key never leaves the hardware device and the malicious host cannot tamper with the signing data, i.e., user always has to confirm the transaction details first. On top of that, host verifies if the hardware wallet is not cheating either. The protocol is intuitive and simple to analyze that it preserves desired security properties. It is thus specialized secure two-party computation protocol. 
+I have designed and implemented a Monero transaction signing protocol on a hardware wallet in a way the secret key never leaves the hardware device and the malicious host cannot tamper with the signing data, i.e., user always has to confirm the transaction details first. On top of that, host verifies if the hardware wallet is not cheating either. The protocol is intuitive and it is simple to verify that it preserves desired security properties. It is thus specialized secure two-party computation protocol. 
 
-Later, we plan to extend the protocol to support threshold signatures and multiple different hardware wallets, following the approach of True2F~\cite{DCMBR18} and 
+Later, we plan to extend the protocol to support threshold signatures and multiple different hardware wallets, following the MPC approach of True2F~\cite{DCMBR18} and 
 \cite{2017-ccs-mavroudis}. The implementation is already merged to the Monero upstream\footnote{\url{https://github.com/monero-project/monero}} and the Trezor hardware wallet upstream repositories\footnote{\url{https://github.com/trezor/trezor-core/}}.
 
 The paper is not yet published, with expected submission in Spring 2019. 
@@ -798,29 +801,50 @@ Covering also blockchain scanning, so view key is not leaked to the host. Scheme
 \section{Publications}
 
 \begin{itemize}
-	\item \emph{A Touch of Evil: High-Assurance Cryptographic Hardware from Untrusted Components \cite{2017-ccs-mavroudis}.} I helped with implementation of the back-end related services for controlling the Myst from the host. Contribution: 5\%
+	%\item \emph{A Touch of Evil: High-Assurance Cryptographic Hardware from Untrusted Components \cite{2017-ccs-mavroudis}.} %
+	\item \cite{2017-ccs-mavroudis}: \fullcite{2017-ccs-mavroudis}. %
 	
-	\item \emph{The Return of Coppersmith's Attack: Practical Factorization of Widely Used RSA Moduli \cite{2017-ccs-nemec}.} I reviewed the math code, implemented the fingerprinting tool\footnote{\url{https://github.com/crocs-muni/roca}}, analyzed large key datasets for presence of the vulnerability, e.g., TLS datasets, certificate authority (CA) keys and Estonian eID. Contribution: 10\%. \todo{DUNNO. CHECK}
+	I helped with implementation of the back-end related services for controlling the Myst from the host. Contribution: 5\%
 	
-	\item \emph{The Efficient Randomness Testing using Boolean Functions \cite{booltest_secrypt2017}}. I co-authored and implemented the Booltest, a tool\footnote{\url{https://github.com/ph4r05/polynomial-distinguishers}} for effective randomness testing. Contribution: 20\%.\todo{DUNNO. CHECK}
+	%\item \emph{The Return of Coppersmith's Attack: Practical Factorization of Widely Used RSA Moduli \cite{2017-ccs-nemec}.} %
+	\item \cite{2017-ccs-nemec}: \fullcite{2017-ccs-nemec}. %
 	
-	\item \emph{Measuring Popularity of Cryptographic Libraries in Internet-Wide Scans \cite{2017-acsac-nemec}}. I've co-analyzed large key datasets for known fingerprints. Contribution: 20\%.\todo{DUNNO. CHECK}
+	I reviewed the math code, implemented the fingerprinting tool\footnote{\url{https://github.com/crocs-muni/roca}}, analyzed large key datasets for presence of the vulnerability, e.g., TLS datasets, certificate authority (CA) keys and Estonian eID. Contribution: 10\%. \todo{DUNNO. CHECK}
 	
-	\item \emph{Traversing Symmetric NAT with Predictable Port Allocation \cite{Klinec:2014:TSN:2659651.2659698}}. I have designed, implemented and evaluated a protocol for bypassing Symmetric NAT so two parties can establish a direct connection. Contribution: 80\%.
+	%\item \emph{The Efficient Randomness Testing using Boolean Functions \cite{booltest_secrypt2017}}. %
+	\item \cite{booltest_secrypt2017}: \fullcite{booltest_secrypt2017}. %
+		
+	I co-authored and implemented the Booltest, a tool\footnote{\url{https://github.com/ph4r05/polynomial-distinguishers}} for effective randomness testing. Contribution: 20\%.\todo{DUNNO. CHECK}
 	
-	\item \emph{Android APK on-the-fly tampering \cite{apk_tampering}}. I've helped with the design and implementation of the malicious traffic interceptor adding malicious payload to the Android application archives (APKs) being downloaded on-the-fly. Contribution: 40\%.\todo{DUNNO. CHECK}
+	%\item \emph{Measuring Popularity of Cryptographic Libraries in Internet-Wide Scans \cite{2017-acsac-nemec}}. %
+	\item \cite{booltest_secrypt2017}: \fullcite{booltest_secrypt2017}. %
 	
-	\item \emph{WSNProtectLayer – security middleware for wireless sensor networks \cite{wsnprotectlayer}}. I co-authored the implementation of the WSNProtectLayer on resource-constrained devices (sensor nodes). Contribution: 5\%.\todo{DUNNO. CHECK}
+	I've co-analyzed large key datasets for known fingerprints. Contribution: 20\%.\todo{DUNNO. CHECK}
+	
+	%\item \emph{Traversing Symmetric NAT with Predictable Port Allocation \cite{Klinec:2014:TSN:2659651.2659698}}. %
+	\item \cite{Klinec:2014:TSN:2659651.2659698}: \fullcite{Klinec:2014:TSN:2659651.2659698}. %
+	
+	I have designed, implemented and evaluated a protocol for bypassing Symmetric NAT so two parties can establish a direct connection. Contribution: 80\%.
+	
+	%\item \emph{Android APK on-the-fly tampering \cite{apk_tampering}}. %
+	\item \cite{apk_tampering}: \fullcite{apk_tampering}. %
+	
+	I've helped with the design and implementation of the malicious traffic interceptor adding malicious payload to the Android application archives (APKs) being downloaded on-the-fly. Contribution: 40\%.\todo{DUNNO. CHECK}
+	
+	%\item \emph{WSNProtectLayer – security middleware for wireless sensor networks \cite{wsnprotectlayer}}. %
+	\item \cite{wsnprotectlayer}: \fullcite{wsnprotectlayer}. %
+	
+	I co-authored the implementation of the WSNProtectLayer on resource-constrained devices (sensor nodes). Contribution: 5\%.\todo{DUNNO. CHECK}
 \end{itemize}
 
-Moreover, there are several papers in the pipeline which have not been submitted yet:
+Moreover, there are several papers in the pipeline which have not yet been submitted and are to be finalized in the upcoming months:
 
 \begin{itemize}
 	\item \emph{Monero hardware wallet signing protocol.} As mentioned in the Section \ref{sec:aim:monero_hw_wallet}, I have designed and implemented distributed transaction signing protocol. Contribution: 80\%.
 	
 	\item \emph{The $4p-1$ factorization method and its viability as a basis for an RSA backdoor}. The work describes very effective factorization methods for RSA moduli assuming the private keys are of a special form. I have performed the large-scale algorithm testing and running time analysis. Contribution: 13\%.\todo{DUNNO. CHECK}
 	
-	\item \emph{Security margins for known cryptographic algorithms.} The work analyzes the security margins of known round-reduced block and stream encryption algorithms and hash functions. I have tested the algorithms with the Booltest. Contribution: 10\%.\todo{DUNNO. CHECK}	
+	\item \emph{Security margins for known cryptographic algorithms.} The work analyzes the security margins of known round-reduced block and stream encryption algorithms and hash functions. I have tested the algorithms with the BoolTest. Contribution: 10\%.\todo{DUNNO. CHECK}	
 \end{itemize}
 
 %\section{Papers in progress}
