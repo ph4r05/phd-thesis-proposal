@@ -800,40 +800,36 @@ Covering also blockchain scanning, so view key is not leaked to the host. Scheme
 
 \section{Publications}
 
+%\newcommand{\citemypub}[1]{\citetitle{#1} \cite{#1}. }
+\newcommand{\citemypub}[1]{\cite{#1}: \fullcite{#1}.\newline}
+
 \begin{itemize}
 	%\item \emph{A Touch of Evil: High-Assurance Cryptographic Hardware from Untrusted Components \cite{2017-ccs-mavroudis}.} %
-	\item \cite{2017-ccs-mavroudis}: \fullcite{2017-ccs-mavroudis}. %
-	
+	\item \citemypub{2017-ccs-mavroudis}
 	I helped with implementation of the back-end related services for controlling the Myst from the host. Contribution: 5\%
 	
 	%\item \emph{The Return of Coppersmith's Attack: Practical Factorization of Widely Used RSA Moduli \cite{2017-ccs-nemec}.} %
-	\item \cite{2017-ccs-nemec}: \fullcite{2017-ccs-nemec}. %
-	
+	\item \citemypub{2017-ccs-nemec}
 	I reviewed the math code, implemented the fingerprinting tool\footnote{\url{https://github.com/crocs-muni/roca}}, analyzed large key datasets for presence of the vulnerability, e.g., TLS datasets, certificate authority (CA) keys and Estonian eID. Contribution: 10\%. \todo{DUNNO. CHECK}
 	
 	%\item \emph{The Efficient Randomness Testing using Boolean Functions \cite{booltest_secrypt2017}}. %
-	\item \cite{booltest_secrypt2017}: \fullcite{booltest_secrypt2017}. %
-		
+	\item \citemypub{booltest_secrypt2017}
 	I co-authored and implemented the Booltest, a tool\footnote{\url{https://github.com/ph4r05/polynomial-distinguishers}} for effective randomness testing. Contribution: 20\%.\todo{DUNNO. CHECK}
 	
 	%\item \emph{Measuring Popularity of Cryptographic Libraries in Internet-Wide Scans \cite{2017-acsac-nemec}}. %
-	\item \cite{booltest_secrypt2017}: \fullcite{booltest_secrypt2017}. %
-	
+	\item \citemypub{booltest_secrypt2017}
 	I've co-analyzed large key datasets for known fingerprints. Contribution: 20\%.\todo{DUNNO. CHECK}
 	
 	%\item \emph{Traversing Symmetric NAT with Predictable Port Allocation \cite{Klinec:2014:TSN:2659651.2659698}}. %
-	\item \cite{Klinec:2014:TSN:2659651.2659698}: \fullcite{Klinec:2014:TSN:2659651.2659698}. %
-	
+	\item \citemypub{Klinec:2014:TSN:2659651.2659698}
 	I have designed, implemented and evaluated a protocol for bypassing Symmetric NAT so two parties can establish a direct connection. Contribution: 80\%.
 	
 	%\item \emph{Android APK on-the-fly tampering \cite{apk_tampering}}. %
-	\item \cite{apk_tampering}: \fullcite{apk_tampering}. %
-	
+	\item \citemypub{apk_tampering}
 	I've helped with the design and implementation of the malicious traffic interceptor adding malicious payload to the Android application archives (APKs) being downloaded on-the-fly. Contribution: 40\%.\todo{DUNNO. CHECK}
 	
 	%\item \emph{WSNProtectLayer – security middleware for wireless sensor networks \cite{wsnprotectlayer}}. %
-	\item \cite{wsnprotectlayer}: \fullcite{wsnprotectlayer}. %
-	
+	\item \citemypub{wsnprotectlayer}
 	I co-authored the implementation of the WSNProtectLayer on resource-constrained devices (sensor nodes). Contribution: 5\%.\todo{DUNNO. CHECK}
 \end{itemize}
 
