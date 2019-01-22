@@ -520,12 +520,15 @@ The central question connecting my further research is: \emph{How can a connecti
 The challenges we aim to address by the future work can be summarized as follows:
 
 \begin{enumerate}
-	\item Single point of failure 
-	\item String trust assumptions
-	\item Insufficient protection of private data and secret keys 
+	\item \emph{Single point of failure}. For instance, reliance on a single black-box cryptographic implementation. As we shown in \cite{2017-ccs-nemec}, such fault is a huge risk for security-critical systems, such as eID.
+	
+	\item \emph{Strong trust assumptions}. For instance, a strong assumption that FIDO authentication tokens are implemented properly \cite{DCMBR18}, PRNG generates cryptographically-secure numbers and that trusted setup parties securely erased trapdoor information.
+	
+	\item \emph{Insufficient protection of private data and secret keys}. 
+	For example, exposure of cryptographic signing keys used to sign finance transfers by malware.
 \end{enumerate}
  
-For instance, the severity of problem 1. is illustrated by our recent work \cite{2017-ccs-nemec} where we showed that the single point of failure is a huge risk for security-critical systems, such as eGovernment. Hence new approaches have to be found to alleviate the risk by removing the single point of failure, making the systems more robust. MPC is a systematic answer to this problem as it addresses the single point of failure directly.
+New approaches have to be found to alleviate the risk by removing the single point of failure and making the systems more robust. MPC is a systematic answer to this problem as enables to securely distribute the trust among independent parties.
 
 \section{Research aim}
 The starting point for my next work will be our previous research \cite{2017-ccs-mavroudis}, where we were able to successfully design a practically functional system based on MPC which brings significant security benefits to end-users. Such systems increase a security level as a potential attacker needs to compromise more targets simultaneously to breach the system. 
