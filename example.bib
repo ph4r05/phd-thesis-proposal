@@ -792,11 +792,26 @@
 
 % Monero Bulletproof
 
+@INPROCEEDINGS{Bnz2017BulletproofsSP2,
+	author={Benedikt B{\"{u}}nz and Jonathan Bootle and Dan Boneh, Andrew Poelstra and Pieter Wuille and Greg Maxwell},
+	booktitle={2018 IEEE Symposium on Security and Privacy (SP)}, 
+	title={Bulletproofs: Short Proofs for Confidential Transactions and More}, 
+	year={2018},
+	pages={315-334},
+	abstract={We propose Bulletproofs, a new non-interactive zero-knowledge proof protocol with very short proofs and without a trusted setup; the proof size is only logarithmic in the witness size. Bulletproofs are especially well suited for efficient range proofs on committed values: they enable proving that a committed value is in a range using only 2 log_2(n)+9 group and field elements, where n is the bit length of the range. Proof generation and verification times are linear in n. Bulletproofs greatly improve on the linear (in n) sized range proofs in existing proposals for confidential transactions in Bitcoin and other cryptocurrencies. Moreover, Bulletproofs supports aggregation of range proofs, so that a party can prove that m commitments lie in a given range by providing only an additive O(log(m)) group elements over the length of a single proof. To aggregate proofs from multiple parties, we enable the parties to generate a single proof without revealing their inputs to each other via a simple multi-party computation (MPC) protocol for constructing Bulletproofs. This MPC protocol uses either a constant number of rounds and linear communication, or a logarithmic number of rounds and logarithmic communication. We show that verification time, while asymptotically linear, is very efficient in practice. The marginal cost of batch verifying 32 aggregated range proofs is less than the cost of verifying 32 ECDSA signatures. Bulletproofs build on the techniques of Bootle et al. (EUROCRYPT 2016). Beyond range proofs, Bulletproofs provide short zero-knowledge proofs for general arithmetic circuits while only relying on the discrete logarithm assumption and without requiring a trusted setup. We discuss many applications that would benefit from Bulletproofs, primarily in the area of cryptocurrencies. The efficiency of Bulletproofs is particularly well suited for the distributed and trustless nature of blockchains. The full version of this article is available on ePrint.},
+	keywords={computational complexity;cryptographic protocols;theorem proving;short proofs;confidential transactions;noninteractive zero-knowledge proof protocol;proof size;field elements;verification times;single proof;simple multiparty computation protocol;zero-knowledge proofs;Bulletproofs;aggregated range proofs;witness size;proof generation;Bitcoin;cryptocurrencies;MPC protocol;logarithmic communication;marginal cost;general arithmetic circuits;discrete logarithm assumption;Protocols;Bitcoin;Contracts;Aggregates;Privacy;Bitcoin;Blockchain;Zero Knowledge proof of knowledge;confidential transactions;privacy},
+	doi={10.1109/SP.2018.00020},
+	ISSN={2375-1207},
+	month={May},
+	url={https://eprint.iacr.org/2017/1066}
+}
+
 @misc{Bnz2017BulletproofsSP,
     author = {Benedikt B{\"{u}}nz and Jonathan Bootle and Dan Boneh, Andrew Poelstra and Pieter Wuille and Greg Maxwell},
     title = {Bulletproofs: Short Proofs for Confidential Transactions and More},
     howpublished = {Cryptology ePrint Archive, Report 2017/1066},
     note = {\url{https://eprint.iacr.org/2017/1066}, Accessed: 2018-04-03},
+    year = {2017}
 }
 
 @misc{borromean,
