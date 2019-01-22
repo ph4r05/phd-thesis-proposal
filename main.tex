@@ -10,7 +10,7 @@
   digital, %% This option enables the default options for the
            %% digital version of a document. Replace with `printed`
            %% to enable the default options for the printed version
-           %% of a document.
+           %% of a document. digital
   twoside, %% This option enables double-sided typesetting. Use at
            %% least 120 g/m² paper to prevent show-through. Replace
            %% with `oneside` to use one-sided typesetting; use only
@@ -70,6 +70,7 @@
 \usepackage{color}
 \usepackage{markdown} %% Lightweight markup
 \usepackage{listings} %% Source code highlighting
+\usepackage{pdfpages} %% attach papers
 
 \usepackage{xargs}  % Use more than one optional parameter in a new commands  
 \usepackage[pdftex,dvipsnames]{xcolor}  % Colored text etc.  
@@ -974,7 +975,20 @@ For more detailed treatment please refer to \cite{Can01, CLOS02, Lin03, G09, CDN
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Attached papers}\label{apx:papers}
-\todoin{Attach papers}
+The most relevant paper is attached here: \citetitle{2017-ccs-mavroudis} \cite{2017-ccs-mavroudis}
+
+\section{Myst}\label{apx:papers:myst}
+The paper is attached on the next page.
+%% Damn pages=- does not work \shrug 
+%% Docs: http://texdoc.net/texmf-dist/doc/latex/pdfpages/pdfpages.pdf
+%\includepdf[pages={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18}]{embed/2017mavroudis.pdf}
+%\includepdf[pages=-,pagecommand={},width=\textwidth]{embed/2017mavroudis.pdf}
+%\includepdf[]{embed/2017mavroudis.pdf}
+
+\ifcamready%
+{\includepdf[pages={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18}]{embed/2017mavroudis.pdf}}%
+{\unsurein{Paper not attached in draft version, switch to camera ready version to attach. \url{https://arxiv.org/pdf/1709.03817.pdf}}}
+
 
 \begin{ecmmnt} % paper list
 \section{Monero paper}
