@@ -602,7 +602,7 @@ Alternatively, the applicable conferences for the proposed research are:
 
 \section{Work plan}
 \begin{itemize}
-	\itembf{Spring 2019.} Research based on extending \cite{2017-ccs-mavroudis} to support general function classes.
+	\itembf{Spring 2019.} Finishing papers in progress as mentioned in Section \ref{sec:res:pubs}. Continue with research based on extending \cite{2017-ccs-mavroudis} to support general function classes.
 	
 	\itembf{Fall 2019.} Finishing the previous goal, focus more on Rabin Miller basis black-box testing, study possibilities of improving the current state with MPC as in \cite{DCMBR18}.
 	
@@ -702,7 +702,7 @@ This chapter summarizes achieved results so far.
 % Monero paper - MPC transaction signing
 % 
 
-\section{Myst - MPC smartcard grid}
+\section{Myst - MPC smartcard grid}\label{sec:res:myst}
 This section is based on results achieved in the: \emph{A Touch of Evil: High-Assurance Cryptographic Hardware from Untrusted Components}~\cite{2017-ccs-mavroudis}. 
 
 In \cite{2017-ccs-nemec}, \emph{The Return of Coppersmith's Attack: Practical Factorization of Widely Used RSA Moduli (ROCA)}, we touched a problem of black-box cryptographic implementations in the secure hardware. The popular secure hardware vendor incorporated a proprietary algorithm for faster generation of RSA primes. The original reasons were probably to increase a performance of RSA key-pair generation as it has significant running time. Unfortunately, the secure hardware generated weak private keys. It significantly decreased the entropy and preserved certain mathematical structure which crucially reduces factorization time of the resulting RSA moduli. The primes were generated as: $p = kM + (65537^a \,\text{mod} M)$, where $M$ is a constant. An RSA modulus formed with primes of this form can be easily factorized with the Coppersmith method.
@@ -753,7 +753,7 @@ Myst is a practical solution protecting from single-point-of-failure problems on
 
 \cite{2017-ccs-mavroudis} was presented on ACM Conference on Computer and Communications Security 2017 (ACM CCS), Dallas, Texas, US.
 
-\section{Monero hardware wallet}
+\section{Monero hardware wallet}\label{sec:res:monero}
 \label{sec:aim:monero_hw_wallet}
 In this, yet unpublished, work I designed and implemented transaction signing protocol for Monero~\cite{zero_to_monero}, privacy-centric cryptocurrency, on the hardware wallet, resource constrained device. 
 
@@ -802,7 +802,7 @@ Covering also blockchain scanning, so view key is not leaked to the host. Scheme
 \end{itemize}
 \end{ecmmnt}
 
-\section{Publications}
+\section{Publications}\label{sec:res:pubs}
 
 %\newcommand{\citemypub}[1]{\citetitle{#1} \cite{#1}. }
 \newcommand{\citemypub}[1]{\cite{#1}: \fullcite{#1}.\newline}
