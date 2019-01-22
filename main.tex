@@ -77,6 +77,7 @@
 \usepackage{wasysym}
 \usepackage{multirow}
 \usepackage{booktabs}
+\usepackage{tikz}
 
 \newcounter{camera_ready}  % camera ready switch, using heavy graphs, in PDF
 \setcounter{camera_ready}{0}  % set to 1 to print in vectors
@@ -160,6 +161,21 @@
 \newtheorem{definition}{Definition}
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
+
+\newcommand{\shrug}[1][]{%
+	\begin{tikzpicture}[baseline,x=0.8\ht\strutbox,y=0.8\ht\strutbox,line width=0.125ex,#1]
+	\def\arm{(-2.5,0.95) to (-2,0.95) (-1.9,1) to (-1.5,0) (-1.35,0) to (-0.8,0)};
+	\draw \arm;
+	\draw[xscale=-1] \arm;
+	\def\headpart{(0.6,0) arc[start angle=-40, end angle=40,x radius=0.6,y radius=0.8]};
+	\draw \headpart;
+	\draw[xscale=-1] \headpart;
+	\def\eye{(-0.075,0.15) .. controls (0.02,0) .. (0.075,-0.15)};
+	\draw[shift={(-0.3,0.8)}] \eye;
+	\draw[shift={(0,0.85)}] \eye;
+	% draw mouth
+	\draw (-0.1,0.2) to [out=15,in=-100] (0.4,0.95); 
+	\end{tikzpicture}}
 
 %% Break long DOIs, but prefer other chars
 %% Alternative: http://shortdoi.org/
@@ -789,8 +805,7 @@ Covering basic Monero transaction, transaction signing protocol for hardware wal
 
 Covering also blockchain scanning, so view key is not leaked to the host. Schemes designed with their properties. Group payment identification pseudonymity, fast scanning. Encrypted Bloom filters. Impossibility on some attractive scheme properties (publicly derivable public key chain for forward secrecy, corresponding private key derivation only with hardware wallet. Formalize). 
 \end{ecmmnt}
-
-\begin{ecmmnt}% summary, my works.
+\begin{ecmmnt}% summary, my works, klepto, roca, booltest, whitebox, protectlayer
 \begin{itemize}
 	\item Bug resilience, Kleptography, Single point of failure of resource constrained devices. GACR proposal motivation. eID system failure due to {\bf{ROCA}}~\cite{2017-ccs-nemec}. Smart-ID~\cite{smart_id_ee}. 
 	
@@ -811,7 +826,7 @@ Covering also blockchain scanning, so view key is not leaked to the host. Scheme
 \end{itemize}
 \end{ecmmnt}
 
-\section{BoolTest}\label{sec:res:booltest}\todo{Try to sell BoolTest}
+\section{BoolTest}\label{sec:res:booltest}\todo{Trying to sell BoolTest \shrug. Reason in the end of the section.}
 In \cite{booltest_secrypt2017}, we devised a powerful randomness test {\emph{BoolTest}}, which provides comparable results to standard randomness testing batteries such as NIST STS or Dieharder. The strength of the BoolTest lies in a fact it usually needs less data than competitors to obtain the same results and offers better interpretation of results. Booltest uses low-degree polynomials as distinguishers, thus cryptanalyst can directly see which polynomials were able to distinguish input data from random stream and thus see which bits are correlated.
 
 Randomness testing of various cryptographic primitives such as PRNGs, encryption and hash algorithms, is essential for their cryptographic quality assessment. Randomness testing is usually the first step of a cryptanalysis. In the extended version of the paper \cite{booltest2}, we also tested output of true random number generators (TRNGs) of smartcards and hardware wallets: Trezor\footnote{\url{https://trezor.io}} and Ledger\footnote{\url{https://www.ledger.com/}}. Having device failing the randomness test indicates a further problem in the design with potentially high impact. Implementing the MPC may help to avoid similar vulnerabilities and potential backdoors. 
@@ -856,7 +871,7 @@ Due to the simple design BoolTest could be transformed to compute inside MPC fra
 	I co-authored the implementation of the WSNProtectLayer on resource-constrained devices (sensor nodes). Contribution: 5\%.\todo{DUNNO. CHECK}
 \end{itemize}
 
-Moreover, there are several papers in the pipeline which have not yet been submitted and are to be finalized in the upcoming months:
+\paragraph{Publications in progress.} There are several papers in the pipeline which have not yet been submitted and are to be finalized in the upcoming months:
 
 \begin{itemize}
 	\item \emph{Monero hardware wallet signing protocol.} As mentioned in the Section \ref{sec:aim:monero_hw_wallet}, I have designed and implemented distributed transaction signing protocol. Contribution: 80\%.
