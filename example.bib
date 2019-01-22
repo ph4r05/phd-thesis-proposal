@@ -48,6 +48,23 @@
    year = {2017}
  }
 
+@InProceedings{booltest2,
+	author="S{\'y}s, Marek
+	and Klinec, Du{\v{s}}an
+	and Kub{\'i}{\v{c}}ek, Karel
+	and {\v{S}}venda, Petr",
+	editor="Obaidat, Mohammad S.
+	and Cabello, Enrique",
+	title="BoolTest: The Fast Randomness Testing Strategy Based on Boolean Functions with Application to DES, 3-DES, MD5, MD6 and SHA-256",
+	booktitle="E-Business and Telecommunications",
+	year="2019",
+	publisher="Springer International Publishing",
+	address="Cham",
+	pages="123--149",
+	abstract="The output of modern cryptographic primitives like pseudorandom generators and block or stream ciphers is frequently required to be indistinguishable from a truly random data. The existence of any distinguisher provides a hint about the insufficient confusion and diffusion property of an analyzed function. In addition to targeted cryptoanalysis, statistical tests included in batteries such as NIST STS, Dieharder or TestU01 are frequently used to assess the indistinguishability property. However, the tests included in these batteries are either too simple to spot the common biases (like the Monobit test) or overly complex (like the Fourier Transform test) requiring an extensive amount of data. We propose a simple, yet surprisingly powerful method called BoolTest for the construction of distinguishers based on an exhaustive search for boolean function(s). The BoolTest typically constructs distinguisher with fewer input data required and directly identifies the function's biased output bits. We analyze the performance on four input generation strategies: counter-based, low hamming weight, plaintext-ciphertext block combination and bit-flips to test strict avalanche criterion. The BoolTest detects bias and thus constructs distinguisher in a significantly higher number of rounds in the round-reduced versions of DES, 3-DES, MD5, MD6 and SHA-256 functions than the state-of-the-art batteries. Finally, we provide a precise interpretation of BoolTest verdict (provided in the form of Z-score) about the confidence of a distinguisher found. The BoolTest clear interpretation is a significant advantage over standard batteries consisting of multiple tests, where not only a statistical significance of a single test but also aggregated decision over multiple, potentially correlated tests, needs to be correctly performed.",
+	isbn="978-3-030-11039-0"
+}
+
 @inbook{e5b50d9180a54487b14eabe2e1207e4b,
 	title = "Elliptic curve cryptography in practice",
 	abstract = "In this paper we perform a review of elliptic curve cryptography (ECC) as it is used in practice today in order to reveal unique mistakes and vulnerabilities that arise in implementations of ECC.We study four popular protocols that make use of this type of public-key cryptography: Bitcoin, secure shell (SSH), transport layer security (TLS), and the Austrian e-ID card. We are pleased to observe that about 1 in 10 systems support ECC across the TLS and SSH protocols. However, we find that despite the high stakes of money, access and resources protected by ECC, implementations suffer from vulnerabilities similar to those that plague previous cryptographic systems.",

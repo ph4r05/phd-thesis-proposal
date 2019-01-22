@@ -811,6 +811,13 @@ Covering also blockchain scanning, so view key is not leaked to the host. Scheme
 \end{itemize}
 \end{ecmmnt}
 
+\section{BoolTest}\label{sec:res:booltest}\todo{Try to sell BoolTest}
+In \cite{booltest_secrypt2017}, we devised a powerful randomness test {\emph{BoolTest}}, which provides comparable results to standard randomness testing batteries such as NIST STS or Dieharder. The strength of the BoolTest lies in a fact it usually needs less data than competitors to obtain the same results and offers better interpretation of results. Booltest uses low-degree polynomials as distinguishers, thus cryptanalyst can directly see which polynomials were able to distinguish input data from random stream and thus see which bits are correlated.
+
+Randomness testing of various cryptographic primitives such as PRNGs, encryption and hash algorithms, is essential for their cryptographic quality assessment. Randomness testing is usually the first step of a cryptanalysis. In the extended version of the paper \cite{booltest2}, we also tested output of true random number generators (TRNGs) of smartcards and hardware wallets: Trezor\footnote{\url{https://trezor.io}} and Ledger\footnote{\url{https://www.ledger.com/}}. Having device failing the randomness test indicates a further problem in the design with potentially high impact. Implementing the MPC may help to avoid similar vulnerabilities and potential backdoors. 
+
+Due to the simple design BoolTest could be transformed to compute inside MPC framework. This would enable outsourced randomness testing of large datasets. 
+
 \section{Publications}\label{sec:res:pubs}
 
 %\newcommand{\citemypub}[1]{\citetitle{#1} \cite{#1}. }
@@ -827,7 +834,10 @@ Covering also blockchain scanning, so view key is not leaked to the host. Scheme
 	
 	%\item \emph{The Efficient Randomness Testing using Boolean Functions \cite{booltest_secrypt2017}}. %
 	\item \citemypub{booltest_secrypt2017}
-	I co-authored and implemented the Booltest, a tool\footnote{\url{https://github.com/ph4r05/polynomial-distinguishers}} for effective randomness testing. Contribution: 20\%.\todo{DUNNO. CHECK}
+	I co-authored, implemented and tested the Booltest, a tool\footnote{\url{https://github.com/ph4r05/polynomial-distinguishers}} for effective randomness testing. Contribution: 30\%.\todo{DUNNO. CHECK}
+	
+	\item \citemypub{booltest2}
+	Extended version of the \cite{booltest_secrypt2017}, contains more tests strategies and results. I tested and helped with the result analysis. Contribution: 25\%.\todo{DUNNO. CHECK}
 	
 	%\item \emph{Measuring Popularity of Cryptographic Libraries in Internet-Wide Scans \cite{2017-acsac-nemec}}. %
 	\item \citemypub{2017-acsac-nemec}
