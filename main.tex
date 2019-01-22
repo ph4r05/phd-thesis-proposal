@@ -163,11 +163,12 @@
 
 %% Break long DOIs, but prefer other chars
 %% Alternative: http://shortdoi.org/
-\newcounter{biburlnumpenalty}
-\setcounter{biburlnumpenalty}{5000}  
+%\newcounter{biburlnumpenalty}
+%\setcounter{biburlnumpenalty}{5000}  
 
 \begin{document}
-\setlength{\marginparwidth}{2.5cm}  % fixes TODO
+\setlength{\marginparwidth}{2.5cm}   % fixes TODO
+\setcounter{biburlnumpenalty}{5000}  % fixes DOI, has to be after document
 
 %\chapter*{Introduction}
 %\addcontentsline{toc}{chapter}{Introduction}
@@ -893,7 +894,7 @@ Moreover, there are several papers in the pipeline which have not yet been submi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Bibliography
-  \printbibliography[heading=bibintoc] 
+\printbibliography[heading=bibintoc] 
 
 
 %% Index
