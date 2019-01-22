@@ -55,6 +55,10 @@
 \usepackage{url}
 \usepackage{siunitx}
 \usepackage{ifthen}
+\usepackage{breakurl}
+\usepackage[breaklinks]{hyperref} %colorlinks
+\usepackage{doi}
+%\usepackage[ocgcolorlinks]{ocgx2}
 
 \usepackage{paralist} %% Compact list environments
 \usepackage{amsmath}  %% Mathematics
@@ -64,7 +68,6 @@
 \usepackage{comment}
 \usepackage{environ}
 \usepackage{color}
-\usepackage{url}      %% Hyperlinks
 \usepackage{markdown} %% Lightweight markup
 \usepackage{listings} %% Source code highlighting
 
@@ -157,6 +160,11 @@
 \newtheorem{definition}{Definition}
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
+
+%% Break long DOIs, but prefer other chars
+%% Alternative: http://shortdoi.org/
+\newcounter{biburlnumpenalty}
+\setcounter{biburlnumpenalty}{5000}  
 
 \begin{document}
 \setlength{\marginparwidth}{2.5cm}  % fixes TODO
@@ -821,7 +829,7 @@ Covering also blockchain scanning, so view key is not leaked to the host. Scheme
 	I co-authored and implemented the Booltest, a tool\footnote{\url{https://github.com/ph4r05/polynomial-distinguishers}} for effective randomness testing. Contribution: 20\%.\todo{DUNNO. CHECK}
 	
 	%\item \emph{Measuring Popularity of Cryptographic Libraries in Internet-Wide Scans \cite{2017-acsac-nemec}}. %
-	\item \citemypub{booltest_secrypt2017}
+	\item \citemypub{2017-acsac-nemec}
 	I've co-analyzed large key datasets for known fingerprints. Contribution: 20\%.\todo{DUNNO. CHECK}
 	
 	%\item \emph{Traversing Symmetric NAT with Predictable Port Allocation \cite{Klinec:2014:TSN:2659651.2659698}}. %
