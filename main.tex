@@ -99,14 +99,15 @@
     advisor       = {prof. RNDr. Václav Matyáš, M.Sc., Ph.D.},
     title         = {Secure multi-party computation with resource-constrained devices},
     TeXtitle      = {Secure multi-party computation with resource-constrained devices},
-    keywords      = {multi-party computation, secure hardware, cryptocurrencies},
-    TeXkeywords   = {multi-party computation, tamper-proof tokens, multi signatures, smartcards, resource constrained devices, cryptocurrencies, monero, \ldots},
-    abstract      = {This is the abstract of my thesis, which can
-
-                     span multiple paragraphs.},
-    thanks        = {These are the acknowledgements for my thesis, which can
-
-                     span multiple paragraphs.},
+    keywords      = {multi-party computation, tamper-proof tokens, multi signatures, smartcards, resource constrained devices, },
+    TeXkeywords   = {multi-party computation, tamper-proof tokens, multi signatures, smartcards, resource constrained devices,  \ldots},
+    abstract      = {
+    	The focus of the proposed research is to analyze the practical benefits of secure multi-party computation (MPC) in restricted environments. 
+    	The computation model consists of multiple heterogeneous nodes. Node is either a powerful generic device such as cloud computation servers or very resource-restricted device, e.g., with low computational power, memory, and energy, such as smartcard.
+    	We aim to study MPC in the context of smartcards to distribute the trust among parties and to remove the single point of failure.
+    	The primary focus is on practical applications increasing the security level in various domains. The research will try to answer a question on how to practically realize MPC on smardcards and what are the current limits, as general MPC methods are quite computationally intensive and thus infeasible to run on smartcards.
+    			},
+    thanks        = {I would like to thank Vashek Matyáš, Petr Švenda, Marek Sýs and other CRoCS lab members for their valuable help, guidance and support.},
     bib           = example.bib,
 }
 \usepackage{makeidx}      %% The `makeidx` package contains
@@ -191,7 +192,46 @@
 %\addcontentsline{toc}{chapter}{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Introduction}
+\chapter{Introduction}\label{sec:intro}
+
+This dissertation thesis proposal aims to introduce motivation for the study of the selected fields, cover state of the art, present my research plan and achieved results.
+
+This section gives an introduction to the resource-constrained hardware tokens, secure multi-party computation (MPC). Chapter \ref{chapter:soa} gives the current state of the art in the MPC, starting from general view towards the application of hardware tokens. Next, Chapter \ref{sec:aim} specifies the research aims with particular applications and plans. Chapter \ref{chapter:results} summarizes achieved results with the list of publications. 
+
+\section{Smart cards}
+Smartcards, tamper-proof hardware tokens, are becoming increasingly popular in the past 15 years and found its way to many cryptographic applications, like authentication tokens and storage of sensitive information, such as encryption and signing keys. The popularity stems from to the security properties smartcards provide. 
+
+Smartcard is a small, programmable, resource-constrained device with limited computational power and memory. Resiliency against attacks is one of the primary design goals of smartcards.
+They should resist tampering, i.e., protect internal memory and current state from reading and malicious changes. For an attacker, smartcard should behave like a black-box. It should not be possible to infer additional information about processed data or internal implementation of the function.
+
+A backdoor or unintentional vulnerability in the smartcards like faulty pseudo-random number generator (PRNG) or RSA key-pair generator may drastically weaken all the cryptographic features in the upper design layers. Moreover, such a fault is difficult to detect. 
+Smartcard manufacturer also cannot oversee the whole manufacturing process which opens possibilities for insider attackers implanting malicious circuitry to the token.
+
+In \cite{2017-ccs-nemec} (\emph{ROCA}), we touched a problem of black-box cryptographic implementations in the secure hardware. The popular secure hardware vendor incorporated a proprietary algorithm for faster generation of RSA primes. The original reasons were probably to increase the performance of RSA key-pair generation as it has significant running time. Unfortunately, the secure hardware generated weak private keys. The key's entropy was significantly reduced, and it preserved certain mathematical structure, which crucially reduces factorization time of the resulting RSA moduli. 
+%The primes were generated as: $p = kM + (65537^a \,\text{mod} M)$, where $M$ is a constant. An RSA modulus formed with primes of this form can be easily factorized with the Coppersmith method.
+As a result, many different domains become affected by this vulnerability — namely electronic IDs\footnote{\url{https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/eID}}, code signing and secure key storage such as disk encryption with Bitlocker\footnote{\url{https://docs.microsoft.com/en-us/windows/security/information-protection/bitlocker/bitlocker-overview}}.
+
+\cite{Young:1996:DSB:646761.706030} introduced \emph{kleptography}, a study of subverting cryptographic algorithms and standards, i.e., cryptographic backdoors. In the kleptography design, the crypto-primitive is constructed in such a way that the resulting system is seemingly correct, without vulnerabilities, but an attacker is able to break the system easily. ROCA vulnerability could be one example of a construction of a kleptographic design as it was undetected several years while the attackers could factor the RSA moduli easily.
+
+\section{MPC}
+Secure multi-party computation (MPC) is a generic cryptographic protocol that enables involved participants to jointly compute an agreed-upon function on their inputs in such a way they learn nothing more from the computation besides the corresponding function output. In particular, inputs of other parties stay secret. The participants can be malicious, deviate from the protocol, and form attacker coalitions to get the private function inputs of others. Several SMPC protocol exists with different guarantees, e.g., with respect to the attacker model, a number of colluding participants.
+
+MPC was initially proposed by Yao \cite{yao82}. Since then, it has been extensively studied, namely with respect to privacy-preserving statistical computations \cite{BJSV15, BKKRST16}, private information retrieval \cite{Bertino2005, Naor:1999:PPA:336992.337028}, auctions and voting.
+
+Application of MPC removes the single point of failure as it distributes the computation over several participants and protecting from their malicious actions. A practical example of MPC deployed in Estonia is the Smart-ID \cite{smart_id_ee}, used for authentication and legal digital signatures.
+Smart-ID extends the RSA digital signature scheme, so it is computed jointly by two independent parties, user's smart-phone, and the server-side HSM. A potential attacker has to breach both parties to recover a private signing key. Smart-ID also effectively protects from vulnerabilities like \emph{ROCA}.
+
+On the other hand, previous research \cite{K07} suggests MPC protocols can benefit from the security properties of smartcards. They help to overcome certain impossibility results in the UC-framework by Canneti \cite{Can01}.
+UC-secure protocols provide high security guarantees in realistic models but it was shown that in order to obtain more complex UC-secure protocols \emph{trusted parties} are required to setup the computation. Presence of such parties is often hard to guarantee or simply undesirable. For example, it is not possible to prove the parties destroyed trapdoor information after the setup, which could lead to the system compromise if trapdoor is used by an attacker.
+
+Universal MPC is resource intensive and thus infeasible to run on smartcards. New approaches have to be found to make universal MPC on smartcards practically usable.
+We also aim to focus on the application of MPC on smartcards to remove single point of failures, protect from malicious card behavior and backdoors. Similarly, we will study practical implementations and benefits of smarcards in MPC protocols.
+
+%The solution we propose to this family of threats is removing the single point of failure by employing a secure multi-party computation (SMPC). 
+%With the SMPC multiple independent participants in the protocol can jointly compute an agreed-upon function so that individual function inputs of the participants remain private while the output is computed by all participants. The participants can be malicious, deviate from the protocol, and collude to get the private function inputs of others. SMPC is also known as secure function evaluation (SFE) or privacy-preserving computation. Several SMPC protocol exists with different guarantees with respect to the attacker model, a number of colluding participants and so on.
+
+
+\newpage
 \begin{shaded}
 Guide:
 \begin{itemize}
@@ -205,7 +245,7 @@ Guide:
 \end{itemize}
 \end{shaded}
 
-Hidden for the sake of sanity ...
+%Hidden for the sake of sanity ...
 \begin{ecmmnt}  % comment out the whole sections
 
 Itemized:
@@ -254,7 +294,7 @@ Itemized:
 
 \end{ecmmnt}
 
-\chapter{State of the Art}%
+\chapter{State of the Art}\label{chapter:soa}%
 \begin{ecmmnt}  % comment out the whole sections
 \section{Related work - itemized}
 \begin{itemize}
@@ -721,7 +761,7 @@ We aim to investigate new possibilities of the secure view-key sharing in the SC
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Achieved results}
+\chapter{Achieved results}\label{chapter:results}
 This chapter summarizes achieved results so far. Section \ref{sec:res:myst} describes \emph{Myst}, our MPC solution based on smartcards, Section \ref{sec:res:monero} emphasizes MPC in the context of cryptocurrencies followed by Section \ref{sec:res:booltest} aimed at randomness testing. Finally, Section \ref{sec:res:pubs} lists my publications.
 
 % CCS Touch of evil
@@ -731,14 +771,9 @@ This chapter summarizes achieved results so far. Section \ref{sec:res:myst} desc
 \section{Myst - MPC smartcard grid}\label{sec:res:myst}
 This section is based on results achieved in the: \emph{A Touch of Evil: High-Assurance Cryptographic Hardware from Untrusted Components}~\cite{2017-ccs-mavroudis}. 
 
-In \cite{2017-ccs-nemec}, \emph{The Return of Coppersmith's Attack: Practical Factorization of Widely Used RSA Moduli (ROCA)}, we touched a problem of black-box cryptographic implementations in the secure hardware. The popular secure hardware vendor incorporated a proprietary algorithm for faster generation of RSA primes. The original reasons were probably to increase a performance of RSA key-pair generation as it has significant running time. Unfortunately, the secure hardware generated weak private keys. It significantly decreased the entropy and preserved certain mathematical structure which crucially reduces factorization time of the resulting RSA moduli. The primes were generated as: $p = kM + (65537^a \,\text{mod} M)$, where $M$ is a constant. An RSA modulus formed with primes of this form can be easily factorized with the Coppersmith method.
-As a result, many different domains become affected by this vulnerability. Namely electronic IDs, code signing and secure key storage such as disk encryption with Bitlocker.
+As mentioned in Section \ref{sec:intro}, many systems make use of tamper-proof token relying on the assumptions they are providing. Thus backdoored or malfunctioning token, e.g., faulty PRNG or RSA key-pair generators, are 
+critical security risks to the whole systems. In \cite{2017-ccs-nemec}, we discovered it is a practical problem on the example of vulnerable Infineon chip and eID depending on it.
 
-\cite{Young:1996:DSB:646761.706030} introduced \emph{kleptography}, a study of subverting cryptographic algorithms and standards, i.e., cryptographic backdoors. In the kleptography design, the crypto-primitive is constructed in such a way that the resulting system is seemingly correct, without vulnerabilities, but an attacker is able to break the system easily. ROCA vulnerability could be one example of a construction of a kleptographic design as it was undetected several years while the attackers could factor the RSA moduli easily.
-
-Similarly, an unintentional vulnerability like faulty pseudo-random number generator (PRNG) may drastically weaken all the cryptographic features in the upper design layers. Moreover, such fault is difficult to detect. 
-Hardware token manufacturer also cannot oversee the whole manufacturing process which opens possibilities for insider attackers implanting malicious circuitry to the token. 
-%
 The following paragraphs are adapted from this work.%\cite{2017-ccs-mavroudis}.
 
 \paragraph{Myst.}%
