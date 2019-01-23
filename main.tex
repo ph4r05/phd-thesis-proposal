@@ -81,7 +81,7 @@
 \usepackage{tikz}
 
 \newcounter{camera_ready}  % camera ready switch, using heavy graphs, in PDF
-\setcounter{camera_ready}{0}  % set to 1 to print in vectors
+\setcounter{camera_ready}{1}  % set to 1 to print in vectors
 \newcommand{\ifcamready}[2]{\ifthenelse{\value{camera_ready}>0}{#1}{#2}}
 \newcommand{\itembf}[1]{\item {\bf{#1}}}
 \newcommand{\bigO}[0]{\mathcal{O}}
@@ -626,7 +626,7 @@ On the other hand, we will analyze whether pre-programmed smartcards acting as a
 \paragraph{Hardware wallets.}%
 Similarly, we would like to examine some selected MPC-related issues in cryptocurrencies and hardware wallets, as our work could have a significant impact in this field protecting end-users from losing funds. 
 Hardware wallet is a dedicated device that stores user's secrets and signs user's outgoing transactions to protect from money theft. There are open questions on how to realize such algorithms in privacy-centric cryptocurrencies (PCCC).
-We will study how to transform complex algorithms used in PCCC, so they are usable on the hardware wallet and how to use MPC to distribute the trust among multiple devices, such as smartphone, browser and the hardware wallet. 
+We will study how to transform complex algorithms used in PCCC, so they are usable on the hardware wallet and how to use MPC to distribute the trust among multiple devices, such as smartphone, browser and the hardware wallet. We will also focus on multi-signatures in context of PCCC, i.e., signature schemes used to collaboratively generate a signature by $k$-out-of-$N$ independent parties that possess the signing key share.
 
 
 \section{Publication venues}
