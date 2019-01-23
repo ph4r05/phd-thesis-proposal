@@ -102,12 +102,12 @@
     advisor       = {prof. RNDr. Václav Matyáš, M.Sc., Ph.D.},
     title         = {Secure multi-party computation with resource-constrained devices},
     TeXtitle      = {Secure multi-party computation with resource-constrained devices},
-    keywords      = {multi-party computation, tamper-proof tokens, multi signatures, smartcards, resource constrained devices, },
-    TeXkeywords   = {multi-party computation, tamper-proof tokens, multi signatures, smartcards, resource constrained devices,  \ldots},
+    keywords      = {multi-party computation, multi-signatures, resource constrained devices, smartcards, tamper-proof tokens},
+    TeXkeywords   = {multi-party computation, multi-signatures, resource constrained devices, smartcards, tamper-proof tokens},
     abstract      = {
     	The focus of the proposed research is to analyze the practical benefits of secure multi-party computation (MPC) in restricted environments. 
-    	The computation model consists of multiple heterogeneous nodes. Node is either a powerful generic device such as cloud computation servers or very resource-restricted device, e.g., with low computational power, memory, and energy, such as smartcard.
-    	We aim to study MPC in the context of smartcards to distribute the trust among parties and to remove the single point of failure.
+    	The computation model consists of multiple heterogeneous nodes. Node is either a powerful generic device such as a cloud computation server or a very resource-restricted device, e.g., with low computational power, memory, and energy, such as a smartcard.
+    	We aim to study MPC in the context of smartcards, to distribute the trust among parties and to remove the single point of failure.
     	The primary focus is on practical applications increasing the security level in various domains. The research will try to answer a question on how to practically realize MPC on smardcards and what are the current limits, as general MPC methods are quite computationally intensive and thus infeasible to run on smartcards.
     			},
     thanks        = {I would like to thank Vashek Matyáš, Petr Švenda, Marek Sýs and other CRoCS lab members for their valuable help, guidance and support.},
@@ -199,33 +199,33 @@
 
 This dissertation thesis proposal aims to introduce motivation for the study of the selected fields, cover state of the art, present my research plan and achieved results.
 
-This section gives an introduction to the resource-constrained hardware tokens, secure multi-party computation (MPC). Chapter \ref{chapter:soa} gives the current state of the art in the MPC, starting from general view towards the application of hardware tokens. Next, Chapter \ref{sec:aim} specifies the research aims with particular applications and plans. Chapter \ref{chapter:results} summarizes achieved results with the list of publications. 
+This section gives an introduction to the resource-constrained hardware tokens, secure multi-party computation (MPC). Chapter \ref{chapter:soa} gives the current state of the art in the MPC, starting from general view towards the application of hardware tokens. Next, Chapter \ref{sec:aim} specifies the research aims with particular applications and plans. Chapter \ref{chapter:results} summarizes achieved results with the list of publications. Appendix \ref{apx:uc} elaborates more on MPC security models, Appendix \ref{apx:papers} contains attached publications.
 
 \section{Smart cards}
-Smartcards, tamper-proof hardware tokens, are becoming increasingly popular in the past 15 years and found its way to many cryptographic applications, like authentication tokens and storage of sensitive information, such as encryption and signing keys. The popularity stems from to the security properties smartcards provide. 
+Smartcards, tamper-proof hardware tokens, are becoming increasingly popular in the past decades and found their way to many cryptographic applications, like authentication tokens and storage of sensitive information, such as encryption and signing keys. Their popularity stems from to the security properties that smartcards provide. 
 
 Smartcard is a small, programmable, resource-constrained device with limited computational power and memory. Resiliency against attacks is one of the primary design goals of smartcards.
-They should resist tampering, i.e., protect internal memory and current state from reading and malicious changes. For an attacker, smartcard should behave like a black-box. It should not be possible to infer additional information about processed data or internal implementation of the function.
+Smartcards should resist tampering, i.e., protect internal memory and current state from reading and malicious changes. For an attacker, a smartcard should behave like a black-box. It should not be possible to infer additional information about the processed data or internal implementation of the function.
 
-A backdoor or unintentional vulnerability in the smartcards like faulty pseudo-random number generator (PRNG) or RSA key-pair generator may drastically weaken all the cryptographic features in the upper design layers. Moreover, such a fault is difficult to detect. 
-Smartcard manufacturer also cannot oversee the whole manufacturing process which opens possibilities for insider attackers implanting malicious circuitry to the token.
+A backdoor or unintentional vulnerability in the smartcards, like a faulty pseudo-random number generator (PRNG) or RSA key-pair generator, may drastically weaken all the cryptographic features in the upper design layers. Moreover, such a fault is difficult to detect. 
+Smartcard manufacturer also cannot oversee the whole manufacturing process, which opens possibilities for insider attackers implanting malicious circuitry to the token.
 
-In \cite{2017-ccs-nemec} (\emph{ROCA}), we touched a problem of black-box cryptographic implementations in the secure hardware. The popular secure hardware vendor incorporated a proprietary algorithm for faster generation of RSA primes. The original reasons were probably to increase the performance of RSA key-pair generation as it has significant running time. Unfortunately, the secure hardware generated weak private keys. The key's entropy was significantly reduced, and it preserved certain mathematical structure, which crucially reduces factorization time of the resulting RSA moduli. 
+In \cite{2017-ccs-nemec} (\emph{ROCA}), we touched a problem of black-box cryptographic implementations in the secure hardware. A popular secure hardware vendor incorporated a proprietary algorithm for a faster generation of RSA primes. The original reasons were probably to increase the performance of RSA key-pair generation as it has a significant running time. Unfortunately, the secure hardware generated weak private keys. The key entropy was significantly reduced, and it preserved certain mathematical structure, which crucially reduced factorization time of the resulting RSA moduli. 
 %The primes were generated as: $p = kM + (65537^a \,\text{mod} M)$, where $M$ is a constant. An RSA modulus formed with primes of this form can be easily factorized with the Coppersmith method.
 As a result, many different domains become affected by this vulnerability — namely electronic IDs\footnote{\url{https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/eID}}, code signing and secure key storage such as disk encryption with Bitlocker\footnote{\url{https://docs.microsoft.com/en-us/windows/security/information-protection/bitlocker/bitlocker-overview}}.
 
-\cite{Young:1996:DSB:646761.706030} introduced \emph{kleptography}, a study of subverting cryptographic algorithms and standards, i.e., cryptographic backdoors. In the kleptography design, the crypto-primitive is constructed in such a way that the resulting system is seemingly correct, without vulnerabilities, but an attacker is able to break the system easily. ROCA vulnerability could be one example of a construction of a kleptographic design as it was undetected several years while the attackers could factor the RSA moduli easily.
+\cite{Young:1996:DSB:646761.706030} introduced \emph{kleptography}, a study of subverting cryptographic algorithms and standards, i.e., cryptographic backdoors. In the kleptography design, the crypto-primitive is constructed in such a way that the resulting system is seemingly correct, without vulnerabilities, but an attacker is able to break the system easily. ROCA vulnerability could be one example of a construction of a kleptographic design as it was undetected for several years while attackers could factor the RSA moduli easily.
 
 \section{MPC}
-Secure multi-party computation (MPC) is a generic cryptographic protocol that enables involved participants to jointly compute an agreed-upon function on their inputs in such a way they learn nothing more from the computation besides the corresponding function output. In particular, inputs of other parties stay secret. The participants can be malicious, deviate from the protocol, and form attacker coalitions to get the private function inputs of others. Several SMPC protocol exists with different guarantees, e.g., with respect to the attacker model, a number of colluding participants.
+Secure multi-party computation (MPC) is a generic cryptographic protocol that enables involved participants to jointly compute an agreed-upon function on their inputs in such a way they learn nothing more from the computation besides the corresponding function output. In particular, inputs of other parties stay secret. The participants can be malicious, deviate from the protocol, and form attacker coalitions to get the private function inputs of others. Several MPC protocols exist with different guarantees, e.g., with respect to the attacker model, a number of colluding participants.
 
 MPC was initially proposed by Yao \cite{yao82}. Since then, it has been extensively studied, namely with respect to privacy-preserving statistical computations \cite{BJSV15, BKKRST16}, private information retrieval \cite{Bertino2005, Naor:1999:PPA:336992.337028}, auctions and voting.
 
-Application of MPC removes the single point of failure as it distributes the computation over several participants and protecting from their malicious actions. A practical example of MPC deployed in Estonia is the Smart-ID \cite{smart_id_ee}, used for authentication and legal digital signatures.
+Application of MPC removes the single point of failure as it distributes the computation over several participants and protects from their malicious actions. A practical example of MPC deployed in Estonia is the Smart-ID \cite{smart_id_ee}, used for authentication and legal digital signatures.
 Smart-ID extends the RSA digital signature scheme, so it is computed jointly by two independent parties, user's smart-phone, and the server-side HSM. A potential attacker has to breach both parties to recover a private signing key. Smart-ID also effectively protects from vulnerabilities like \emph{ROCA}.
 
-On the other hand, previous research \cite{K07} suggests MPC protocols can benefit from the security properties of smartcards. They help to overcome certain impossibility results in the UC-framework by Canneti \cite{Can01}.
-UC-secure protocols provide high security guarantees in realistic models but it was shown that in order to obtain more complex UC-secure protocols \emph{trusted parties} are required to setup the computation. Presence of such parties is often hard to guarantee or simply undesirable. For example, it is not possible to prove the parties destroyed trapdoor information after the setup, which could lead to the system compromise if trapdoor is used by an attacker.
+On the other hand, previous research \cite{K07} suggests that MPC protocols can benefit from the security properties of smartcards. They help to overcome certain impossibility results in the UC-framework by Canneti \cite{Can01}.
+UC-secure protocols provide high security guarantees in realistic models, but it was shown that in order to obtain more complex UC-secure protocols, \emph{trusted parties} are required to setup the computation. Presence of such parties is often hard to guarantee or simply undesirable. For example, it is not possible to prove that the parties destroyed trapdoor information after the setup, which could lead to the system compromise if the trapdoor is used by an attacker.
 
 Universal MPC is resource intensive and thus infeasible to run on smartcards. New approaches have to be found to make universal MPC on smartcards practically usable.
 We also aim to focus on the application of MPC on smartcards to remove single point of failures, protect from malicious card behavior and backdoors. Similarly, we will study practical implementations and benefits of smarcards in MPC protocols.
@@ -334,7 +334,7 @@ Itemized:
     - multisigs, monero, zcoin, zcash
 \end{ecmmnt}
 
-This chapter gives a short introduction to the multi-party computation area, its properties, attacker types, security models and set-up assumptions. The review of basic two-party, multi-party and information-theoretic protocols follows in sections \ref{sec:soa:2pc}, \ref{sec:soa:mpc}, \ref{sec:soa:infproto} with a new extensions in section \ref{sec:soa:extensions}. Furthermore, Section \ref{sec:soa:const_rounds} reviews constant-round protocols, followed by feasibility results in various security models in the section \ref{sec:soa:uc_feasibility}. Section \ref{sec:soa:tokens} describes how use of hardware tokens, tamper-proof resource constrained devices helps to overcome certain impossibility results. The chapter is concluded by a review of practical MPC applications and tools that are base and inspiration for the following work in Section \ref{sec:soa:applications}. Appendix \ref{apx:uc} elaborates more on specifict of UC security model.
+This chapter gives a short introduction to the multi-party computation area, its properties, attacker types, security models and set-up assumptions. The review of basic two-party, multi-party and information-theoretic protocols follows in sections \ref{sec:soa:2pc}, \ref{sec:soa:mpc}, \ref{sec:soa:infproto} with a new extensions in section \ref{sec:soa:extensions}. Furthermore, Section \ref{sec:soa:const_rounds} reviews constant-round protocols, followed by feasibility results in various security models in the section \ref{sec:soa:uc_feasibility}. Section \ref{sec:soa:tokens} describes how use of hardware tokens, tamper-proof resource constrained devices helps to overcome certain impossibility results. The chapter is concluded by a review of practical MPC applications and tools that are base and inspiration for the following work in Section \ref{sec:soa:applications}. Appendix \ref{apx:uc} elaborates more on details of UC security model.
 
 \paragraph{MPC.}%
 Secure multi-party computation (MPC) is a very generic and well studied cryptographic task.
@@ -583,10 +583,10 @@ The challenges we aim to address by the future work can be summarized as follows
 \begin{enumerate}
 	\item \emph{Single point of failure}. For instance, reliance on a single black-box cryptographic implementation. As we shown in \cite{2017-ccs-nemec}, such fault is a huge risk for security-critical systems, such as eID.
 	
-	\item \emph{Strong trust assumptions}. For instance, a strong assumption that FIDO authentication tokens are implemented properly \cite{DCMBR18}, PRNG generates cryptographically-secure numbers and that trusted setup parties securely erased trapdoor information.
+	\item \emph{Strong trust assumptions}. For instance, a strong assumption that FIDO authentication tokens are implemented properly \cite{DCMBR18}, that a PRNG generates cryptographically-secure numbers and that trusted setup parties securely erased trapdoor information.
 	
 	\item \emph{Insufficient protection of private data and secret keys}. 
-	For example, exposure of cryptographic signing keys used to sign finance transfers by malware.
+	For example, exposure of cryptographic signing keys used to sign financial transfers by malware.
 \end{enumerate}
  
 New approaches have to be found to alleviate the risk by removing the single point of failure and making the systems more robust. MPC is a systematic answer to this problem as enables to securely distribute the trust among independent parties.
@@ -594,13 +594,13 @@ New approaches have to be found to alleviate the risk by removing the single poi
 \section{Research aim}
 The starting point for my next work will be our previous research \cite{2017-ccs-mavroudis}, where we were able to successfully design a practically functional system based on MPC which brings significant security benefits to end-users. Such systems increase a security level as a potential attacker needs to compromise more targets simultaneously to breach the system. 
 
-Another inspiration could be the SmartID~\cite{smart_id_ee} protocol deployed by banks in Baltic countries, producing qualified signature according to eIDAS directive. The RSA key-pairs are generated collaboratively both on the smartphone and the desktop, so attacker needs to obtain both key parts to break the system. It is a nice example of a robust system that would mitigate vulnerabilities like those we found in Infineon chip and its eGovernment application \cite{2017-ccs-nemec}. 
+Another inspiration could be the SmartID~\cite{smart_id_ee} protocol deployed by banks in Baltic countries, producing a qualified signature according to the eIDAS directive \cite{eidas2016}. The RSA key-pairs are generated collaboratively both on the smartphone and the desktop, so an attacker needs to obtain both key parts to break the system. It is a nice example of a robust system that would mitigate vulnerabilities like those we found in Infineon chip and its eGovernment application \cite{2017-ccs-nemec}. 
 
 Moreover, we would like to focus on building practical and efficient solutions that could serve as a drop-in replacement for existing, less secure ones. 
 The adoption is more seamless if the environment does not need to be changed.
 This approach is now far more common, as we saw in \cite{smart_id_ee, DCMBR18}. % JKX18 OPAQUE somehow??
 
-Previous research also suggests that a combination of MPC and hardware tokens is very beneficial as it helps to overcome problems of a trusted setup which  itself is often not desirable. For instance, it is impossible to prove that all parties destroyed the trapdoor information during the trusted setup of the system, which is essential to its security. Typical example is a trusted setup in ZCash\footnote{\url{https://z.cash/}}, popular anonymous cryptocurrency. If the trusted setup was somehow subverted and an attacker knows the trapdoor, he can completely break the system by generating new coins without anybody noticing.
+Previous research also suggests that a combination of MPC and hardware tokens is very beneficial as it helps to overcome problems of a trusted setup which  itself is often not desirable. For instance, it is impossible to prove that all parties destroyed the trapdoor information during the trusted setup of the system, which is essential to its security. A typical example is the trusted setup in ZCash\footnote{\url{https://z.cash/}}, popular anonymous cryptocurrency. If the trusted setup was somehow subverted and an attacker knows the trapdoor, he can completely break the system by generating new coins without anybody noticing.
 
 As discussed by \cite{K07}, the token model increases robustness as each user is free to choose which smartcard to use from various manufacturers. In connection with \cite{2017-ccs-nemec}, this gives strong security guarantees also against supply chain attacks.
 
@@ -615,7 +615,7 @@ As the token model offers some unique properties, we can make trade-offs in the 
 %Requirements on the token, minimal, maximal, tradeoffs.
 %Existing protocols could be modified to be practically usable with the tokens. 
 
-We will try to make our previous result \cite{2017-ccs-mavroudis} more universal, so it can evaluate a bigger class of functions. Similarly, we want to study how to protect from malicious tokens, e.g., by requiring a card to create a zero-knowledge proof that the operation was performed correctly.  This protection could eliminate the threat of backdoors in the model and reduces the required trust.
+We will try to make our previous result \cite{2017-ccs-mavroudis} more universal, so that it can evaluate a bigger class of functions. Similarly, we want to study how to protect from malicious tokens, e.g., by requiring a card to create a zero-knowledge proof that the operation was performed correctly.  This protection could eliminate the threat of backdoors in the model and reduces the required trust.
 Our ambition is to extend existing MPC compilers to support hardware token models.
 
 \paragraph{Side-channel and backdoor protection.}%
@@ -764,7 +764,7 @@ This chapter summarizes achieved results so far. Section \ref{sec:res:myst} desc
 % Monero paper - MPC transaction signing
 % 
 
-\section{Myst - MPC smartcard grid}\label{sec:res:myst}
+\section{Myst -- MPC smartcard grid}\label{sec:res:myst}
 This section is based on results achieved in the: \emph{A Touch of Evil: High-Assurance Cryptographic Hardware from Untrusted Components}~\cite{2017-ccs-mavroudis}. 
 
 As mentioned in Section \ref{sec:intro}, many systems make use of tamper-proof token relying on the assumptions they are providing. Thus backdoored or malfunctioning token, e.g., faulty PRNG or RSA key-pair generators, are 
@@ -808,7 +808,7 @@ Myst is a practical solution protecting from single-point-of-failure problems on
 	\label{fig:myst_throughput}
 \end{figure}
 
-\cite{2017-ccs-mavroudis} was presented on ACM Conference on Computer and Communications Security 2017 (ACM CCS), Dallas, Texas, US.
+\cite{2017-ccs-mavroudis} was presented at ACM Conference on Computer and Communications Security 2017 (ACM CCS), Dallas, Texas, US.
 
 \section{Monero hardware wallet}\label{sec:res:monero}
 \label{sec:aim:monero_hw_wallet}
@@ -858,8 +858,8 @@ Covering also blockchain scanning, so view key is not leaked to the host. Scheme
 \end{itemize}
 \end{ecmmnt}
 
-\section{BoolTest}\label{sec:res:booltest}\todo{Trying to sell BoolTest \shrug. Reason in the end of the section.}
-In \cite{booltest_secrypt2017}, we devised a powerful randomness test {\emph{BoolTest}}, which provides comparable results to standard randomness testing batteries such as NIST STS or Dieharder. The strength of the BoolTest lies in a fact it that usually needs less data than competitors to obtain the same results and offers a better interpretation of results. Booltest uses low-degree polynomials as distinguishers; thus cryptanalyst can directly see which polynomials were able to distinguish input data from the random stream and thus see which bits are correlated.
+\section{BoolTest}\label{sec:res:booltest} %\todo{Trying to sell BoolTest \shrug. Reason in the end of the section.}
+In \cite{booltest_secrypt2017}, we devised a powerful randomness test {\emph{BoolTest}}, which provides comparable results to standard randomness testing batteries such as NIST STS or Dieharder. The strength of the BoolTest lies in a fact it that usually needs less data than competitors to obtain the same results and offers a better interpretation of results. BoolTest uses low-degree polynomials as distinguishers; thus a cryptanalyst can directly see which polynomials were able to distinguish input data from the random stream and thus see which bits are correlated.
 
 Randomness testing of various cryptographic primitives such as PRNGs, encryption and hash algorithms, is essential for their cryptographic quality assessment. Randomness testing is usually the first step of cryptanalysis. In the extended version of the paper \cite{booltest2}, we also tested output of true random number generators (TRNGs) of smartcards and hardware wallets: Trezor\footnote{\url{https://trezor.io}} and Ledger\footnote{\url{https://www.ledger.com/}}. Having device failing the randomness test indicates a further problem in the design with potentially high impact. Implementing the MPC may help to avoid similar vulnerabilities and potential backdoors. 
 
@@ -884,7 +884,7 @@ Due to the simple design BoolTest could be transformed to compute inside MPC fra
 	I co-authored, implemented and tested the Booltest, a tool\footnote{\url{https://github.com/ph4r05/polynomial-distinguishers}} for effective randomness testing. Contribution: 35\%.
 	
 	\item \citemypub{booltest2}
-	Extended version of \cite{booltest_secrypt2017}, contains more tests strategies and results. I tested and helped with the result analysis. Contribution: 27\%.\todo{DUNNO. CHECK}
+	Extended version of \cite{booltest_secrypt2017}, contains more tests strategies and results. I tested and helped with the result analysis. Contribution: 30\%.
 	
 	%\item \emph{Measuring Popularity of Cryptographic Libraries in Internet-Wide Scans \cite{2017-acsac-nemec}}. %
 	\item \citemypub{2017-acsac-nemec}
@@ -896,14 +896,14 @@ Due to the simple design BoolTest could be transformed to compute inside MPC fra
 	
 	%\item \emph{Android APK on-the-fly tampering \cite{apk_tampering}}. %
 	\item \citemypub{apk_tampering}
-	I've helped with the design and implementation of the malicious traffic interceptor adding malicious payload to the Android application archives (APKs) being downloaded on-the-fly. Contribution: 40\%.\todo{DUNNO. CHECK}
+	I've helped with the design and implementation of the malicious traffic interceptor adding malicious payload to the Android application archives (APKs) being downloaded on-the-fly. Contribution: 35\%.\todo{DUNNO. CHECK}
 	
 	%\item \emph{WSNProtectLayer – security middleware for wireless sensor networks \cite{wsnprotectlayer}}. %
 	\item \citemypub{wsnprotectlayer}
-	I co-authored the implementation of the WSNProtectLayer on resource-constrained devices (sensor nodes). Contribution: 5\%.\todo{DUNNO. CHECK}
+	I co-authored the implementation of the WSNProtectLayer on resource-constrained devices (sensor nodes). Contribution: 5\%.
 \end{itemize}
 
-\paragraph{Publications in progress.} There are several papers in the pipeline which have not yet been submitted and are to be finalized in the upcoming months:
+\paragraph{Publications in progress.} There are several papers in the pipeline that have not yet been submitted and are to be finalized in the upcoming months:
 
 \begin{itemize}
 	\item \emph{Monero hardware wallet signing protocol.} As mentioned in the Section \ref{sec:aim:monero_hw_wallet}, I have designed and implemented distributed transaction signing protocol. Contribution: 80\%.
@@ -967,7 +967,7 @@ Due to the simple design BoolTest could be transformed to compute inside MPC fra
 \appendix 
 
 \chapter{Security models}\label{apx:uc}
-Here we shortly compare plain and security UC model.
+Here we shortly compare the plain and UC security models.
 
 \paragraph{Plain model.}
 Both models, plain and UC, define two separate worlds.
@@ -1005,7 +1005,7 @@ For more detailed treatment please refer to \cite{Can01, CLOS02, Lin03, G09, CDN
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Attached papers}\label{apx:papers}
-The most relevant paper is attached here: \citetitle{2017-ccs-mavroudis} \cite{2017-ccs-mavroudis}
+The most relevant papers are attached here: \citetitle{2017-ccs-mavroudis} \cite{2017-ccs-mavroudis} and \citetitle{booltest_secrypt2017} \cite{booltest_secrypt2017}.
 
 \section{Myst}\label{apx:papers:myst}
 The paper is attached on the next page.
@@ -1018,6 +1018,12 @@ The paper is attached on the next page.
 \ifcamready%
 {\includepdf[pages={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18}]{embed/2017mavroudis.pdf}}%
 {\unsurein{Paper not attached in draft version, switch to camera ready version to attach. \url{https://arxiv.org/pdf/1709.03817.pdf}}}
+
+\section{BoolTest}\label{exp:papers:booltest}
+The paper is attached on the next page.
+\ifcamready%
+{\includepdf[pages={1,2,3,4,5,6,7,8,9,10,11,12}]{embed/2017booltest.pdf}}%
+{\unsurein{Paper not attached in draft version, switch to camera ready version to attach. \url{https://crocs.fi.muni.cz/_media/public/papers/polynomials_preprintl_secrypt2017.pdf}}}
 
 
 \begin{ecmmnt} % paper list
