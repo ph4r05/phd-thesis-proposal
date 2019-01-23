@@ -88,6 +88,9 @@
 \newcommand{\cmmnt}[1]{\ignorespaces}
 \newcommand{\mcrot}[4]{\multicolumn{#1}{#2}{\rlap{\rotatebox{#3}{#4}~}}} 
 %\newenvironment{ecmmnt}[1]{}{}  % #1
+\newcounter{ph4_show_guides}
+\setcounter{ph4_show_guides}{0}
+\newcommand{\ifguides}[2]{\ifthenelse{\value{ph4_show_guides}>0}{#1}{#2}}
 
 \thesissetup{
     date          = \the\year/01/25,
@@ -230,7 +233,7 @@ We also aim to focus on the application of MPC on smartcards to remove single po
 %The solution we propose to this family of threats is removing the single point of failure by employing a secure multi-party computation (SMPC). 
 %With the SMPC multiple independent participants in the protocol can jointly compute an agreed-upon function so that individual function inputs of the participants remain private while the output is computed by all participants. The participants can be malicious, deviate from the protocol, and collude to get the private function inputs of others. SMPC is also known as secure function evaluation (SFE) or privacy-preserving computation. Several SMPC protocol exists with different guarantees with respect to the attacker model, a number of colluding participants and so on.
 
-
+\ifguides{
 \newpage
 \begin{shaded}
 Guide:
@@ -244,6 +247,7 @@ Guide:
     \item 2-3 pages %\the\marginparwidth
 \end{itemize}
 \end{shaded}
+}{}
 
 %Hidden for the sake of sanity ...
 \begin{ecmmnt}  % comment out the whole sections
@@ -550,7 +554,7 @@ Several FHE implementation exist, such as HELib~\cite{helib}, PALISADE~\cite{pal
 
 However, this research branch is out of the scope of this thesis proposal as general FHE is very expensive in terms of CPU time and memory and thus not practically applicable in the context of resource constrained devices.
 
-
+\ifguides{
 \newpage
 \begin{shaded}
 	Guide:
@@ -563,6 +567,7 @@ However, this research branch is out of the scope of this thesis proposal as gen
 		\item Range: 8-12 pages
 	\end{itemize}
 \end{shaded}
+}{}
 
 \begin{ecmmnt}
 %UC-related: "Consequently, many known protocols (e.g., the general protocol of [gmw87], to name one) are not UC secure. 
@@ -679,7 +684,7 @@ Alternatively, the applicable conferences for the proposed research are:
 	\itembf{Spring 2021.} Finishing dissertation thesis.
 \end{itemize}
 
-
+\ifguides{
 \newpage
 \begin{shaded}
 	\begin{itemize}
@@ -705,6 +710,7 @@ Alternatively, the applicable conferences for the proposed research are:
 		\item Anti cheating cards, generating proper randomness.
 	\end{itemize}
 }
+}{}
 
 %Hidden for the sake of sanity ...
 \begin{ecmmnt}  % comment out the whole sections
@@ -928,7 +934,7 @@ Due to the simple design BoolTest could be transformed to compute inside MPC fra
 %	\item Static Rabin-Miller basis on embedded cards, testing, detection, exploitation. Based on Bleichenbacher \cite{10.1007/978-3-540-30580-4_2}.
 %\end{itemize}
 
-
+\ifguides{
 \newpage
 \begin{shaded}
 \begin{itemize}
@@ -937,8 +943,7 @@ Due to the simple design BoolTest could be transformed to compute inside MPC fra
     \item Range: 3-5 pages
 \end{itemize}
 \end{shaded}
-
-\newpage
+}{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
