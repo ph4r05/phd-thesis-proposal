@@ -458,7 +458,7 @@ Katz discusses that token model may reduce required trust compared to CRS as a u
 It could also help with accountability. In the CRS model, it may not be feasible to detect malicious generator or to prove that trapdoor information was deleted while tokens can be tested by independent labs attesting their declared functionalities.
 
 \paragraph{Improvements.}%
-The \cite{CGS08} improved Katz by using only resettable or stateless tokens and one round protocol under enhanced trapdoor permutations assumption, which is more general than DDH used by Katz. \cite{CGS08} also relaxes assumption how malicious parties create tokens\cmmnt{Attacker does not need to know the code}. Resettable tokens are simpler thus cheaper to manufacture. Moreover, an attacker cannot perform rewinding attack which increases security and makes proofs simpler.
+\cite{CGS08} improved Katz by using only resettable or stateless tokens and one round protocol under enhanced trapdoor permutations assumption, which is more general than DDH used by Katz. \cite{CGS08} also relaxes assumption how malicious parties create tokens\cmmnt{Attacker does not need to know the code}. Resettable tokens are simpler thus cheaper to manufacture. Moreover, an attacker cannot perform rewinding attack which increases security and makes proofs simpler.
 
 \cite{DNW09} discusses that hardware token has two key properties: 1. it is isolated from the environment, 2. it is a new separate entity and Sender never sees an interaction of token and receiver. \cite{K07} uses only the first property. \cite{DNW09} then relaxes token assumption to a temporal isolation of one party so he can communicate up to $b$ bits with the environment. This allows to realize any UC-secure multi-party computation with active and adaptive adversaries with a dishonest majority under standard cryptographic assumptions. This result can be applied to side-channels attacks on the smartcards.
 % IT also proposes more CA which may be trusted by several sets of parties ~ company CAs, trust yours, distrust others.
@@ -884,7 +884,7 @@ Due to the simple design BoolTest could be transformed to compute inside MPC fra
 	I co-authored, implemented and tested the Booltest, a tool\footnote{\url{https://github.com/ph4r05/polynomial-distinguishers}} for effective randomness testing. Contribution: 30\%.\todo{DUNNO. CHECK}
 	
 	\item \citemypub{booltest2}
-	Extended version of the \cite{booltest_secrypt2017}, contains more tests strategies and results. I tested and helped with the result analysis. Contribution: 25\%.\todo{DUNNO. CHECK}
+	Extended version of \cite{booltest_secrypt2017}, contains more tests strategies and results. I tested and helped with the result analysis. Contribution: 25\%.\todo{DUNNO. CHECK}
 	
 	%\item \emph{Measuring Popularity of Cryptographic Libraries in Internet-Wide Scans \cite{2017-acsac-nemec}}. %
 	\item \citemypub{2017-acsac-nemec}
