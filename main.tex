@@ -250,7 +250,7 @@ Guide:
 }{}
 
 %Hidden for the sake of sanity ...
-\begin{ecmmnt}  % comment out the whole sections
+\begin{ecmmnt}  % klepto, roca, booltest, whitebox, protectlayer
 
 Itemized:
 \begin{itemize}
@@ -299,7 +299,7 @@ Itemized:
 \end{ecmmnt}
 
 \chapter{State of the Art}\label{chapter:soa}%
-\begin{ecmmnt}  % comment out the whole sections
+\begin{ecmmnt}  % Related work, multisignatures
 \section{Related work - itemized}
 \begin{itemize}
     \item {\bf{SMPC}}, multi party computation in general. Secure function evaluation, privacy preserving computation, specific algorithms, e.g., privacy preserving set intersection, database lookup, data mining. 
@@ -333,9 +333,6 @@ Itemized:
     \subsection{Privacy centric cryptocurrencies}
     - multisigs, monero, zcoin, zcash
 \end{ecmmnt}
-%
-%\newpage
-%\section{Related work}
 
 This chapter gives a short introduction to the multi-party computation area, its properties, attacker types, security models and set-up assumptions. The review of basic two-party, multi-party and information-theoretic protocols follows in sections \ref{sec:soa:2pc}, \ref{sec:soa:mpc}, \ref{sec:soa:infproto} with a new extensions in section \ref{sec:soa:extensions}. Furthermore, Section \ref{sec:soa:const_rounds} reviews constant-round protocols, followed by feasibility results in various security models in the section \ref{sec:soa:uc_feasibility}. Section \ref{sec:soa:tokens} describes how use of hardware tokens, tamper-proof resource constrained devices helps to overcome certain impossibility results. The chapter is concluded by a review of practical MPC applications and tools that are base and inspiration for the following work in Section \ref{sec:soa:applications}. Appendix \ref{apx:uc} elaborates more on specifict of UC security model.
 
@@ -569,14 +566,7 @@ However, this research branch is out of the scope of this thesis proposal as gen
 \end{shaded}
 }{}
 
-\begin{ecmmnt}
-%UC-related: "Consequently, many known protocols (e.g., the general protocol of [gmw87], to name one) are not UC secure. 
-Secure function evaluation has been broadly studied \cite{
-yao82, conf/sp/SonghoriHS0K15, Malkhi:2004:FST:1251375.1251395, 10.1007/978-3-642-40041-4_5}, namely with respect to private database search \cite{Bertino2005, Naor:1999:PPA:336992.337028}, private data mining \cite{Aldeen2015} and voting. However, it typically suffers from large performance or communication overhead.
-The previous research uses FPGA as a trusted element, trading trust for computational efficiency. However, FPGA itself cannot withstand attacks by side channel power analysis or fault induction attacks.
-SCPs, on the other hand, are tamper-proof but do not offer the flexibility of FPGAs and, namely, they suffer from low computational power and very limited memory \cite{10.1007/978-3-642-19074-2_1, Boureanu:2015:LCC:2714576.2714591, cryptoeprint:2016:615}.
-In \cite{2017-ccs-mavroudis}, we designed, theoretically analyzed, and evaluated \emph{Myst}, a suite of ECC-based cryptographic protocols for a distributed key generation, encryption, decryption and signature generation using SMPC on smartcards.
-
+\begin{ecmmnt} %k-out-of-N
 Also, the K-out-of-N ECC-based multi-signature protocol research has recently undergone rapid development, especially due to rising crypto-currencies popularity as they rely on multi-signatures for signing outgoing transactions in accounts held by multiple owners ~\cite{Bellare:2007:UAS:2394539.2394589, Bnz2017BulletproofsSP, cryptoeprint:2018:068}. 
 \end{ecmmnt}
 
@@ -712,8 +702,8 @@ Alternatively, the applicable conferences for the proposed research are:
 }
 }{}
 
-%Hidden for the sake of sanity ...
-\begin{ecmmnt}  % comment out the whole sections
+
+\begin{ecmmnt}  % Motivation, large chunks, offloading, musig, k-of-n, cryptocurrencies - nice
 \chapter{Study plan}
 \begin{itemize}
 	\item Transaction signing for privacy centric cryptocurrencies on secure crypto processors.  
