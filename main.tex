@@ -624,7 +624,7 @@ On the other hand, we will analyze whether pre-programmed smartcards acting as a
 
 \paragraph{Hardware wallets.}%
 Similarly, we would like to examine some selected MPC-related issues in cryptocurrencies and hardware wallets, as our work could have a significant impact in this field protecting end-users from losing funds. 
-Hardware wallet is a dedicated device that stores user's secrets and signs user's outgoing transactions to protect from money theft. There are open questions on how to realize such algorithms in privacy-centric cryptocurrencies (PCCC).
+Hardware wallet is a dedicated device that stores user's secrets and signs user's outgoing transactions to protect from money theft. There are open questions on how to realize such algorithms in privacy-centric cryptocurrencies (PCCC) on hardware wallets.
 We will study how to transform complex algorithms used in PCCC, so they are usable on the hardware wallet and how to use MPC to distribute the trust among multiple devices, such as smartphone, browser and the hardware wallet. We will also focus on multi-signatures in context of PCCC, i.e., signature schemes used to collaboratively generate a signature by $k$-out-of-$N$ independent parties that possess the signing key share.
 
 
@@ -757,7 +757,7 @@ We aim to investigate new possibilities of the secure view-key sharing in the SC
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Achieved results}\label{chapter:results}
-This chapter summarizes achieved results so far. Section \ref{sec:res:myst} describes \emph{Myst}, our MPC solution based on smartcards, Section \ref{sec:res:monero} emphasizes MPC in the context of cryptocurrencies followed by Section \ref{sec:res:booltest} aimed at randomness testing. Finally, Section \ref{sec:res:pubs} lists my publications.
+This chapter summarizes achieved results so far. Section~\ref{sec:res:myst} describes \emph{Myst}, our MPC solution based on smartcards, Section~\ref{sec:res:booltest} aims at randomness testing followed by Section~\ref{sec:res:monero} that emphasizes MPC in the context of cryptocurrencies. Finally, Section~\ref{sec:res:pubs} lists my publications.
 
 % CCS Touch of evil
 % Monero paper - MPC transaction signing
@@ -766,7 +766,7 @@ This chapter summarizes achieved results so far. Section \ref{sec:res:myst} desc
 \section{Myst -- MPC smartcard grid}\label{sec:res:myst}
 This section is based on results achieved in the publication \emph{A Touch of Evil: High-Assurance Cryptographic Hardware from Untrusted Components}~\cite{2017-ccs-mavroudis}. 
 
-As mentioned in Section \ref{sec:intro}, many systems make use of tamper-proof tokens relying on the assumptions they are providing. Thus backdoored or malfunctioning tokens, e.g., faulty PRNG or RSA key-pair generators, are 
+As mentioned in Section~\ref{sec:intro}, many systems make use of tamper-proof tokens relying on the assumptions they are providing. Thus backdoored or malfunctioning tokens, e.g., faulty PRNG or RSA key-pair generators, are 
 critical security risks to the whole systems. In \cite{2017-ccs-nemec}, we discovered it is a practical problem on the example of vulnerable Infineon chip and eID depending on it.
 
 The following paragraphs are adapted from \cite{2017-ccs-mavroudis}.
@@ -810,7 +810,7 @@ Myst is a practical solution protecting from single-point-of-failure problems on
 \cite{2017-ccs-mavroudis} was presented at ACM Conference on Computer and Communications Security 2017 (ACM CCS), Dallas, Texas, US.
 
 \section{BoolTest}\label{sec:res:booltest} %\todo{Trying to sell BoolTest \shrug. Reason in the end of the section.}
-In \cite{booltest_secrypt2017}, we devised a powerful randomness test {\emph{BoolTest}}, which provides comparable results to standard randomness testing batteries such as NIST STS or Dieharder. The strength of the BoolTest lies in a fact it that usually needs less data than competitors to obtain the same results and offers a better interpretation of results. BoolTest uses low-degree polynomials as distinguishers; thus a cryptanalyst can directly see which polynomials were able to distinguish input data from the random stream and thus see which bits are correlated.
+In \cite{booltest_secrypt2017}, we devised a powerful randomness test {\emph{BoolTest}}, which provides comparable results to standard randomness testing batteries such as NIST STS \cite{Bassham:2010:SRS:2206233} or Dieharder \cite{dieharder}. The strength of the BoolTest lies in a fact that it usually needs less data than competitors to obtain the same results and it offers a better interpretation of results. BoolTest uses low-degree polynomials as distinguishers; thus a cryptanalyst can directly see which polynomials were able to distinguish input data from the random stream and thus see which bits are correlated.
 
 Randomness testing of various cryptographic primitives such as PRNGs, encryption and hash algorithms, is essential for their cryptographic quality assessment. Randomness testing is usually the first step of cryptanalysis. In the extended version of the paper \cite{booltest2}, we also tested output of true random number generators (TRNGs) of smartcards and hardware wallets: Trezor\footnote{\url{https://trezor.io}} and Ledger\footnote{\url{https://www.ledger.com/}}. If such device fails the randomness test it indicates a further problem in the design with potentially high impact. Implementing the MPC may help to avoid similar vulnerabilities and potential backdoors. 
 
@@ -824,7 +824,7 @@ Monero differs from traditional cryptocurrencies in a way it stores the transact
 
 Monero uses Pedersen commitments to conceal the value of transactions being sent. On top of that, non-interactive zero-knowledge proofs, so-called Bulletproofs \cite{Bnz2017BulletproofsSP2} are used to ensure the transaction uses proper values.
 
-In the considered scenario, a user owns a hardware wallet, dedicated device storing the private keys used for signing the transactions. It has usually a display and hardware buttons so user can confirm the transaction details on the device. Hardware wallet protects a user from theft as the key is never leaked to the connected host, which might be infected due to large attack surface and due to its multi-purpose nature. Hardware wallet is on the other hand very limited device so the attack surface is as low as possible. 
+In the considered scenario, a user owns a hardware wallet, dedicated device storing the private keys used for signing the transactions. It has usually a display and hardware buttons so user can confirm the transaction details on the device. Hardware wallet protects a user from a cryptocurrency theft as the signing key is never leaked to the connected host, which might be infected due to large attack surface and due to its multi-purpose nature. Hardware wallet is on the other hand very limited device so the attack surface is as low as possible. 
 
 I have designed and implemented a Monero transaction signing protocol on a hardware wallet in a way the secret key never leaves the hardware device and the malicious host cannot tamper with the signing data, i.e., user always has to confirm the transaction details first. In addition to that, host verifies if the hardware wallet is not cheating either. The protocol is intuitive and it is simple to verify that it preserves desired security properties. It is thus specialized secure two-party computation protocol. 
 
@@ -883,7 +883,7 @@ Covering also blockchain scanning, so view key is not leaked to the host. Scheme
 	I co-authored, implemented and tested the Booltest, a tool\footnote{\url{https://github.com/ph4r05/polynomial-distinguishers}} for effective randomness testing. Contribution: 35\%.
 	
 	\item \citemypub{booltest2}
-	Extended version of \cite{booltest_secrypt2017}, contains more tests strategies and results. I tested and helped with the result analysis. Contribution: 30\%.
+	Extended version of \cite{booltest_secrypt2017}, contains more tests strategies and results. I conducted the testing and helped with the result analysis. Contribution: 30\%.
 	
 	%\item \emph{Measuring Popularity of Cryptographic Libraries in Internet-Wide Scans \cite{2017-acsac-nemec}}. %
 	\item \citemypub{2017-acsac-nemec}
