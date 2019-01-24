@@ -809,6 +809,13 @@ Myst is a practical solution protecting from single-point-of-failure problems on
 
 \cite{2017-ccs-mavroudis} was presented at ACM Conference on Computer and Communications Security 2017 (ACM CCS), Dallas, Texas, US.
 
+\section{BoolTest}\label{sec:res:booltest} %\todo{Trying to sell BoolTest \shrug. Reason in the end of the section.}
+In \cite{booltest_secrypt2017}, we devised a powerful randomness test {\emph{BoolTest}}, which provides comparable results to standard randomness testing batteries such as NIST STS or Dieharder. The strength of the BoolTest lies in a fact it that usually needs less data than competitors to obtain the same results and offers a better interpretation of results. BoolTest uses low-degree polynomials as distinguishers; thus a cryptanalyst can directly see which polynomials were able to distinguish input data from the random stream and thus see which bits are correlated.
+
+Randomness testing of various cryptographic primitives such as PRNGs, encryption and hash algorithms, is essential for their cryptographic quality assessment. Randomness testing is usually the first step of cryptanalysis. In the extended version of the paper \cite{booltest2}, we also tested output of true random number generators (TRNGs) of smartcards and hardware wallets: Trezor\footnote{\url{https://trezor.io}} and Ledger\footnote{\url{https://www.ledger.com/}}. If such device fails the randomness test it indicates a further problem in the design with potentially high impact. Implementing the MPC may help to avoid similar vulnerabilities and potential backdoors. 
+
+Due to the simple design BoolTest could be transformed to compute inside MPC framework. This would enable outsourced randomness testing of large datasets.
+
 \section{Monero hardware wallet}\label{sec:res:monero}
 \label{sec:aim:monero_hw_wallet}
 In this, yet unpublished, work I designed and implemented transaction signing protocol for Monero~\cite{zero_to_monero}, privacy-centric cryptocurrency, on the hardware wallet, resource constrained device. 
@@ -855,14 +862,7 @@ Covering also blockchain scanning, so view key is not leaked to the host. Scheme
 	\item Paper with V. Sedlacek analyzing particular {\bf{number factorization}} method based on elliptic curves. Submitted by the end of theses submission deadline.
 	
 \end{itemize}
-\end{ecmmnt}
-
-\section{BoolTest}\label{sec:res:booltest} %\todo{Trying to sell BoolTest \shrug. Reason in the end of the section.}
-In \cite{booltest_secrypt2017}, we devised a powerful randomness test {\emph{BoolTest}}, which provides comparable results to standard randomness testing batteries such as NIST STS or Dieharder. The strength of the BoolTest lies in a fact it that usually needs less data than competitors to obtain the same results and offers a better interpretation of results. BoolTest uses low-degree polynomials as distinguishers; thus a cryptanalyst can directly see which polynomials were able to distinguish input data from the random stream and thus see which bits are correlated.
-
-Randomness testing of various cryptographic primitives such as PRNGs, encryption and hash algorithms, is essential for their cryptographic quality assessment. Randomness testing is usually the first step of cryptanalysis. In the extended version of the paper \cite{booltest2}, we also tested output of true random number generators (TRNGs) of smartcards and hardware wallets: Trezor\footnote{\url{https://trezor.io}} and Ledger\footnote{\url{https://www.ledger.com/}}. If such device fails the randomness test it indicates a further problem in the design with potentially high impact. Implementing the MPC may help to avoid similar vulnerabilities and potential backdoors. 
-
-Due to the simple design BoolTest could be transformed to compute inside MPC framework. This would enable outsourced randomness testing of large datasets. 
+\end{ecmmnt} 
 
 \section{Publications}\label{sec:res:pubs}
 
@@ -949,8 +949,8 @@ Due to the simple design BoolTest could be transformed to compute inside MPC fra
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Bibliography
+\renewcommand*{\bibfont}{\footnotesize}
 \printbibliography[heading=bibintoc] 
-
 
 %% Index
 %   \makeatletter\thesis@blocks@clear\makeatother
