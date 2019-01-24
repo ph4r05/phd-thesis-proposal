@@ -416,7 +416,7 @@ For the garbled circuits it entails: Point-and-permute \cite{BMR90}, Free XOR \c
 Cut-and-choose extension \cite{LP07,LP11,Lin16} enables the use of the garbled circuit with malicious parties by simply generating more circuits, committing to them and revealing a subset of them on request. The approach has been extensively studied and significantly improved, e.g., LEGO \cite{NO09} and its numerous improvements \cite{cryptoeprint:2013:155, FJNT15, cryptoeprint:2016:1069, cryptoeprint:2017:226, KNBTR17, cryptoeprint:2018:578}.
 \cite{SHSSK15} uses a sequential gate logic (gates with memory and clock) to significantly reduce the circuit size. %TinyTable \cite{cryptoeprint:2016:695}
 
-Secret-sharing based extensions resistant to malicious parties are for instance DPSZ \cite{DPSZ12, cryptoeprint:2012:642}, MiniMac \cite{DZ13}, TinyOT \cite{NNOB12}, BDOZ \cite{BDOZ11}, MASCOT \cite{KOS16}. Schemes in this family make use of an additional pre-processing phase which is input independent. Initially, the Beaver triplets \cite{B91a} $(a,b,a.b)$ were used in the pre-computation phase for masking online phase, in particular evaluation of multiplication gates.
+Secret-sharing based extensions resistant to malicious parties are for instance DPSZ \cite{DPSZ12, cryptoeprint:2012:642}, MiniMac \cite{DZ13}, TinyOT \\\cite{NNOB12}, BDOZ \cite{BDOZ11}, MASCOT \cite{KOS16}. Schemes in this family make use of an additional pre-processing phase which is input independent. Initially, the Beaver triplets \cite{B91a} $(a,b,a.b)$ were used in the pre-computation phase for masking online phase, in particular evaluation of multiplication gates.
 
 \cite{WRK17} generalizes TinyOT to a multi-party setting with a dishonest majority of malicious attackers. The protocol is the first constant-round implemented and practically usable. It works in the standalone security model while \cite{DPSZ12} is statistically UC-secure. The following new works are in the same line of research: \cite{FKOS15, DZ16, LPJ17, BCGIM17, cryptoeprint:2017:1230}.
 %
@@ -907,9 +907,9 @@ Due to the simple design BoolTest could be transformed to compute inside MPC fra
 \begin{itemize}
 	\item \emph{Monero hardware wallet signing protocol.} As mentioned in the Section \ref{sec:aim:monero_hw_wallet}, I have designed and implemented distributed transaction signing protocol. Contribution: 80\%.
 	
-	\item \emph{The $4p-1$ factorization method and its viability as a basis for an RSA backdoor}. The work describes very effective factorization methods for RSA moduli assuming the private keys are of a special form. I have performed the large-scale algorithm testing and running time analysis. Contribution: 13\%.\todo[disable]{DUNNO. CHECK}
+	\item \emph{The $4p-1$ factorization method and its viability as a basis for an RSA backdoor}. The work describes very effective factorization methods for RSA moduli assuming the private keys are of a special form. I have performed the large-scale algorithm testing and running time analysis. Contribution: 15\%, 4 authors.\todo[disable]{DUNNO. CHECK}
 	
-	\item \emph{Security margins for known cryptographic algorithms.} The work analyzes the security margins of known round-reduced block and stream encryption algorithms and hash functions. I have tested the algorithms with the BoolTest. Contribution: 7\%.
+	\item \emph{Security margins for known cryptographic algorithms.} The work analyzes the security margins of known round-reduced block and stream encryption algorithms and hash functions. I have tested the algorithms with the BoolTest. Contribution: 7\%, 4 authors.
 \end{itemize}
 
 %\section{Papers in progress}
