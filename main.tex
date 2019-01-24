@@ -521,26 +521,6 @@ Fairplay~\cite{MNPS04} was the first published MPC compiler for two-party comput
 MPC compilers and general MPC systems undergo massive active development since then. \cite{sok19} gives an extensible up-to-date review of the numerous practically usable MPC systems. A tools list is depicted in Table \ref{tbl:compilers}. %
 \todo[disable]{Mention tech compilers are based on?}
 
-\begin{table}[h]
-\begin{tabular}{llllllll}
-Tool        &  & \rlap{\rotatebox{90}{Protocol}~} & \rlap{\rotatebox{90}{Parties}~} & \rlap{\rotatebox{90}{Mixed-mode}~} & \rlap{\rotatebox{90}{Semi-honest}~} & \rlap{\rotatebox{90}{Malicious}~} & \rlap{\rotatebox{90}{Updated}~} \\\hline
-EMP-toolkit \cite{emp-toolkit} &  & GC       & 2  & $\CIRCLE$     & $\CIRCLE$           & $\CIRCLE$         & 09/2018           \\
-Obliv-C \cite{ZE15}    &  & GC       & 2  & $\CIRCLE$     & $\CIRCLE$           & $\Circle$         & 06/2018           \\
-OblivVM \cite{oblivm}    &  & GC       & 2  & $\CIRCLE$     & $\CIRCLE$           & $\Circle$         & 02/2016           \\
-TinyGarble \cite{SHSSK15}  &  & GC       & 2  & $\Circle$     & $\CIRCLE$           & $\Circle$         & 10/2018           \\
-Wysteria \cite{RHH14}    &  & MC       & 2+ & $\CIRCLE$     & $\CIRCLE$           & $\Circle$         & 10/2014           \\
-ABY \cite{Demmler2015ABYA}        &  & GC, MC   & 2  & $\CIRCLE$     & $\CIRCLE$           & $\Circle$         & 10/2018           \\
-SCALE-MAMBA \cite{scale-mamba} &  & Hy       & 2+ & $\CIRCLE$     & $\CIRCLE$           & $\CIRCLE$         & 10/2018           \\
-Sharemind \cite{BLWJP08}   &  & Hy       & 3  & $\CIRCLE$     & $\CIRCLE$           & $\Circle$         & 09/2018           \\
-PICCO \cite{ZSB13}      &  & Hy       & 3+ & $\CIRCLE$     & $\CIRCLE$           & $\Circle$         & 10/2017           \\
-Frigate \cite{MGCBT16}    &  & -        & 2+ & $\Circle$     & -           & -         & 05/2016           \\
-CBMC-GC \cite{HFKV12}    &  & -        & 2+ & $\Circle$     & -           & -         & 05/2017           \\
-\end{tabular}
-\caption{List of available MPC tools from \cite{sok19}. GC, MC, Hy correspond to Garbled Circuit, Multiplication Circuit, Hybrid approach, respectively. Mixed mode tools can combine both secure and insecure computations in one program. Last two entries are only compilers to the circuit format hence lacking security-related fields.}
-\label{tbl:compilers}
-\end{table}
-%\end{itemize}
-
 
 \section{Fully homomorphic encryption}\label{sec:soa:fhe}
 Fully homomorphic encryption (FHE) is a very powerful tool that enables to compute a function over encrypted data so the function evaluator does not learn data he is computing with. This has great applications in cloud computing as it protects client's data when the computation is offloaded to a malicious servers \cite{Gentry:2009:FHE:1536414.1536440, 10.1007/978-3-642-13190-5_2, cryptoeprint:2011:133, cryptoeprint:2012:099, 10.1007/978-3-642-40041-4_5, 10.1007/978-3-642-36362-7_1, 10.1007/978-3-642-55220-5_30}. 
@@ -548,6 +528,26 @@ Fully homomorphic encryption (FHE) is a very powerful tool that enables to compu
 Several FHE implementation exist, such as HELib~\cite{helib}, PALISADE~\cite{palisade} and SEAL~\cite{seal}.
 
 However, this research branch is out of the scope of this thesis proposal as general FHE is very expensive in terms of CPU time and memory and thus not practically applicable in the context of resource constrained devices.
+
+\begin{table}[ht]
+	\begin{tabular}{llllllll}
+		Tool        &  & \rlap{\rotatebox{90}{Protocol}~} & \rlap{\rotatebox{90}{Parties}~} & \rlap{\rotatebox{90}{Mixed-mode}~} & \rlap{\rotatebox{90}{Semi-honest}~} & \rlap{\rotatebox{90}{Malicious}~} & \rlap{\rotatebox{90}{Updated}~} \\\hline
+		EMP-toolkit \cite{emp-toolkit} &  & GC       & 2  & $\CIRCLE$     & $\CIRCLE$           & $\CIRCLE$         & 09/2018           \\
+		Obliv-C \cite{ZE15}    &  & GC       & 2  & $\CIRCLE$     & $\CIRCLE$           & $\Circle$         & 06/2018           \\
+		OblivVM \cite{oblivm}    &  & GC       & 2  & $\CIRCLE$     & $\CIRCLE$           & $\Circle$         & 02/2016           \\
+		TinyGarble \cite{SHSSK15}  &  & GC       & 2  & $\Circle$     & $\CIRCLE$           & $\Circle$         & 10/2018           \\
+		Wysteria \cite{RHH14}    &  & MC       & 2+ & $\CIRCLE$     & $\CIRCLE$           & $\Circle$         & 10/2014           \\
+		ABY \cite{Demmler2015ABYA}        &  & GC, MC   & 2  & $\CIRCLE$     & $\CIRCLE$           & $\Circle$         & 10/2018           \\
+		SCALE-MAMBA \cite{scale-mamba} &  & Hy       & 2+ & $\CIRCLE$     & $\CIRCLE$           & $\CIRCLE$         & 10/2018           \\
+		Sharemind \cite{BLWJP08}   &  & Hy       & 3  & $\CIRCLE$     & $\CIRCLE$           & $\Circle$         & 09/2018           \\
+		PICCO \cite{ZSB13}      &  & Hy       & 3+ & $\CIRCLE$     & $\CIRCLE$           & $\Circle$         & 10/2017           \\
+		Frigate \cite{MGCBT16}    &  & -        & 2+ & $\Circle$     & -           & -         & 05/2016           \\
+		CBMC-GC \cite{HFKV12}    &  & -        & 2+ & $\Circle$     & -           & -         & 05/2017           \\
+	\end{tabular}
+	\caption{List of available MPC tools from \cite{sok19}. GC, MC, Hy correspond to Garbled Circuit, Multiplication Circuit, Hybrid approach, respectively. Mixed mode tools can combine both secure and insecure computations in one program. Last two entries are only compilers to the circuit format hence lacking security-related fields.}
+	\label{tbl:compilers}
+\end{table}
+%\end{itemize}
 
 \ifguides{
 \newpage
