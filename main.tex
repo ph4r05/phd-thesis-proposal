@@ -198,7 +198,7 @@
 
 This dissertation thesis proposal aims to introduce motivation for the study of the selected fields, cover state of the art and present my research plan and results achieved so far.
 
-This section gives an introduction to the resource-constrained hardware tokens and secure multi-party computation (MPC). Chapter \ref{chapter:soa} gives the current state of the art in the MPC, starting from general view towards the application of hardware tokens in MPC. Next, Chapter \ref{sec:aim} specifies the research aims with particular applications and plans. Chapter \ref{chapter:results} summarizes achieved results with the list of publications. Appendix \ref{apx:uc} elaborates more on MPC security models, Appendix \ref{apx:papers} contains attached publications.
+This section gives an introduction to the resource-constrained hardware tokens and secure multi-party computation (MPC). Chapter~\ref{chapter:soa} gives the current state of the art in the MPC, starting from general view towards the application of hardware tokens in MPC. Next, Chapter~\ref{sec:aim} specifies the research aims with particular applications and plans. Chapter~\ref{chapter:results} summarizes achieved results with the list of publications. Appendix~\ref{apx:uc} elaborates more on MPC security models, Appendix~\ref{apx:papers} contains attached publications.
 
 \section{Smartcards}
 Smartcards, tamper-proof hardware tokens, are becoming increasingly popular in the past decades and found their way to many cryptographic applications, like authentication tokens and storage of sensitive information (such as encryption and signing keys). Their popularity stems from the security properties that the smartcards provide. 
@@ -344,7 +344,7 @@ For more formal treatment please refer to \cite{G09}.
 
 MPC protocols are characterized with respect to various criteria:
 \begin{itemize}
-    \itembf{Number of parties.} Two-party computation (\emph{2PC}) is an important special case, $m=2$, which has a large dedicated body of research as it achieves own specific feasibility results due to nature of the problem, i.e., there is no honest majority and it is often motivated by popular client-server paradigm. 3-party computation also constitutes a separate group (\emph{3PC}) \cite{CKMZ14, MRZ15}.
+    \itembf{Number of parties.} Two-party computation (\emph{2PC}) is an important special case, $m=2$, which has a large dedicated body of research as it achieves own specific feasibility results due to nature of the problem, i.e., there is no honest majority and it is often motivated by popular client-server paradigm. Three-party computation also constitutes a separate group (\emph{3PC}) \cite{CKMZ14, MRZ15}.
 
     \itembf{Attacker types.} The \emph{semi-honest} attackers may form a colluding coalition with the aim to learn more information from the protocol runs than the privacy property of the MPC describes. They may communicate and share information from runs. However, they follow the protocol definition exactly. This attacker model is also called \emph{passive} or \emph{honest-but-curious}. 
     On the other hand, \emph{malicious} or \emph{active} attackers may on top of that perform arbitrary actions during the protocol execution. They can diverge from the protocol, forge, replay messages, stop responding, etc.
@@ -354,14 +354,14 @@ MPC protocols are characterized with respect to various criteria:
     \itembf{Size of the attacker coalition.} A basic security property of MPC protocol is a size of the coalition $t$ with which the MPC protocol stays secure. Depending on the attacker model, it can be \emph{dishonest majority} up to $m-1$, \emph{honest majority} $2t+1 < m$, which makes sense only with $m>2$. There are also special cases requiring $2/3$ majority.
 
     \itembf{Computational power.} The adversary is typically assumed to be \emph{computationally bounded}, i.e., its running complexity is probabilistic polynomial in the inputs $x_i$ and number of parties $m$.
-    MC protocols with bounded attacker typically rely on standard cryptographic primitives and hardness assumptions like the Decisional Diffie-Hellman assumption \cite{KL07}, factoring hardness assumption and so on. For this reason, the model is also called \emph{cryptographic}.
+    MPC protocols with bounded attacker typically rely on standard cryptographic primitives and hardness assumptions like the Decisional Diffie-Hellman assumption \cite{KL07}, factoring hardness assumption and so on. For this reason, the model is also called \emph{cryptographic}.
     
     Contrary to that, the \emph{information-theoretic} also called \emph{computationally unbounded} model poses no restrictions on the attackers' computational power. MPC in this model provides higher security guarantees, but its security breaks completely if the attacker coalition size $t$ grows above the required limit. 
     In this model, protocols are typically using perfectly-secure one-time-pad and secret sharing, e.g., Shamir's secret sharing \cite{Shamir79}. The protocols are usually computationally more effective as there is no public-key cryptography involved, but the communication cost may render them ineffective. 
     
-    \itembf{Set-up assumptions.} MPC security is stated with respect to various set-up assumptions. If not stated otherwise, MPC is assumed to work in the so-called \emph{plain model}. It may also use stronger security models, such as the \emph{Common Reference String (CRS)} model \cite{CF01,DN02} assuming all nodes have access to a CRS from a certain distribution generated by a TTP. The CRS may be, e.g., cryptographic keys or randomness used later in the protocol. Other commonly used models and assumptions are \emph{Random Oracles} \cite{HM04}, \emph{Correlated Randomness Model} \cite{FGMR02, FWW04, IKMOP13}, \emph{Public key infrastructure (PKI)} \cite{BCNP04}, \emph{One way functions} \cite{IL89, KL07}, \emph{collision resistant hash functions} \cite{KL07, GMS08}.
+    \itembf{Set-up assumptions.} MPC security is stated with respect to various set-up assumptions. If not stated otherwise, MPC is assumed to work in the so-called \emph{plain model}. It may also use stronger security models, such as the \emph{Common Reference String (CRS)} model \cite{CF01,DN02} assuming all nodes have access to a CRS sampled from a certain distribution generated by a TTP. The CRS may be, e.g., cryptographic keys or randomness used later in the protocol. Other commonly used models and assumptions are \emph{Random Oracles} \cite{HM04}, \emph{Correlated Randomness Model} \cite{FGMR02, FWW04, IKMOP13}, \emph{Public key infrastructure (PKI)} \cite{BCNP04}, \emph{One way functions} \cite{IL89, KL07}, \emph{collision-resistant hash functions} \cite{KL07, GMS08}.
     
-    \itembf{Communication properties.} MPC typically assumes \emph{private channels}, i.e., private and reliable point-to-point (P2P) communication channels. Some properties may additionally require a \emph{broadcast}. Channels can be either \emph{synchronized} or \emph{asynchronous}. The weakest model is assuming only plain links with no guarantees. The slightly stronger model adds an authenticated P2P links.
+    \itembf{Communication properties.} MPC typically assumes \emph{private channels}, i.e., private and reliable point-to-point (P2P) communication channels. Some protocols may additionally require a \emph{broadcast}. Channels can be either \emph{synchronized} or \emph{asynchronous}. The weakest model is assuming only plain links with no guarantees. The slightly stronger model adds an authenticated P2P links.
     
     Protocols are usually characterized with the respect to communication \emph{rounds}. In one round, each participant $P_i$ may send message to any other party $\overline{P_i} = \{P_j; i \neq j\}$, but the messages can only depend on information received in previous rounds. Round complexity depends on the underlying mechanism, typically it is: $\bigO(\text{depth}(C))$, polynomial in the depth of the circuit, $\bigO(\text{deg}(g))$, polynomial in degree of encoding polynomials or $\bigO(1)$, \emph{constant round}.
     
@@ -381,7 +381,7 @@ Intuitively, the model defines an \emph{ideal~functionality}~$\mathcal{F}$, whic
 If $\mathcal{Z}$ cannot distinguish which execution is it plugged in the adversary can cause only a "damage" or learn only the information it could learn in the ideal world with the TTP where the security is implicit. For more detailed treatment please refer to \cite{Can01, CLOS02, Lin03, G09, CDN15, Lin17} or the Appendix \ref{apx:uc}.
 
 \section{Two-party computation}\label{sec:soa:2pc} %
-One of the founding work on MPC is a seminal paper of Yao \cite{Yao86}, which proved \emph{completeness} of the two-party computation, i.e., all computable functions $f$ can be computed in a secure two-party computation model in the semi-honest setting with computationally bounded attackers. 
+One of the founding works on MPC is a seminal paper of Yao \cite{Yao86}, which proved \emph{completeness} of the two-party computation, i.e., all computable functions $f$ can be computed in a secure two-party computation model in the semi-honest setting with computationally bounded attackers. 
 
 Yao's approach is based on converting a function $f$ to a Boolean circuit $C$. $C$ consists of gates, i.e., nodes performing addition and multiplication (AND and XOR) on its inputs and producing an output. A number of input wires on a gate is called fan-in, typically is 2 and a number of outputs is called fan-out, which is typically 1. Gates are connected with wires into a circuit. Input wires are connecting user inputs to gate's input, output wires are connected to gates outputs and unconnected on the other end.
 
@@ -475,7 +475,7 @@ They assume collision-resistant hash functions (CRHFs) and the existence of uniq
 
 \cite{HPV16} constructed two-party protocol with optimal round complexity with stateless tokens and one-way functions in client-server setting (only server creates tokens) in an extended Global Universal Composable framework which relaxes transferability of tokens. The protocol is UC-secure with malicious senders and receivers.
 
-\cite{CCOV17} relaxes the trust model in computing with corrupted tokens as some token manufacturers may create malicious tokens. They present UC-secure protocol with $N$ stateless tokens that compute original functionality securely even with $N-1$ malicious tokens with one-way functions. In \cite{2017-ccs-mavroudis}, we implemented similar solution but with stronger cryptographic assumptions.
+\cite{CCOV17} relaxes the trust model in computing with corrupted tokens as some token manufacturers may create malicious tokens. They present UC-secure protocol with $N$ stateless tokens that compute original functionality securely even with $N-1$ malicious tokens using only one-way functions assumption. In \cite{2017-ccs-mavroudis}, we implemented similar solution but with stronger cryptographic assumptions.
 % Unlimited number of OTs -> unlimited number of MPCs
 
 %\todoin{ToDo: This section is a bit rusty, may need some improvements.}
@@ -489,7 +489,6 @@ They assume collision-resistant hash functions (CRHFs) and the existence of uniq
 %
 In this part, we review related practical results achieved in the MPC.
 %In \cite{JKSS10} authors design asymmetric MPC
-\cite{DSZ14} implemented practical 2PC on smartphones based on \cite{GMW87} using a smartcard to accelerate computation with pre-computation phase `thanks to the additional trust it provides.
 
 %\begin{itemize}
 \subsection{New challenges} %
@@ -517,7 +516,7 @@ The login key is derived as $k=H(pass, salt)$. The attacker can collect the salt
 %awesome-mpc
 MPC compiler is a software that translates a desired functionality $\mathcal{F}$ specification, e.g., secure set intersection, to a program that uses MPC to securely evaluate the functionality $\mathcal{F}$.
 
-Fairplay~\cite{MNPS04} was the first published MPC compiler for two-party computations based on Yao's garbled circuits. It featured a high-level definition procedural language: Secure Function Definition Language (SFDL) used to express the desired functionality $\mathcal{F}$. Fairplay translates SFDL to a circuit representation which can be securely evaluated by two parties. This general tool enabled experimentation with MPC to a broader audience. 
+Fairplay~\cite{MNPS04} was the first published MPC compiler for two-party computations based on Yao's garbled circuits. It featured a high-level definition procedural language: Secure Function Definition Language (SFDL) used to express the desired functionality $\mathcal{F}$. Fairplay translates SFDL to a circuit representation which can be securely evaluated by two parties. This general tool enabled experimentation with MPC to a broader audience. \cite{DSZ14} implemented practical 2PC on smartphones based on \cite{GMW87} using a smartcard to accelerate computation with pre-computation phase `thanks to the additional trust it provides.
 
 MPC compilers and general MPC systems undergo massive active development since then. \cite{sok19} gives an extensible up-to-date review of the numerous practically usable MPC systems. A tools list is depicted in Table \ref{tbl:compilers}. %
 \todo[disable]{Mention tech compilers are based on?}
